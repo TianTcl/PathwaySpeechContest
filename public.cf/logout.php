@@ -1,0 +1,1 @@
+<?php header("Location: /resource/php/core/api?app=account&cmd=logout"); ?>

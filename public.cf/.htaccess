@@ -1,0 +1,126 @@
+# ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ Domain's default ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~
+
+## Initialize
+RewriteEngine On
+#AllowOverride All
+DefaultLanguage en-US
+AddDefaultCharset UTF-8
+#SetEnv SERVER_ADMIN Tecillium@TianTcl.net
+#Allow from 103.246.18.14
+#Allow from 2401:5700:100:503::28:236
+LimitRequestBody 1024000
+#CheckSpelling On
+
+## Block bots
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
+RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
+RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus
+RewriteRule ^.* - [F,L]
+
+## Handling
+#Header set Access-Control-Allow-Origin "*"
+
+# ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ Specific / custom url edit ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~
+
+## Url edits
+#RewriteRule ^(.*)$ https://inf.bodin.ac.th/e/Pathway-Speech-Contest/$1 [L,QSA]
+#RewriteRule ^(contact|criteria|login|logout|register|submit\/)$ /?url=$1 [L,QSA]
+#RewriteRule ^(organize\/(|home|statics))$ /?url=$1 [L,QSA]
+
+
+## Redirect some link
+Redirect 301 /index /
+RewriteRule ^error/(\d{3,4})$ /error?hsc=$1 [L]
+RewriteCond %{HTTP_USER_AGENT} (Safari){0} [NC]
+RewriteRule ^(.+\.(png|jpg|jpeg|gif))$ resource/images/viewer?path=$1 [L,QSA]
+RewriteCond %{HTTP_USER_AGENT} (Safari){0} [NC]
+RewriteRule ^(.+\.(png|jpg|jpeg|gif).+)$ error/902 [L]
+
+# ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ Systematics ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~
+
+## No file slashs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+## No extensions
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+## Redirect url that contains extensions to default
+RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+RewriteRule .* - [L,R=404]
+
+## Execute PHP in other file types
+#AddType application/x-httpd-php .aspx
+#AddType application/x-httpd-php .xml
+
+## Password protect site mode
+#AuthType basic
+#AuthName "This site is currently under construction"
+#AuthUserFile /resource/.htpasswd
+#Require tiantcl
+
+## Add MIME Types
+AddType application/pdf .pdf
+AddType application/x-shockwave-flash .swf
+AddType application/x-tar .tar
+AddType application/zip .zip
+AddType image/gif .gif .GIF
+AddType image/jpeg .jpeg .jpg .jpe .JPG
+AddType image/png .png .PNG
+AddType image/svg+xml .svg
+AddType image/vnd.microsoft.icon .ico
+AddType audio/x-wav .wav
+AddType audio/x-midi .mid
+AddType video/mpeg .mpeg .mpg .mpe
+AddType video/quicktime .qt .mov
+AddType video/x-msvideo .avi
+AddType video/x-sgi-movie .movie
+
+# ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ Default documents ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~~~
+
+## Server error page
+ErrorDocument 400 /error/400
+ErrorDocument 401 /error/401
+ErrorDocument 402 /error/402
+ErrorDocument 403 /error/403
+ErrorDocument 404 /error/404
+ErrorDocument 405 /error/405
+ErrorDocument 406 /error/406
+ErrorDocument 407 /error/407
+ErrorDocument 408 /error/408
+ErrorDocument 409 /error/409
+ErrorDocument 410 /error/410
+ErrorDocument 411 /error/411
+ErrorDocument 412 /error/412
+ErrorDocument 413 /error/413
+ErrorDocument 414 /error/414
+ErrorDocument 415 /error/415
+ErrorDocument 416 /error/416
+ErrorDocument 417 /error/417
+#ErrorDocument 418 /error/418
+#ErrorDocument 422 /error/422
+#ErrorDocument 423 /error/423
+#ErrorDocument 424 /error/424
+#ErrorDocument 425 /error/425
+#ErrorDocument 426 /error/426
+#ErrorDocument 449 /error/449
+#ErrorDocument 450 /error/450
+ErrorDocument 500 /error/500
+ErrorDocument 501 /error/501
+ErrorDocument 502 /error/502
+ErrorDocument 503 /error/503
+ErrorDocument 504 /error/504
+ErrorDocument 505 /error/505
+#ErrorDocument 506 /error/506
+#ErrorDocument 507 /error/507
+#ErrorDocument 508 /error/508
+#ErrorDocument 509 /error/509
+#ErrorDocument 510 /error/510

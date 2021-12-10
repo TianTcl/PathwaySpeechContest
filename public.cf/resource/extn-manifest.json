@@ -1,0 +1,22 @@
+{
+  "name": "___",
+  "description" : "___",
+  "version": "1.0",
+  "manifest_version": 2,
+  "app": {
+	"urls": ["https://___"]  
+  },
+  "browser_action": {
+    "--default_popup": "/resource/appwork/extn-popup",
+    "default_icon": "/resource/images/logo.svg"
+  },
+  "--commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+Shift+T",
+        "mac": "MacCtrl+Alt+Shift+T"
+      },
+      "description": "Open ___ shortcuts"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+/* Form interactives */
+input, select, textarea {
+	margin: 0px; padding: 0px;
+	border-radius: none; border: none; box-shadow: none;
+}
+input[type="radio"], input[type="checkbox"], input[type="range"], input[type="image"] {
+	margin: initial; padding: initial;
+	border-radius: initial; border: initial; box-shadow: initial;
+}
+.form input[type="checkbox"] {
+    margin: 2.5px 5px;
+    width: 20px; height: 20px;
+    appearance: none; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; -o-appearance: none;
+}
+.form input[type="checkbox"]:before {
+    width: 20px; height: 20px;
+    background-color: var(--clr-gg-grey-500); box-shadow: 1.25px 1.25px var(--shd-tiny) var(--fade-black-6);
+    border-radius: 10px;
+    display: inline-block; content: "";
+    cursor: pointer; transition: var(--time-tst-fast);
+}
+.form input[type="checkbox"]:checked:before { background-color: var(--clr-bs-green); }
+.form input.switch[type="checkbox"], .form input.switch[type="checkbox"]:before { width: 40px; }
+.form input.lever[type="checkbox"], .form input.lever[type="checkbox"]:before { height: 40px; }
+.form input[type="checkbox"]:after {
+    width: 16.25px; height: 16.25px;
+    background-color: var(--clr-gg-grey-100);
+    border-radius: 8.125px;
+    display: inline-block; content: "";
+    cursor: pointer; transition: var(--time-tst-fast);
+}
+.form input.emphasize[type="checkbox"]:after {
+    width: 14.25px; height: 14.25px;
+    border: 1px solid var(--clr-gg-grey-300);
+}
+.form input.switch[type="checkbox"]:after { transform: translate(calc(-100% - 21.25px), -2px); }
+.form input.switch[type="checkbox"]:checked:after { transform: translate(calc(-100% - 2.75px), -2px); }
+.form input.emphasize.switch[type="checkbox"]:after { transform: translate(calc(-100% - 22.25px), -1.25px) scale(1.5); }
+.form input.emphasize.switch[type="checkbox"]:checked:after { transform: translate(calc(-100% - 1.75px), -1.25px) scale(1.5); border: 1px solid var(--clr-bs-green); }
+.form input.lever[type="checkbox"]:after { transform: translate(calc(-100% - 1.75px), -2.25px); }
+.form input.lever[type="checkbox"]:checked:after { transform: translate(calc(-100% - 1.75px), -21.75px); }
+.form input.emphasize.lever[type="checkbox"]:after { transform: translate(calc(-100% - 1.75px), -1.25px) scale(1.5); }
+.form input.emphasize.lever[type="checkbox"]:checked:after { transform: translate(calc(-100% - 1.75px), -21.75px) scale(1.5); border: 1px solid var(--clr-bs-green); }
+.form {
+    --form-bdr: 1px solid var(--clr-bs-gray-dark);
+}
+.form:not(.modern) { display: flex; }
+.form:not(.inline):not(.modern) { flex-direction: column; }
+.form.inline:not(.modern) > span { line-height: 2.25; }
+.form:not(.modern) .group { display: flex; flex-direction: row; align-items: stretch; /* flex-wrap: wrap; */ }
+.form.inline:not(.modern) > * { margin: 0px 5px; display: inline-flex; }
+.form:not(.inline):not(.modern) > * { margin-bottom: 10px; }
+.form:not(.modern) .group.inline { display: inline-flex; }
+.form:not(.modern) .group.center { justify-content: center; }
+.form:not(.modern) .group.right { justify-content: flex-end; }
+.form:not(.modern) .group.spread { justify-content: space-evenly; }
+.form:not(.modern) .group.split { justify-content: space-between; }
+.form:not(.modern) .group:not(.spread):not(.split) > * { border-radius: 0px; }
+.form:not(.modern) .group:not(.spread):not(.split) > *:first-child { border-radius: 5px 0px 0px 5px; }
+.form:not(.modern) .group:not(.spread):not(.split) > *:last-child { border-radius: 0px 5px 5px 0px; }
+.form:not(.modern) .group:not(.spread):not(.split) > *:not(:last-child) { border-right: none; }
+.form:not(.modern) .group > span {
+    padding: 5px 10px;
+    color: #212529; text-align: center; white-space: nowrap;
+    background-color: #E9ECEF;
+    border: var(--form-bdr);
+    display: flex; align-items: center;
+}
+.form select {
+    padding: 5px;
+    width: 100%;
+	font-family: "Sarabun", sans-serif; font-size: 1.025em;
+	border-radius: 2.5px; border: var(--form-bdr);
+    background-color: var(--sys-main-bg-1);
+    transition: var(--time-tst-fast);
+}
+.form.inline select { width: fit-content; }
+.form select:focus {
+    /* border-radius: 2.5px 2.5px 0px 0px; */
+    border-color: var(--clr-bs-blue);
+    box-shadow: 0px 0px 0px 0.25rem rgb(13 110 253 / 25%);
+}
+.form:not(.modern) input[type="text"], .form:not(.modern) input[type="number"], .form:not(.modern) input[type="tel"], .form:not(.modern) input[type="email"], .form:not(.modern) input[type="url"], .form:not(.modern) input[type="color"], .form:not(.modern) input[type="date"], .form:not(.modern) input[type="datetime-local"], .form:not(.modern) input[type="month"], .form:not(.modern) input[type="password"], .form:not(.modern) input[type="search"], .form:not(.modern) input[type="time"], .form:not(.modern) input[type="week"], .form:not(.modern) input[type="new-password"] {
+    padding: 5px 10px;
+    width: calc(100% - 22.5px);
+    font-family: "Sarabun", "Open Sans", sans-serif; font-size: 1.5rem;
+    border: var(--form-bdr); border-radius: 5px;
+    transition: var(--time-tst-fast);
+}
+.form:not(.modern) input[type="text"]:focus, .form:not(.modern) input[type="number"]:focus, .form:not(.modern) input[type="tel"]:focus, .form:not(.modern) input[type="email"]:focus, .form:not(.modern) input[type="url"]:focus, .form:not(.modern) input[type="color"]:focus, .form:not(.modern) input[type="date"]:focus, .form:not(.modern) input[type="datetime-local"]:focus, .form:not(.modern) input[type="month"]:focus, .form:not(.modern) input[type="password"]:focus, .form:not(.modern) input[type="search"]:focus, .form:not(.modern) input[type="time"]:focus, .form:not(.modern) input[type="week"]:focus, .form:not(.modern) input[type="new-password"]:focus {
+    border-color: var(--clr-bs-blue);
+    box-shadow: 0px 0px 0px 0.25rem rgb(13 110 253 / 25%);
+}
+.form.inline:not(.modern) input[type="text"], .form.inline:not(.modern) input[type="number"], .form.inline:not(.modern) input[type="tel"], .form.inline:not(.modern) input[type="email"], .form.inline:not(.modern) input[type="url"], .form.inline:not(.modern) input[type="color"], .form.inline:not(.modern) input[type="date"], .form.inline:not(.modern) input[type="datetime-local"], .form.inline:not(.modern) input[type="month"], .form.inline:not(.modern) input[type="password"], .form.inline:not(.modern) input[type="search"], .form.inline:not(.modern) input[type="time"], .form.inline:not(.modern) input[type="week"], .form.inline:not(.modern) input[type="new-password"] { width: fit-content; }
+@media only screen and (max-width: 768px) {
+	.form:not(.modern) input[type="text"], .form:not(.modern) input[type="number"], .form:not(.modern) input[type="tel"], .form:not(.modern) input[type="email"], .form:not(.modern) input[type="url"], .form:not(.modern) input[type="color"], .form:not(.modern) input[type="date"], .form:not(.modern) input[type="datetime-local"], .form:not(.modern) input[type="month"], .form:not(.modern) input[type="password"], .form:not(.modern) input[type="search"], .form:not(.modern) input[type="time"], .form:not(.modern) input[type="week"], .form:not(.modern) input[type="new-password"] {
+		padding: 2.5px 5px;
+        font-size: 1rem;
+	}
+}
+/* ADDITIONAL */
+/* share dialog */
+div.sharer table { width: 100%; }
+div.sharer table tr td {
+    --abtn-height: 25px;
+    padding: 5px;
+}
+div.sharer table tr td a {
+    text-align: left;
+    display: flex;
+}
+div.sharer table tr td a img, div.sharer table tr td a i {
+    width: var(--abtn-height); height: var(--abtn-height);
+    font-size: 24px; line-height: var(--abtn-height); text-decoration: none;
+    color: var(--clr-main-white-absolute); text-align: center;
+    object-fit: contain;
+}
+div.sharer table tr td a span {
+    margin-left: 7.5px;
+    font-size: 15px; line-height: var(--abtn-height); font-weight: bold;
+}
+div.sharer center { margin: 10px 0px; }
+div.sharer center button {
+    padding: 2.5px 20px;
+    font-size: 15px; font-weight: bold;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "___",
+  "short_name": "___",
+  "start_url": "/",
+  "--orientation": "any",
+  "theme_color": "#___",
+  "background_color": "#___",
+  "description": "By : Tecillium (UFDT) | ___",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/resource/images/logo.svg",
+      "sizes": "480x480",
+      "type": "image/svg"
+    }
+  ]
+}

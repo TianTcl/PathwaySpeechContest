@@ -31,7 +31,7 @@
 					} document.querySelector("form button").disabled = true;
 					$.post("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api", {app: "workshop", cmd: "view", attr: data}, function(res, hsc) {
 						var dat = JSON.parse(res);
-						if (dat.success) $.post("/resource/php/core/override", {app: "workshop", cmd: "view", attr: data}, function(res, hcs) {
+						if (dat.success) $.post("/resource/php/core/override", {app: "workshop", cmd: "view", attr: dat}, function(res, hcs) {
 							location = "/recording/"+dat.info;
 						}); else {
 							app.ui.notify(1, dat.reason);

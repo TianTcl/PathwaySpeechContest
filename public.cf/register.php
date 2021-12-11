@@ -95,7 +95,7 @@
 						} if (!/^\d$/.test(info.grade)) {
 							if (pass) { focusfield("grade"); pass = false; }
 							app.ui.notify(1, [2, "Invalid grade selected"]);
-						} if (!/^[ก-๛ \.()\-]{1,200}$/.test(info.school)) {
+						} if (!/^[A-Za-zก-๛ \.()\-]{1,200}$/.test(info.school)) {
 							if (pass) { focusfield("school"); pass = false; }
 							app.ui.notify(1, [2, "Invalid school name"]);
 						} if (!/^0[1-9]\d{8}$/.test(info.phone)) {

@@ -61,7 +61,7 @@
         }
     } class TianTcl { use TCL_string; } $tcl = new TianTcl(); */
     
-    class TianTcl {
+    if (!class_exists("TianTcl")) { class TianTcl {
         // bin2hex = hex2bin | dechex = hexdec | decoct = octdec | decbin = bindec | base_convert
         public function encode($string, $nest = 1) {
             if ($nest < 1) $nest = 1; else if ($nest > 5) $nest = 5;
@@ -73,5 +73,12 @@
             for ($i = 0; $i < $nest; $i++) $string = strrev(base64_decode(strrev(str_rot13(hex2bin(strrev($string))))));
             return $string;
         }
-    } $tcl = new TianTcl();
+        public function uuid($string) {
+            $data = random_bytes(16); # strval($string ?? random_bytes(16));
+            assert(strlen($data) == 16);
+            $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+            $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+            return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+        }
+    } } $tcl = new TianTcl();
 ?>

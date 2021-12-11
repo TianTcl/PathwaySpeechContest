@@ -32,6 +32,7 @@ RewriteRule ^.* - [F,L]
 #RewriteRule ^(.*)$ https://inf.bodin.ac.th/e/Pathway-Speech-Contest/$1 [L,QSA]
 #RewriteRule ^(contact|criteria|login|logout|register|submit\/)$ /?url=$1 [L,QSA]
 #RewriteRule ^(organize\/(|home|statics))$ /?url=$1 [L,QSA]
+RewriteRule ^recording/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$ /workshop/video_playback?signature=$1 [L,QSA]
 
 
 ## Redirect some link

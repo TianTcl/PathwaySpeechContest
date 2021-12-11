@@ -14,6 +14,12 @@
 				$_SESSION['evt2']["force_pwd_change"] = false;
 				echo '{"success": true}';
             }
+        } else if ($app == "workshop") {
+            if ($cmd == "view") {
+                $_SESSION['event']['workshop-URL'] = $attr['info'];
+				$_SESSION['event']['workshop-VDO'] = $tcl -> decode($attr['clip'], 3);
+				echo '{"success": true}';
+            }
         }
 	}
 ?>

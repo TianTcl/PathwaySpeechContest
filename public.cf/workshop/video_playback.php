@@ -59,7 +59,7 @@
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="frame">
-				<?php include($dirPWroot."resource/php/video_player.php"); ?>
+				<?php include($dirPWroot."resource/php/extend/video_player.php"); ?>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

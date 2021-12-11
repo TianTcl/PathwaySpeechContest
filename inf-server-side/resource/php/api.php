@@ -112,6 +112,30 @@
                     // End LINE Notify API
                 } else { echo '{"success": false, "reason": [3, "Unable to record your donation. Please try again."]}'; slog("webForm", "PathwaySCon", "donate", "new", strtolower($attr['email']), "fail", $remote, "InvalidQuery"); }
             }
+        } else if ($app == "workshop") {
+            if ($cmd == "view") {
+                unset($attr['remote']);
+                $name = $db -> real_escape_string(trim($attr['name']));
+                $clip = $db -> real_escape_string(trim($attr['clip']));
+                $geturl = $db -> query("SELECT wvid,link FROM PathwaySCon_workshop WHERE namen='$name' AND video=$clip");
+                if ($geturl) {
+                    if ($geturl -> num_rows == 1) {
+                        $readurl = $geturl -> fetch_array(MYSQLI_ASSOC);
+                        $db -> query("UPDATE PathwaySCon_workshop SET view=view+1 WHERE vwid=".$readurl['vwid']);
+                        echo '{"success": true, "info": "'.$readurl['link'].'"}';
+                        slog($readurl['vwid'], "PathwaySCon", "video", "view", "", "pass", $remote);
+                        $_SESSION['event']['workshop-URL'] = $readurl['link'];
+                    } else {
+                        $link = $tcl -> uuid("$name-$clip");
+                        $success = $db -> query("INSERT INTO PathwaySCon_workshop (namen,video,link,ip) VALUES ('$name',$clip,'$link','$ip')");
+                        if ($success) {
+                            echo '{"success": true, "info": "'.$link.'"}';
+                            slog($db -> insert_id, "PathwaySCon", "video", "view", "", "pass", $remote);
+                            $_SESSION['event']['workshop-URL'] = $link;
+                        } else { echo '{"success": false'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "NotEligible"); }
+                    }
+                } else { echo '{"success": false, "reason": [3, "Unable to load your video. Please try again."]}'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "InvalidQuery"); }
+            }
         }
 		$db -> close();
 	}

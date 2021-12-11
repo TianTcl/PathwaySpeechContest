@@ -121,9 +121,9 @@
                 if ($geturl) {
                     if ($geturl -> num_rows == 1) {
                         $readurl = $geturl -> fetch_array(MYSQLI_ASSOC);
-                        $db -> query("UPDATE PathwaySCon_workshop SET view=view+1 WHERE vwid=".$readurl['vwid']);
+                        $db -> query("UPDATE PathwaySCon_workshop SET view=view+1 WHERE wvid=".$readurl['wvid']);
                         echo '{"success": true, "info": "'.$readurl['link'].'"'.($rmte ? ', "clip": "'.($tcl -> encode($clip, 3)).'"' : "").'}';
-                        slog($readurl['vwid'], "PathwaySCon", "video", "view", "", "pass", $remote);
+                        slog($readurl['wvid'], "PathwaySCon", "video", "view", "", "pass", $remote);
                         $_SESSION['event']['workshop-URL'] = $readurl['link'];
                     } else {
                         $link = $tcl -> uuid("$name-$clip");

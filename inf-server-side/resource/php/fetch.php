@@ -41,11 +41,11 @@
                 // Pre generate SQL
                 $sort = "ORDER BY ".$colcode[$sortBy][0]." $sortOrder";
                 $disp = "LIMIT ".strval((intval($page)-1)*intval($show)).", $show";
-                $queryBegin = "SELECT namen,namef,namel,email,grade,school FROM PathwaySCon_attendees";
+                $queryBegin = "SELECT namen,namef,namel,email,grade,school FROM PathwaySCon_attendees WHERE NOT ptpid IN(0, 1)";
                 $queryEnd = "$sort $disp"; $sql = ""; $col = array("A", "B", "C", "E", "F", "D"); $queryPreset = array(
-                    "a" => "$queryBegin WHERE grade BETWEEN 0 AND 3",
-                    "b" => "$queryBegin WHERE grade BETWEEN 4 AND 6",
-                    "c" => "$queryBegin WHERE grade BETWEEN 7 AND 9",
+                    "a" => "$queryBegin AND grade BETWEEN 0 AND 3",
+                    "b" => "$queryBegin AND grade BETWEEN 4 AND 6",
+                    "c" => "$queryBegin AND grade BETWEEN 7 AND 9",
                 );
                 // Translate
                 $pt = explode("\\", $pathTree);

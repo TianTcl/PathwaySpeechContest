@@ -24,7 +24,7 @@
                     $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
                     require($dirPWroot."resource/php/lib/LINE.php");
                     $LINE -> setToken("970F4tFzYzTrBZ4ayvrhqKihmGFCrvPsM11sKrNhPPU");
-                    $LINE -> notify("มีผู้สมัครใหม่ → ".$attr['namen']."\r\n".$num2grade[intval($attr['grade'])]." โรงเรียน".$attr['school']."\r\nจำนวนผู้สมัครทั้งหมด $newid คน");
+                    $LINE -> notify("มีผู้สมัครใหม่ → ".$attr['namen']."\r\n".$num2grade[intval($attr['grade'])]." โรงเรียน".$attr['school']."\r\nจำนวนผู้สมัครทั้งหมด ".strval(intval($newid)-1)." คน");
                     // End LINE Notify API
                 } else { echo '{"success": false, "reason": [3, "Unable to register. Please try again."]}'; slog("webForm", "PathwaySCon", "register", "new", strtolower($attr['email']), "fail", $remote, "InvalidQuery"); }
             }
@@ -57,7 +57,7 @@
             }
         } else if ($app == "stat") {
             if ($cmd == "fetch") {
-                $getappall = $db -> query("SELECT COUNT(ptpid)-1 AS amt FROM PathwaySCon_attendees");
+                $getappall = $db -> query("SELECT COUNT(ptpid)-2 AS amt FROM PathwaySCon_attendees");
                 $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE round=".$_SESSION['event']['round']);
                 $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");

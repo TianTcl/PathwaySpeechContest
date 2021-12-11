@@ -122,14 +122,14 @@
                     if ($geturl -> num_rows == 1) {
                         $readurl = $geturl -> fetch_array(MYSQLI_ASSOC);
                         $db -> query("UPDATE PathwaySCon_workshop SET view=view+1 WHERE vwid=".$readurl['vwid']);
-                        echo '{"success": true, "info": "'.$readurl['link'].'"}';
+                        echo '{"success": true, "info": "'.$readurl['link'].'"'.($rmte ? ', "clip": "'.($tcl -> encode($clip, 3)).'"' : "").'}';
                         slog($readurl['vwid'], "PathwaySCon", "video", "view", "", "pass", $remote);
                         $_SESSION['event']['workshop-URL'] = $readurl['link'];
                     } else {
                         $link = $tcl -> uuid("$name-$clip");
                         $success = $db -> query("INSERT INTO PathwaySCon_workshop (namen,video,link,ip) VALUES ('$name',$clip,'$link','$ip')");
                         if ($success) {
-                            echo '{"success": true, "info": "'.$link.'"}';
+                            echo '{"success": true, "info": "'.$link.'"'.($rmte ? ', "clip": "'.($tcl -> encode($clip, 3)).'"' : "").'}';
                             slog($db -> insert_id, "PathwaySCon", "video", "view", "", "pass", $remote);
                             $_SESSION['event']['workshop-URL'] = $link;
                         } else { echo '{"success": false'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "NotEligible"); }

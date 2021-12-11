@@ -9,7 +9,7 @@
     if (!isset($_COOKIE['set_lang'])) setcookie("set_lang", "en", $exptimeout, "/", $_SERVER['HTTP_HOST']);
 
     // PSC custom
-    /* if (!isset($_SESSION['event'])) */ $_SESSION['event'] = array(
+    if (!isset($_SESSION['event'])) $_SESSION['event'] = array(
         "round" => "1"
     );
 ?>

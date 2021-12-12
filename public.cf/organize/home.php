@@ -22,6 +22,7 @@
 				<p>คุณสามารถเลือกการทำงานได้จากเมนูด้านบนหรือตัวเลือกด้านล่าง</p>
 				<input name="contest" type="checkbox" id="ref_menu-a"><label for="ref_menu-a">การประกวด</label><ul>
 					<li><a href="attendees">รายนามผู้สมัคร</a></li>
+					<li disabled><a href="grade-clip">ลงคะแนนวีดีโอคลิป</a></li>
 				</ul>
 				<input name="donate" type="checkbox" id="ref_menu-b"><label for="ref_menu-b">การบริจาค</label><ul>
 					<li><a href="giveaway">บริหารการแจก giveaway</a></li>
@@ -30,6 +31,7 @@
 				</ul>
 				<input name="stats" type="checkbox" id="ref_menu-c"><label for="ref_menu-c">สถิติต่างๆ</label><ul>
 					<li><a href="statics">สถิติของโครงการ</a></li>
+					<li><a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank">รายงานการเข้าเว็บ</a></li>
 				</ul>
 			</div>
 		</main>

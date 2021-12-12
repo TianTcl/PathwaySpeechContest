@@ -102,6 +102,7 @@
 						</div>
 					</div>
 				</div>
+				<p>View full report on <a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank">Google Datastudio</a> (from Google Analytics)</p>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

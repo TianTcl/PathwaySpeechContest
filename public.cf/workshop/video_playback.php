@@ -10,7 +10,7 @@
 	switch ($_SESSION['event']['workshop-VDO']) {
 		case 1:
 			$player_src = "workshop_2021-12-11"; $player_name = "1st Workshop (11/12/2021)";
-			$player_duration = ""; $player_thumbnail = "/resource/images/workshop-1.png"; break;
+			$player_duration = "1:42:35"; $player_thumbnail = "/resource/images/workshop-1.png"; break;
 		default: header("location: /workshop/"); break;
 	} $player_src = "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/images/$player_src.mp4";
 ?>

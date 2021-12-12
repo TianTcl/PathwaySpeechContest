@@ -25,6 +25,7 @@
             <label>Sitemap</label>
             <ul>
                 <li><a href="/">Homepage</a></li>
+                <li><a href="/workshop/feed">Workshop</a></li>
                 <li><a href="/donate">Donate</a></li>
                 <li><a href="/posts">Gallery</a></li>
                 <li><a href="/FaQ">FaQ</a></li>

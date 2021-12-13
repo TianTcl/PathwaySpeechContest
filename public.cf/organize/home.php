@@ -20,8 +20,11 @@
 				<p><?php echo ($_COOKIE['set_lang']=="en"?"Welcome ":"ยินดีต้อนรับ ").$_SESSION['evt2']['name']; ?> (<?php echo $_SESSION['evt2']['usrn']; ?>)</p>
 				<p><?php echo ($_COOKIE['set_lang']=="en"?"to the Pathway Speech Contest oragnizer dashboard":"เข้าสู่ระบบแผงควบระบบ Pathway Speech Contest"); ?></p><br>
 				<p>คุณสามารถเลือกการทำงานได้จากเมนูด้านบนหรือตัวเลือกด้านล่าง</p>
-				<input name="contest" type="checkbox" id="ref_menu-a"><label for="ref_menu-a">การประกวด</label><ul>
-					<li><a href="attendees">รายนามผู้สมัคร</a></li>
+				<input name="contest" type="checkbox" id="ref_menu-a"><label for="ref_menu-a">เกี่ยวกับ</label><ul>
+					<li class="dt">บัญชีของฉัน</li>
+					<li><a href="profile">โปรไฟล์</a></li>
+					<li class="dt">การประกวด</li>
+					<li><a href="attendees">รายชื่อผู้สมัคร</a></li>
 					<li disabled><a href="grade-clip">ลงคะแนนวีดีโอคลิป</a></li>
 				</ul>
 				<input name="donate" type="checkbox" id="ref_menu-b"><label for="ref_menu-b">การบริจาค</label><ul>

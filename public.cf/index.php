@@ -68,7 +68,7 @@
 						<a href="<?=isset($_SESSION['evt'])?"submit/":"register"?>" role="button" class="cyan"><?=isset($_SESSION['evt'])?($_COOKIE['set_lang']=="th"?"ส่งผลงาน":"Submit it"):($_COOKIE['set_lang']=="th"?"ลงทะเบียน":"Register")?></a>
 						<a href="donate" role="button" class="green"><?=$_COOKIE['set_lang']=="th"?"บริจาค":"Donate"?></a>
 					</div>
-					<center><br><a href="criteria">เกณฑ์การพิจรณาคะแนน</a> | <a href="contact">ช่องทางการติดต่อสอบถาม</a></center>
+					<center><br><a href="criteria">เกณฑ์การพิจรณาคะแนน</a> | <a href="contact">ช่องทางการติดต่อสอบถาม</a> | <a href="team">คณะผู้ประสานงาน</a></center>
 				</div>
 			</div>
 		</main>

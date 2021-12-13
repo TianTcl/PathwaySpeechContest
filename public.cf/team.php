@@ -49,7 +49,7 @@
 			main div.wrapper div.people {
 				margin: 7.5px;
 				width: 225px; height: 300px;
-				border-radius: 5px;
+				border-radius: 5px; background-color: var(--clr-psc-skin-low);
 				box-shadow: 1.25px 5px var(--shd-small) var(--fade-black-7);
 				display: flex; flex-direction: column;
 			}

@@ -48,9 +48,9 @@
             } else if ($action == "showTeam") {
                 $teams = array("lead" => array(), "rest" => array());
                 $sqlfront = "SELECT name,role,avatar,display FROM PathwaySCon_organizer";
-                $getlead = $db -> query("$sqlfront WHERE role LIKE '%lead%'");
+                $getlead = $db -> query("$sqlfront WHERE role LIKE '%lead%' ORDER BY sequence,role,name");
                 while ($readlead = $getlead -> fetch_assoc()) array_push($teams['lead'], $readlead);
-                $getrest = $db -> query("$sqlfront WHERE NOT role LIKE '%lead%' ORDER BY role,name");
+                $getrest = $db -> query("$sqlfront WHERE NOT role LIKE '%lead%' ORDER BY sequence,role,name");
                 while ($readrest = $getrest -> fetch_assoc()) array_push($teams['rest'], $readrest);
                 echo json_encode($teams);
             } else if ($action == "getAdminProfile") {

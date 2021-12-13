@@ -8,7 +8,8 @@
 		$text = ""; foreach ($roles as $role) {
 			switch ($role) {
 				case "lead"; $name = "Founder" /*"ผู้จัดโครงการ"*/; break;
-				case "colead"; $name = "Coordinator" /*"ผู้ร่วมจัดโครงการ"*/; break;
+				case "colead"; $name = "Co-Founder" /*"ผู้ร่วมจัดโครงการ"*/; break;
+				case "contact"; $name = "Coordinator" /*"ผู้ประสานงาน"*/; break;
 				case "art"; $name = "Graphic Designer" /*"ดีไซน์เนอร์"*/; break;
 				case "content"; $name = "Content Creator" /*"ผู้คิดเนื้อหา"*/; break;
 				case "grader"; $name = "Judge" /*"กรรมการ"*/; break;

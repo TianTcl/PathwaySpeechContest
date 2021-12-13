@@ -30,6 +30,7 @@
                 <li><a href="/posts">Gallery</a></li>
                 <li><a href="/FaQ">FaQ</a></li>
                 <li><a href="/contact">Contact us</a></li>
+                <li><a href="/team">Teams</a></li>
                 <?php if (!isset($_SESSION['evt'])) { ?>
                 <li><a href="/criteria">Scoring Criteria</a></li>
                 <li><a href="/register">Register</a></li>
@@ -46,6 +47,7 @@
                 <li><a href="/organize/">เข้าสู่ระบบทีมงาน</a></li>
                 <?php } else { ?>
                 <li><a href="/organize/home">เมนูหลัก</a></li>
+                <li><a href="/profile">โปรไฟล์ของฉัน</a></li>
                 <li><a href="/organize/attendees">รายชื่อผู้สมัคร</a></li>
                 <li><a href="/organize/giveaway">บริหาร Giveaway</a></li>
                 <li><a href="/organize/statics">สถิติ</a></li>

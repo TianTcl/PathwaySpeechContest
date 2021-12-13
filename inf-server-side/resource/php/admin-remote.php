@@ -45,6 +45,14 @@
                         else { echo '{"success": false, "reason": [3, "Incorrect username or password."]}'; slog($user, "PathwaySCon", "password", "new", "", "fail", "remote", "Incorrect"); }
                     } if (isset($notify)) { echo '{"success": false, "reason": ['.$notify.']}'; slog($user, "PathwaySCon", "password", "new", "", "fail", "remote", "NotEligible"); }
                 } else { echo '{"success": false, "reason": [1, "Missing parameter or parameter empty."]}'; slog($user, "PathwaySCon", "password", "new", "", "fail", "remote", "Empty"); }
+            } else if ($action == "showTeam") {
+                $teams = array("lead" => array(), "rest" => array());
+                $sqlfront = "SELECT name,role,avatar,display FROM PathwaySCon_organizer";
+                $getlead = $db -> query("$sqlfront WHERE role LIKE '%lead%'");
+                while ($readlead = $getlead -> fetch_assoc()) array_push($teams['lead'], $readlead);
+                $getrest = $db -> query("$sqlfront WHERE NOT role LIKE '%lead%' ORDER BY role,name");
+                while ($readrest = $getrest -> fetch_assoc()) array_push($teams['rest'], $readrest);
+                echo json_encode($teams);
             }
             $db -> close();
         }

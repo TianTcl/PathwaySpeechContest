@@ -6,7 +6,7 @@
         $user = trim($_REQUEST['user']);
         if (isset($_REQUEST['do']) && $_REQUEST['do']<>"") {
             $action = trim($_REQUEST['do']);
-            require($dirPWroot."e/resource/db_connect.php");
+            require($dirPWroot."e/resource/db_connect.php"); # require($dirPWroot."/resource/php/lib/TianTcl.php");
             if ($action == "login") {
                 if (isset($_POST['user']) && isset($_POST['pass']) && !empty(trim($_POST['user'])) && !empty(trim($_POST['pass']))) {
                     $user = $db -> real_escape_string(trim($_POST['user']));
@@ -53,6 +53,9 @@
                 $getrest = $db -> query("$sqlfront WHERE NOT role LIKE '%lead%' ORDER BY role,name");
                 while ($readrest = $getrest -> fetch_assoc()) array_push($teams['rest'], $readrest);
                 echo json_encode($teams);
+            } else if ($action == "getAdminProfile") {
+                $myinfo = $db -> query("SELECT avatar,display FROM PathwaySCon_organizer WHERE user_id=$user");
+                echo json_encode($myinfo -> fetch_array(MYSQLI_ASSOC));
             }
             $db -> close();
         }

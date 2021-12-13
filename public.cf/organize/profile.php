@@ -1,6 +1,6 @@
 <?php
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
-	require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ps.php");
+	require($dirPWroot."resource/hpe/init_ps.php");
     header("Access-Control-Allow-Origin: https://pathwayspeechcontest.cf");
     $rmte = (isset($_GET['remote']) && !empty($_GET['remote'])); $remote = $rmte ? "remote" : "";
 	$header_title = "My Profile";
@@ -8,43 +8,21 @@
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
 
-	require($dirPWroot."e/resource/db_connect.php");
-	$user = $rmte ? trim($_GET['remote']) : $_SESSION['evt2']['user'];
-	if (isset($_POST['name']) && !empty(trim($_POST['name']))) {
-		if ($rmte) $back = "https://PathwaySpeechContest.cf/organize/profile";
-		$name = $db -> real_escape_string(trim($_POST['name']));
-		require($dirPWroot."resource/php/core/getip.php");
-		if (isset($_FILES['usf'])) {
-			$target_dir = "../resource/images/"; $imageFileType = strtolower(pathinfo(basename($_FILES['usf']["name"]), PATHINFO_EXTENSION));
-			$newFileName = crc32($user).".$imageFileType";
-            $etfn = "people-$newFileName"; $target_file = $target_dir.$etfn;
-            $uploadOk = ($_FILES['usf']["size"] > 0 && $_FILES['usf']["size"] <= 3072000); // 3 MB
-            if (!in_array($imageFileType, array("png", "jpg"))) $uploadOk = false;
-            if ($uploadOk) {
-                if (file_exists($target_file)) unlink($target_file);
-                if (move_uploaded_file($_FILES['usf']["tmp_name"], $target_file)) $avatersql = ",avatar='$newFileName'";
-                else { $avatersql = ""; $notify2 = '3, "Unable to upload your photo. Please try again"'; }
-            } else { $avatersql = ""; $notify2 = '3, "Invalid photo property"'; }
-		} else $avatersql = "";
-		$success = $db -> query("UPDATE PathwaySCon_organizer SET display='$name'$avatersql WHERE user_id=$user");
-		if ($success) { $notify = '0, "Your profile is updated"'; slog($user, "PathwaySCon", "account", "edit", "", "pass", $remote); }
-		else { $notify = '0, "Your profile is updated"'; slog($user, "PathwaySCon", "account", "edit", "", "fail", $remote, "InvalidQuery"); }
-		if ($rmte) header("Location: $back#".(isset($notify)?("msg=".urlencode("app.ui.notify(1,[".str_replace(" ", "--20", $notify)."])").(isset($notify2)?("&msg2=".urlencode("app.ui.notify(1,[".str_replace(" ", "--20", $notify2)."])")):"")):""));
-	} $myinfo = $db -> query("SELECT avatar,display FROM PathwaySCon_organizer WHERE user_id=$user");
-	$mydata = $myinfo -> fetch_array(MYSQLI_ASSOC);
-	$db -> close();
+    require_once($dirPWroot."resource/php/lib/TianTcl.php");
+	$user = $_SESSION['evt2']['user'];
+	$get = json_decode(file_get_contents("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/admin-remote?user=$user&do=getAdminProfile", false));
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/heading.php"); require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ss.php"); ?>
+		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
 			main form div.box {
 				margin-bottom: 10px;
 				width: calc(100% - 5px); height: 125px;
 				border-radius: 5px; border: 2.5px dashed var(--clr-bs-gray);
 				background-color: var(--clr-gg-grey-300); background-size: contain; background-repeat: no-repeat; background-position: center;
-				background-image: url("/e/Pathway-Speech-Contest/resource/images/people-<?=(!empty($mydata['avatar'])?$mydata['avatar']:"default.jpg")?>");
+				background-image: url("<?=(!empty($get -> avatar)?"https://inf.bodin.ac.th/e/Pathway-Speech-Contest":"")?>/resource/images/people-<?=(!empty($get -> avatar)?($get -> avatar):"default.jpg")?>");
 				/* display: flex; justify-content: center; */
 				overflow: hidden;
 			}
@@ -64,11 +42,22 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				<?php if(isset($notify))echo"app.ui.notify(1,[$notify]);";?>
-				<?php if(isset($notify2))echo"app.ui.notify(1,[$notify2]);";?>
+				seek_param();
 				$('form input[name="usf"]').on("change", validate_file);
 				$('form').on("change", function() { document.querySelector("form button").disabled = false; });
 			});
+			function seek_param() { if (location.hash.length > 1) {
+				// Extract hashes
+				var hash = {}; location.hash.substring(1, location.hash.length).split("&").forEach((ehs) => {
+					let ths = ehs.split("=");
+					hash[ths[0]] = ths[1];
+				});
+				// Let's see
+				if (typeof hash.msg !== "undefined") {
+					eval(decodeURIComponent(hash.msg.replaceAll("--20", "%20"))+";");
+					if (typeof hash.msg2 !== "undefined") eval(decodeURIComponent(hash.msg2.replaceAll("--20", "%20"))+";");
+				} history.replaceState(null, null, location.pathname);
+			} }
 			function validate_file() {
 				var f = document.querySelector('form input[name="usf"]').files;
 				var cond = f.length == 1; if (cond) {
@@ -89,12 +78,12 @@
 		</script>
 	</head>
 	<body>
-		<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/header.php"); ?>
+		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>My Profile</h2>
-				<form class="form" method="post" enctype="multipart/form-data">
-					<input type="text" name="name" maxlength="30" placeholder="ชื่อที่แสดง(ต่อสาธารณะ)" required value="<?=$mydata['display']?>">
+				<form class="form" method="post" enctype="multipart/form-data" action="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/organize/profile?remote=<?=$user?>">
+					<input type="text" name="name" maxlength="30" placeholder="ชื่อที่แสดง(ต่อสาธารณะ)" required value="<?=($get -> display)?>">
 					<div class="box"><input type="file" name="usf" accept=".png, .jpg" required></div>
 					<div class="group">
 						<span>ภาพโปรไฟล์</span>
@@ -106,7 +95,7 @@
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>
 		<footer>
-			<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/footer.php"); ?>
+			<?php require($dirPWroot."resource/hpe/footer.php"); ?>
 		</footer>
 	</body>
 </html>

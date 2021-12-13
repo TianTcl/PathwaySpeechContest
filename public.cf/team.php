@@ -8,7 +8,7 @@
 		$text = ""; foreach ($roles as $role) {
 			switch ($role) {
 				case "lead"; $name = "ผู้จัดโครงการ"; break;
-				case "art"; $name = "นักออกแบบ"; break;
+				case "art"; $name = "ดีไซน์เนอร์"; break;
 				case "content"; $name = "ผู้คิดเนื้อหา"; break;
 				case "grader"; $name = "กรรมการ"; break;
 				case "judge"; $name = "กรรมการตัดสิน"; break;
@@ -54,6 +54,7 @@
 			main div.wrapper div.people > .image {
 				height: 225px;
 				border-radius: 5px 5px 0px 0px;
+				overflow: hidden;
 			}
 			main div.wrapper div.people > .image img {
 				width: 100%; height: 100%;

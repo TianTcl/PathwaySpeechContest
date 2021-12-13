@@ -67,6 +67,9 @@
 				line-height: calc(75px / 2); text-align: center;
 			}
 			main div.wrapper div.people > .role { font-size: 1.125rem; }
+			@media only screen and (max-width: 768px) {
+				main div.wrapper div.people > .role { font-size: 0.75rem; }
+			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {

@@ -7,14 +7,15 @@
 	function role2text($roles) {
 		$text = ""; foreach ($roles as $role) {
 			switch ($role) {
-				case "lead"; $name = "ผู้จัดโครงการ"; break;
-				case "art"; $name = "ดีไซน์เนอร์"; break;
-				case "content"; $name = "ผู้คิดเนื้อหา"; break;
-				case "grader"; $name = "กรรมการ"; break;
-				case "judge"; $name = "กรรมการตัดสิน"; break;
-				case "stage"; $name = "วิทยากร"; break;
-				case "MC"; $name = "พิธีกร"; break;
-				case "dev"; $name = "นักพัฒนาระบบ"; break;
+				case "lead"; $name = "Founder" /*"ผู้จัดโครงการ"*/; break;
+				case "colead"; $name = "Coordinator" /*"ผู้ร่วมจัดโครงการ"*/; break;
+				case "art"; $name = "Graphic Designer" /*"ดีไซน์เนอร์"*/; break;
+				case "content"; $name = "Content Creator" /*"ผู้คิดเนื้อหา"*/; break;
+				case "grader"; $name = "Judge" /*"กรรมการ"*/; break;
+				case "judge"; $name = "Head Judge" /*"กรรมการตัดสิน"*/; break;
+				case "stage"; $name = "Senior guest" /*"วิทยากร"*/; break;
+				case "MC"; $name = "MC" /*"พิธีกร"*/; break;
+				case "dev"; $name = "System Developer" /*"นักพัฒนาระบบ"*/; break;
 				default; $name = ""; break;
 			} if ($name <> "") $text .= (!empty($text) ? ", " : "").$name;
 		} return $text;
@@ -65,6 +66,7 @@
 				height: calc(75px / 2);
 				line-height: calc(75px / 2); text-align: center;
 			}
+			main div.wrapper div.people > .role { font-size: 1.125rem; }
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {

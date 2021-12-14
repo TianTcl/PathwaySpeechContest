@@ -22,13 +22,13 @@
 		} return $text;
 	}
 	function renderUser($user) {
-		$avatar = empty($user -> avatar) ? "/resource/images/people-default.jpg" : "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/images/people-".($user -> avatar);
+		$avatar = $user -> avatar; if (empty($avatar)) $avatar = "default.jpg";
 		$realName = $user -> name; if ($realName == "Tecillium (UFDT)") $realName = "นายชัยณัฏฐ์  ลิ้มชุณหนุกูล";
 		$displayName = $user -> display; if (empty($displayName)) $displayName = "-_-_-";
 		$eventRole = role2text(explode(",", $user -> role));
 		?><div class="people">
-			<div class="image" <?=(empty($user -> avatar)?"":"real")?>>
-				<img src="<?=$avatar?>" data-dark="false">
+			<div class="image <?=(empty($user -> avatar)?"":"real")?>">
+				<img src="/resource/images/people-<?=$avatar?>" data-dark="false">
 			</div>
 			<div class="name"><span data-title="<?=$realName?>"><?=$displayName?></span></div>
 			<div class="role"><?=$eventRole?></div>
@@ -62,7 +62,7 @@
 				width: 100%; height: 100%;
 				object-fit: scale-down;
 			}
-			main div.wrapper div.people > .image[real] img { object-fit: cover; }
+			/* main div.wrapper div.people > .image.real img { object-fit: cover; } */
 			main div.wrapper div.people > :not(.image) {
 				height: calc(75px / 2);
 				line-height: calc(75px / 2); text-align: center;
@@ -74,8 +74,9 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				setTimeout(function() { Grade(document.querySelectorAll("main div.wrapper div.people > .image:not([real])")); }, 250);
-			})
+				setTimeout(function() { Grade(document.querySelectorAll("main div.wrapper div.people > .image:not(.real)")); }, 250);
+				setTimeout(function() { Grade(document.querySelectorAll("main div.wrapper div.people > .image.real")); }, 750);
+			});
 		</script>
 		<script type="text/javascript" src="/resource/js/lib/grade.min.js"></script>
 	</head>

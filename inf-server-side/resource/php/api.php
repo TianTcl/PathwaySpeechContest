@@ -8,6 +8,7 @@
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
         require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
         $rmte = (isset($attr['remote']) && $attr['remote']); $remote = $rmte ? "remote" : "";
+        $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
 		if ($app == "register") {
             if ($cmd == "chkEml") {
                 $attr = $db -> real_escape_string(trim($attr));
@@ -21,7 +22,6 @@
                     $newid = $db -> insert_id;
                     echo '{"success": true}'; slog("webForm", "PathwaySCon", "register", "new", $newid, "pass", $remote);
                     // Notify team via LINE application
-                    $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
                     require($dirPWroot."resource/php/lib/LINE.php");
                     $LINE -> setToken("970F4tFzYzTrBZ4ayvrhqKihmGFCrvPsM11sKrNhPPU");
                     $LINE -> notify("มีผู้สมัครใหม่ → ".$attr['namen']."\r\n".$num2grade[intval($attr['grade'])]." โรงเรียน".$attr['school']."\r\nจำนวนผู้สมัครทั้งหมด ".strval(intval($newid)-1)." คน");
@@ -61,17 +61,32 @@
                 $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE round=".$_SESSION['event']['round']);
                 $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
+                $getschamt = $db -> query("SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school ORDER BY amount DESC,school");
+                $getgrdamt = $db -> query("SELECT grade,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY grade ORDER BY amount DESC,grade");
                 $db = create_database_connection("tiantcl_inf");
                 $getpageview = $db -> query("SELECT COUNT(logid) AS amt FROM log_pageview WHERE url LIKE '%e/Pathway-Speech-Contest/%' AND NOT url LIKE '%e/Pathway-Speech-Contest/organize/%'");
-                if ($getappall || $getappsnd || $getpageview || $getdonate) {
+                if ($getappall || $getappsnd || $getpageview || $getdonate || $getschamt || $getgrdamt) {
                     $result = array(
-                        "ptp-all" => ($getappall ? ($getappall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
-                        "ptp-att" => ($getappsnd ? ($getappsnd -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
-                        "vdo-mark" => "0",
-                        "vdo-clip" => ($getvdoall ? ($getvdoall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
-                        "pageview" => ($getpageview ? ($getpageview -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
-                        "transac" => ($getdonate ? ($getdonate -> fetch_array(MYSQLI_ASSOC))['amt'] : "-")
-                    ); echo '{"success": true, "info": '.json_encode($result).'}';
+                        "raw" => array(
+                            "ptp-all" => ($getappall ? ($getappall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
+                            "ptp-att" => ($getappsnd ? ($getappsnd -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
+                            "vdo-mark" => "0",
+                            "vdo-clip" => ($getvdoall ? ($getvdoall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
+                            "pageview" => ($getpageview ? ($getpageview -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
+                            "transac" => ($getdonate ? ($getdonate -> fetch_array(MYSQLI_ASSOC))['amt'] : "-")
+                        ), "tbl" => array(
+                            "schl-amt" => array(),
+                            "grde-amt" => array()
+                        )
+                    ); if ($getschamt -> num_rows > 0) { while ($schamt = $getschamt -> fetch_assoc()) array_push($result['tbl']['schl-amt'], array(
+                        "key" => $schamt['school'],
+                        "amt" => intval($schamt['amount']),
+                        "ppl" => $schamt['peoples']
+                    )); } if ($getgrdamt -> num_rows > 0) { while ($grdamt = $getgrdamt -> fetch_assoc()) array_push($result['tbl']['grde-amt'], array(
+                        "key" => $num2grade[intval($grdamt['grade'])],
+                        "amt" => intval($grdamt['amount']),
+                        "ppl" => $grdamt['peoples']
+                    )); } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch statics."]}';
             }
         } else if ($app == "giveaway") {

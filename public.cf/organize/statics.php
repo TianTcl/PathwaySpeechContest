@@ -35,6 +35,15 @@
 				text-align: center; font-size: 1.5rem;
 				display: block;
 			}
+			main #reports ~ details {
+				margin-bottom: 0px; padding: 5px 10px;
+				border-bottom: 1.25px solid var(--clr-psc-skin-high);
+			}
+			main #reports ~ details:first-of-type { border-top: 1.25px solid var(--clr-psc-skin-high); }
+			main div.table.no-1 td:nth-child(2), main div.table.no-2 td:nth-child(1), main div.table.no-2 td:nth-child(2) { text-align: center; }
+			/* main div.table.no-1 td:nth-child(3), main div.table.no-2 td:nth-child(3) { white-space: pre-wrap; } */
+			main div.table.no-1 td:nth-child(3) { max-width: 45%; }
+			main div.table.no-2 td:nth-child(3) { max-width: 60%; }
 			@media only screen and (max-width: 768px) {
 				main .stat .grpdiv { justify-content: flex-start; flex-direction: column; }
 				main .stat .grpdiv .card:not(:last-child) { margin-bottom: 17.5px; }
@@ -56,7 +65,13 @@
 					$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api?app=stat&cmd=fetch", function(res, hsc) {
 						var dat = JSON.parse(res);
 						if (dat.success) {
-							Object.keys(dat.info).forEach((ei) => { document.querySelector('main .stat .card output[name="'+ei+'"]').value = dat.info[ei]; });
+							Object.keys(dat.info.raw).forEach((ei) => { document.querySelector('main .stat .card output[name="'+ei+'"]').value = dat.info.raw[ei]; });
+							Object.keys(dat.info.tbl).forEach((et) => {
+								var rowHTML = ""; dat.info.tbl[et].forEach((er) => {
+									let ppls = er.ppl.replaceAll(",", ", "); ppls = ppls.substr(0, 50) + (ppls.length > 50 ? "..." : "");
+									rowHTML += '<tr><td>'+er.key+'</td><td>'+er.amt+'</td><td><span class="txtoe">'+ppls+'</span></td></tr>';
+								}); document.querySelector("main div.table tbody."+et).innerHTML = rowHTML;
+							});
 						} else app.ui.notify(1, dat.reason);
 					});
 				}
@@ -67,42 +82,63 @@
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
-				<h2>Event Statics<button onClick="get_lastest_statics()" class="green" data-title="refresh"><i class="material-icons">sync</i></button></h2>
+			<h2>Event Statics<button onClick="get_lastest_statics()" class="green" data-title="refresh"><i class="material-icons">sync</i></button></h2>
+				<p>View full report on <a href="/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank">Google Datastudio</a> (from Google Analytics)</p>
 				<div class="stat">
 					<div class="grpdiv">
 						<div class="card">
-							<h4>ผู้สมัครทั้งหมด</h4>
-							<output name="ptp-all"></output>
+							<h4>ผู้สมัครทั้งหมด <a href="#reports"><i class="material-icons">arrow_downward</i></a><a href="attendees"><i class="material-icons">arrow_forward</i></a></h4>
+							<output name="ptp-all">-</output>
 						</div>
 						<div class="card">
 							<h4>ผู้สมัครที่ส่งคลิป</h4>
-							<output name="ptp-att"></output>
+							<output name="ptp-att">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
 							<h4>คลิปที่ตรวจแล้ว</h4>
-							<output name="vdo-mark"></output>
+							<output name="vdo-mark">-</output>
 						</div>
 						<div class="card">
 							<h4>คลิปที่ยังไม่ตรวจ</h4>
-							<output name="vdo-clip"></output>
+							<output name="vdo-clip">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4>การดูเว็บทั้งหมด</h4>
-							<output name="pageview"></output>
+							<h4>การดูเว็บทั้งหมด <a href="/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank"><i class="material-icons">arrow_forward</i></a></h4>
+							<output name="pageview">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4>จำนวนรายการบริจาค</h4>
-							<output name="transac"></output>
+							<h4>จำนวนรายการบริจาค <a disabled href="donation"><i class="material-icons">arrow_forward</i></a></h4>
+							<output name="transac">-</output>
 						</div>
 					</div>
 				</div>
-				<p>View full report on <a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank">Google Datastudio</a> (from Google Analytics)</p>
+				<h3 id="reports">Statics Datatable</h3>
+				<details open>
+					<summary>การสมัครตามโรงเรียน</summary>
+					<div class="table no-1">
+						<table><thead><tr>
+							<th onClick="ro(1, 1)">โรงเรียน</th>
+							<th onClick="ro(1, 2)">จำนวนผู้สมัคร</th>
+							<th>ชื่อเล่นผู้สมัคร</th>
+						</tr></thead><tbody class="schl-amt"></tbody></table>
+					</div>
+				</details>
+				<details open>
+					<summary>การสมัครตามระดับชั้น</summary>
+					<div class="table no-2">
+						<table><thead><tr>
+							<th onClick="ro(2, 1)">ระดับชั้น</th>
+							<th onClick="ro(2, 2)">จำนวนผู้สมัคร</th>
+							<th>ชื่อเล่นผู้สมัคร</th>
+						</tr></thead><tbody class="grde-amt"></tbody></table>
+					</div>
+				</details>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

@@ -115,8 +115,8 @@
             if ($cmd == "submit") {
                 unset($attr['remote']);
                 foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
-                $transac = empty($attr['when']) ? "" : date("Y-m-d H:i:s", strtotime($attr['when'].":00"));
-                $success = $db -> query("INSERT INTO PathwaySCon_donation (email,donor,amt,transac,refer,ip) VALUES ('".strtolower($attr['email'])."','".$attr['sender']."','".$attr['amount']."','$transac','".$attr['reference']."','$ip')");
+                $transac = empty($attr['when']) ? "NULL" : ("'".date("Y-m-d H:i:s", strtotime($attr['when'].":00"))."'");
+                $success = $db -> query("INSERT INTO PathwaySCon_donation (email,donor,amt,transac,refer,ip) VALUES ('".strtolower($attr['email'])."','".$attr['sender']."','".$attr['amount']."',$transac,'".$attr['reference']."','$ip')");
                 if ($success) {
                     $newid = $db -> insert_id;
                     echo '{"success": true}'; slog("webForm", "PathwaySCon", "donate", "new", $newid, "pass", $remote);

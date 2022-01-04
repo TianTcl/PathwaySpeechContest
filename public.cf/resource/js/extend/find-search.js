@@ -7,7 +7,7 @@ let fsfx = function() {
         return '<style type="text/css">'+_htmlStyle[_mode]+'</style><div class="fs-wrapper"><div class="form"><input type="search" name="fs-search" onInput="fs.find(this)" placeholder="'+placeholder+'" autofocus style="margin: 0px auto 5px;"></div><div class="rs slider hscroll sscroll"><span onClick="fs.choose()">ลบออก</span></div></div>';
     }
     var find = function(me) {
-        var search_for = me.value.trim(); if (!/^[%_+]+$/.test(search_for) && search_for.length > 0 && search_for.length <= 75)
+        var search_for = me.value.trim(); if (/^[^%_+]{1,75}$/.test(search_for))
         $.post("https://inf.bodin.ac.th/resource/php/core/fetch?app=fs&cmd="+_mode, {q: search_for}, function(res, hsc) {
             var dat = JSON.parse(res), dumper = $(".fs-wrapper div.rs");
             if (dat.success) {

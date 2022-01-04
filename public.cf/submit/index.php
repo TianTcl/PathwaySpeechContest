@@ -96,7 +96,7 @@
 					history.replaceState(null, null, location.pathname);
 				}
 			}
-			const statusTxt = function(state) { return state ? '<font style="color: var(--clr-bs-green)">ส่งแล้ว</font>' : '<font style="color: var(--clr-bs-red)">ไม่มีไฟล์</font>'; }
+			const statusTxt = function(state) { return state ? '<font style="color: var(--clr-bs-green)"><?=$_COOKIE['set_lang']=="th"?"ส่งแล้ว":"Sent"?></font>' : '<font style="color: var(--clr-bs-red)"><?=$_COOKIE['set_lang']=="th"?"ไม่มีไฟล์":"Empty"?></font>'; }
 			function get_submission_status() {
 				ttl = 30;
 				if (is_active) {
@@ -119,16 +119,16 @@
 				<h2>กรุณาเลือกประเภทไฟล์ที่จะส่ง</h2>
 				<div class="table fileSelect"><table><thead>
 					<tr>
-						<th>ไฟล์</th>
-						<th>สถานะ <a onClick="get_submission_status()" href="javascript:void(0)" data-title="Refresh status"><i class="material-icons">sync</i></a></th>
+						<th><?=$_COOKIE['set_lang']=="th"?"ไฟล์":"File"?></th>
+						<th><?=$_COOKIE['set_lang']=="th"?"สถานะ":"Status"?> <a onClick="get_submission_status()" href="javascript:void(0)" data-title="Refresh status"><i class="material-icons">sync</i></a></th>
 					</tr>
 				</thead><tbody>
 					<tr>
-						<td><a href="speech-video" onClick="return viewSubmission(this)" data-text="วีดีโอสุนทรพจน์">Speech Video</a></td>
+						<td><a href="speech-video" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"วีดีโอสุนทรพจน์":"Speech Video"?>">Speech Video</a></td>
 						<td name="v"></td>
 					</tr>
 					<tr>
-						<td disabled><strike><a href="payment-slip" onClick="return viewSubmission(this)" data-text="สลิปการโอนเงิน">Payment Slip</a></strike></td>
+						<td disabled><strike><a href="payment-slip" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"สลิปการโอนเงิน":"Payment Slip"?>">Payment Slip</a></strike></td>
 						<td name="s"></td>
 					</tr>
 				</tbody></table></div>

@@ -11,6 +11,7 @@
 	<head>
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
+			main div.message.green a { float: right; transform: scale(0.8) translate(17.5px, -5px); }
 			main form div.box {
 				margin-bottom: 10px;
 				width: calc(100% - 5px); height: 125px;
@@ -82,7 +83,7 @@
 					let filename = (f[0].name).toLowerCase().split(".");
 					cond = (["mp4"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 25600000); // 25 MB
 					if (cond) document.querySelector("main form output").value = f[0].name;
-					else app.ui.notify(1, [2, "Please check if your video is .MP4 file and its size is less than or equal to 25 MB"]);
+					else app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาตรวจสอบว่าไฟล์เป็นนามสกุล .MP4 และมีขนาดไม่เกิน 25 MB":"Please check if your video is .MP4 file and its size is less than or equal to 25 MB"?>"]);
 				} else document.querySelector("main form output").value = "";
 				document.querySelector("form button").disabled = !cond;
 				return cond;
@@ -108,7 +109,7 @@
 						<button class="blue ripple-click" onClick="return upload()" disabled>Upload</button>
 					</div>
 				</form>
-				<p>หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่ <a href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank">devtech@PathwaySpeechContest.cf</a> ได้</p>
+				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?> <a href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank">devtech@PathwaySpeechContest.cf</a><?=$_COOKIE['set_lang']=="th"?" ได้":"."?></p>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

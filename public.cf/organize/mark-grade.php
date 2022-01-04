@@ -218,19 +218,19 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
-				<h2>ลงคะแนนวีดีโอคลิป</h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech video"?></h2>
 				<div class="app">
 					<div class="slot lists slider">
 						<div class="vg vg-1">
-							<h4>ประถม 3-6</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"ประถม 3-6":"Elementary 3-6"?></h4>
 							<ul><!-- List A --></ul>
 						</div>
 						<div class="vg vg-2">
-							<h4>มัธยม 1-3</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"มัธยม 1-3":"Middle School"?></h4>
 							<ul><!-- List B --></ul>
 						</div>
 						<div class="vg vg-3">
-							<h4>มัธยม 4-6</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"มัธยม 4-6":"High School"?></h4>
 							<ul><!-- List C --></ul>
 						</div>
 					</div>
@@ -242,7 +242,11 @@
 					<div class="slot grade">
 						<form class="table extend form" disabled>
 							<table>
-								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);"><th>หัวข้อ</th><th>คะแนนที่ได้</th><th>คะแนนที่เต็ม</th></tr></thead>
+								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
+									<th><?=$_COOKIE['set_lang']=="th"?"หัวข้อ":"Critition"?></th>
+									<th><?=$_COOKIE['set_lang']=="th"?"คะแนนที่ได้":"Score"?></th>
+									<th><?=$_COOKIE['set_lang']=="th"?"คะแนนที่เต็ม":"Max points"?></th>
+								</tr></thead>
 								<thead><tr>
 									<th>Content</th>
 									<th><output type="number" name="s:1"></th>

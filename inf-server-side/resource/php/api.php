@@ -62,19 +62,20 @@
             if ($cmd == "fetch") {
                 $getappall = $db -> query("SELECT COUNT(ptpid) AS amt FROM PathwaySCon_attendees WHERE ptpid > 1");
                 $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=".$_SESSION['event']['round']);
+                $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 GROUP BY a.smid");
                 $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
                 $getschamt = $db -> query("(SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school HAVING amount > 1) UNION SELECT 'โรงเรียนอื่นๆ' AS school,COUNT(a.ptpid) AS amount,GROUP_CONCAT(a.namen) AS peoples FROM PathwaySCon_attendees a WHERE a.ptpid > 1 AND NOT EXISTS (SELECT b.school FROM PathwaySCon_attendees b WHERE a.school=b.school HAVING COUNT(ptpid) > 1) ORDER BY amount DESC,school");
                 $getgrdamt = $db -> query("SELECT grade,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY grade ORDER BY amount DESC,grade");
                 $db = create_database_connection("tiantcl_inf");
                 $getpageview = $db -> query("SELECT COUNT(logid) AS amt FROM log_pageview WHERE url LIKE '%e/Pathway-Speech-Contest/%' AND NOT url LIKE '%e/Pathway-Speech-Contest/organize/%'");
-                if ($getappall || $getappsnd || $getpageview || $getdonate || $getschamt || $getgrdamt) {
+                if ($getappall || $getappsnd || $getvdogrd || $getvdoall || $getdonate || $getschamt || $getgrdamt || $getpageview) {
                     $result = array(
                         "raw" => array(
                             "ptp-all" => ($getappall ? ($getappall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
                             "ptp-att" => ($getappsnd ? ($getappsnd -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
-                            "vdo-mark" => "0",
-                            "vdo-clip" => ($getvdoall ? ($getvdoall -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
+                            "vdo-mark" => ($getvdogrd ? ($getvdogrd -> num_rows) : "-"),
+                            "vdo-clip" => ($getvdoall ? intval(($getvdoall -> fetch_array(MYSQLI_ASSOC))['amt'])-($getvdogrd ? ($getvdogrd -> num_rows) : 0) : "-"),
                             "pageview" => ($getpageview ? ($getpageview -> fetch_array(MYSQLI_ASSOC))['amt'] : "-"),
                             "transac" => ($getdonate ? ($getdonate -> fetch_array(MYSQLI_ASSOC))['amt'] : "-")
                         ), "tbl" => array(

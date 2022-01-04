@@ -24,44 +24,44 @@
         <div class="group">
             <label>Sitemap</label>
             <ul>
-                <li><a href="/">Homepage</a></li>
-                <li><a href="/workshop/feed">Workshop</a></li>
-                <li><a href="/donate">Donate</a></li>
-                <li><a href="/posts">Gallery</a></li>
-                <li><a href="/FaQ">FaQ</a></li>
-                <li><a href="/contact">Contact us</a></li>
-                <li><a href="/team">Teams</a></li>
+                <li><a href="/"><?=$_COOKIE['set_lang']=="th"?"หน้าหลัก":"Homepage"?></a></li>
+                <li><a href="/workshop/feed"><?=$_COOKIE['set_lang']=="th"?"การประชุมเชิงปฏิบัติการ":"Workshop"?></a></li>
+                <li><a href="/donate"><?=$_COOKIE['set_lang']=="th"?"บริจาค":"Donate"?></a></li>
+                <li><a href="/posts"><?=$_COOKIE['set_lang']=="th"?"คลังภาพ":"Gallery"?></a></li>
+                <li><a href="/FaQ"><?=$_COOKIE['set_lang']=="th"?"คำถามที่พบบ่อย":"FaQ"?></a></li>
+                <li><a href="/contact"><?=$_COOKIE['set_lang']=="th"?"ติดต่อเรา":"Contact us"?></a></li>
+                <li><a href="/team"><?=$_COOKIE['set_lang']=="th"?"คณะผู้ดำเนินงาน":"Teams"?></a></li>
                 <?php if (!isset($_SESSION['evt'])) { ?>
-                <li><a href="/criteria">Scoring Criteria</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/login">Sign in</a></li>
+                <li><a href="/criteria"><?=$_COOKIE['set_lang']=="th"?"เกณฑ์การพิจรณาคะแนน":"Scoring Criteria"?></a></li>
+                <li><a href="/register"><?=$_COOKIE['set_lang']=="th"?"ลงทะเบียน":"Register"?></a></li>
+                <li><a href="/login"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></a></li>
                 <?php } else { ?>
-                <li><a href="/submit/">ส่งผลงาน</a></li>
-                <li><a href="/criteria">Scoring Criteria</a></li>
-                <li><a href="/logout">Sign out</a></li>
+                <li><a href="/submit/"><?=$_COOKIE['set_lang']=="th"?"ส่งผลงาน":"Submit speech"?></a></li>
+                <li><a href="/criteria"><?=$_COOKIE['set_lang']=="th"?"เกณฑ์การพิจรณาคะแนน":"Scoring Criteria"?></a></li>
+                <li><a href="/logout"><?=$_COOKIE['set_lang']=="th"?"ออกจากระบบ":"Sign out"?></a></li>
                 <?php } ?>
             </ul>
-            <label>Organizer</label>
+            <label><?=$_COOKIE['set_lang']=="th"?"ผู้ดำเนินงาน":"Organizer"?></label>
             <ul>
                 <?php if (!isset($_SESSION['evt2'])) { ?>
-                <li><a href="/organize/">เข้าสู่ระบบทีมงาน</a></li>
+                <li><a href="/organize/"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบทีมงาน":"Organizer sign-in"?></a></li>
                 <?php } else { ?>
-                <li><a href="/organize/home">เมนูหลัก</a></li>
-                <li class="sub-detail">เกี่ยวกับ</li>
-                <li><a href="/organize/profile">โปรไฟล์ของฉัน</a></li>
+                <li><a href="/organize/home"><?=$_COOKIE['set_lang']=="th"?"เมนูหลัก":"Home menu"?></a></li>
+                <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"เกี่ยวกับ":"About"?></li>
+                <li><a href="/organize/profile"><?=$_COOKIE['set_lang']=="th"?"โปรไฟล์ของฉัน":"My profile"?></a></li>
                 <li class="seperator">&nbsp;</li>
-                <li><a href="/organize/attendees">รายชื่อผู้สมัคร</a></li>
-                <li><a href="/organize/mark-grade">ลงคะแนนวีดีโอคลิป</a></li>
-                <li disabled><a href="/organize/rate-rank">จัดลำดับและตัดสิน</a></li>
+                <li><a href="/organize/attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
+                <li><a href="/organize/mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
+                <li disabled><a href="/organize/rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
                 <li class="seperator">&nbsp;</li>
-                <li><a href="/organize/send-email">ส่งอีเมลแจ้งเตือน</a></li>
-                <li class="sub-detail">การบริจาค</li>
-                <li><a href="/organize/giveaway">บริหาร Giveaway</a></li>
-                <li disabled><a href="/organize/donation">รายการที่รับบริจาค</a></li>
-                <li class="sub-detail">การบริจาค</li>
-                <li><a href="/organize/statics">สถิติของโครงการ</a></li>
+                <li><a href="/organize/send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>
+                <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"การบริจาค":"Donate"?></li>
+                <li><a href="/organize/giveaway"><?=$_COOKIE['set_lang']=="th"?"บริหาร Giveaway":"Giveaway management"?></a></li>
+                <li disabled><a href="/organize/donation"><?=$_COOKIE['set_lang']=="th"?"รายการที่รับบริจาค":"Donation list"?></a></li>
+                <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"สถิติต่างๆ":"Statics"?></li>
+                <li><a href="/organize/statics"><?=$_COOKIE['set_lang']=="th"?"สถิติของโครงการ":"Event statics"?></a></li>
                 <li class="seperator">&nbsp;</li>
-                <li><a href="/organize/logout">ออกจากระบบทีมงาน</a></li>
+                <li><a href="/organize/logout"><?=$_COOKIE['set_lang']=="th"?"ออกจากระบบทีมงาน":"Organizer sign-out"?></a></li>
                 <?php } ?>
             </ul>
         </div>

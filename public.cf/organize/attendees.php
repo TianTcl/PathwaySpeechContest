@@ -174,7 +174,8 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-			// $(sS.slt.d).on("change", sS.complete);
+				// $(sS.slt.d).on("change", sS.complete);
+				$(sS.slt.v).on("input change", sS.find);
 				// Fill patterned elements
 				$('div.group.f div.dir div.wrapper .tree.ctrl').prepend('<label class="tree accd"><input type="checkbox"></label>');
 				$('div.group.f div.dir div.wrapper .tree.mbr:not([expand])').attr("expand", "false");
@@ -185,15 +186,19 @@
 				$('div.group.f div.dir div.wrapper .tree.accd + label[data-info="pre-select"]').click();
 				$('div.group.f div.dir div.wrapper .tree.accd + label[data-info="pre-select"]').removeAttr("data-info");
 			});
+			var sv = { sq: null };
 			const sS = {
 				slt: {
-					v: 'div.group.f div.search div.live input[name="search"]',
-					d: 'div.group.f div.search div.live input[name="search"] + input[type="search"]',
+					v: 'div.group.f div.search div.live input[name="search"]'
+					// d: 'div.group.f div.search div.live input[name="search"] + input[type="search"]',
 				}, find: function() {
-					// setTimeout(function() {
+					/* setTimeout(function() {
 						fsa.start("ค้นหาบัญชีผู้ใช้งานทั้งหมด", sS.slt.v, sS.slt.d, "", "all");
-					// }, 50);
-				}, complete: function() {
+					}, 50); */
+					var search_for = document.querySelector(sS.slt.v).value.trim();
+					sv.sq = (/^[^%_+]{1,75}$/.test(search_for) ? search_for : null);
+					sD.load(null, "search");
+				}, /* complete: function() {
 					if (document.querySelector(sS.slt.v).value != "") {
 						$("div.group.f div.dir div.wrapper .tree.accd + label[selected]").attr("data-info", "last-select");
 						$("div.group.f div.dir div.wrapper .tree.accd + label[selected]").removeAttr("selected");
@@ -202,9 +207,9 @@
 						$('div.group.f div.dir div.wrapper .tree.accd + label[data-info="last-select"]').click();
 						$('div.group.f div.dir div.wrapper .tree.accd + label[data-info="last-select"]').removeAttr("data-info");
 					}
-				}, clear: function() {
+				}, */ clear: function() {
 					document.querySelector(sS.slt.v).value = "";
-					document.querySelector(sS.slt.d).value = "";
+					// document.querySelector(sS.slt.d).value = "";
 				}
 			};
 			const sD = {
@@ -220,7 +225,7 @@
 						me.setAttribute("selected", "");
 					} var dir = $(me).attr("data-tree");
 					document.querySelector("div.group.s div.list").disabled = true;
-					$.post("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/fetch?list=attend&change="+change, {
+					$.post("/e/Pathway-Speech-Contest/resource/php/fetch?list=attend&change="+change+(sv.sq!=null?("&q="+encodeURIComponent(sv.sq)):""), {
 						pathTree: dir,
 						page: sF.ctrl.page.current,
 						show: sF.ctrl.page.disp,
@@ -231,15 +236,15 @@
 						if (dat.success) {
 							sF.ctrl = dat.intl;
 							sF.render(dat.info);
-						} else document.querySelector(sF.slt).innerHTML = '<div class="msg"><center class="message red">Error while trying to fetch user list.</center></div>';
+						} else document.querySelector(sF.slt).innerHTML = '<div class="msg"><center class="message red"><?=$_COOKIE['set_lang']=="th"?"เกิดปัญหาระหว่างการโหลกรายชื่อ":"Error while trying to fetch user list."?></center></div>';
 						document.querySelector("div.group.s div.list").disabled = false;
-					}); sS.clear();
+					}); // sS.clear();
 				}
 			};
 			const sF = {
 				slt: "div.group.s div.list",
 				render: function(data) {
-					if (data.users.length == 0) document.querySelector(sF.slt).innerHTML = '<div class="msg"><center class="message gray">There are no user in this category.</center></div>';
+					if (data.users.length == 0) document.querySelector(sF.slt).innerHTML = '<div class="msg"><center class="message gray"><?=$_COOKIE['set_lang']=="th"?"ไม่มีชื่อในหมวดหมู่นี้":"There are no user in this category."?></center></div>';
 					else {
 						var htmlPL = '<div class="table"><table>';
 						if (typeof data.column !== "undefined" && data.column.length > 0) {
@@ -326,10 +331,10 @@
 			<div class="container">
 				<div class="wrapper">
 					<div class="group f">
-						<div class="search" disabled>
+						<div class="search">
 							<div class="live filter">
-								<input name="search" type="hidden">
-								<input type="search" onFocus="sS.find()" placeholder="Search ... (ค้นหา)">
+								<!input name="search" type="hidden">
+								<input type="search" name="search" placeholder="Search ... (ค้นหา)">
 							</div>
 						</div>
 						<div class="dir slider">

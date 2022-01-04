@@ -45,7 +45,7 @@
 				<div class="form">
 					<div class="group split">
 						&nbsp;
-						<a role="button" class="green hollow" href="/workshop/">&emsp;ดูคลิปย้อนหลัง &nbsp;<i class="material-icons">arrow_forward</i> &nbsp; </a>
+						<a role="button" class="green hollow" href="/workshop/">&emsp;<?=$_COOKIE['set_lang']=="th"?"ดูคลิปย้อนหลัง":"View Playback"?> &nbsp;<i class="material-icons">arrow_forward</i> &nbsp; </a>
 					</div>
 				</div>
 			</div>

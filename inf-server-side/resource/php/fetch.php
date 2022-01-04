@@ -13,23 +13,25 @@
 		"G" => array("time", 1, "Register time", false)
 	);
 	// Inputs
-    if (isset($_GET['list'])) {
-        $list = trim($_GET['list']);
+    if (isset($_REQUEST['list'])) {
+        $list = trim($_REQUEST['list']);
         if ($list == "attend") {
-            if (isset($_POST['pathTree']) && isset($_POST['page']) && isset($_POST['show']) && isset($_POST['sortBy']) && isset($_POST['sortOrder'])) {
+            if (isset($_REQUEST['pathTree']) && isset($_REQUEST['page']) && isset($_REQUEST['show']) && isset($_REQUEST['sortBy']) && isset($_REQUEST['sortOrder'])) {
+                require($dirPWroot."e/resource/db_connect.php");
                 // Clean up
-                $pathTree = trim($_POST['pathTree']);
-                $page = trim($_POST['page']);
-                $show = trim($_POST['show']);
-                $sortBy = trim($_POST['sortBy']);
-                $sortOrder = trim($_POST['sortOrder']);
+                $pathTree = trim($_REQUEST['pathTree']);
+                $page = trim($_REQUEST['page']);
+                $show = trim($_REQUEST['show']);
+                $sortBy = trim($_REQUEST['sortBy']);
+                $sortOrder = trim($_REQUEST['sortOrder']);
                 // Calculate
-                if (isset($_GET['change'])) {
-                    $change = trim($_GET['change']); switch ($change) {
+                if (isset($_REQUEST['change'])) {
+                    $change = trim($_REQUEST['change']); switch ($change) {
                         case "pathTree": $page = "1"; $sortBy = "G"; $sortOrder = "DESC"; break;
                         case "show": $page = strval(floor($_SESSION['var-mUser_set']['page']*$_SESSION['var-mUser_set']['show']/intval($show))+1); break;
                         case "sortBy": $page = "1"; $sortOrder = "ASC"; break;
                         case "sortOrder": $page = "1"; break;
+                        case "search": $page = "1"; break;
                     }
                 } $_SESSION['var-mUser_set'] = array( // Save for compare
                     "pathTree" => $pathTree,
@@ -46,7 +48,11 @@
                     "a" => "$queryBegin AND grade BETWEEN 0 AND 3",
                     "b" => "$queryBegin AND grade BETWEEN 4 AND 6",
                     "c" => "$queryBegin AND grade BETWEEN 7 AND 9",
-                );
+                ); if (isset($_REQUEST['q']) && !empty(trim($_REQUEST['q']))) {
+                    $searchQeury = "AND ("; $q = $db -> real_escape_string(trim($_REQUEST['q']));
+                    foreach (array("A", "B", "C", "D", "F") as $cols) $searchQeury .= $colcode[$cols][0]." LIKE '$q%' OR ";
+                    $searchQeury = rtrim($searchQeury, " OR ").")";
+                } else $searchQeury = "";
                 // Translate
                 $pt = explode("\\", $pathTree);
                 if ($pt[0] == "cf") {
@@ -65,10 +71,10 @@
                     } else $sql = $queryBegin;
                 } if (!empty($sql)) {
                     // Process
-                    require($dirPWroot."e/resource/db_connect.php");
-                    $result = $db -> query("$sql $queryEnd");
+                    # require($dirPWroot."e/resource/db_connect.php");
+                    $result = $db -> query("$sql $searchQeury $queryEnd");
                     $all = $db -> query($sql); 
-                    $db -> close();
+                    # $db -> close();
                     // Export
                     $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
                     $intlOut = '"intl": {'.
@@ -84,7 +90,6 @@
                         // send tbody
                         $send .= '"users": [';
                         while ($eu = $result -> fetch_assoc()) {
-
                             $send .= '{ ';
                             $send .= '"A": { "val": "'.$eu[$colcode['A'][0]].'" },';
                             $send .= '"B": { "val": "'.$eu[$colcode['B'][0]].'" },';
@@ -98,6 +103,7 @@
                         echo "$send }, $intlOut }";
                     } else echo '{ "success": true, "info": { "users": [] }, '.$intlOut.' }';
                 } else echo '{ "success": false }';
+                $db -> close();
             } else echo '{ "success": false }';
         }
         else echo '{ "success": false }';

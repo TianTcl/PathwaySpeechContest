@@ -67,7 +67,7 @@
 				height: calc(75px / 2);
 				line-height: calc(75px / 2); text-align: center;
 			}
-			main div.wrapper div.people > .role { font-size: 1.125rem; }
+			main div.wrapper div.people > .role { font-size: 1.025rem; }
 			@media only screen and (max-width: 768px) {
 				main div.wrapper div.people > .role { font-size: 0.75rem; }
 			}
@@ -76,15 +76,17 @@
 			$(document).ready(function() {
 				setTimeout(function() { Grade(document.querySelectorAll("main div.wrapper div.people > .image:not(.real)")); }, 250);
 				setTimeout(function() { Grade(document.querySelectorAll("main div.wrapper div.people > .image.real")); }, 750);
+				<?php if (has_perm("dev")) echo '$("main div.wrapper div.team:nth-child(2)").sortable()'; ?>
 			});
 		</script>
 		<script type="text/javascript" src="/resource/js/lib/grade.min.js"></script>
+		<script type="text/javascript" src="/resource/js/lib/jquery-ui.min.js"></script>
 	</head>
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
-				<h2>คณะผู้ประสานงานโครงการ</h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"คณะผู้ประสานงานโครงการ":"Event organizers"?></h2>
 				<div class="wrapper">
 					<div class="team">
 						<?php foreach ($get -> lead as $readlead) renderUser($readlead); ?>

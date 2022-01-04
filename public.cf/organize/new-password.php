@@ -68,7 +68,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>New password (Setup)</h2>
-				<div class="message yellow">ในขณะนี้ ระบบยังไม่รองรับการเปลี่ยนรหัสผ่าน</div>
+				<div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ในขณะนี้ ระบบยังไม่รองรับการเปลี่ยนรหัสผ่าน":"You cannot change your password after this (for now)."?></div>
 				<form method="post" class="form" onInput="fillAll()">
 					<label>Old password</label>
 					<input name="pwd-old" type="password" maxlength="255" required autofocus />
@@ -76,7 +76,7 @@
 					<input name="pwd-new" value="<?=$_POST['pwd-new']??""?>" type="new-password" maxlength="255" required />
 					<label>Confirm new password</label>
 					<input name="pwd-cnf" type="password" maxlength="255" required />
-					<label>ตัวอักษรที่อนุญาต: 0-9 A-Z a-z ! @ # $ % ^ & * - _ .</label>
+					<label><?=$_COOKIE['set_lang']=="th"?"ตัวอักษรที่อนุญาต":"Allowed characters"?>: 0-9 A-Z a-z ! @ # $ % ^ & * - _ .</label>
 					<button class="green full-x ripple-click" onClick="return validate()" disabled>Set password</button>
 				</form>
 			</div>

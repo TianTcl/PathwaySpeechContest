@@ -46,8 +46,8 @@
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
-				<h2>การดูคลิปวีดีโอย้อนหลัง</h2>
-				<p>พิมพ์ชื่อเล่นตนเองเป็นภาษาไทยหรืออังกฤษโดยไม่ใส่เครื่องหมายใดๆและเลือกคลิปที่ต้องการดูแล้วกดปุ่ม watch</p>
+				<h2><?=$_COOKIE['set_lang']=="th"?"การดูคลิปวีดีโอย้อนหลัง":"Watching workshop video playback"?></h2>
+				<p><?=$_COOKIE['set_lang']=="th"?"พิมพ์ชื่อเล่นตนเองเป็นภาษาไทยหรืออังกฤษโดยไม่ใส่เครื่องหมายใดๆและเลือกคลิปที่ต้องการดูแล้วกดปุ่ม watch":"Type your nickname in Thai or English without any punctuation and select the clip you want to watch then press watch button."?></p>
 				<form class="form" onChange="update()">
 					<input type="text" name="name" maxlength="30" placeholder="Your nickname">
 					<div class="group">

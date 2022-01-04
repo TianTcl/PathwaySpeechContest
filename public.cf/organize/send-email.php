@@ -52,10 +52,10 @@
 				APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/override",
 				num2grade: ["ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6"],
 				msgs: {
-					"remind-12": "เตือนเหลือเวลา 12 วัน",
-					"remind-8": "เตือนเหลือเวลา 8 วัน",
-					"remind-5": "เตือนเหลือเวลา 5 วัน",
-					"remind-0": "เตือนเวลาครั้งสุดท้าย"
+					"remind-12": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 12 วัน":"12 Days left"?>",
+					"remind-8": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 8 วัน":"8 Days left"?>",
+					"remind-5": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 5 วัน":"5 Days left"?>",
+					"remind-0": "<?=$_COOKIE['set_lang']=="th"?"เตือนเวลาครั้งสุดท้าย":"Last call (warn)"?>"
 				}, hash: 138
 			};
 			var sv = { all: false, req: [0, null] };
@@ -151,7 +151,7 @@
 						<div class="group">
 							<span>With selected: Notify</span>
 							<select name="msg">
-								<option value selected disabled>---กรุณาเลือกข้อความ---</option>
+								<option value selected disabled>---<?=$_COOKIE['set_lang']=="th"?"กรุณาเลือกข้อความ":"Select a message"?>---</option>
 							</select>
 							<button onClick="email()" class="yellow" disabled>Send &nbsp;</button>
 						</div>

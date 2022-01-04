@@ -61,10 +61,10 @@
 			<div class="container">
 				<h2>เกณฑ์ในการประกวด</h2>
 				<ul>
-					<li>หัวข้อ New Year's Day</li>
-					<li>ความยาวในการพูด 2-3 นาที</li>
+					<li><?=$_COOKIE['set_lang']=="th"?"หัวข้อ New Year's Day":"New Year's Day Topic."?></li>
+					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
-				<div class="message blue">เปิดรับสมัครตั้งแต่วันนี้ - 31 ธันวาคม 2564</div>
+				<div class="message blue"><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31 December<sup>st</sup> 2021"?></div>
 				<h2>Scoring Criteria</h2>
 				<div class="crit table"><table>
 					<thead><tr><th>Content</th><th>35 pts</th></tr></thead>
@@ -90,7 +90,7 @@
 				</table></div>
 				<div class="form"><div class="group split" style="margin-bottom: 0px;">
 					<div class="group">
-						<a id="ref_stat" role="button" href="javascript:view_competitive_ratio()">ดูกลุ่มการแข่งขัน</a>
+						<a id="ref_stat" role="button" href="javascript:view_competitive_ratio()"><?=$_COOKIE['set_lang']=="th"?"ดูกลุ่มการแข่งขัน":"View contest groups"?></a>
 					</div>
 					<div class="group">
 						<a href="https://docs.google.com/viewerng/viewer?embedded=true&url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" 
@@ -102,7 +102,9 @@
 					</div>
 				</div></div>
 				<div class="stat message black" style="display: none;"><table><thead><tr>
-					<th>กลุ่มการจัดลำดับ</th><th>จำนวนผู้สมัคร</th><th>ส่งผลงานแล้ว</th>
+					<th><?=$_COOKIE['set_lang']=="th"?"กลุ่มการจัดลำดับ":"Ranking Group"?></th>
+					<th><?=$_COOKIE['set_lang']=="th"?"จำนวนผู้สมัคร":"Registrants"?></th>
+					<th><?=$_COOKIE['set_lang']=="th"?"ส่งผลงานแล้ว":"Submissions"?></th>
 				</tr></thead><tbody></tbody></table></div>
 			</div>
 		</main>

@@ -81,32 +81,32 @@
 					document.querySelectorAll(".form [name]").forEach((ef) => { info[ef.name] = ef.value.trim(); });
 					if (Object.values(info).includes("")) {
 						pass = false; focusfield(Object.keys(info).find(key => info[key] === ""));
-						app.ui.notify(1, [1, "Please fill in all the fields"]);
+						app.ui.notify(1, [1, "<?=$_COOKIE['set_lang']=="th"?"Please fill in all the fields.":"กรุณากรอกให้ครบทุกช่อง"?>"]);
 					} else {
-						if (!/^((เด็ก(ชาย|หญิง)|ด.(ช|ญ).|นาย|นางสาว)[ก-๛]{1,44}|[A-Z][a-z]{0,49})$/.test(info.namef)) {
+						if (!/^((เด็ก(ชาย|หญิง)|ด\.(ช|ญ)\.|นาย|นางสาว)[ก-๛]{1,44}|[A-Z][a-z]{0,49})$/.test(info.namef)) {
 							if (pass) { focusfield("namef"); pass = false; }
-							app.ui.notify(1, [2, "Invalid First name format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid First name format.":"รูปแบบชื่อจริงไม่ถูกต้อง"?>"]);
 						} if (!/^([ก-๛]{1,50}|[A-Z][a-z]{0,49})$/.test(info.namel)) {
 							if (pass) { focusfield("namel"); pass = false; }
-							app.ui.notify(1, [2, "Invalid Last name format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid Last name format.":"รูปแบบนามสกุลไม่ถูกต้อง"?>"]);
 						} if (!/^([ก-๛]{1,30}|[A-Z][a-z]{0,29})$/.test(info.namen)) {
 							if (pass) { focusfield("namen"); pass = false; }
-							app.ui.notify(1, [2, "Invalid Nick name format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid Nick name format.":"รูปแบบชื่อเล่นไม่ถูกต้อง"?>"]);
 						} if (!/^\d$/.test(info.grade)) {
 							if (pass) { focusfield("grade"); pass = false; }
-							app.ui.notify(1, [2, "Invalid grade selected"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid grade selected.":"ระดับชั้นที่เลือกไม่ถูกต้อง"?>"]);
 						} if (!/^[A-Za-zก-๛ \.()\-]{1,200}$/.test(info.school)) {
 							if (pass) { focusfield("school"); pass = false; }
-							app.ui.notify(1, [2, "Invalid school name"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid school name.":"รูปแบบชื่อโรงเรียนไม่ถูกต้อง"?>"]);
 						} if (!/^0[1-9]\d{8}$/.test(info.phone)) {
 							if (pass) { focusfield("phone"); pass = false; }
-							app.ui.notify(1, [2, "Invalid phone number format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid phone number format.":"รูปแบบหมายดลขโทรศัพท์ไม่ถูกต้อง"?>"]);
 						} if (!/^[0-9A-Za-z\._]{3,50}$/.test(info.line)) {
 							if (pass) { focusfield("line"); pass = false; }
-							app.ui.notify(1, [2, "Invalid line ID format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid line ID format.":"รูปแบบไอดีไลน์ไม่ถูกต้อง"?>"]);
 						} if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@([a-zA-Z0-9\-_]+\.)+[a-zA-Z]{2,13}$/.test(info.email) || info.email.length > 255) {
 							if (pass) { focusfield("email"); pass = false; }
-							app.ui.notify(1, [2, "Invalid E-mail address format"]);
+							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid E-mail address format":"รูปแบบที่อยู่อีเมลไม่ถูกต้อง"?>"]);
 						}
 					} if (pass) {
 						// Check if mail is registered
@@ -116,7 +116,7 @@
 							if (dat.success) {
 								if (dat.isTaken) {
 									focusfield("email");
-									app.ui.notify(1, [1, "This E-mail address has already been used"]);
+									app.ui.notify(1, [1, "<?=$_COOKIE['set_lang']=="th"?"This E-mail address has already been used":"ที่อยู่อีเมลนี้ใช้ในการสมัครไปแล้ว"?>"]);
 								} else { // No problem, then register
 									sv = info;
 									registrationConfirm();
@@ -129,8 +129,10 @@
 				var registrationConfirm = function(cnf = null) {
 					// <div class="table"><table><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table></div>
 					if (cnf == null) {
-						let grade = $('.form select[name="grade"] option:checked').text().split(" ");
-						app.ui.lightbox.open("top", {title: "โปรดตรวจสอบข้อมูล", allowclose: true, autoclose: 90000, html: '<style type="text/css">.cnf-wrapper { font-size: 1.25rem; } .cnf-wrapper > * { margin: 0px 0px 10px; } .cnf-wrapper output { text-decoration: underline; } .cnf-wrapper div.action { display: flex; justify-content: space-evenly; }</style><div class="cnf-wrapper"><center class="message red">คุณไม่สามารถกลับมาแก้ไขข้อมูลได้ในภายหลัง</center><div class="info">ฉัน <output>'+sv.namef+'  '+sv.namel+' ('+sv.namen+')</output> ศึกษาอยู่ชั้น<output>'+grade[0]+'ศึกษาปีที่ '+grade[1]+'</output> โรงเรียน<output>'+sv.school+'</output> ใช้ไอดีไลน์ <output>'+sv.line+'</output> และเบอร์โทรศัพท์มือถือ <output>'+sv.phone+'</output><br>ที่อยู่อีเมลสำหรับติดต่อของฉันคือ <output>'+sv.email+'</output></div><div class="action"><button onClick="reg.confirm(false)" class="gray hollow ripple-click">กลับไปแก้ไขข้อมูล</button><button onClick="reg.confirm(true)" class="green ripple-click">ยืนยันข้อมูลการลงทะเบียน</button></div></div>'});
+						let grade = $('.form select[name="grade"] option:checked').text().split(" ")<?=$_COOKIE['set_lang']=="th"?"":'.splice(0, 2).join(" ")'?>;
+						app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"โปรดตรวจสอบข้อมูล":"Please recheck the given information"?>", allowclose: true, autoclose: 90000, html: '<style type="text/css">.cnf-wrapper { font-size: 1.25rem; } .cnf-wrapper > * { margin: 0px 0px 10px; } .cnf-wrapper output { text-decoration: underline; } .cnf-wrapper div.action { display: flex; justify-content: space-evenly; }</style><div class="cnf-wrapper"><center class="message red"><?=$_COOKIE['set_lang']=="th"?"คุณไม่สามารถกลับมาแก้ไขข้อมูลได้ในภายหลัง":"Your information can\'t be edited later."?></center>'+
+							'<div class="info"><?=$_COOKIE['set_lang']=="th"?"ฉัน <output>'+sv.namef+'  '+sv.namel+' ('+sv.namen+')</output> ศึกษาอยู่ชั้น<output>'+grade[0]+'ศึกษาปีที่ '+grade[1]+'</output> โรงเรียน<output>'+sv.school+'</output> ใช้ไอดีไลน์ <output>'+sv.line+'</output> และเบอร์โทรศัพท์มือถือ <output>'+sv.phone+'</output><br>ที่อยู่อีเมลสำหรับติดต่อของฉันคือ <output>'+sv.email+'</output>":"I\'m <output>'+sv.namen+' ('+sv.namef+'  '+sv.namel+')</output>. I\'m studying in <output>'+grade+'</output> at <output>'+sv.school+'</output> School. Using LINE ID <output>'+sv.line+'</output> and telephone number <output>'+sv.phone+'</output><br>My contact e-mail address is <output>'+sv.email+'</output>"?></div>'+
+							'<div class="action"><button onClick="reg.confirm(false)" class="gray hollow ripple-click"><?=$_COOKIE['set_lang']=="th"?"กลับไปแก้ไขข้อมูล":"Edit information"?></button><button onClick="reg.confirm(true)" class="green ripple-click"><?=$_COOKIE['set_lang']=="th"?"ยืนยันข้อมูลการลงทะเบียน":"Confirm & Register"?></button></div></div>'});
 						setTimeout(function() { ppa.ripple_click_program(); }, 750);
 					} else {
 						app.ui.lightbox.close();
@@ -143,7 +145,7 @@
 						var dat = JSON.parse(res);
 						if (dat.success) {
 							$(".form").addClass("message");
-							$('<div class="message cyan" style="display: none;"><div>การลงทะเบียนเสร็จสิ้น<br>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน</div><div style="display: flex;"><a href="login#user='+encodeURI(sv.email)+'" role="button" class="blue hollow full-x ripple-click" draggable="false">เข้าสู่ระบบ</a></div></div>').insertAfter(".form").toggle("fold");
+							$('<div class="message cyan" style="display: none;"><div><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเสร็จสิ้น<br>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน":"Registration complete.<br>Please sign in to submit your speech video."?></div><div style="display: flex;"><a href="login#user='+encodeURIComponent(sv.email)+'" role="button" class="blue hollow full-x ripple-click" draggable="false" style="justify-content: center;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></a></div></div>').insertAfter(".form").toggle("fold");
 							setTimeout(function() { ppa.ripple_click_program(); }, 500);
 							sv = null;
 						} else {
@@ -178,13 +180,13 @@
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
-				<h2>การลงทะเบียนเข้าร่วมประกวด</h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเข้าร่วมประกวด":"Register to Event"?></h2>
 				<div class="message blue">
-					<h3>กำหนดการ (รอบที่ 1)</h3>
-					<p>เปิดรับสมัคร<strike>วันที่ 1 ธันวาคม 2564</strike><b>วันนี้</b><br>ปิดรับสมัครวันที่ 31 ธันวาคม 2564<br>ประกาศผลวันที่ 15 มกราคม 2565</p>
+					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 1)":"Schedule (Season 1)"?></h3>
+					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 1 ธันวาคม 2564<br>ปิดรับสมัครวันที่ 31 ธันวาคม 2564<br>ประกาศผลวันที่ 15 มกราคม 2565":"Open for registration & submit: 1<sup>st</sup> December 2021<br>Close for registration & submit: 31<sup>st</sup> December 2021<br>Rank & Score announcement: 15<sup>th</sup> January 2022"?> <font style="color: var(--clr-bs-red);">•</font></p>
 				</div>
 				<div class="option">
-					<p>หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย</p>
+					<p><?=$_COOKIE['set_lang']=="th"?'หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย':'If you are already registered. Then you can <a href="login">sign in</a> to submut your speech.<br>If you are not registered. Then you can start filling the <a href="javascript:reg.start()">registration form</a>.'?></p>
 				</div>
 				<div class="form modern gray" style="display: none;">
 					<form>

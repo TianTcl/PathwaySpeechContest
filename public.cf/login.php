@@ -99,12 +99,12 @@
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
-				<h2>เข้าสู่ระบบ</h2>
-				<p>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน<br>หากท่านยังไม่ได้ลงทะเบียน สามารถ<a href="register#start">ลงทะเบียน</a>ได้ที่นี่</p>
+				<h2><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></h2>
+				<p><?=$_COOKIE['set_lang']=="th"?'กรุณาเข้าสู่ระบบเพื่อส่งผลงาน<br>หากท่านยังไม่ได้ลงทะเบียน สามารถ<a href="register#start">ลงทะเบียน</a>ได้ที่นี่':'Please be signed-in to submit your speech.<br>If you are not registered. You can <a href="register#start">register</a> here.'?></p>
 				<form>
 					<input type="email" maxlength="255" required><label>E-mail address</label>
 					<input type="tel" maxlength="10" required><label>Phone number</label>
-					<button type="submit" class="blue full-x ripple-click" onClick="return signin()" style="margin-top: 7.5px;">เข้าสู่ระบบ</button>
+					<button type="submit" class="blue full-x ripple-click" onClick="return signin()" style="margin-top: 7.5px;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
 				</form>
 			</div>
 		</main>

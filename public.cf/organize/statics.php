@@ -76,7 +76,11 @@
 					});
 				}
 			}
+			function ro(tbl, col) {
+				w3.sortHTML("div.table.no-"+tbl.toString()+" table tbody", "tr", "td:nth-child("+col.toString()+")");
+			}
 		</script>
+		<script type="text/javascript" src="/resource/js/lib/w3.min.js"></script>
 	</head>
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
@@ -87,55 +91,55 @@
 				<div class="stat">
 					<div class="grpdiv">
 						<div class="card">
-							<h4>ผู้สมัครทั้งหมด <a href="#reports"><i class="material-icons">arrow_downward</i></a><a href="attendees"><i class="material-icons">arrow_forward</i></a></h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"ผู้สมัครทั้งหมด":"Applicants"?> <a href="#reports"><i class="material-icons">arrow_downward</i></a><a href="attendees"><i class="material-icons">arrow_forward</i></a></h4>
 							<output name="ptp-all">-</output>
 						</div>
 						<div class="card">
-							<h4>ผู้สมัครที่ส่งคลิป</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"ผู้สมัครที่ส่งคลิป":"All Submissions"?></h4>
 							<output name="ptp-att">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4>คลิปที่ตรวจแล้ว</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"คลิปที่ตรวจแล้ว":"Marked submissions"?></h4>
 							<output name="vdo-mark">-</output>
 						</div>
 						<div class="card">
-							<h4>คลิปที่ยังไม่ตรวจ</h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"คลิปที่ยังไม่ตรวจ":"Unmarked submissions"?></h4>
 							<output name="vdo-clip">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4>การดูเว็บทั้งหมด <a href="/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank"><i class="material-icons">arrow_forward</i></a></h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"การดูเว็บทั้งหมด":"Webpage views"?> <a href="/go?url=https%3A%2F%2Fdatastudio.google.com%2Freporting%2F3be6fa8d-bb84-47d7-9075-614dfa12c915" target="_blank"><i class="material-icons">arrow_forward</i></a></h4>
 							<output name="pageview">-</output>
 						</div>
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4>จำนวนรายการบริจาค <a disabled href="donation"><i class="material-icons">arrow_forward</i></a></h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"จำนวนรายการบริจาค":"Donation"?> <a disabled href="donation"><i class="material-icons">arrow_forward</i></a></h4>
 							<output name="transac">-</output>
 						</div>
 					</div>
 				</div>
 				<h3 id="reports">Statics Datatable</h3>
 				<details open>
-					<summary>การสมัครตามโรงเรียน</summary>
+					<summary><?=$_COOKIE['set_lang']=="th"?"การสมัครตามโรงเรียน":"Applicants by school"?></summary>
 					<div class="table no-1">
 						<table><thead><tr>
-							<th onClick="ro(1, 1)">โรงเรียน</th>
-							<th onClick="ro(1, 2)">จำนวนผู้สมัคร</th>
-							<th>ชื่อเล่นผู้สมัคร</th>
+							<th onClick="ro(1, 1)"><?=$_COOKIE['set_lang']=="th"?"โรงเรียน":"School"?></th>
+							<th onClick="ro(1, 2)"><?=$_COOKIE['set_lang']=="th"?"จำนวนผู้สมัคร":"Amount"?></th>
+							<th><?=$_COOKIE['set_lang']=="th"?"ชื่อเล่นผู้สมัคร":"Applicants"?></th>
 						</tr></thead><tbody class="schl-amt"></tbody></table>
 					</div>
 				</details>
 				<details open>
-					<summary>การสมัครตามระดับชั้น</summary>
+					<summary><?=$_COOKIE['set_lang']=="th"?"การสมัครตามระดับชั้น":"Applicants by grade"?></summary>
 					<div class="table no-2">
 						<table><thead><tr>
-							<th onClick="ro(2, 1)">ระดับชั้น</th>
-							<th onClick="ro(2, 2)">จำนวนผู้สมัคร</th>
-							<th>ชื่อเล่นผู้สมัคร</th>
+							<th onClick="ro(2, 1)"><?=$_COOKIE['set_lang']=="th"?"ระดับชั้น":"Grade"?></th>
+							<th onClick="ro(2, 2)"><?=$_COOKIE['set_lang']=="th"?"จำนวนผู้สมัคร":"Amount"?></th>
+							<th><?=$_COOKIE['set_lang']=="th"?"ชื่อเล่นผู้สมัคร":"Applicants"?></th>
 						</tr></thead><tbody class="grde-amt"></tbody></table>
 					</div>
 				</details>

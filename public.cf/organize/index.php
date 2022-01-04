@@ -49,11 +49,11 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<form class="auth-wrapper form" method="post" onInput="allowForm()">
-					<h2>ทีมงานเข้าสู่ระบบ</h2>
-					<div class="message blue">สำหรับผู้ที่เข้าใช้งานครั้งแรก รหัสคืออีเมลที่กรอก</div>
+					<h2><?=$_COOKIE['set_lang']=="th"?"ทีมงานเข้าสู่ระบบ":"Organizer sign-in"?></h2>
+					<div class="message blue"><?=$_COOKIE['set_lang']=="th"?"สำหรับผู้ที่เข้าใช้งานครั้งแรก รหัสคืออีเมลที่กรอก":"First time here? Your password is the your email address."?></div>
 					<label>Username</label><input name="user" type="text" <?php echo(isset($user)?"value=\"$user\"":"autofocus");?>><br>
 					<label>Password</label><input name="pass" type="password" <?php echo(isset($pass)?"value=\"$pass\"":(isset($user)?"autofocus":""));?>><br>
-					<button class="blue full-x ripple-click" onClick="return SignIn()" disabled>เข้าสู่ระบบ</button>
+					<button class="blue full-x ripple-click" onClick="return SignIn()" disabled><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
 				</form>
 			</div>
 		</main>

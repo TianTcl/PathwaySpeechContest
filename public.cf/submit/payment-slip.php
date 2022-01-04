@@ -61,7 +61,7 @@
 				$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/submit/file?status&remote=<?php echo $_SESSION['evt']['encid']; ?>", function(res, hsc) {
 					var dat = JSON.parse(res);
 					if (dat.success) {
-						$(dat.info.s?'<div class="message green">คุณได้ส่งไฟล์แล้ว</div><div class="message yellow">การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม และทางผู้ดำเนินกิจกรรมจะประเมินจากไฟล์ล่าสุดเท่านั้น</div>':'<div class="message gray">คุณยังไม่เคยส่งไฟล์</div>').insertBefore("main form");
+						$(dat.info.s?'<div class="message green">'.($_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have sent your slip.").'</div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม":"Re-submitting a new one will replace the previous."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven't send any slip yet."?></div>').insertBefore("main form");
 						if (document.querySelector("div.message.green") != null) addDL();
 					} else app.ui.notify(1, dat.reason);
 				});
@@ -86,10 +86,17 @@
 					let filename = (f[0].name).toLowerCase().split(".");
 					cond = (["png"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 3072000); // 3 MB
 					if (cond) document.querySelector("main form output").value = f[0].name;
-					else app.ui.notify(1, [2, "Please check if your video is .PNG file and its size is less than or equal to 3 MB"]);
+					else app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาตรวจสอบว่าไฟล์เป็นนามสกุล .PNG และมีขนาดไม่เกิน 3 MB":"Please check if your file is .PNG file and its size is less than or equal to 3 MB"?>"]);
 				} else document.querySelector("main form output").value = "";
 				document.querySelector("form button").disabled = !cond;
 				return cond;
+			}
+			function upload() {
+				if (validate_file()) {
+					$('<div class="i"><i class="material-icons">file_upload</i></div>').insertBefore("form button");
+					document.querySelector("form").submit();
+					document.querySelector("form button").disabled = true;
+				}
 			}
 			function addDL() {
 				$("div.message.green").append('<div><button onClick="preview()" class="gray hollow ripple-click"><i class="material-icons">visibility</i></button><a role="button" class="green hollow ripple-click" href="https://inf.bodin.ac.th/resource/dl?furl=e%2FPathway-Speech-Contest%2Fresource%2Fupload%2Fps-<?=$_SESSION['event']['round']."%2F".$_SESSION['evt']['user']?>.png" target="_blank" download="Pathway Speech Contest - <?=$_SESSION['evt']['namea']?>" draggable="false" rel="noreferrer"><i class="material-icons">download</i> Download</a></div>');
@@ -109,7 +116,7 @@
 					<div class="box"><input type="file" name="usf" accept=".png" required></div>
 					<div class="right">
 						<output></output>
-						<button class="blue ripple-click" onClick="return upload()" disabled>Upload</button>
+						<button class="blue ripple-click" onClick="return upload()" disabled><?=$_COOKIE['set_lang']=="th"?"อัปโหลด":"Upload"?></button>
 					</div>
 				</form>
 			</div>

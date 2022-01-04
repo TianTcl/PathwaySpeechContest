@@ -76,7 +76,7 @@
 					cond = (["png", "jpg", "jpeg", "heic", "gif"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 5120000); // 5 MB
 					if (cond) document.querySelector("main form input[readonly]").value = f[0].name;
 					else app.ui.notify(1, [2, "Please check if your photo is one of the following format PNG/JPG/GIF/HEIF and its size is less than or equal to 5 MB"]);
-				} else document.querySelector("main form input[readonly]").value = "ใช้ภาพเดิม";
+				} else document.querySelector("main form input[readonly]").value = "<?=$_COOKIE['set_lang']=="th"?"ใช้ภาพเดิม":"Same picture"?>";
 				// document.querySelector("form button").disabled = !cond;
 				return cond;
 			}
@@ -94,11 +94,11 @@
 			<div class="container">
 				<h2>My Profile</h2>
 				<form class="form" method="post" enctype="multipart/form-data">
-					<input type="text" name="name" maxlength="30" placeholder="ชื่อที่แสดง(ต่อสาธารณะ)" required value="<?=$mydata['display']?>">
+					<input type="text" name="name" maxlength="30" placeholder="<?=$_COOKIE['set_lang']=="th"?"ชื่อที่แสดง(ต่อสาธารณะ)":"Display name"?>" required value="<?=$mydata['display']?>">
 					<div class="box"><input type="file" name="usf" accept=".png, .jpg, .jpeg, .gif, .heic" required></div>
 					<div class="group">
-						<span>ภาพโปรไฟล์</span>
-						<input type="text" readonly value="ใช้ภาพเดิม">
+						<span><?=$_COOKIE['set_lang']=="th"?"ภาพโปรไฟล์":"Avatar"?></span>
+						<input type="text" readonly value="<?=$_COOKIE['set_lang']=="th"?"ใช้ภาพเดิม":"Same picture"?>">
 						<button class="blue ripple-click" onClick="return update()" disabled>&emsp;Save&emsp;&emsp;</button>
 					</div>
 				</form>

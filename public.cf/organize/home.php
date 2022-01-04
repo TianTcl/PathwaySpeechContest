@@ -25,7 +25,10 @@
 					<li><a href="profile">โปรไฟล์</a></li>
 					<li class="dt">การประกวด</li>
 					<li><a href="attendees">รายชื่อผู้สมัคร</a></li>
-					<li disabled><a href="grade-clip">ลงคะแนนวีดีโอคลิป</a></li>
+					<li><a href="mark-grade">ลงคะแนนวีดีโอคลิป</a></li>
+					<li disabled><a href="rate-rank">จัดลำดับและตัดสิน</a></li>
+					<li class="dl">&nbsp;</li>
+					<li><a href="send-email">ส่งอีเมลแจ้งเตือน</a></li>
 				</ul>
 				<input name="donate" type="checkbox" id="ref_menu-b"><label for="ref_menu-b">การบริจาค</label><ul>
 					<li><a href="giveaway">บริหารการแจก giveaway</a></li>

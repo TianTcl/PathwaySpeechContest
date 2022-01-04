@@ -62,9 +62,9 @@
 				var f = document.querySelector('form input[name="usf"]').files;
 				var cond = f.length == 1; if (cond) {
 					let filename = (f[0].name).toLowerCase().split(".");
-					cond = (["png", "jpg"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 3072000); // 3 MB
+					cond = (["png", "jpg", "jpeg", "heic", "gif"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 5120000); // 5 MB
 					if (cond) document.querySelector("main form input[readonly]").value = f[0].name;
-					else app.ui.notify(1, [2, "Please check if your photo is .PNG or .JPG file and its size is less than or equal to 3 MB"]);
+					else app.ui.notify(1, [2, "Please check if your photo is one of the following format PNG/JPG/GIF/HEIF and its size is less than or equal to 5 MB"]);
 				} else document.querySelector("main form input[readonly]").value = "ใช้ภาพเดิม";
 				// document.querySelector("form button").disabled = !cond;
 				return cond;
@@ -84,7 +84,7 @@
 				<h2>My Profile</h2>
 				<form class="form" method="post" enctype="multipart/form-data" action="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/organize/profile?remote=<?=$user?>">
 					<input type="text" name="name" maxlength="30" placeholder="ชื่อที่แสดง(ต่อสาธารณะ)" required value="<?=($get -> display)?>">
-					<div class="box"><input type="file" name="usf" accept=".png, .jpg" required></div>
+					<div class="box"><input type="file" name="usf" accept=".png, .jpg, .jpeg, .gif, .heic" required></div>
 					<div class="group">
 						<span>ภาพโปรไฟล์</span>
 						<input type="text" readonly value="ใช้ภาพเดิม">

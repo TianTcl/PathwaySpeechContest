@@ -47,6 +47,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>การดูคลิปวีดีโอย้อนหลัง</h2>
+				<p>พิมพ์ชื่อเล่นตนเองเป็นภาษาไทยหรืออังกฤษโดยไม่ใส่เครื่องหมายใดๆและเลือกคลิปที่ต้องการดูแล้วกดปุ่ม watch</p>
 				<form class="form" onChange="update()">
 					<input type="text" name="name" maxlength="30" placeholder="Your nickname">
 					<div class="group">

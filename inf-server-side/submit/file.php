@@ -2,6 +2,7 @@
 	session_start();
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
     header("Access-Control-Allow-Origin: https://pathwayspeechcontest.cf");
+
     require_once($dirPWroot."resource/php/lib/TianTcl.php");
     $rmte = (isset($_GET['remote']) && !empty($_GET['remote'])); $remote = $rmte ? "remote" : "";
     $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
@@ -12,18 +13,19 @@
 		echo json_encode(array(
             "success" => true,
             "info" => array(
-                "v" => file_exists("../resource/upload/$user-v-$round.mp4"),
-                "s" => file_exists("../resource/upload/$user-s-$round.png")
+                "v" => file_exists("../resource/upload/sv-$round/$user.mp4"),
+                "s" => file_exists("../resource/upload/ps-$round/$user.png")
             )
         ));
     } else if (isset($_GET['upload']) && isset($_FILES)) {
         require($dirPWroot."e/resource/db_connect.php");
         $file = trim($_GET['upload']); switch ($file) {
-            case "v": $back = "speech-video"; $allow_type = array("mp4"); $maxFileSize = 10240000; /* 10 MB */ break;
-            case "s": $back = "payment-slip"; $allow_type = array("png"); $maxFileSize = 3072000; /* 3 MB */ break;
+            case "v": $back = "speech-video"; $tgdn = "sv"; $allow_type = array("mp4"); $maxFileSize = 25600000; /* 25 MB */ break;
+            case "s": $back = "payment-slip"; $tgdn = "ps"; $allow_type = array("png"); $maxFileSize = 3072000; /* 3 MB */ break;
         } if (isset($back)) {
-            $target_dir = "../resource/upload/"; $imageFileType = strtolower(pathinfo(basename($_FILES['usf']["name"]), PATHINFO_EXTENSION));
-            $etfn = "$user-$file-$round.$imageFileType"; $target_file = $target_dir.$etfn;
+            $target_dir = "../resource/upload/$tgdn-$round/"; $imageFileType = strtolower(pathinfo(basename($_FILES['usf']["name"]), PATHINFO_EXTENSION));
+            $etfn = "$user.$imageFileType"; $target_file = $target_dir.$etfn;
+            if (!is_dir($target_dir)) mkdir($target_dir, 0755);
             $uploadOk = ($_FILES['usf']["size"] > 0 && $_FILES['usf']["size"] <= $maxFileSize);
             if (!in_array($imageFileType, $allow_type)) $uploadOk = false;
             if ($rmte) $back = "https://PathwaySpeechContest.cf/submit/$back";

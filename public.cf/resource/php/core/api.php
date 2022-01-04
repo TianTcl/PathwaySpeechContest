@@ -11,7 +11,8 @@
                 $_SESSION['evt'] = array(
 					"user" => $id, "encid" => $attr[0],
 					"namea" => $attr[1],
-					"namen" => $attr[2]
+					"namen" => $attr[2],
+					"myID" => $attr[3]
 				); echo '{"success": true}';
             } else if ($cmd == "logout") {
 				$user = $_SESSION['evt']['encid'] ?? "";

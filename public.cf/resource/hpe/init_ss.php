@@ -1,4 +1,4 @@
-<style type="text/css" class="main">
+<style type="text/css">
 	<?php
 		$googleFonts = array(
 			"Akaya+Telivigala",
@@ -33,6 +33,9 @@
 	@import url('/resource/css/core/appfont.css');
 	@import url('/resource/css/core/tclfont.css');
 	@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+</style>
+<style type="text/css" class="theme" media="only screen and (max-width: 0px)">
+	:root, [data-dark="false"], .player, iframe { filter: invert(100%) hue-rotate(180deg); }
 </style>
 <script type="text/javascript">
     $(function(){
@@ -70,6 +73,8 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
 		gtag("js", new Date());	gtag("config", "UA-204561763-3");
+		// Temporary Safair Ripple Fix
+		if (navigator.userAgent.indexOf("Safari") > -1) $("main .form span.ripple-effect").remove();
     });
 	// Scrolling
 	$(document).scroll(function() {

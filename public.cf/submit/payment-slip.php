@@ -12,7 +12,7 @@
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
 			main div.message.green { display: flex; justify-content: space-between; align-items: center; }
-			main div.message a i.material-icons, main div.message button i.material-icons { transform: translateY(5px); }
+			main div.message button i.material-icons { transform: translateY(5px); }
 			main div.message button { border-radius: 0.3rem 0px 0px 0.3rem; }
 			main div.message a { border-radius: 0px 0.3rem 0.3rem 0px; }
 			main form div.box {
@@ -92,11 +92,11 @@
 				return cond;
 			}
 			function addDL() {
-				$("div.message.green").append('<div><button onClick="preview()" class="gray hollow ripple-click"><i class="material-icons">visibility</i></button><a role="button" class="green hollow ripple-click" href="https://inf.bodin.ac.th/resource/dl?furl=e%2FPathway-Speech-Contest%2Fresource%2Fupload%2F<?=$_SESSION['evt']['user']."-s-".$_SESSION['event']['round']?>.png" target="_blank" download="Pathway Speech Contest - <?=$_SESSION['evt']['namea']?>" draggable="false" rel="noreferrer"><i class="material-icons">download</i> Download</a></div>');
+				$("div.message.green").append('<div><button onClick="preview()" class="gray hollow ripple-click"><i class="material-icons">visibility</i></button><a role="button" class="green hollow ripple-click" href="https://inf.bodin.ac.th/resource/dl?furl=e%2FPathway-Speech-Contest%2Fresource%2Fupload%2Fps-<?=$_SESSION['event']['round']."%2F".$_SESSION['evt']['user']?>.png" target="_blank" download="Pathway Speech Contest - <?=$_SESSION['evt']['namea']?>" draggable="false" rel="noreferrer"><i class="material-icons">download</i> Download</a></div>');
 				ppa.ripple_click_program();
 			}
 			function preview() {
-				top.app.ui.lightbox.open("top", {title: "My payment slip", allowclose: true, autoclose: 180000, html: '<div style="background-image: linear-gradient(45deg,#EFEFEF 25%,rgba(239,239,239,0) 25%,rgba(239,239,239,0) 75%,#EFEFEF 75%,#EFEFEF),linear-gradient(45deg,#EFEFEF 25%,rgba(239,239,239,0) 25%,rgba(239,239,239,0) 75%,#EFEFEF 75%,#EFEFEF); background-position: 0 0,10px 10px; background-size: 21px 21px;"><img src="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/upload/<?=$_SESSION['evt']['user']."-s-".$_SESSION['event']['round']?>.png" alt="My payment slip" draggable="false" style="max-width: 90vw; max-height: 80vh; object-fit: contain;"></div>'})
+				top.app.ui.lightbox.open("top", {title: "My payment slip", allowclose: true, autoclose: 180000, html: '<div style="background-image: linear-gradient(45deg,#EFEFEF 25%,rgba(239,239,239,0) 25%,rgba(239,239,239,0) 75%,#EFEFEF 75%,#EFEFEF),linear-gradient(45deg,#EFEFEF 25%,rgba(239,239,239,0) 25%,rgba(239,239,239,0) 75%,#EFEFEF 75%,#EFEFEF); background-position: 0 0,10px 10px; background-size: 21px 21px;"><img src="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/upload/ps-<?=$_SESSION['event']['round']."/".$_SESSION['evt']['user']?>.png" alt="My payment slip" draggable="false" style="max-width: 90vw; max-height: 80vh; object-fit: contain;"></div>'})
 			}
 		</script>
 	</head>

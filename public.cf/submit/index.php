@@ -36,7 +36,7 @@
 				border-bottom: 1px solid var(--clr-bs-gray);
 			}
 			main div.sl-frame iframe {
-				width: 100%; height: 450px;
+				width: 100%; height: 500px;
 				background-color: var(--fade-white-6);
 				border: none;
 			}
@@ -49,6 +49,11 @@
 			main div.sl-frame div:hover { background-color: var(--fade-black-8); }
 			main div.sl-frame div:active { color: var(--clr-bs-red); }
 			main div.sl-frame div i.material-icons { transform: translateY(5px); pointer-events: none; }
+			main p span.pid {
+				float: right;
+				font-family: "TianTcl-en_01", "pixelmix", "Dosis", "Permanent Marker", "Ranchers", "Mali", "Oswald";
+				font-size: 1.5em;
+			}
 			@media only screen and (max-width: 768px) {
 				main div.sl-frame div { width: 22.5px; height: 22.5px; }
 				main div.sl-frame div i.material-icons { transform: none; }
@@ -75,7 +80,7 @@
 					var viewurl = me.href;
 					if (!sl_viewed) {
 						var viewport = $("main div.container div.sl-frame");
-						viewport.css("display", "block"); viewport.animate({height: 450}, 1000, ppa.ripple_click_program);
+						viewport.css("display", "block"); viewport.animate({height: 500}, 1000, ppa.ripple_click_program);
 						sl_viewed = true;
 					}
 					$(ifr.parentNode).children().first().text($(me).attr("data-text"));
@@ -123,12 +128,12 @@
 						<td name="v"></td>
 					</tr>
 					<tr>
-						<td disabled><a href="payment-slip" onClick="return viewSubmission(this)" data-text="สลิปการโอนเงิน">Payment Slip</a></td>
+						<td disabled><strike><a href="payment-slip" onClick="return viewSubmission(this)" data-text="สลิปการโอนเงิน">Payment Slip</a></strike></td>
 						<td name="s"></td>
 					</tr>
 				</tbody></table></div>
 				<div class="sl-frame"><p class="txtoe"></p><div onClick="cfv()" class="ripple-click"><i class="material-icons">close</i></div><iframe></iframe></div>
-				<p><i>You are signed in as <?=$_SESSION['evt']['namea']?></i></p>
+				<p><i>You are signed in as <?=$_SESSION['evt']['namea']?></i><span class="pid">ID: <i><?=$_SESSION['evt']['myID']?></i></span></p>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

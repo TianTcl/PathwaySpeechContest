@@ -47,10 +47,20 @@
                 <li><a href="/organize/">เข้าสู่ระบบทีมงาน</a></li>
                 <?php } else { ?>
                 <li><a href="/organize/home">เมนูหลัก</a></li>
+                <li class="sub-detail">เกี่ยวกับ</li>
                 <li><a href="/organize/profile">โปรไฟล์ของฉัน</a></li>
+                <li class="seperator">&nbsp;</li>
                 <li><a href="/organize/attendees">รายชื่อผู้สมัคร</a></li>
+                <li><a href="/organize/mark-grade">ลงคะแนนวีดีโอคลิป</a></li>
+                <li disabled><a href="/organize/rate-rank">จัดลำดับและตัดสิน</a></li>
+                <li class="seperator">&nbsp;</li>
+                <li><a href="/organize/send-email">ส่งอีเมลแจ้งเตือน</a></li>
+                <li class="sub-detail">การบริจาค</li>
                 <li><a href="/organize/giveaway">บริหาร Giveaway</a></li>
-                <li><a href="/organize/statics">สถิติ</a></li>
+                <li disabled><a href="/organize/donation">รายการที่รับบริจาค</a></li>
+                <li class="sub-detail">การบริจาค</li>
+                <li><a href="/organize/statics">สถิติของโครงการ</a></li>
+                <li class="seperator">&nbsp;</li>
                 <li><a href="/organize/logout">ออกจากระบบทีมงาน</a></li>
                 <?php } ?>
             </ul>

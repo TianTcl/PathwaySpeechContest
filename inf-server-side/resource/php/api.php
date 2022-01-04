@@ -7,6 +7,7 @@
 	else $has_data = false; if ($has_data) {
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
         require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
+        require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
         $rmte = (isset($attr['remote']) && $attr['remote']); $remote = $rmte ? "remote" : "";
         $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
 		if ($app == "register") {
@@ -17,7 +18,9 @@
                 else echo '{"success": false, "reason": [3, "Unable to check E-mail address duplicates"]}';
             } else if ($cmd == "addNew") {
                 foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
-                $success = $db -> query("INSERT INTO PathwaySCon_attendees (email,namef,namel,namen,phone,school,grade,line,ip) VALUES ('".strtolower($attr['email'])."','".$attr['namef']."','".$attr['namel']."','".$attr['namen']."','".$attr['phone']."','".$attr['school']."',".$attr['grade'].",'".$attr['line']."','$ip')");
+                $getid = $db -> query("SELECT COUNT(ptpid) AS newid FROM PathwaySCon_attendees"); $newID = ($getid -> fetch_array(MYSQLI_ASSOC))['newid'];
+                $pubID = date("y", time()).$_SESSION['event']['round'].str_repeat("0", 3-strlen($newID)).$newID;
+                $success = $db -> query("INSERT INTO PathwaySCon_attendees (email,namef,namel,namen,phone,school,grade,publicID,line,ip) VALUES ('".strtolower($attr['email'])."','".$attr['namef']."','".$attr['namel']."','".$attr['namen']."','".$attr['phone']."','".$attr['school']."',".$attr['grade'].",".$pubID.",'".$attr['line']."','$ip')");
                 if ($success) {
                     $newid = $db -> insert_id;
                     echo '{"success": true}'; slog("webForm", "PathwaySCon", "register", "new", $newid, "pass", $remote);
@@ -32,18 +35,18 @@
             if ($cmd == "login") {
                 $attr['user'] = $db -> real_escape_string(trim($attr['user']));
                 $attr['pass'] = $db -> real_escape_string(trim($attr['pass']));
-                $success = $db -> query("SELECT ptpid,namef,namel,namen FROM PathwaySCon_attendees WHERE email='".$attr['user']."' AND phone='".$attr['pass']."'");
+                $success = $db -> query("SELECT ptpid,namef,namel,namen,publicID FROM PathwaySCon_attendees WHERE email='".$attr['user']."' AND phone='".$attr['pass']."'");
                 if ($success) {
                     if ($success -> num_rows == 1) {
                         $result = $success -> fetch_array(MYSQLI_ASSOC);
                         $_SESSION['evt'] = array(
                             "user" => $result['ptpid'],
                             "namea" => $result['namef']." ".$result['namel'],
-                            "namen" => $result['namen']
+                            "namen" => $result['namen'],
+                            "myID" => $result['publicID']
                         ); if ($rmte) {
-                            $keyid = substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13); // 5d3
-							$keyid = substr($keyid, 0, 4)."-".substr($keyid, 4, 5)."-".substr($keyid, 9, 4);
-                        } echo '{"success": true, "info": ["'.($keyid??"").'", "'.$result['namef']." ".$result['namel'].'", "'.$result['namen'].'"]}';
+                            $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13)));
+                        } echo '{"success": true, "info": ["'.($keyid??"").'", "'.$result['namef']." ".$result['namel'].'", "'.$result['namen'].'", '.$result['publicID'].']}';
                         slog($_SESSION['evt']['user'], "PathwaySCon", "account", "login", "", "pass", $remote);
                     } else { echo '{"success": false, "reason": [3, "Incorrect E-mail address or phone number"]}'; slog("webForm", "PathwaySCon", "account", "login", $attr['user'].",".$attr['pass'], "fail", $remote, "Incorrect"); }
                 } else { echo '{"success": false, "reason": [3, "Unable to sign you in. Please try again."]}'; slog("webForm", "PathwaySCon", "account", "login", $attr['user'].",".$attr['pass'], "fail", $remote, "InvalidQuery"); }
@@ -57,11 +60,11 @@
             }
         } else if ($app == "stat") {
             if ($cmd == "fetch") {
-                $getappall = $db -> query("SELECT COUNT(ptpid)-2 AS amt FROM PathwaySCon_attendees");
-                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE round=".$_SESSION['event']['round']);
-                $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission");
+                $getappall = $db -> query("SELECT COUNT(ptpid) AS amt FROM PathwaySCon_attendees WHERE ptpid > 1");
+                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=".$_SESSION['event']['round']);
+                $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
-                $getschamt = $db -> query("SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school ORDER BY amount DESC,school");
+                $getschamt = $db -> query("(SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school HAVING amount > 1) UNION SELECT 'โรงเรียนอื่นๆ' AS school,COUNT(a.ptpid) AS amount,GROUP_CONCAT(a.namen) AS peoples FROM PathwaySCon_attendees a WHERE a.ptpid > 1 AND NOT EXISTS (SELECT b.school FROM PathwaySCon_attendees b WHERE a.school=b.school HAVING COUNT(ptpid) > 1) ORDER BY amount DESC,school");
                 $getgrdamt = $db -> query("SELECT grade,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY grade ORDER BY amount DESC,grade");
                 $db = create_database_connection("tiantcl_inf");
                 $getpageview = $db -> query("SELECT COUNT(logid) AS amt FROM log_pageview WHERE url LIKE '%e/Pathway-Speech-Contest/%' AND NOT url LIKE '%e/Pathway-Speech-Contest/organize/%'");
@@ -88,6 +91,14 @@
                         "ppl" => $grdamt['peoples']
                     )); } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch statics."]}';
+            } else if ($cmd == "race") {
+                $getgroup = $db -> query("SELECT (CASE WHEN a.grade BETWEEN 0 AND 3 THEN 'ประถม' WHEN a.grade BETWEEN 4 AND 6 THEN 'มัธยมต้น' WHEN a.grade BETWEEN 7 AND 9 THEN 'มัธยมปลาย' END) AS Category, COUNT(a.ptpid) AS Amount, COUNT(b.smid) AS Submit FROM PathwaySCon_attendees a LEFT JOIN PathwaySCon_submission b ON a.ptpid=b.ptpid AND b.round=1 WHERE a.ptpid>1 GROUP BY Category");
+                if ($getgroup) {
+                    $result = array();
+                    if ($getgroup -> num_rows > 0) { while ($grpamt = $getgroup -> fetch_assoc())
+                        $result[$grpamt['Category']] = array($grpamt['Amount'], $grpamt['Submit']);
+                    } echo '{"success": true, "info": '.json_encode($result).'}';
+                } else echo '{"success": false, "reason": [3, "Unable to fetch amount."]}';
             }
         } else if ($app == "giveaway") {
             if ($cmd == "get") {
@@ -112,20 +123,41 @@
                 }
             }
         } else if ($app == "donate") {
-            if ($cmd == "submit") {
-                unset($attr['remote']);
-                foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
-                $transac = empty($attr['when']) ? "NULL" : ("'".date("Y-m-d H:i:s", strtotime($attr['when'].":00"))."'");
-                $success = $db -> query("INSERT INTO PathwaySCon_donation (email,donor,amt,transac,refer,ip) VALUES ('".strtolower($attr['email'])."','".$attr['sender']."','".$attr['amount']."',$transac,'".$attr['reference']."','$ip')");
+            if ($cmd == "submit" || $cmd == "addnew") {
+                if ($cmd == "submit") {
+                    $exor = "webForm";
+                    unset($attr['remote']);
+                    foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
+                    $transac = empty($attr['when']) ? "NULL" : ("'".date("Y-m-d H:i:s", strtotime($attr['when'].":00"))."'");
+                } else if ($cmd == "addnew") {
+                    $exor = "botGoogle";
+                    $attr = json_decode(file_get_contents('php://input'), true);
+                    $transac = empty($attr['transac']) ? "NULL" : ("'".date("Y-m-d H:i:s", strtotime($attr['transac']))."'");
+                } $time = $attr['time'] ?? "current_timestamp()"; if ($time <> "current_timestamp()") $time = "'".date("Y-m-d H:i:s", strtotime($attr['time']))."'";
+                $attr['contact'] = (preg_match('/^0[689](\d{8}|\d-\d{3}-\d{4}|(-\d{4}){2})$/', $attr['contact'])) ? str_replace("-", "", $attr['contact']): strtolower($attr['contact']);
+                $address = $attr['address'] ?? 'NULL'; if ($address <> "NULL") $address = "'$address'";
+                // File mgmt
+                if (isset($_FILES['slip'])) {
+                    $target_dir = "../upload/slip/"; $imageFileType = strtolower(pathinfo(basename($_FILES['slip']["name"]), PATHINFO_EXTENSION));
+                    $etfn = "people".$attr['reference'].".$imageFileType"; $target_file = $target_dir.$etfn;
+                    $uploadOk = ($_FILES['slip']["size"] > 0 && $_FILES['slip']["size"] <= 3072000); // 3 MB
+                    if (!in_array($imageFileType, array("png", "jpg", "jpeg", "gif", "heic"))) $uploadOk = false;
+                    if ($uploadOk) {
+                        if (file_exists($target_file)) unlink($target_file);
+                        if (move_uploaded_file($_FILES['slip']["tmp_name"], $target_file)) $slip = $imageFileType;
+                        else { slog($exor, "PathwaySCon", "donate", "new", $attr['contact'], "fail", $remote, "FileNoMove"); die('{"success": false, [3, "Unable to upload your photo. Please try again"]}'); }
+                    } else { slog($exor, "PathwaySCon", "donate", "new", $attr['contact'], "fail", $remote, "notEligible"); die('{"success": false, [3, "Invalid photo property"]}'); }
+                } if (!isset($slip)) $slip = "NULL";
+                $success = $db -> query("INSERT INTO PathwaySCon_donation (contact,donor,amt,transac,refer,address,slip,ip,time) VALUES ('".$attr['contact']."','".$attr['sender']."','".$attr['amount']."',$transac,'".$attr['reference']."',$address,$slip,'$ip',$time)");
                 if ($success) {
                     $newid = $db -> insert_id;
-                    echo '{"success": true}'; slog("webForm", "PathwaySCon", "donate", "new", $newid, "pass", $remote);
+                    echo '{"success": true}'; slog($exor, "PathwaySCon", "donate", "new", $newid, "pass", $remote);
                     // Notify team via LINE application
                     require($dirPWroot."resource/php/lib/LINE.php");
                     $LINE -> setToken("970F4tFzYzTrBZ4ayvrhqKihmGFCrvPsM11sKrNhPPU");
                     $LINE -> notify("มีผู้ร่วมสนับสนุนทุนเพิ่ม → ".$attr['sender']."\r\nจำนวนเงิน ".$attr['amount']." บาท");
                     // End LINE Notify API
-                } else { echo '{"success": false, "reason": [3, "Unable to record your donation. Please try again."]}'; slog("webForm", "PathwaySCon", "donate", "new", strtolower($attr['email']), "fail", $remote, "InvalidQuery"); }
+                } else { echo '{"success": false, "reason": [3, "Unable to record your donation. Please try again."]}'; slog($exor, "PathwaySCon", "donate", "new", $attr['contact'], "fail", $remote, "InvalidQuery"); }
             }
         } else if ($app == "workshop") {
             if ($cmd == "view") {

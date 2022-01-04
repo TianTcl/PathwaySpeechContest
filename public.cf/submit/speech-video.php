@@ -80,9 +80,9 @@
 				var f = document.querySelector('form input[name="usf"]').files;
 				var cond = f.length == 1; if (cond) {
 					let filename = (f[0].name).toLowerCase().split(".");
-					cond = (["mp4"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 10240000); // 10 MB
+					cond = (["mp4"].includes(filename[filename.length-1])) && (f[0].size > 0 && f[0].size < 25600000); // 25 MB
 					if (cond) document.querySelector("main form output").value = f[0].name;
-					else app.ui.notify(1, [2, "Please check if your video is .MP4 file and its size is less than or equal to 10 MB"]);
+					else app.ui.notify(1, [2, "Please check if your video is .MP4 file and its size is less than or equal to 25 MB"]);
 				} else document.querySelector("main form output").value = "";
 				document.querySelector("form button").disabled = !cond;
 				return cond;
@@ -108,6 +108,7 @@
 						<button class="blue ripple-click" onClick="return upload()" disabled>Upload</button>
 					</div>
 				</form>
+				<p>หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่ <a href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank">devtech@PathwaySpeechContest.cf</a> ได้</p>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

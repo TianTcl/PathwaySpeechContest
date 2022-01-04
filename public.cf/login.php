@@ -86,8 +86,8 @@
 						var dat = JSON.parse(res);
 						if (dat.success) $.post("/resource/php/core/api", {app: "account", cmd: "login", attr: dat.info}, function(res, hsc) {
 							var dat2 = JSON.parse(res);
-							if (dat.success) location = "submit/";
-							else app.ui.notify(1, dat.reason);
+							if (dat2.success) location = "submit/";
+							else app.ui.notify(1, dat2.reason);
 						});
 						else app.ui.notify(1, dat.reason);
 					}); else app.ui.notify(1, [2, "Your sign in information is invalid."]);

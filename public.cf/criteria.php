@@ -22,14 +22,16 @@
 			main .crit tr > *:nth-child(2) { text-align: right; }
 			main .crit tr td:nth-child(1) { padding-left: 25px; }
 			main .crit tr td:nth-child(2) { color: var(--clr-bs-gray); }
-			main .download { display: flex; justify-content: flex-end; }
-			main .download > * { border-radius: 0px; }
-			main .download > *:first-child { border-radius: 0.3rem 0px 0px 0.3rem; }
-			main .download > *:last-child { border-radius: 0px 0.3rem 0.3rem 0px; }
-			main .download a[role="button"] i.material-icons { transform: translateY(5px); }
-			@media only screen and (max-width: 768px) {
-				main a[role="button"] i.material-icons { transform: translateY(2.5px); }
+			main a#ref_stat {
+				color: #0D6EFD; font-family: "Google Sans", "IBM Plex Sans Thai", "Prompt", "Kanit", "Sarabun";
+				border-radius: 5px;
 			}
+			main a#ref_stat:hover { text-decoration: underline; }
+			main a#ref_stat:active { color: #0A58CA; }
+			main .stat table { min-width: 70%; }
+			main .stat th, main .stat td { padding: 0px 5px; }
+			main .stat thead th:nth-child(1) { text-align: left; }
+			main .stat tbody td:nth-child(n+2) { text-align: center; }
 		</style>
 		<script type="text/javascript">
 			function viewFile(me) {
@@ -38,6 +40,18 @@
 					let src = $(me).attr("href");
 					app.ui.lightbox.open("top", {title: "Scoring Criteria - PDF", allowclose: true, html: '<iframe src="'+src+'" style="width:90vw;height:80vh;border:none">Loading...</iframe>'});
 				}
+			}
+			function view_competitive_ratio() {
+				$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api?app=stat&cmd=race", function(res, hsc) {
+					var dat = JSON.parse(res);
+					if (dat.success) {
+						var TBL = '', htmlDOM = document.querySelector("main .stat table tbody");
+						Object.keys(dat.info).forEach((group) => TBL += '<tr><td>'+group+'</td><td>'+dat.info[group][0]+' คน</td><td>'+dat.info[group][1]+' คน</td></tr>');
+						htmlDOM.innerHTML = TBL;
+						$(htmlDOM.parentNode.parentNode).toggle("fold", "linear", "slow");
+						$("main a#ref_stat").attr("disabled", "");
+					} else app.ui.notify(1, dat.reason);
+				});
 			}
 		</script>
 	</head>
@@ -74,14 +88,22 @@
 					<thead><tr><th>Time</th><th>5 pts</th></tr></thead>
 					<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);"><th>Total</th><th>100 pts</th></tr></thead>
 				</table></div>
-				<div class="download">
-					<a href="https://docs.google.com/viewerng/viewer?embedded=true&url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" 
-						class="cyan" role="button" onClick="return viewFile(this)" data-title="Preview File"><i class="material-icons">visibility</i></a>
-					<a href="/resource/dl?furl=e%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" download="Scoring Criteria - Pathway Speech Contest.pdf"
-						class="green" role="button"><i class="material-icons">download</i> Download</a>
-					<a href="https://docs.google.com/viewerng/viewer?url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" 
-						class="blue" role="button" target="_blank" data-title="Open in new tab"><i class="material-icons">open_in_new</i></a>
-				</div>
+				<div class="form"><div class="group split" style="margin-bottom: 0px;">
+					<div class="group">
+						<a id="ref_stat" role="button" href="javascript:view_competitive_ratio()">ดูกลุ่มการแข่งขัน</a>
+					</div>
+					<div class="group">
+						<a href="https://docs.google.com/viewerng/viewer?embedded=true&url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" 
+							class="cyan" role="button" onClick="return viewFile(this)" data-title="Preview File"><i class="material-icons">visibility</i></a>
+						<a href="/resource/dl?furl=e%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" download="Scoring Criteria - Pathway Speech Contest.pdf"
+							class="green" role="button"><i class="material-icons">download</i> Download</a>
+						<a href="https://docs.google.com/viewerng/viewer?url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria.pdf" 
+							class="blue" role="button" target="_blank" data-title="Open in new tab"><i class="material-icons">open_in_new</i></a>
+					</div>
+				</div></div>
+				<div class="stat message black" style="display: none;"><table><thead><tr>
+					<th>กลุ่มการจัดลำดับ</th><th>จำนวนผู้สมัคร</th><th>ส่งผลงานแล้ว</th>
+				</tr></thead><tbody></tbody></table></div>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

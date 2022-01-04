@@ -83,18 +83,17 @@ function private() {
 				$("html body nav ul.action li.print span").text("Print page");
 			}
 			// $.ajax({url: "/resource/lang/"+current_lang+"_"+path+".js"});
-			document.querySelectorAll('select[name="hl"] option').forEach((eo) => {
+			document.querySelectorAll('header select[name="hl"] option').forEach((eo) => {
 				if (eo.innerText==current_lang) eo.selected = true;
 			});
 		}
 	}
 	var lang_change_program = function() {
-		$('select[name="hl"]').on("change", function() {
-			let new_lang = document.querySelector('select[name="hl"] option:checked').innerText;
+		$('header select[name="hl"]').on("change", function() {
+			let new_lang = document.querySelector('header select[name="hl"] option:checked').innerText;
 			app.ui.change.lang(new_lang);
 		});
 	}
-	// const page_style = $("html head style.main").text();
 	var check_theme = function(wait = true) {
 		setTimeout(function() {
 			var current_theme = ppa.getCookie("set_theme");
@@ -102,20 +101,18 @@ function private() {
 				app.ui.change.theme("light", false); // if (self == top) location.reload();
 			} else {
 				if (current_theme == "light" && !wait) {
-					// $("html head style.main").text(page_style);
-					$("html head style.main").text($("html head style.main").text().substring(0, $("html head style.main").text().length - 82));
+					$("html head style.theme").attr("media", "only screen and (max-width: 0px)");
 					$("html body header section div.head-item.clrt a").attr("onClick", "app.ui.change.theme('dark')");
 					$("html head meta[name=\"theme-color\"]").attr("content", color_light);
 					$("html head meta[name=\"apple-mobile-web-app-status-bar-style\"]").attr("content", color_light);
 				} else if (current_theme == "dark") {
-					// $("html head style.main").text(page_style+"\n:root,[data-dark=\"false\"],.player{filter:invert(100%)hue-rotate(180deg);}\n");
-					$("html head style.main").text($("html head style.main").text()+"\n:root,[data-dark=\"false\"],.player,iframe{filter:invert(100%)hue-rotate(180deg);}\n");
+					$("html head style.theme").attr("media", "only screen and (min-width: 0px)");
 					$("html body header section div.head-item.clrt a").attr("onClick", "app.ui.change.theme('light')");
 					$("html head meta[name=\"theme-color\"]").attr("content", color_dark);
 					$("html head meta[name=\"apple-mobile-web-app-status-bar-style\"]").attr("content", color_dark);
 				}
 			}
-		}, wait?575:0);
+		}, (wait? 500 : 0));
 	}
 	// Keyboard shortcuts (Enable | Disable)
 	var prevkey = [];

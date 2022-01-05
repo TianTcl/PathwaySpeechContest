@@ -70,7 +70,11 @@
 			}
 			main .app .slot.grade :not(:first-child) tr > td:nth-child(2) { text-align: center; }
 			main .app .slot.grade :not(:first-child) tr > :nth-child(3) { text-align: right; }
-			main .app .slot.grade tr td:nth-child(1) { padding-left: 25px; }
+			main .app .slot.grade tr td:nth-child(1) {
+				padding-left: 25px;
+				white-space: pre-wrap;
+			}
+			main .app .slot.grade tr td:nth-child(2) input { min-width: 40px; }
 			main .app .slot.grade tr td:nth-child(3) { color: var(--clr-bs-gray); }
 			main .app .slot.grade input[type="number"] {
 				padding: 1.25px 5px;

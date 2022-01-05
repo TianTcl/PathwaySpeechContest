@@ -59,6 +59,7 @@
 				border: none;
 			}
 			main .app .slot.grade { height: fit-content; }
+			main .app .slot.grade table { border-bottom: 1.1px solid var(--clr-bs-gray-dark); }
 			main .app .slot.grade thead { background-color: var(--fade-black-8); }
 			main .app .slot.grade thead:not(:first-child) { border-top: 1.125px solid var(--clr-gg-grey-500); border-bottom: none; }
 			main .app .slot.grade thead:not(:last-child) { border-bottom: 1.125px solid var(--clr-gg-grey-500); }
@@ -70,7 +71,11 @@
 			}
 			main .app .slot.grade :not(:first-child) tr > td:nth-child(2) { text-align: center; }
 			main .app .slot.grade :not(:first-child) tr > :nth-child(3) { text-align: right; }
-			main .app .slot.grade tr td:nth-child(1) { padding-left: 25px; }
+			main .app .slot.grade tr td:nth-child(1) {
+				padding-left: 25px;
+				white-space: pre-wrap;
+			}
+			main .app .slot.grade tr td:nth-child(2) input { min-width: 40px; }
 			main .app .slot.grade tr td:nth-child(3) { color: var(--clr-bs-gray); }
 			main .app .slot.grade input[type="number"] {
 				padding: 1.25px 5px;
@@ -79,7 +84,10 @@
 			main .app .slot.grade input[type="number"]:invalid { color: var(--clr-bs-red); }
 			main .app .slot.grade output[type="number"] { color: var(--clr-bs-blue); }
 			main .app .slot.grade output[type="number"]:not([name="s:0"]) { font-weight: normal; }
-			main .app .slot.grade table { border-bottom: 1.1px solid var(--clr-bs-gray-dark); }
+			main .app .slot.grade a.action-list {
+				float: right;
+				height: 24px;
+			}
 			main .app .slot.grade div.group { padding: 0px 12.5px; }
 			main .app .slot.grade div.group span { background-color: transparent; border: none; }
 			@media only screen and (max-width: 768px) {
@@ -89,10 +97,37 @@
 					display: flex; flex-direction: column;
 				}
 				main .app .slot { margin-bottom: 10px; }
-				main .app .slot.lists { /* grid-area: 1 / 1 / 2 / 2; */ max-height: 300px !important; }
+				main .app .slot.lists { /* grid-area: 1 / 1 / 2 / 2; */ max-height: 240px !important; }
 				main .app .slot.video { /* grid-area: 2 / 1 / 3 / 2; */ max-height: 540px; height: 540px; }
 				main .app .slot.grade { /* grid-area: 3 / 1 / 4 / 2; */ max-height: 720px; }
 				main .app .slot.grade input[type="number"] { padding: 1.25px 2.5px; }
+			}
+		</style>
+		<style type="text/css" for="lb-scoreboard">
+			.lightbox .scoreboard { max-height: 70vh; }
+			.scoreboard .load { padding: 12.5px 5px; }
+			.scoreboard .message { font-size: 18.75px; }
+			.scoreboard table > thead:first-child > * {
+				padding: 5px 2.5px;
+				text-align: left; /* Not working */
+			}
+			.scoreboard table > thead:first-child > * > span {
+				writing-mode: vertical-rl;
+				transform: rotate(180deg);
+			}
+			.scoreboard table > thead:first-child > :nth-child(1), .scoreboard table > thead:first-child > :nth-child(12), .scoreboard table > thead:first-child > :nth-child(13) {
+				padding: 2.5px 5px;
+				text-align: center;
+			}
+			.scoreboard table > :not(:first-child) > * { text-align: center; }
+			.scoreboard table > :not(:first-child) > *:nth-child(1) { text-align: right; }
+			.scoreboard table > :nth-child(2) > *:nth-child(13) > div {
+				max-width: 300px;
+				text-align: left; white-space: pre-wrap;
+			}
+			@media only screen and (max-width: 768px) {
+				.scoreboard .message { font-size: 12.5px; }
+				.scoreboard table > :nth-child(2) *:nth-child(13) > div { max-width: 240px; }
 			}
 		</style>
 		<script type="text/javascript">
@@ -202,16 +237,26 @@
 						if (pass) { focusfield("comment"); pass = false; app.ui.notify(1, [2, "Your comment is too long.<br>(Longer than 1,000 characters)"]); }
 					} return { pass: pass, info: info };
 				};
+				var viewScore = function() {
+					app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"คะแนนจากกรรมการทั้งหมด":"Score from all judges"?>", allowclose: true, html: '<div class="scoreboard"><center class="load"><img src="/resource/images/widget-load_spinner.gif" draggable="false" height="50"><br></center></div>'});
+					setTimeout(function() {
+						$(".lightbox .scoreboard").load("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/html/judge-score.html?of=ID"+btoa(sv.currentID));
+					}, 750);
+				};
 				return {
 					init: initiate,
 					load: getScore,
 					score: {
 						save: saveScore,
 						reset: resetScore
-					}
+					}, view: viewScore
 				};
 			} const grader = gradefx(); delete gradefx;
+			function ro(col) {
+				w3.sortHTML("div.table table tbody", "tr", "td:nth-child("+col.toString()+")");
+			}
 		</script>
+		<script type="text/javascript" src="/resource/js/lib/w3.min.js"></script>
 	</head>
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
@@ -313,7 +358,7 @@
 									<th>5 pts</th>
 								</tr></thead>
 								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
-									<th>Total</th>
+									<th>Total <a onClick="grader.view()" href="javascript:void(0)" class="action-list" data-title="Score list"><i class="material-icons">list</i></a></th>
 									<th><output type="number" name="s:0"></th>
 									<th>100 pts</th>
 								</tr></thead>

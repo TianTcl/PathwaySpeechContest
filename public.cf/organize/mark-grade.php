@@ -101,41 +101,57 @@
 				main .app .slot.video { /* grid-area: 2 / 1 / 3 / 2; */ max-height: 540px; height: 540px; }
 				main .app .slot.grade { /* grid-area: 3 / 1 / 4 / 2; */ max-height: 720px; }
 				main .app .slot.grade input[type="number"] { padding: 1.25px 2.5px; }
+				main .app .slot.grade a.action-list { height: 18px; }
 			}
 		</style>
 		<style type="text/css" for="lb-scoreboard">
 			.lightbox .scoreboard { max-height: 70vh; }
 			.scoreboard .load { padding: 12.5px 5px; }
 			.scoreboard .message { font-size: 18.75px; }
-			.scoreboard table > thead:first-child > * {
+			.scoreboard table > thead:first-child tr * {
 				padding: 5px 2.5px;
 				text-align: left; /* Not working */
 			}
-			.scoreboard table > thead:first-child > * > span {
+			.scoreboard table > thead:first-child tr * > span {
 				writing-mode: vertical-rl;
 				transform: rotate(180deg);
 			}
-			.scoreboard table > thead:first-child > :nth-child(1), .scoreboard table > thead:first-child > :nth-child(12), .scoreboard table > thead:first-child > :nth-child(13) {
+			.scoreboard table > thead:first-child tr :nth-child(1), .scoreboard table > thead:first-child tr :nth-child(12), .scoreboard table > thead:first-child tr :nth-child(13) {
 				padding: 2.5px 5px;
 				text-align: center;
 			}
-			.scoreboard table > :not(:first-child) > * { text-align: center; }
-			.scoreboard table > :not(:first-child) > *:nth-child(1) { text-align: right; }
-			.scoreboard table > :nth-child(2) > *:nth-child(13) > div {
+			.scoreboard table > :not(:first-child) tr * { text-align: center; }
+			.scoreboard table > :not(:first-child) tr *:nth-child(1) { text-align: right; }
+			.scoreboard table > :nth-child(2) tr *:nth-child(13) > div {
 				max-width: 300px;
 				text-align: left; white-space: pre-wrap;
 			}
 			@media only screen and (max-width: 768px) {
 				.scoreboard .message { font-size: 12.5px; }
-				.scoreboard table > :nth-child(2) *:nth-child(13) > div { max-width: 240px; }
+				.scoreboard table > :nth-child(2) tr *:nth-child(13) > div { max-width: 240px; }
 			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				grader.init();
+				seek_param();
 			});
+			const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/override", myID: "<?=$_SESSION['evt2']['user']?>" };
+			function seek_param() { if (location.hash!="") {
+				// Extract hashes
+				var hash = {}; location.hash.substring(1, location.hash.length).split("&").forEach((ehs) => {
+					let ths = ehs.split("=");
+					hash[ths[0]] = ths[1];
+				});
+				// Let's see
+				if (typeof hash.id !== "undefined") {
+					grader.load((parseInt(atob(hash.id+"="), 36)/parseInt(cv.myID)).toString(36));
+					if (typeof hash.view !== "undefined") {
+						if (hash.view == "score") grader.view();
+					}
+				}
+			} }
 			function gradefx() {
-				const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/override", myID: "<?=$_SESSION['evt2']['user']?>" };
 				var sv = { inited: false, loaded: false, viewLink: {} };
 				var initiate = function() {
 					if (!sv.inited) {
@@ -188,7 +204,7 @@
 							var actionButton = $('main .app .slot.grade button[onClick$="grader.score.save()"]');
 							if (dat.info == null) actionButton.attr("class", "full-x green").children().last().text("Mark");
 							else actionButton.attr("class", "full-x blue").children().last().text("Update Mark");
-							loadScore();
+							loadScore(); history.pushState(null, null, location.pathname+"#id="+btoa((parseInt(sv.currentID, 36)*parseInt(cv.myID)).toString(36)).replace(/=$/, ""));
 							// Show VDO
 							document.querySelector("main .app .slot.video div.wrapper iframe").src = "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/upload/video?view=ID"+btoa(encID)+"&remote="+cv.myID;
 						} else app.ui.notify(1, dat.reason);
@@ -239,9 +255,16 @@
 				};
 				var viewScore = function() {
 					app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"คะแนนจากกรรมการทั้งหมด":"Score from all judges"?>", allowclose: true, html: '<div class="scoreboard"><center class="load"><img src="/resource/images/widget-load_spinner.gif" draggable="false" height="50"><br></center></div>'});
+					$(".lightbox .head label").on("click", function() {
+						history.replaceState(null, null, location.pathname+location.hash.replace(/&view=score$/, ""));
+					});
 					setTimeout(function() {
 						$(".lightbox .scoreboard").load("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/html/judge-score.html?of=ID"+btoa(sv.currentID));
+						history.replaceState(null, null, location.pathname+location.hash+"&view=score");
 					}, 750);
+				};
+				var rubric = function() {
+					const win = window.open("https://inf.bodin.ac.th/go?url=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F124JQRtB1DlBAx7vgd3dWYRY9Udhvo-SvX4h1H0Qj_fY%2Fedit%23bookmark%3Did.p4ub8pvredjb");
 				};
 				return {
 					init: initiate,
@@ -249,7 +272,8 @@
 					score: {
 						save: saveScore,
 						reset: resetScore
-					}, view: viewScore
+					}, view: viewScore,
+					criteria: rubric
 				};
 			} const grader = gradefx(); delete gradefx;
 			function ro(col) {

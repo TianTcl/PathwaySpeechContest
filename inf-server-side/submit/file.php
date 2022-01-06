@@ -8,17 +8,18 @@
     $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
     if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
     # if (!isset($_SESSION['event']['round'])) die('{"success": false, "reason": [2, "Server error. Please contact system administrator to fix this problem."]}');
-    $round = $_SESSION['event']['round'] ?? "1";
+    require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = $_SESSION['event']['round'];
+    require($dirPWroot."e/resource/db_connect.php");
     if (isset($_GET['status'])) {
 		echo json_encode(array(
             "success" => true,
             "info" => array(
                 "v" => file_exists("../resource/upload/sv-$round/$user.mp4"),
-                "s" => file_exists("../resource/upload/ps-$round/$user.png")
+                "s" => file_exists("../resource/upload/ps-$round/$user.png"),
+                "g" => boolval($db -> query("SELECT a.scid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round") -> num_rows)
             )
         ));
     } else if (isset($_GET['upload']) && isset($_FILES)) {
-        require($dirPWroot."e/resource/db_connect.php");
         $file = trim($_GET['upload']); switch ($file) {
             case "v": $back = "speech-video"; $tgdn = "sv"; $allow_type = array("mp4"); $maxFileSize = 25600000; /* 25 MB */ break;
             case "s": $back = "payment-slip"; $tgdn = "ps"; $allow_type = array("png"); $maxFileSize = 3072000; /* 3 MB */ break;
@@ -43,6 +44,6 @@
                 else { slog($user, "PathwaySCon", "file", "new", $file, "fail"); header("Location: $back#status=error"); }
             } else { slog($user, "PathwaySCon", "file", "new", $file, "fail", "", "NotEligible"); header("Location: $back#status=failed"); }
         } else header("Location: ".$_SERVER['HTTP_REFERER']."#status=unknown");
-        $db -> close();
     }
+    $db -> close();
 ?>

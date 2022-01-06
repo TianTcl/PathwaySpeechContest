@@ -1,5 +1,0 @@
-<FilesMatch "^people-\d{8,10}\.(png|jpg)$">
-    <IfModule mod_headers.c>
-        Header set Access-Control-Allow-Origin "https://pathwayspeechcontest.cf/"
-    </IfModule>
-</FilesMatch>

@@ -184,6 +184,57 @@
                     }
                 } else { echo '{"success": false, "reason": [3, "Unable to load your video. Please try again."]}'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "InvalidQuery"); }
             }
+        } else if ($app == "main") {
+            $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+            if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
+            $round = $_SESSION['event']['round'];
+            if ($cmd == "get") {
+                if ($attr == "score") {
+                    $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p40) AS VARCHAR(5)) AS p40,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
+                    if ($getscore) {
+                        if ($getscore -> num_rows == 1) {
+                            $readscore = $getscore -> fetch_array(MYSQLI_ASSOC);
+                            echo '{"success": true, "info": {"type": true, "data": '.json_encode($readscore).'}}';
+                        } else echo '{"success": true, "info": {"type": false, "data": ["gray", "'.($_COOKIE['set_lang']=="th"?"ยังไม่มีผลคะแนน":"No grades.").'"]}}';
+                    } else echo '{"success": false, "reason": [3, "Unable to get scores."]}';
+                } else if ($attr == "comment") {
+                    $getperm = $db -> query("SELECT viewCmt FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
+                    if ($getperm && $getperm -> num_rows == 1) {
+                        $permission = ($getperm -> fetch_array(MYSQLI_ASSOC))['viewCmt'];
+                        if ($permission == "N") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คุณไม่มีสิทธิ์ในการดูข้อความจากผู้พิจรณา":"You don't have permission to view comments.").' <a role=\\"button\\" onClick=\\"reqComment(\''.base_convert(time(), 10, 36).'\')\\" href=\\"javascript:void(0)\\" class=\\"yellow\\" draggable=\\"false\\">'.($_COOKIE['set_lang']=="th"?"ขอสิทธิ์":"Request permission").'</a>"}}';
+                        else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจรณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
+                        else if ($permission == "Y") {
+                            $getcmt = $db -> query("SELECT a.scid,a.comment FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE NOT a.comment='' AND b.ptpid=$user AND b.round=$round");
+                            if ($getcmt) {
+                                if ($getcmt -> num_rows > 0) {
+                                    $info = ""; while ($readcmt = $getcmt -> fetch_assoc()) {
+                                        $keyid = base_convert(intval($readcmt['scid']) * 138, 10, 36);
+                                        $info .= '<li name=\\"'.$keyid.'\\">'.$readcmt['comment'].'</li><hr>';
+                                    } echo '{"success": true, "info": {"html": "<ul class=\\"list\\">'.$info.'</ul>"}}';
+                                } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"ไม่มีข้อความจากผู้พิจรณาคะแนน":"No comment.").'</center>"}}';
+                            } else echo '{"success": false, "reason": [3, "Unable to load comments."]}';
+                        } else echo '{"success": false, "reason": [2, "Invalid permission responded."]}';
+                    } else echo '{"success": false, "reason": [3, "Unable to get permission."]}';
+                }
+            } else if ($cmd == "comment") {
+                if ($attr == "request") {
+                    $getperm = $db -> query("SELECT viewCmt FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
+                    if ($getperm && $getperm -> num_rows == 1) {
+                        $permission = ($getperm -> fetch_array(MYSQLI_ASSOC))['viewCmt'];
+                        if ($permission == "N") {
+                            $success = $db -> query("UPDATE PathwaySCon_submission SET viewCmt='R',viewCmt_req=current_timestamp() WHERE ptpid=$user AND round=$round");
+                            if ($success) {
+                                echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"ส่งคำขอสิทธิ์การดูข้อความจากผู้พิจรณาคะแนนแล้ว.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Permission request sent.<br>Please come back later.").'"}}';
+                                slog($user, "PathwaySCon", "comment", "request", "view", "pass", $remote);
+                            } else {
+                                echo '{"success": false, "reason": [3, "'.($_COOKIE['set_lang']=="th"?"เกิดข้อผิดพลาด.<br>กรุณาลองอีกครั้ง.":"There's an error.<br>Please try again.").'"]}';
+                                slog($user, "PathwaySCon", "comment", "request", "view", "fail", $remote, "InvalidQuery");
+                            }
+                        } else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจรณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
+                        else if ($permission == "Y") echo '{"success": false, "reason": [2, "'.($_COOKIE['set_lang']=="th"?"เกิดขอผิดผลาด.<br>คุณมีสิทธิ์ดูความคิดเห็นแล้ว ไม่สามารถยื่นคำขอซ้ำได้.":"There's an error.<br>You already have a permission to view comments. You cannot request view permission again.").'"]}';
+                    } else echo '{"success": false, "reason": [3, "Unable to get permission."]}';
+                }
+            }
         }
 		$db -> close();
 	}

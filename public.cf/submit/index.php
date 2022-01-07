@@ -54,10 +54,6 @@
 				font-family: "TianTcl-en_01", "pixelmix", "Dosis", "Permanent Marker", "Ranchers", "Mali", "Oswald";
 				font-size: 1.5em;
 			}
-			@media only screen and (max-width: 768px) {
-				main div.sl-frame div { width: 22.5px; height: 22.5px; }
-				main div.sl-frame div i.material-icons { transform: none; }
-			}
 		</style>
 		<script type="text/javascript">
 			var ttl = 30, is_active = true;
@@ -80,7 +76,7 @@
 					var viewurl = me.href;
 					if (!sl_viewed) {
 						var viewport = $("main div.container div.sl-frame");
-						viewport.css("display", "block"); viewport.animate({height: 500}, 1000, ppa.ripple_click_program);
+						viewport.css("display", "block"); viewport.animate({height: 535}, 1000, ppa.ripple_click_program);
 						sl_viewed = true;
 					}
 					$(ifr.parentNode).children().first().text($(me).attr("data-text"));

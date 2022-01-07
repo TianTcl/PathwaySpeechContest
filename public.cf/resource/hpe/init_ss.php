@@ -95,4 +95,16 @@
 		}
 	}
 	$("a").on('click', function(event) { smooth_scrolling(event); });
+	function openInBrowser() {
+		const TUL = top.location, userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		if (/(Line|line(-poker)?)/.test(userAgent)) {
+			let URL = {
+				page: TUL.protocol+"//"+TUL.hostname+TUL.pathname,
+				query: TUL.search+(TUL.search.length ? "&" : "?")+"openExternalBrowser=1"
+			}; TUL.assign(URL.page+URL.query+TUL.hash);
+			delete URL;
+		} else if (/(FBA(N|V)|facebookexternalhit)/.test(userAgent)) {
+
+		} delete TUL;
+	} <?php if (isset($forceExternalBrowser) && $forceExternalBrowser) echo 'openInBrowser();'; ?>
 </script>

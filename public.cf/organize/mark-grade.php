@@ -70,7 +70,7 @@
 				text-align: right;
 			}
 			main .app .slot.grade :not(:first-child) tr > td:nth-child(2) { text-align: center; }
-			main .app .slot.grade :not(:first-child) tr > :nth-child(3) { text-align: right; }
+			main .app .slot.grade :not(:first-child) tr > *:nth-child(3) { text-align: right; }
 			main .app .slot.grade tr td:nth-child(1) {
 				padding-left: 25px;
 				white-space: pre-wrap;
@@ -145,7 +145,7 @@
 				});
 				// Let's see
 				if (typeof hash.id !== "undefined") {
-					grader.load((parseInt(atob(hash.id+"="), 36)/parseInt(cv.myID)).toString(36));
+					grader.load((parseInt(atob(decodeURIComponent(hash.id)+"="), 36)/parseInt(cv.myID)).toString(36));
 					if (typeof hash.view !== "undefined") {
 						if (hash.view == "score") grader.view();
 					}
@@ -204,7 +204,7 @@
 							var actionButton = $('main .app .slot.grade button[onClick$="grader.score.save()"]');
 							if (dat.info == null) actionButton.attr("class", "full-x green").children().last().text("Mark");
 							else actionButton.attr("class", "full-x blue").children().last().text("Update Mark");
-							loadScore(); history.pushState(null, null, location.pathname+"#id="+btoa((parseInt(sv.currentID, 36)*parseInt(cv.myID)).toString(36)).replace(/=$/, ""));
+							loadScore(); history.pushState(null, null, location.pathname+"#id="+encodeURIComponent(btoa((parseInt(sv.currentID, 36)*parseInt(cv.myID)).toString(36)).replace(/=$/, "")));
 							// Show VDO
 							document.querySelector("main .app .slot.video div.wrapper iframe").src = "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/upload/video?view=ID"+btoa(encID)+"&remote="+cv.myID;
 						} else app.ui.notify(1, dat.reason);
@@ -314,11 +314,11 @@
 								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
 									<th><?=$_COOKIE['set_lang']=="th"?"หัวข้อ":"Critition"?></th>
 									<th><?=$_COOKIE['set_lang']=="th"?"คะแนนที่ได้":"Score"?></th>
-									<th><?=$_COOKIE['set_lang']=="th"?"คะแนนที่เต็ม":"Max points"?></th>
+									<th><?=$_COOKIE['set_lang']=="th"?"คะแนนเต็ม":"Max points"?></th>
 								</tr></thead>
 								<thead><tr>
 									<th>Content</th>
-									<th><output type="number" name="s:1"></th>
+									<th><output type="number" name="s:1"></output></th>
 									<th>35 pts</th>
 								</tr></thead>
 								<tbody>
@@ -338,7 +338,7 @@
 								</tbody>
 								<thead><tr>
 									<th>Language Competence & Fluency</th>
-									<th><output type="number" name="s:2"></th>
+									<th><output type="number" name="s:2"></output></th>
 									<th>45 pts</th>
 								</tr></thead>
 								<tbody>
@@ -362,7 +362,7 @@
 								</tbody>
 								<thead><tr>
 									<th>Presentation</th>
-									<th><output type="number" name="s:3"></th>
+									<th><output type="number" name="s:3"></output></th>
 									<th>15 pts</th>
 								</tr></thead>
 								<tbody>
@@ -383,7 +383,7 @@
 								</tr></thead>
 								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
 									<th>Total <a onClick="grader.view()" href="javascript:void(0)" class="action-list" data-title="Score list"><i class="material-icons">list</i></a></th>
-									<th><output type="number" name="s:0"></th>
+									<th><output type="number" name="s:0"></output></th>
 									<th>100 pts</th>
 								</tr></thead>
 							</table>

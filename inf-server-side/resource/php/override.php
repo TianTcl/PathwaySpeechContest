@@ -86,7 +86,7 @@
 					if ($getsbmt -> num_rows == 1) {
 						$mark = $getsbmt -> fetch_array(MYSQLI_ASSOC); $export = array();
 						foreach ($mark as $key => $val) {
-							if (preg_match('/^p\d{2}$/', $key)) $export[$key] = intval($val);
+							if (preg_match('/^(p\d{2}|mark)$/', $key)) $export[$key] = intval($val);
 							else if ($key == "scid") $export['returnTo'] = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($val)+138)*138, 1), 0, 13))); // 5d3
 							else $export[$key] = $val;
 						} echo '{"success": true, "info": '.json_encode($export).'}';
@@ -94,6 +94,8 @@
 				} else echo '{"success": false, "reason": [3, "Unable to load submission"]}';
 			} else if ($cmd == "write") {
 				$toEdit = strval(intval(base_convert(trim($attr['returnTo']), 36, 10)) / 138); unset($attr['returnTo']);
+				$attr['comment'] = htmlspecialchars($attr['comment']);
+				foreach ($attr as $part => $mark) $attr[$part] = $db -> real_escape_string(trim($mark));
 				$success = $db -> query("INSERT INTO PathwaySCon_score (smid,judge,".implode(",", array_keys($attr)).",ip) VALUES ($toEdit,$user,'".implode("','", array_values($attr))."','$ip')");
 				if ($success) {
 					$newid = $db -> insert_id; $encID = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($newid)+138)*138, 1), 0, 13))); // 5d3
@@ -103,16 +105,14 @@
 			} else if ($cmd == "edit") {
 				$toEdit = strval(intval($tcl -> decode(str_replace("-", "", $attr['returnTo'])."5d3"))/138-138); unset($attr['returnTo']);
 				$marks = ""; foreach ($attr as $key => $val) {
-					$marks .= "$key='".($db -> real_escape_string($trim($val)))."',";
+					if ($key <> "comment") $marks .= "$key='".($db -> real_escape_string(trim($val)))."',";
+					else $marks .= "$key='".($db -> real_escape_string(htmlspecialchars(trim($val))))."',";
 				} $success = $db -> query("UPDATE PathwaySCon_score SET $marks edit=edit+1,lasttime=current_timestamp() WHERE scid=$toEdit");
 				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "grade", "edit", "$toEdit", "pass", $remote); }
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "edit", $toEdit, "fail", $remote, "InvalidQuery"); }
 			}
 		}
-		$db -> close(); /*
-		$keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13))); // 5d3
-
-		$keyid 
-		*/
+		$db -> close();
+		# $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13))); // 5d3
 	}
 ?>

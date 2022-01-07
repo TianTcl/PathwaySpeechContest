@@ -33,10 +33,10 @@
 			main .comment ul.list hr:last-child { display: none; }
 		</style>
 		<script type="text/javascript">
-			const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api" };
+			const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api", ID: "<?=$_SESSION['evt']['encid']?>" };
 			$(document).ready(function() {
 				setTimeout(function() {
-					$.post(cv.APIurl, {app: "main", cmd: "get", attr: "score"}, function(res, hsc) {
+					$.post(cv.APIurl, {app: "main", cmd: "get", attr: "score", remote: cv.ID}, function(res, hsc) {
 						var dat = JSON.parse(res);
 						$("main .mark .load").remove();
 						if (dat.success) {
@@ -60,13 +60,13 @@
 					$(this).remove();
 				}); $("main .comment .load").show();
 				setTimeout(function() {
-					$.post(cv.APIurl, {app: "main", cmd: "get", attr: "comment"}, onCommentLoadComplete);
+					$.post(cv.APIurl, {app: "main", cmd: "get", attr: "comment", remote: cv.ID}, onCommentLoadComplete);
 				}, 750);
 			}
 			function reqComment(token) {
 				$("main .comment").html('<center class="load"><img src="/resource/images/widget-load_spinner.gif" draggable="false" height="50"></center>');
 				setTimeout(function() {
-					$.post(cv.APIurl, {app: "main", cmd: "comment", attr: "request"}, onCommentLoadComplete);
+					$.post(cv.APIurl, {app: "main", cmd: "comment", attr: "request", remote: cv.ID}, onCommentLoadComplete);
 				}, 750);
 			}
 		</script>

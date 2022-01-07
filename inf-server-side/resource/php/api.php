@@ -8,7 +8,7 @@
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
         require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
         require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
-        $rmte = (isset($attr['remote']) && $attr['remote']); $remote = $rmte ? "remote" : "";
+        $rmte = ((isset($attr['remote']) && $attr['remote']) || (isset($_REQUEST['remote']) && $_REQUEST['remote'])); $remote = $rmte ? "remote" : "";
         $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
 		if ($app == "register") {
             if ($cmd == "chkEml") {
@@ -185,7 +185,7 @@
                 } else { echo '{"success": false, "reason": [3, "Unable to load your video. Please try again."]}'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "InvalidQuery"); }
             }
         } else if ($app == "main") {
-            $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+            $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
             if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
             $round = $_SESSION['event']['round'];
             if ($cmd == "get") {

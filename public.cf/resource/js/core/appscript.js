@@ -1,7 +1,7 @@
 /* TianTcl base js (v1.4.2) */
 // Private
-const app_name = "TianTcl's website",
-	color_light = "#FFFFFF", color_dark = "#000000";
+const app_name = "Pathway Speech Contest System",
+	color_light = "#CCEDD4", color_dark = "#18442B";
 function private() {
 	var console_proof = function() {
 		setTimeout(function() {

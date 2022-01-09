@@ -6,7 +6,7 @@
 
 	$remoting = (isset($_REQUEST['remote']) && preg_match('/^100\d{2}$/', $_REQUEST['remote']));
 	if (!isset($_SESSION['evt2']) && !$remoting) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("grader") || has_perm("judge") || $remoting; if ($permitted) {
 		$playable = false;
 		if (isset($_REQUEST['view']) && !empty(trim($_REQUEST['view']))) {

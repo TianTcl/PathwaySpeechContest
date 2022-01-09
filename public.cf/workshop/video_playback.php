@@ -5,13 +5,13 @@
 	$header_desc = "การย้อนดูคลิปวีดีโอ";
 
 	if (!isset($_GET['signature']) || empty(trim($_GET['signature']))|| !isset($_SESSION['event']['workshop-URL'])
-		|| $_SESSION['event']['workshop-URL'] <> trim($_GET['signature'])) header("location: /workshop/");
+		|| $_SESSION['event']['workshop-URL'] <> trim($_GET['signature'])) header("Location: /workshop/");
 	$player_secured = false; $home = "workshop/";
 	switch ($_SESSION['event']['workshop-VDO']) {
 		case 1:
 			$player_src = "workshop_2021-12-11"; $player_name = "1st Workshop (11/12/2021)";
 			$player_duration = "1:42:35"; $player_thumbnail = "/resource/images/workshop-1.png"; break;
-		default: header("location: /workshop/"); break;
+		default: header("Location: /workshop/"); break;
 	} $player_src = "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/images/$player_src.mp4";
 ?>
 <!doctype html>

@@ -5,7 +5,7 @@
 	$header_desc = "ส่งอีเมลหาผู้สมัคร";
 
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("lead"); if ($permitted) {
 		
 	}
@@ -55,7 +55,8 @@
 					"remind-12": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 12 วัน":"12 Days left"?>",
 					"remind-8": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 8 วัน":"8 Days left"?>",
 					"remind-5": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 5 วัน":"5 Days left"?>",
-					"remind-0": "<?=$_COOKIE['set_lang']=="th"?"เตือนเวลาครั้งสุดท้าย":"Last call (warn)"?>"
+					"remind-0": "<?=$_COOKIE['set_lang']=="th"?"เตือนเวลาครั้งสุดท้าย":"Last call (warn)"?>",
+					"view-cert": "<?=$_COOKIE['set_lang']=="th"?"ประกาศผลทางเว็บไซต์":"Announce rank via website"?>"
 				}, hash: 138
 			};
 			var sv = { all: false, req: [0, null] };
@@ -145,7 +146,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
-				<h2>Send notofication</h2>
+				<h2>Send notification</h2>
 				<div class="form-esc">
 					<div class="form">
 						<div class="group">

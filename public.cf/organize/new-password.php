@@ -5,7 +5,7 @@
 	$header_desc = "ตั้งรหัสผ่าน";
 
 	if (!isset($_SESSION['evt2'])) header("Location: ".($_GET['return_url'] ?? "./"));
-	else if (!$_SESSION['evt2']["force_pwd_change"]) header("location: ".($_GET['return_url'] ?? "home"));
+	else if (!$_SESSION['evt2']["force_pwd_change"]) header("Location: ".($_GET['return_url'] ?? "home"));
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

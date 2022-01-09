@@ -4,7 +4,7 @@
 	$header_title = "เมนูหลักทีมงาน";
 
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,8 +26,9 @@
 					<li class="dt"><?=$_COOKIE['set_lang']=="th"?"การประกวด":"Competition"?></li>
 					<li><a href="attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
 					<li><a href="mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
-					<li disabled><a href="rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
+					<li><a href="rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
 					<li class="dl">&nbsp;</li>
+					<li><a href="grant-permission"><?=$_COOKIE['set_lang']=="th"?"คำขออนุญาติอ่านคอมเม้น":"Review premission request"?></a></li>
 					<li><a href="send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>
 				</ul>
 				<input name="donate" type="checkbox" id="ref_menu-b"><label for="ref_menu-b"><?=$_COOKIE['set_lang']=="th"?"การบริจาค":"Donate"?></label><ul>

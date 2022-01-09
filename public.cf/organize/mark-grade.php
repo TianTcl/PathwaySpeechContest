@@ -4,7 +4,7 @@
 	$header_title = "ลงคะแนน";
 	
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("grader"); if ($permitted) {
 		
 	}

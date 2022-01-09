@@ -43,11 +43,11 @@
 		<link rel="manifest" href="/resource/appmanifest.webmanifest" crossorigin="use-credentials">
 		<link rel="manifest" href="/resource/extn-manifest.json">
 		<meta name="application-name" content="<?php echo $heading_name; ?>">
-		<meta name="theme-color" content="#" />
+		<meta name="theme-color" content="#CCEDD4" />
 		<!-- iOS standalone A2HS webapp prepare -->
 		<meta name="apple-mobile-web-app-title" content="<?php echo $heading_name; ?>">
 		<link rel="apple-touch-startup-image" href="/resource/images/PathwaySpeechContest.ico">
-		<meta name="apple-mobile-web-app-status-bar-style" content="#">
+		<meta name="apple-mobile-web-app-status-bar-style" content="#CCEDD4">
 		<link rel="apple-touch-icon" href="/resource/<?php echo $heading_cover;?>">
 		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="canonical" href="//<?php echo $heading_domain; ?>"/>

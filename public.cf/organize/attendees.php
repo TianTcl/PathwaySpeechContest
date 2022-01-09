@@ -4,7 +4,7 @@
 	$header_title = "รายชื่อผู้สมัคร";
 	
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

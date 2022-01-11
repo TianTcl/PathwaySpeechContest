@@ -26,7 +26,7 @@
 					<li class="dt"><?=$_COOKIE['set_lang']=="th"?"การประกวด":"Competition"?></li>
 					<li><a href="attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
 					<li><a href="mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
-					<li><a href="rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
+					<li hidden><a href="rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
 					<li class="dl">&nbsp;</li>
 					<li><a href="grant-permission"><?=$_COOKIE['set_lang']=="th"?"คำขออนุญาติอ่านคอมเม้น":"Review premission request"?></a></li>
 					<li><a href="send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>

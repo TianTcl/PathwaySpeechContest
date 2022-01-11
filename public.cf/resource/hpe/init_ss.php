@@ -38,6 +38,7 @@
 	:root, [data-dark="false"], .player, iframe { filter: invert(100%) hue-rotate(180deg); }
 </style>
 <script type="text/javascript">
+	const isSafari = (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") < 0);
     $(function(){
 		// SEO & lighthouse
 		document.querySelector("html").setAttribute("lang", ppa.getCookie("set_lang"));
@@ -74,7 +75,7 @@
 		function gtag() { dataLayer.push(arguments); }
 		gtag("js", new Date());	gtag("config", "UA-204561763-3");
 		// Temporary Safair Ripple Fix
-		if (navigator.userAgent.indexOf("Safari") > -1) $("main .form span.ripple-effect").remove();
+		if (isSafari) $("main span.ripple-effect").remove();
     });
 	// Scrolling
 	$(document).scroll(function() {
@@ -105,6 +106,11 @@
 			delete URL;
 		} else if (/(FBA(N|V)|facebookexternalhit)/.test(userAgent)) {
 
-		} delete TUL;
-	} <?php if (isset($forceExternalBrowser) && $forceExternalBrowser) echo 'openInBrowser();'; ?>
+		} delete TUL; if (isSafari) {
+			var actionCourse = document.createElement("script"), thisPage = location.href;
+			actionCourse.onload = function() { location = "googlechromme://navigate?url=" + encodeURIComponent(thisPage); }
+			actionCourse.onerror = function() { location = thisPage; }
+			document.head.appendChild(actionCourse);
+		}
+	} <?php echo 'if ('.intval(isset($forceExternalBrowser) && $forceExternalBrowser).' || isSafari) openInBrowser();'; ?>
 </script>

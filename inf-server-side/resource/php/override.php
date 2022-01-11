@@ -111,6 +111,35 @@
 				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "grade", "edit", "$toEdit", "pass", $remote); }
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "edit", $toEdit, "fail", $remote, "InvalidQuery"); }
 			}
+		} else if ($app == "rank") {
+			/* if ($cmd == "load") {
+				// $attr = $db -> real_escape_string(trim($attr));
+				switch ($attr) {
+					case "A": $group = "AND b.grade BETWEEN 0 AND 3"; break;
+					case "B": $group = "AND b.grade BETWEEN 4 AND 6"; break;
+					case "C": $group = "AND b.grade BETWEEN 7 AND 9"; break;
+					default: die('{"success": false, "reason": [2, "Invalid group requested."]}'); break;
+				} $gethigh = $db -> query("SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,CAST(AVG(c.mark) AS VARCHAR(5)) AS mark,a.rank FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 $group GROUP BY a.smid ORDER BY mark DESC,a.lasttime,b.time LIMIT 5");
+				if ($gethigh) {
+					if ($gethigh -> num_rows) {
+						$toplist = array(); while ($readhigh = $gethigh -> fetch_assoc()) array_push($toplist, array(
+							"ID" => base_convert(intval($readhigh['smid'])*138, 10, 36),
+							"name" => str_replace(" (", " <font>(", str_replace(")", ")</font>", $readhigh['name'])),
+							"mark" => ($readhigh['mark'] + 0),
+							"rank" => $readhigh['rank']
+						)); echo '{"success": true, info: '.json_encode($toplist).'}';
+					} else echo '{"success": false, "reason": [1, "No participant in this category."]}';
+				} else echo '{"success": false, "reason": [3, "Unable to fetch list."]}';
+			} */ if ($cmd == "list") {
+				$gettop = $db -> query("(SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,1 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND b.grade BETWEEN 0 AND 3 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,2 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND b.grade BETWEEN 4 AND 6 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,3 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND b.grade BETWEEN 7 AND 9 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5)");
+				$sbmts = array(); if ($gettop && $gettop -> num_rows > 0) {
+					while ($readtop = $gettop -> fetch_assoc()) array_push($sbmts, array(
+						"ID" => base_convert(intval($readtop['smid'])*138, 10, 36),
+						"group" => intval($readtop['division']),
+						"name" => $readtop['name']
+					));
+				} echo '{"success": true, "info": '.json_encode($sbmts).'}';
+			}
 		}
 		$db -> close();
 		# $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13))); // 5d3

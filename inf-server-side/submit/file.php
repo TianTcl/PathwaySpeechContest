@@ -36,7 +36,7 @@
                     require($dirPWroot."resource/php/core/getip.php");
                     if ($file == "v") {
                         $checkdup = $db -> query("SELECT smid FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
-                        if ($checkdup && $checkdup -> num_rows == 1) $db -> query("UPDATE PathwaySCon_submission SET edit=edit+1,ip='$ip' WHERE smid=".($checkdup -> fetch_array(MYSQLI_ASSOC))['smid']);
+                        if ($checkdup && $checkdup -> num_rows == 1) $db -> query("UPDATE PathwaySCon_submission SET edit=edit+1,lasttime=current_timestamp(),ip='$ip' WHERE smid=".($checkdup -> fetch_array(MYSQLI_ASSOC))['smid']);
                         else $db -> query("INSERT INTO PathwaySCon_submission (ptpid,round,ip) VALUES ($user,$round,'$ip')");
                     } slog($user, "PathwaySCon", "file", "new", $file, "pass");
                     header("Location: $back#status=success");

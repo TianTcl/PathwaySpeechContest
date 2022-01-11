@@ -5,7 +5,7 @@
 	
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
-	$permitted = has_perm("grader"); if ($permitted) {
+	$permitted = (has_perm("grader") || has_perm("judge", false)); if ($permitted) {
 		
 	}
 ?>
@@ -55,7 +55,7 @@
 			main .app .slot.lists div.vg ul li font { color: var(--clr-main-black-absolute); }
 			main .app .slot.video div.wrapper { width: 100%; height: 100%; }
 			main .app .slot.video div.wrapper iframe {
-				width: 100%; height: 100%;
+				width: inherit; height: inherit;
 				border: none;
 			}
 			main .app .slot.grade { height: fit-content; }
@@ -157,7 +157,7 @@
 					if (!sv.inited) {
 						sv.inited = true;
 						// Fetch list
-						$.get(cv.APIurl+"?app=grade&cmd=list", function(res, hsc) {
+						$.get(cv.APIurl+"?app=<?=(has_perm("judge",false)?"rank":"grade")?>&cmd=list", function(res, hsc) {
 							var dat = JSON.parse(res);
 							if (dat.success) {
 								if (dat.info.length) {
@@ -166,7 +166,7 @@
 										let name = '<font>'+ei.name.replace(" (", '</font> (');
 										$("main .app .slot.lists div.vg-"+ei.group+" ul").append('<li class="txtoe ripple-click" onClick="grader.load(\''+ei.ID+'\')">'+name+'</li>');
 									}); ppa.ripple_click_program();
-									if (navigator.userAgent.indexOf("Safari") > -1) $("main .form span.ripple-effect").remove();
+									if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") < 0) $("main span.ripple-effect").remove();
 								}
 							} else app.ui.notify(1, dat.reason);
 						}); // Calculation
@@ -377,7 +377,7 @@
 									</tr>
 								</tbody>
 								<thead><tr>
-									<th>Time</th>
+									<th>Time <a onClick="grader.criteria()" href="javascript:void(0)" class="action-list" data-title="Rubric criteria"><i class="material-icons">window</i></a></th>
 									<th style="padding: 2.5px 5px; text-align: center;"><input type="number" name="p:40" required min="0" max="5" step="1"></th>
 									<th>5 pts</th>
 								</tr></thead>

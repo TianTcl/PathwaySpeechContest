@@ -16,12 +16,50 @@
 			}
 			div.register div.btn-warp a[role="button"]:first-child { border-radius: 27.5px 0px 0px 27.5px; }
 			div.register div.btn-warp a[role="button"]:last-child { border-radius: 0px 27.5px 27.5px 0px; }
+			div.register center a { white-space: nowrap; }
 			@media only screen and (max-width: 768px) {
 				div.register div.btn-warp a[role="button"] { font-size: 18.75px; }
 			}
 		</style>
 		<script type="text/javascript">
-			
+			$(document).ready(function() {
+				setTimeout(changeTopic, 1250);
+				setTimeout(changeTopic2, 1250);
+			});
+			function changeTopic() {
+				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+					target = document.querySelector("main .topic");
+				function remove() {
+					if (pos > 0) {
+						target.innerHTML = target.innerHTML.substring(0, --pos);
+						if (!target.innerHTML.length) target.innerHTML = "<br>";
+						setTimeout(remove, speed);
+					} else setTimeout(typein, speed*2.5);
+				}
+				function typein() {
+					if (target.innerHTML == "<br>") target.innerHTML = "";
+					if (pos < topic.length) {
+						target.innerHTML += topic.charAt(pos++);
+						setTimeout(typein, speed);
+					}
+				} remove();
+			}
+			function changeTopic2() {
+				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+					target = $("main span.evn");
+				function remove() {
+					if (pos > 0) {
+						target.html(target.html().substring(0, --pos));
+						setTimeout(remove, speed);
+					} else setTimeout(typein, speed*2.5);
+				}
+				function typein() {
+					if (pos < topic.length) {
+						target.html(target.html() + topic.charAt(pos++));
+						setTimeout(typein, speed);
+					}
+				} remove();
+			}
 		</script>
 	</head>
 	<body>
@@ -32,11 +70,11 @@
 					<p>การแข่งขัน</p>
 					<h1>Pathway Speech Contest</h1>
 					<p>ในหัวข้อ</p>
-					<h2>NEW YEAR'S DAY</h2>
+					<h2 class="topic">NEW YEAR'S DAY</h2>
 					<p><font style="color: var(--clr-bs-red);">ฟรี! ค่าสมัคร</font></p>
 				</center>
 				<hr>
-				<p>ชื่อโครงการ โครงการประกวดสุนทรพจน์หัวข้อ “New Year’s Day”</p>
+				<p>ชื่อโครงการ โครงการประกวดสุนทรพจน์หัวข้อ “<span class="evn">New Year's Day</span>”</p>
 				<p>เวลาในการแข่งขัน นักเรียนควรใ้ช้เวลาในการพูดสุนทรพจน์ 2-3 นาที</p>
 				<hr>
 				<span>คุณสมบัติผู้เข้าแข่งขัน</span><ul>
@@ -52,7 +90,7 @@
 				</ul>
 				<hr>
 				<p>รูปแบบกิจกรรม</p>
-				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “New Year’s Day” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
+				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “<span class="evn">New Year's Day</span>” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
 				<span>วิธีการส่งคลิปวิดีโอเพื่อแข่งขัน</span><ul>
 					<li>อัดคลิปวิดีโอครึ่งตัวโดยให้เห็นใบหน้าที่ชัดเจน</li>
 					<li>แนะนำตัวให้น่าจดจำไม่เกิน 30 วินาที</li>
@@ -68,7 +106,7 @@
 						<a href="<?=isset($_SESSION['evt'])?"submit/":"register"?>" role="button" class="cyan"><?=isset($_SESSION['evt'])?($_COOKIE['set_lang']=="th"?"ส่งผลงาน":"Submit it"):($_COOKIE['set_lang']=="th"?"ลงทะเบียน":"Register")?></a>
 						<a href="donate" role="button" class="green"><?=$_COOKIE['set_lang']=="th"?"บริจาค":"Donate"?></a>
 					</div>
-					<center><br><a href="criteria">เกณฑ์การพิจรณาคะแนน</a> | <a href="contact">ช่องทางการติดต่อสอบถาม</a> | <a href="team">คณะผู้ประสานงาน</a></center>
+					<center><br><a href="criteria">เกณฑ์การพิจรณาคะแนน</a> | <a href="contact">ช่องทางการติดต่อสอบถาม</a> | <a href="team">คณะผู้ประสานงาน</a> | <a href="FaQ">คำถามที่พบบ่อย</a></center>
 				</div>
 			</div>
 		</main>

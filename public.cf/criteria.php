@@ -34,6 +34,9 @@
 			main .stat tbody td:nth-child(n+2) { text-align: center; }
 		</style>
 		<script type="text/javascript">
+			$(document).ready(function() {
+				setTimeout(changeTopic, 1250);
+			});
 			function viewFile(me) {
 				go_on(); return false;
 				function go_on() {
@@ -53,6 +56,22 @@
 					} else app.ui.notify(1, dat.reason);
 				});
 			}
+			function changeTopic() {
+				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+					target = $("main span.evn");
+				function remove() {
+					if (pos > 0) {
+						target.html(target.html().substring(0, --pos));
+						setTimeout(remove, speed);
+					} else setTimeout(typein, speed*2.5);
+				}
+				function typein() {
+					if (pos < topic.length) {
+						target.html(target.html() + topic.charAt(pos++));
+						setTimeout(typein, speed);
+					}
+				} remove();
+			}
 		</script>
 	</head>
 	<body>
@@ -61,7 +80,7 @@
 			<div class="container">
 				<h2>เกณฑ์ในการประกวด</h2>
 				<ul>
-					<li><?=$_COOKIE['set_lang']=="th"?"หัวข้อ New Year's Day":"New Year's Day Topic."?></li>
+					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">New Year\'s Day</span>':'<span class="evn">New Year\'s Day</span> Topic.'?></li>
 					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
 				<div class="message blue"><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31 December<sup>st</sup> 2021"?></div>

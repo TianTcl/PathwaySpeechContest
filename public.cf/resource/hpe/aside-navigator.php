@@ -31,6 +31,7 @@
                 <li><a href="/FaQ"><?=$_COOKIE['set_lang']=="th"?"คำถามที่พบบ่อย":"FaQ"?></a></li>
                 <li><a href="/contact"><?=$_COOKIE['set_lang']=="th"?"ติดต่อเรา":"Contact us"?></a></li>
                 <li><a href="/team"><?=$_COOKIE['set_lang']=="th"?"คณะผู้ดำเนินงาน":"Teams"?></a></li>
+                <li><a href="/announcement"><?=$_COOKIE['set_lang']=="th"?"ประกาศ":"Announcements"?></a></li>
                 <?php if (!isset($_SESSION['evt'])) { ?>
                 <li><a href="/criteria"><?=$_COOKIE['set_lang']=="th"?"เกณฑ์การพิจรณาคะแนน":"Scoring Criteria"?></a></li>
                 <li><a href="/register"><?=$_COOKIE['set_lang']=="th"?"ลงทะเบียน":"Register"?></a></li>
@@ -50,12 +51,14 @@
                 <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"เกี่ยวกับ":"About"?></li>
                 <li><a href="/organize/profile"><?=$_COOKIE['set_lang']=="th"?"โปรไฟล์ของฉัน":"My profile"?></a></li>
                 <li class="seperator">&nbsp;</li>
+                <li><a href="/organize/grant-permission"><?=$_COOKIE['set_lang']=="th"?"คำขออนุญาติอ่านคอมเม้น":"Comment view request"?></a></li>
+                <li><a href="/organize/send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>
+                <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"การแข่งขัน":"Competition"?></li>
                 <li><a href="/organize/attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
                 <li><a href="/organize/mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
                 <li hidden><a href="/organize/rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
                 <li class="seperator">&nbsp;</li>
-                <li><a href="/organize/grant-permission"><?=$_COOKIE['set_lang']=="th"?"คำขออนุญาติอ่านคอมเม้น":"Review premission request"?></a></li>
-                <li><a href="/organize/send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>
+                <li><a href="/organize/scoreboard"><?=$_COOKIE['set_lang']=="th"?"กระดานคะแนน":"Scoreboard"?></a></li>
                 <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"การบริจาค":"Donate"?></li>
                 <li><a href="/organize/giveaway"><?=$_COOKIE['set_lang']=="th"?"บริหาร Giveaway":"Giveaway management"?></a></li>
                 <li disabled><a href="/organize/donation"><?=$_COOKIE['set_lang']=="th"?"รายการที่รับบริจาค":"Donation list"?></a></li>

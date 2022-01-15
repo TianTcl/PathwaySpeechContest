@@ -23,7 +23,8 @@
 				margin: 0px 17.5px 17.5px; padding: 15px;
 				border-radius: 15px;
 				box-shadow: 1.25px 1.25px var(--shd-big) var(--fade-black-6);
-				display: flex; transition: var(--time-tst-xfast) ease-out;
+				display: flex; align-items: center;
+				transition: var(--time-tst-xfast) ease-out;
 			}
 			main .rankrs .card.left { justify-content: flex-start; }
 			main .rankrs .card.right { justify-content: flex-end; }
@@ -35,20 +36,20 @@
 			main .rankrs center + .card + .card:hover { background-color: rgba(252, 229, 220, 0.75); }
 			main .rankrs center + .card + .card + .card:hover { background-color: rgba(255, 236, 228, 0.75); }
 			main .rankrs .card .avatar {
-				width: 125px; height: 125px;
+				width: 125px; min-height: 125px; height: 100%;
 				display: flex; justify-content: center; align-items: center;
 				transition: var(--time-tst-xfast) ease-out;
 			}
 			main .rankrs .card.left .avatar { margin-right: 12.5px; }
 			main .rankrs .card.right .avatar { margin-left: 12.5px; }
+			main .rankrs .card.left:hover .avatar { margin-right: 17.5px; }
+			main .rankrs .card.right:hover .avatar { margin-left: 17.5px; }
 			main .rankrs .card .avatar .wrapper {
 				width: 100px; height: 100px;
 				display: flex; justify-content: center; align-items: center;
 				transition: var(--time-tst-xfast) ease-out;
 			}
 			main .rankrs .card:hover .avatar .wrapper { width: 125px; height: 125px; }
-			main .rankrs .card.left:hover .avatar { margin-right: 17.5px; }
-			main .rankrs .card.right:hover .avatar { margin-left: 17.5px; }
 			main .rankrs .card .avatar .wrapper img {
 				/* transform: scale(1.025); */
 				width: inherit; height: inherit;
@@ -70,7 +71,7 @@
 			main .rankrs .card .info .prize > span {
 				padding: 2.5px 12.5px;
 				background-color: var(--clr-psc-skin-high); border-radius: 75px;
-				font-size: 1.75em; font-weight: bold;
+				font-size: 1.75em; font-weight: bold; white-space: nowrap;
 			}
 			main .rankrs .card .info .name > span {
 				padding: 0px 5px;
@@ -81,9 +82,24 @@
 				font-size: 1.025em;
 			}
 			@media only screen and (max-width: 768px) {
-				main .rankrs .card { margin: 0px 10px 12.5px; }
-				main .rankrs .card:last-child { margin: 0px 10px 10px; }
+				main .rankrs h3 { margin: 12.5px 0px 10px; }
+				main .rankrs .card { margin: 0px 2.5px 12.5px; padding: 7.5px; }
+				main .rankrs .card:last-child { margin: 0px 2.5px 5px; }
+				main .rankrs .card .avatar {
+					width: 100px; min-height: 100px; height: 100%;
+					/* align-items: baseline; */
+				}
+				main .rankrs .card.left .avatar { margin-right: 5px; }
+				main .rankrs .card.right .avatar { margin-left: 5px; }
+				main .rankrs .card.left:hover .avatar { margin-right: 10px; }
+				main .rankrs .card.right:hover .avatar { margin-left: 10px; }
+				main .rankrs .card .avatar .wrapper { width: 80px; height: 80px; }
+				main .rankrs .card:hover .avatar .wrapper { width: 100px; height: 100px; }
+				main .rankrs .card .info.longnme { grid-template-rows: 1.5fr 1fr 1.5fr; }
+				main .rankrs .card .info.longnme.longsch { grid-template-rows: 1.5fr 2fr 1.5fr; }
 				main .rankrs .card .info.longsch { grid-template-rows: 2.5fr 2fr 3fr; }
+				main .rankrs .card .info .school > span { font-size: 0.975em; }
+				main .rankrs .card .info.longsch .school > span { font-size: 0.875em; }
 			}
 		</style>
 		<script type="text/javascript">
@@ -167,7 +183,7 @@
 								<img data-dark="false" src="/resource/images/participant-2864276859.jpg" alt="Idea">
 							</div>
 						</div>
-						<div class="info">
+						<div class="info longsch longnme">
 							<div class="prize"><span>2<sup>nd</sup> Runner Up</span></div>
 							<div class="name"><span>Taksapon Srikram</span></div>
 							<div class="school"><span>Bodindecha (Sing Singhaseni) School</span></div>
@@ -192,7 +208,7 @@
 								<img data-dark="false" src="/resource/images/participant-2908309946.jpg" alt="Indy">
 							</div>
 						</div>
-						<div class="info">
+						<div class="info longsch longnme">
 							<div class="prize"><span>1<sup>st</sup> Runner Up</span></div>
 							<div class="name"><span>Siriwatana Chantanakome</span></div>
 							<div class="school"><span>Bodindecha (Sing Singhaseni) School</span></div>

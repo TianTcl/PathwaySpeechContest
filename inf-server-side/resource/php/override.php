@@ -103,7 +103,7 @@
 				}
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "new", $toEdit, "fail", $remote, "InvalidQuery"); }
 			} else if ($cmd == "edit") {
-				$toEdit = strval(intval($tcl -> decode(str_replace("-", "", $attr['returnTo'])."5d3"))/138-138); unset($attr['returnTo']);
+				$toEdit = strval(intval($tcl -> decode(str_replace("-", "", $attr['returnTo'])."5d3", 1))/138-138); unset($attr['returnTo']);
 				$marks = ""; foreach ($attr as $key => $val) {
 					if ($key <> "comment") $marks .= "$key='".($db -> real_escape_string(trim($val)))."',";
 					else $marks .= "$key='".($db -> real_escape_string(htmlspecialchars(trim($val))))."',";
@@ -139,6 +139,44 @@
 						"name" => $readtop['name']
 					));
 				} echo '{"success": true, "info": '.json_encode($sbmts).'}';
+			}
+		} else if ($app == "cmtperm") {
+			if ($cmd == "list") {
+				$getwait = $db -> query("SELECT a.smid,b.namen,b.namef,b.namel FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE a.viewCmt='R' ORDER BY viewCmt_req ASC");
+				if ($getwait) {
+					if ($getwait -> num_rows) {
+						$waiter = array(); while ($readwait = $getwait -> fetch_assoc()) array_push($waiter, array(
+							"ID" => base_convert(intval($readwait['smid'])*138, 10, 36),
+							"nickname" => $readwait['namen'],
+							"longname" => $readwait['namef']." ".$readwait['namel']
+						)); echo '{"success": true, "info": '.json_encode($waiter).'}';
+					} else echo '{"success": true, "info": []}';
+				} else echo '{"success": false, "reason": [3, "Unable to load waiting list."]}';
+			} else if ($cmd == "load") {
+				$smID = $db -> real_escape_string(strval(intval(base_convert(trim($attr), 36, 10))/138));
+				$getperm = $db -> query("SELECT viewCmt FROM PathwaySCon_submission WHERE smid=$smID");
+				if ($getperm && $getperm -> num_rows == 1) {
+					$perm = ($getperm -> fetch_array(MYSQLI_ASSOC))['viewCmt'];
+					if ($perm <> "R") echo '{"success": true, "info": null}';
+					else {
+						$getcmt = $db -> query("SELECT substring(b.display, 4, LENGTH(b.display)) as judge,a.comment FROM PathwaySCon_score a INNER JOIN PathwaySCon_organizer b ON a.judge=b.user_id WHERE a.smid=$smID AND NOT a.comment=''");
+						if ($getcmt) {
+							if ($getcmt -> num_rows) {
+								$comments = array(); while ($readcmt = $getcmt -> fetch_assoc()) array_push($comments, array(
+									"commenter" => $readcmt['judge'],
+									"message" => $readcmt['comment']
+								)); echo '{"success": true, "info": '.json_encode($comments).'}';
+							} else echo '{"success": true, "info": []}';
+						} else echo '{"success": false, "reason": [3, "Unable to get comments."]}';
+					}
+				} else echo '{"success": false, "reason": [3, "Unable to get status."]}';
+			} else if ($cmd == "give") {
+				$user = $rmte ? trim($_REQUEST['user']) : ($_SESSION['evt2']['user'] ?? "");
+				if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
+				$smID = $db -> real_escape_string(strval(intval(base_convert(trim($attr), 36, 10))/138));
+				$success = $db -> query("UPDATE PathwaySCon_submission SET viewCmt='Y',viewCmt_ans=CURRENT_TIMESTAMP() WHERE smid=$smID");
+				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "comment", "allow", $smID, "pass", $remote); }
+				else { echo '{"success": false, "reason": [3, "Unable to update permission."]}'; slog($user, "PathwaySCon", "comment", "allow", $smID, "fail", $remote); }
 			}
 		}
 		$db -> close();

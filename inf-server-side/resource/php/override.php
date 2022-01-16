@@ -171,7 +171,7 @@
 					}
 				} else echo '{"success": false, "reason": [3, "Unable to get status."]}';
 			} else if ($cmd == "give") {
-				$user = $rmte ? trim($_REQUEST['user']) : ($_SESSION['evt2']['user'] ?? "");
+				$user = $rmte ? trim($_REQUEST['remote']) : ($_SESSION['evt2']['user'] ?? "");
 				if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
 				$smID = $db -> real_escape_string(strval(intval(base_convert(trim($attr), 36, 10))/138));
 				$success = $db -> query("UPDATE PathwaySCon_submission SET viewCmt='Y',viewCmt_ans=CURRENT_TIMESTAMP() WHERE smid=$smID");

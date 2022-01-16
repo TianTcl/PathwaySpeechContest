@@ -230,7 +230,7 @@
 								var slipFile = validate_file(true); if (!slipFile) {
 									if (pass) { focusfield("tax:slip"); pass = false; }
 									app.ui.notify(1, [2, "กรุณาเลือกไฟล์ภาพสลิปการโอนเงิน"]);
-								} else sv.info.slip = document.querySelector('.form .part-2 [name="tax:slip"]').files; if (pass) {
+								} else sv.info.slip = document.querySelector('.form .part-2 [name="tax:slip"]').files[0]; if (pass) {
 									var address = verify_addr();
 									if (address) sv.info.address = JSON.stringify(address);
 									else pass = false;
@@ -239,19 +239,9 @@
 								$(".form .part:not(.part-3)").attr("disabled", "");
 								var tmp_data = new FormData(), send_data = {app: "donate", cmd: "submit", attr: sv.info};
 								tmp_data.append("app", "donate"); tmp_data.append("cmd", "submit");
-								for (let key in sv.info) tmp_data.append("attr["+key+"]", sv.info[key]);
-								function send_it(send_data) { $.post(cv.APIurl, send_data, function(res, hsc) {
-									var dat = JSON.parse(res);
-									if (dat.success) {
-										$("main .form .fill").removeClass("cyan").addClass("blue");
-										toPage(3);
-										sv.tsignature = sv.info = sv.reference = undefined;
-									} else {
-										app.ui.notify(1, dat.reason);
-										setTimeout(function() { $(".form .part:not(.part-3)").removeAttr("disabled"); }, 1250);
-									}
-								}); } try { send_it(send_data); } catch(ex) { delete sv.info.slip; send_it({app: "donate", cmd: "submit", attr: sv.info}); }
-								/* var xhr = new XMLHttpRequest; xhr.open("POST", cv.APIurl, true); xhr.responseType = "text"; xhr.onload = function() {
+								for (let key in sv.info) {
+									tmp_data.append((key == "slip" ? key : "attr["+key+"]"), sv.info[key]);
+								} var xhr = new XMLHttpRequest; xhr.open("POST", cv.APIurl, true); xhr.onload = function() {
 									var dat = JSON.parse(this.responseText);
 									if (dat.success) {
 										$("main .form .fill").removeClass("cyan").addClass("blue");
@@ -261,18 +251,7 @@
 										app.ui.notify(1, dat.reason);
 										setTimeout(function() { $(".form .part:not(.part-3)").removeAttr("disabled"); }, 1250);
 									}
-								}; xhr.setRequestHeader("Content-Type", "multipart/form-data"); xhr.send(tmp_data); */
-								/* fetch(cv.APIurl, {method: "POST", body: tmp_data, headers: {"Content-Type": "multipart/form-data"}}).then(function(res) {
-									var dat = JSON.parse(res);
-									if (dat.success) {
-										$("main .form .fill").removeClass("cyan").addClass("blue");
-										toPage(3);
-										sv.tsignature = sv.info = sv.reference = undefined;
-									} else {
-										app.ui.notify(1, dat.reason);
-										setTimeout(function() { $(".form .part:not(.part-3)").removeAttr("disabled"); }, 1250);
-									}
-								}); */
+								}; xhr.send(tmp_data);
 							}
 						}
 					}
@@ -349,7 +328,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>Donate</h2>
-				<div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้ผู้พัฒนาระบบกำลังปรับปรุงระบบ กรุณาเข้ามาใหม่ภายหลัง<br>การกรอกฟอร์มบริจาคใดๆในช่วงที่ยังมีข้อความนี้จะไม่มีผล":"System developer is upgrading this page. Please come back later.<br>Sending the form below now doesn't counts."?><a data-role="button" class="cyan ripple-click" target="_blank" href="https://bod.in.th/!PSC-donate2" style="float: right;">&nbsp;<?=$_COOKIE['set_lang']=="th"?"ฟอร์มบริจาคชั่วคราว":"Temporary Form"?>&nbsp;</a></div>
+				<!--div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้ผู้พัฒนาระบบกำลังปรับปรุงระบบ กรุณาเข้ามาใหม่ภายหลัง<br>การกรอกฟอร์มบริจาคใดๆในช่วงที่ยังมีข้อความนี้จะไม่มีผล":"System developer is upgrading this page. Please come back later.<br>Sending the form below now doesn't counts."?><a data-role="button" class="cyan ripple-click" target="_blank" href="https://bod.in.th/!PSC-donate2" style="float: right;">&nbsp;<?=$_COOKIE['set_lang']=="th"?"ฟอร์มบริจาคชั่วคราว":"Temporary Form"?>&nbsp;</a></div-->
 				<!--details class="message gray">
 					<summary>ขั้นตอนวิธีการบริจาค</summary>
 					<p>___บราๆๆ___ ทำไม ยังไม่เขียน ช่วยแต่งหน่อยก็ดี</p>

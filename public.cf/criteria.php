@@ -10,6 +10,7 @@
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
 			main div.container { overflow-x: visible !important; }
+			main .date.message { transition: var(--time-tst-medium); }
 			main .crit {
 				background-color: var(--clr-psc-skin-shiny);
 				border-radius: 5px;
@@ -57,7 +58,7 @@
 				});
 			}
 			function changeTopic() {
-				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+				var pos = 14, topic = "World Health Day", speed = 50,
 					target = $("main span.evn");
 				function remove() {
 					if (pos > 0) {
@@ -69,7 +70,7 @@
 					if (pos < topic.length) {
 						target.html(target.html() + topic.charAt(pos++));
 						setTimeout(typein, speed);
-					}
+					} else $("main .date.message").toggleClass("blue yellow");
 				} remove();
 			}
 		</script>
@@ -83,7 +84,7 @@
 					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">New Year\'s Day</span>':'<span class="evn">New Year\'s Day</span> Topic.'?></li>
 					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
-				<div class="message blue"><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31 December<sup>st</sup> 2021"?></div>
+				<div class="message blue date"><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31 December<sup>st</sup> 2021"?></div>
 				<h2>Scoring Criteria</h2>
 				<div class="crit table"><table>
 					<thead><tr><th>Content</th><th>35 pts</th></tr></thead>

@@ -225,7 +225,7 @@
 						me.setAttribute("selected", "");
 					} var dir = $(me).attr("data-tree");
 					document.querySelector("div.group.s div.list").disabled = true;
-					$.post("/e/Pathway-Speech-Contest/resource/php/fetch?list=attend&change="+change+(sv.sq!=null?("&q="+encodeURIComponent(sv.sq)):""), {
+					$.post("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/fetch?list=attend&change="+change+(sv.sq!=null?("&q="+encodeURIComponent(sv.sq)):""), {
 						pathTree: dir,
 						page: sF.ctrl.page.current,
 						show: sF.ctrl.page.disp,
@@ -322,8 +322,6 @@
 				}
 			};
 		</script>
-		<script type="text/javascript" src="/resource/js/lib/w3.min.js"></script>
-		<script type="text/javascript" src="/resource/js/extend/fs-account.js"></script>
 	</head>
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>

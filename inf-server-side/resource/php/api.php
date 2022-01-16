@@ -2,8 +2,7 @@
 	session_start();
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
     header("Access-Control-Allow-Origin: https://pathwayspeechcontest.cf");
-	if (isset($_POST['app']) && isset($_POST['cmd'])) { $has_data = true; $app = $_POST['app']; $cmd = $_POST['cmd']; $attr = $_POST['attr']; }
-	else if (isset($_GET['app']) && isset($_GET['cmd'])) { $has_data = true; $app = $_GET['app']; $cmd = $_GET['cmd']; $attr = $_GET['attr']; }
+	if (isset($_REQUEST['app']) && isset($_REQUEST['cmd'])) { $has_data = true; $app = $_REQUEST['app']; $cmd = $_REQUEST['cmd']; $attr = $_REQUEST['attr']??""; }
 	else $has_data = false; if ($has_data) {
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
         require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
@@ -160,17 +159,18 @@
                 $address = $attr['address'] ?? 'NULL'; if ($address <> "NULL") $address = "'$address'";
                 // File mgmt
                 if (isset($_FILES['slip'])) {
-                    $target_dir = "../upload/slip/"; $imageFileType = strtolower(pathinfo(basename($_FILES['slip']["name"]), PATHINFO_EXTENSION));
-                    $etfn = "people".$attr['reference'].".$imageFileType"; $target_file = $target_dir.$etfn;
-                    $uploadOk = ($_FILES['slip']["size"] > 0 && $_FILES['slip']["size"] <= 3072000); // 3 MB
+                    $slipF = $_FILES['slip'];
+                    $target_dir = "../upload/slip/"; $imageFileType = strtolower(pathinfo(basename($slipF["name"]), PATHINFO_EXTENSION));
+                    $etfn = date("Y_m_d", time())."-".$attr['reference'].".$imageFileType"; $target_file = $target_dir.$etfn;
+                    $uploadOk = ($slipF["size"] > 0 && $slipF["size"] <= 3072000); // 3 MB
                     if (!in_array($imageFileType, array("png", "jpg", "jpeg", "gif", "heic"))) $uploadOk = false;
                     if ($uploadOk) {
                         if (file_exists($target_file)) unlink($target_file);
-                        if (move_uploaded_file($_FILES['slip']["tmp_name"], $target_file)) $slip = $imageFileType;
+                        if (move_uploaded_file($slipF["tmp_name"], $target_file)) $slipT = '"'.$imageFileType.'"';
                         else { slog($exor, "PathwaySCon", "donate", "new", $attr['contact'], "fail", $remote, "FileNoMove"); die('{"success": false, [3, "Unable to upload your photo. Please try again"]}'); }
                     } else { slog($exor, "PathwaySCon", "donate", "new", $attr['contact'], "fail", $remote, "notEligible"); die('{"success": false, [3, "Invalid photo property"]}'); }
-                } if (!isset($slip)) $slip = "NULL";
-                $success = $db -> query("INSERT INTO PathwaySCon_donation (contact,donor,amt,transac,refer,address,slip,ip,time) VALUES ('".$attr['contact']."','".$attr['sender']."','".$attr['amount']."',$transac,'".$attr['reference']."',$address,$slip,'$ip',$time)");
+                } if (!isset($slipT)) $slipT = "NULL";
+                $success = $db -> query("INSERT INTO PathwaySCon_donation (contact,donor,amt,transac,refer,address,slip,ip,time) VALUES ('".$attr['contact']."','".$attr['sender']."','".$attr['amount']."',$transac,'".$attr['reference']."',$address,$slipT,'$ip',$time)");
                 if ($success) {
                     $newid = $db -> insert_id;
                     echo '{"success": true}'; slog($exor, "PathwaySCon", "donate", "new", $newid, "pass", $remote);

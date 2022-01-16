@@ -27,7 +27,7 @@
 				setTimeout(changeTopic2, 1250);
 			});
 			function changeTopic() {
-				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+				var pos = 14, topic = "WORLD HEALTH DAY", speed = 50,
 					target = document.querySelector("main .topic");
 				function remove() {
 					if (pos > 0) {
@@ -45,7 +45,7 @@
 				} remove();
 			}
 			function changeTopic2() {
-				var pos = 14, topic = "World No-Tobacco Day", speed = 50,
+				var pos = 14, topic = "World Health Day", speed = 50,
 					target = $("main span.evn");
 				function remove() {
 					if (pos > 0) {
@@ -74,7 +74,7 @@
 					<p><font style="color: var(--clr-bs-red);">ฟรี! ค่าสมัคร</font></p>
 				</center>
 				<hr>
-				<p>ชื่อโครงการ โครงการประกวดสุนทรพจน์หัวข้อ “<span class="evn">New Year's Day</span>”</p>
+				<p>กิจกรรมประกวดสุนทรพจน์ในหัวข้อ “<span class="evn">New Year's Day</span>”</p>
 				<p>เวลาในการแข่งขัน นักเรียนควรใ้ช้เวลาในการพูดสุนทรพจน์ 2-3 นาที</p>
 				<hr>
 				<span>คุณสมบัติผู้เข้าแข่งขัน</span><ul>
@@ -87,6 +87,7 @@
 					<li>เพื่อนำเงินบริจาคทั้งหมดที่ได้รับจากการจัดการประกวดสุนทรพจน์ภาษาอังกฤษไปบริจาคแก่<a href="https://inf.bodin.ac.th/go?url=http%3A%2F%2Fdpf.or.th" target="_blank">มูลนิธิดวงประทีป</a>ใน<a href="https://inf.bodin.ac.th/go?url=http%3A%2F%2Fdpf.or.th%2Fautopagev4%2Fshow_page.php%3Ftopic_id%3D10%26auto_id%3D3" target="_blank">โครงการอนุบาลชุมชน</a>
 					<li>เพื่อส่งเสริมและสนับสนุนให้นักเรียนมีความกล้าแสดงออกทางความคิด และยังรวมถึงการใช้ความคิดสร้างสรรค์ในการพูดและสื่อสารเป็นภาษาอังกฤษ</li>
 					<li>เพื่อให้นักเรียนใช้เวลาว่างให้เกิดประโยชน์</li>
+					<li>เพื่อรณรงค์ให้ประชาชนเห็นถึงความสำคัญของสุขภาพ ทั้งสุขภาพกายและสุขภาพจิต</li>
 				</ul>
 				<hr>
 				<p>รูปแบบกิจกรรม</p>
@@ -94,7 +95,7 @@
 				<span>วิธีการส่งคลิปวิดีโอเพื่อแข่งขัน</span><ul>
 					<li>อัดคลิปวิดีโอครึ่งตัวโดยให้เห็นใบหน้าที่ชัดเจน</li>
 					<li>แนะนำตัวให้น่าจดจำไม่เกิน 30 วินาที</li>
-					<li>กล่าวสุนทรพจน์เป็นภาษาอังกฤษเกี่ยวกับความทรงจำในวันปีใหม่ประมาณ 2-3 นาที</li>
+					<li>กล่าวสุนทรพจน์เป็นภาษาอังกฤษประมาณ 2-3 นาที</li>
 				</ul>
 				<hr>
 				<!--ul><span>กรรมการตัดสิน</span>

@@ -178,6 +178,49 @@
 				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "comment", "allow", $smID, "pass", $remote); }
 				else { echo '{"success": false, "reason": [3, "Unable to update permission."]}'; slog($user, "PathwaySCon", "comment", "allow", $smID, "fail", $remote); }
 			}
+		} else if ($app == "donate") {
+			if ($cmd == "list") {
+				if ($attr == "date") {
+					$getmon = $db -> query("SELECT SUBSTRING(time, 1, 7) AS month,COUNT(1) AS trns FROM PathwaySCon_donation GROUP BY month ORDER BY month");
+					if ($getmon) {
+						if ($getmon -> num_rows) {
+							$months = array(); while ($readmon = $getmon -> fetch_assoc()) array_push($months, $readmon);
+							echo '{"success": true, "info": '.json_encode($months).'}';
+						} else echo '{"success": false, "reason": [2, "No transactions."]}';
+					} else echo '{"success": false, "reason": [3, "Unable to get list."]}';
+				} else if ($attr == "trns") {
+					if (isset($_REQUEST['month']) && !empty(trim($_REQUEST['month']))) {
+						$search = $db -> real_escape_string(trim($_REQUEST['month']));
+						$gettrns = $db -> query("SELECT refer AS no,donor AS name,amt AS amount,COALESCE(transac,time) AS trns,(CASE WHEN transac IS NULL THEN 0 WHEN transac LIKE '%' THEN 1 END) AS isReal,COALESCE(receive,'W') AS state FROM PathwaySCon_donation WHERE time LIKE '$search-%' ORDER BY trns");
+						if ($gettrns) {
+							$trns = array(); while ($readtrns = $gettrns -> fetch_assoc()) array_push($trns, $readtrns);
+							echo '{"success": true, "info": '.json_encode($trns).'}';
+						} else echo '{"success": false, "reason": [3, "Unable to fetch list."]}';
+					} else echo '{"success": false, "reason": [2, "No month selected."]}';
+				}
+			} else if ($cmd == "load") {
+				$refID = $db -> real_escape_string(trim($attr));
+				$getdata = $db -> query("SELECT dnid,amt,COALESCE(transac,time) AS trns,(CASE WHEN transac IS NULL THEN 0 WHEN transac LIKE '%' THEN 1 END) AS isReal,slip,COALESCE(receive,'W') AS state FROM PathwaySCon_donation WHERE refer=$refID");
+				if ($getdata) {
+					if ($getdata -> num_rows) {
+						$readdata = $getdata -> fetch_array(MYSQLI_ASSOC); $senddata = array(
+							"encID" => $tcl -> encode(base_convert(intval($readdata['dnid'])*138, 10, 36), 1),
+							"amount" => intval($readdata['amt']),
+							"time" => $readdata['trns'], "ttype" => boolval(intval($readdata['isReal'])),
+							"file" => $readdata['slip'],
+							"state" => $readdata['state']
+						); echo '{"success": true, "info": '.json_encode($senddata).'}';
+					} else echo '{"success": false, "reason": [2, "Transaction not found."]}';
+				} else echo '{"success": false, "reason": [3, "Unable to get information."]}';
+			} else if ($cmd == "set") {
+				$user = $rmte ? trim($_REQUEST['remote']) : ($_SESSION['evt2']['user'] ?? "");
+				if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
+				$dnID = $db -> real_escape_string(intval(base_convert($tcl -> decode(trim($attr[0]), 1), 36, 10))/138);
+				$state = $db -> real_escape_string(trim($attr[1])); $status = ($state == "W") ? "NULL" : "'$state'";
+				$success = $db -> query("UPDATE PathwaySCon_donation SET receive=$status,receive_time=CURRENT_TIMESTAMP() WHERE dnid=$dnID");
+				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "donate", "set", $dnID."→".$state, "pass", $remote); }
+				else { echo '{"success": false}'; slog($user, "PathwaySCon", "donate", "set", $dnID."→".$state, "fail", $remote, "InvalidQuery"); }
+			}
 		}
 		$db -> close();
 		# $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13))); // 5d3

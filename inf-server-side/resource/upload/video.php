@@ -69,7 +69,7 @@
 				}, 250); loaderi.show(); tprevent.attr("style", "cursor: wait !important;"); control.css("pointer-events", "none");
 				var vdo = document.querySelector(".player div.full.video div.view video"),
 					realSource = "/e/Pathway-Speech-Contest/resource/upload/sv-<?=$_SESSION['event']['round']?>/"+ID+".mp4";
-				if (isSafari) fetchVideo(realSource).then(function(blobObj) {
+				if (!isSafari) fetchVideo(realSource).then(function(blobObj) {
 					var viewLink = URL.createObjectURL(blobObj);
 					vdo.src = viewLink; // gen_blob();
 				}); else vdo.src = realSource;

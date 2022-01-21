@@ -161,7 +161,18 @@
 				setTimeout(function() {
 					Grade(document.querySelectorAll("/* div.app-logo div.card a div.img-container */ div.imgfill"));
 				}, (navigator.userAgent.indexOf("Mac OS")>-1?500:50));
-				// app.ui.notify(1, [1, JSON.stringify(navigator.userAgentData)]);
+				// Facebook chat
+				var chatbox = document.getElementById('fb-customer-chat');
+				chatbox.setAttribute("page_id", "111070124738792");
+				chatbox.setAttribute("attribution", "biz_inbox");
+				window.fbAsyncInit = function() { FB.init({ xfbml : true, version : 'v12.0' }); };
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
 			});
 		</script>
 		<script type="text/javascript" src="/resource/js/lib/grade.min.js"></script>
@@ -203,7 +214,7 @@
 				<p>Inbox are open for messaging.</p>
 				<div class="msn-chat">
 					<div class="head">
-						<span class="tap suggest-click"></span>
+						<span class="tap -suggest-click"></span>
 						<a href="/go?url=https%3A%2F%2Fm.me%2FPathway.speechcontest" target="_blank">
 							<div class="imgfill"><img src="/resource/images/nav-share-messenger.png" data-dark="false"></div>
 						</a>
@@ -216,7 +227,7 @@
 				<p>Feel free to chat together with us.</p>
 				<div class="msn-chat">
 					<div class="head">
-						<span class="tap suggest-click"></span>
+						<span class="tap -suggest-click"></span>
 						<a href="/go?url=https%3A%2F%2Fline.me%2Fti%2Fg2%2FiJPG9CO3YDuIWnvEZ-bQhEGMytEegoW-I3mJtQ" target="_blank"><!-- instagr.am%2Fdirect%2Ft%2F340282366841710300949128190289155194062 -->
 							<div class="imgfill"><img src="/resource/images/nav-share-line.png" data-dark="false"></div>
 						</a>
@@ -228,6 +239,7 @@
 				</div>
 			</div>
 		</main>
+		<div id="fb-root"></div><div id="fb-customer-chat" class="fb-customerchat"></div>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>
 		<footer>
 			<?php require($dirPWroot."resource/hpe/footer.php"); ?>

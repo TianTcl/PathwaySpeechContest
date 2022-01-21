@@ -65,7 +65,12 @@
 				$('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').on("input change", validate_field);
 				validate_field(); // app.io.confirm("leave");
 				if (location.hash == "#start") setTimeout(reg.start, 1250);
+				setTimeout(changeSchd, 1250);
 			});
+			function changeSchd() {
+				$("main .schd-1").toggle("slide", "linear", "slow");
+				$("main .schd-2").toggle("blind", "linear", "slow");
+			}
 			function validate_field() {
 				document.querySelectorAll('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').forEach((eio) => {
 					var ei = $(eio);
@@ -181,9 +186,13 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเข้าร่วมประกวด":"Register to Event"?></h2>
-				<div class="message blue">
+				<div class="message blue schd-1">
 					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 1)":"Schedule (Season 1)"?></h3>
 					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 1 ธันวาคม 2564<br>ปิดรับสมัครวันที่ 31 ธันวาคม 2564<br>ประกาศผลวันที่ 15 มกราคม 2565":"Open for registration & submit: 1<sup>st</sup> December 2021<br>Close for registration & submit: 31<sup>st</sup> December 2021<br>Rank & Score announcement: 15<sup>th</sup> January 2022"?> <font style="color: var(--clr-bs-red);">•</font></p>
+				</div>
+				<div class="message blue schd-2" style="display: none;">
+					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 2)":"Schedule (Season 2)"?></h3>
+					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style=\"color: var(--clr-bs-red);\">•</font><br>ปิดรับสมัครวันที่ 31 มีนาคม 2565<br>ประกาศผลวันที่ 20 เมษายน 2565":"Open for registration & submit: 12<sup>th</sup> March 2022<br>Close for registration & submit: 31<sup>st</sup> March 2022<br>Rank & Score announcement: 20<sup>th</sup> April 2022"?></p>
 				</div>
 				<div class="option">
 					<p><?=$_COOKIE['set_lang']=="th"?'หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย':'If you are already registered. Then you can <a href="login">sign in</a> to submut your speech.<br>If you are not registered. Then you can start filling the <a href="javascript:reg.start()">registration form</a>.'?></p>

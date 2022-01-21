@@ -106,6 +106,16 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				donate.init();
+				if (isSafari) {
+					$("main span.ripple-effect").remove();
+					/* try {
+						var actionCourse = document.createElement("script"), thisPage = location.href;
+						actionCourse.onload = function() { top.location.assign("googlechromme://navigate?url=" + encodeURIComponent(thisPage)); }
+						actionCourse.onerror = function() { location = thisPage; }
+						document.head.appendChild(actionCourse); openInBrowser();
+						top.location.assign("googlechromme://navigate?url=" + encodeURIComponent(thisPage));
+					} catch (ex) {} */ $("main .container > .error").toggle("clip");
+				}
 			});
 			function donation() {
 				const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api" };
@@ -289,12 +299,14 @@
 						let filename = f.name.toLowerCase().split(".");
 						if ((["png", "jpg", "jpeg", "heic", "gif"].includes(filename.at(-1))) && (f.size > 0 && f.size < 3072000)) { // 3 MB
 							if (!recheck) {
-								fname.value = f.name; try { sv.img_link = URL.createObjectURL(f);
-								preview.css("background-image", 'url("'+sv.img_link+'")'); } catch(ex) {}
+								fname.value = f.name; try { if (!isSafari) { sv.img_link = URL.createObjectURL(f);
+								preview.css("background-image", 'url("'+sv.img_link+'")'); } } catch(ex) {}
 							} return f;
 						} else app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาตรวจสอบว่าภาพของคุณเป็นประเภท PNG/JPG/GIF/HEIF และมีขนาดไม่เกิน 3 MB":"Please check if your photo is one of the following format PNG/JPG/GIF/HEIF and its size is less than or equal to 3 MB."?>"]);
-					} fname.value = ""; preview.removeAttr("style");
-					return false;
+					} else {
+						fname.value = "<?=$_COOKIE['set_lang']=="th"?"[ยังไม่มี] ---กรุณาเลือกภาพ---":"[BLANK] ---Please choose an image---"?>"; preview.removeAttr("style");
+						app.ui.notify(1, [1, "No file selected."]);
+					} return false;
 				};
 				var add_addr = function(addr) {
 					let fv = document.forms[1];
@@ -334,6 +346,7 @@
 					<p>___บราๆๆ___ ทำไม ยังไม่เขียน ช่วยแต่งหน่อยก็ดี</p>
 				</details-->
 				<p><?=$_COOKIE['set_lang']=="th"?"เงินบริจาคทั้งหมดจะถูกนำไปบริจาคแก่มูลนิธิดวงประทีปในโครงการอนุบาลชุมชน":"All donations will be donated to Duangprathip foundation in Society Nursery program."?></p>
+				<center class="error message yellow" style="display: none;"><?=$_COOKIE['set_lang']=="th"?"กรุณาใช้ browser อื่นในการกรอกฟอร์ม<br>หรือกรอกใน":"Please use other internet browser to fill in this form.<br>Or fill in "?><a href="https://bod.in.th/!PSC-donate2" target="_blank"><?=$_COOKIE['set_lang']=="th"?"กูเกิ้ลฟอร์ม":"Google Form"?></a>. (<?=$_COOKIE['set_lang']=="th"?"ไม่สามารถขอใบเสร็จได้":"Cannot request receipt"?>)</center>
 				<div class="form">
 					<section class="fill message cyan" style="height: 0px;">
 						<div style="--page:1;">

@@ -3,6 +3,8 @@
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "การส่งผลงาน";
 	$header_desc = "ดูผลคะแนน";
+
+	if (!isset($_SESSION['evt'])) header("Location: ../login");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

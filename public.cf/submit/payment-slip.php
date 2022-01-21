@@ -61,7 +61,7 @@
 				$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/submit/file?status&remote=<?php echo $_SESSION['evt']['encid']; ?>", function(res, hsc) {
 					var dat = JSON.parse(res);
 					if (dat.success) {
-						$(dat.info.s?'<div class="message green">'.($_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have sent your slip.").'</div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม":"Re-submitting a new one will replace the previous."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven't send any slip yet."?></div>').insertBefore("main form");
+						$(dat.info.s?'<div class="message green"><?=$_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have sent your slip."?></div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม":"Re-submitting a new one will replace the previous."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven't send any slip yet."?></div>').insertBefore("main form");
 						if (document.querySelector("div.message.green") != null) addDL();
 					} else app.ui.notify(1, dat.reason);
 				});

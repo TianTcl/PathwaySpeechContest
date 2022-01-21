@@ -255,6 +255,19 @@
                         else if ($permission == "Y") echo '{"success": false, "reason": [2, "'.($_COOKIE['set_lang']=="th"?"เกิดขอผิดผลาด.<br>คุณมีสิทธิ์ดูความคิดเห็นแล้ว ไม่สามารถยื่นคำขอซ้ำได้.":"There's an error.<br>You already have a permission to view comments. You cannot request view permission again.").'"]}';
                     } else echo '{"success": false, "reason": [3, "Unable to get permission."]}';
                 }
+            } else if ($cmd == "certify") {
+                if ($attr == "list") {
+                    $getrank = $db -> query("SELECT rank FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
+                    if ($getrank) {
+                        if ($getrank -> num_rows == 1) {
+                            $readrank = ($getrank -> fetch_array(MYSQLI_ASSOC))['rank'];
+                            if (empty($readrank)) $certamt = 0;
+                            else if ($readrank == "5N") $certamt = 1;
+                            else $certamt = 2;
+                            echo '{"success": true, "info": '.$certamt.'}';
+                        } else echo '{"success": false, "reason": [2, "Your haven\'t submit any speech this round."]}';
+                    } else echo '{"success": false, "reason": [3, "Unable to get ranks."]}';
+                }
             }
         }
 		$db -> close();

@@ -3,6 +3,9 @@
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "Scoring Criteria";
 	$header_desc = "เกณฑ์การพิจรณาคะแนน";
+
+	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31<sup>st</sup> December 2021";
+	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 12 - 31 มีนาคม 2565":"Open for registration at 12<sup>th</sup> - 31<sup>st</sup> March 2022";
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,7 +87,7 @@
 					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">New Year\'s Day</span>':'<span class="evn">New Year\'s Day</span> Topic.'?></li>
 					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
-				<div class="message blue date"><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31 December<sup>st</sup> 2021"?></div>
+				<div class="message blue date"><?=$schedule?></div>
 				<h2>Scoring Criteria</h2>
 				<div class="crit table"><table>
 					<thead><tr><th>Content</th><th>35 pts</th></tr></thead>

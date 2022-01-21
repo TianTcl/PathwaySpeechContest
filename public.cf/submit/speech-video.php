@@ -58,7 +58,7 @@
 				$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/submit/file?status&remote=<?php echo $_SESSION['evt']['encid']; ?>", function(res, hsc) {
 					var dat = JSON.parse(res);
 					if (dat.success) {
-						$(dat.info.v?'<div class="message green">คุณได้ส่งไฟล์แล้ว</div><div class="message yellow">การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม และทางผู้ดำเนินกิจกรรมจะประเมินจากไฟล์ล่าสุดเท่านั้น</div>':'<div class="message gray">คุณยังไม่เคยส่งไฟล์</div>').insertBefore("main form");
+						$(dat.info.v?'<div class="message green"><?=$_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have submitted your video."?></div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม และทางผู้ดำเนินกิจกรรมจะประเมินจากไฟล์ล่าสุดเท่านั้น":"Re-submitting a new one will replace the previous. Judges will grade from your lastest video."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven\'t send any video yet."?></div>').insertBefore("main form");
 					} else app.ui.notify(1, dat.reason);
 				});
 

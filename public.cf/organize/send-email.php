@@ -7,6 +7,7 @@
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("lead"); if ($permitted) {
+		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = intval($_SESSION['event']['round']);
 		
 	}
 ?>
@@ -56,8 +57,9 @@
 					"remind-8": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 8 วัน":"8 Days left"?>",
 					"remind-5": "<?=$_COOKIE['set_lang']=="th"?"เตือนเหลือเวลา 5 วัน":"5 Days left"?>",
 					"remind-0": "<?=$_COOKIE['set_lang']=="th"?"เตือนเวลาครั้งสุดท้าย":"Last call (warn)"?>",
-					"view-cert": "<?=$_COOKIE['set_lang']=="th"?"ประกาศผลทางเว็บไซต์":"Announce rank via website"?>"
-				}, hash: 138
+					"announce": "<?=$_COOKIE['set_lang']=="th"?"ประกาศผลทางเว็บไซต์":"Announce rank via website"?>"
+				}, hash: 138,
+				round: parseInt("<?=$round?>")
 			};
 			var sv = { all: false, req: [0, null] };
 			$(document).ready(function() {
@@ -71,12 +73,13 @@
 						var tbl = $(".form-esc .table tbody").html(""),
 							msgno = Object.keys(cv.msgs).length;
 						dat.info.forEach((ptp) => {
-							let status = parseInt(ptp.mail).toString(2); status = String(status).padStart(msgno, "0").split("").reverse().map(s => '<i class="material-icons">'+(parseInt(s)?'done':'clear')+'</i>').join("");
+							let status = roundStatus(ptp.mail).toString(2); status = String(status).padStart(msgno, "0").split("").reverse().map(s => '<i class="material-icons">'+(parseInt(s)?'done':'clear')+'</i>').join("");
 							tbl.append('<tr><td><input type="checkbox" name="ptp" value="'+(ptp.ptpid*cv.hash).toString(36)+'"></td><td>'+ptp.namen+' ('+ptp.namef+' '+ptp.namel+')</td><td>'+cv.num2grade[ptp.grade]+'</td><td>'+status+'</td></tr>');
 						}); $('.form-esc [name="ptp"]').on("change", function() { document.querySelector('.form-esc button[onClick="email()"]').disabled = false; });
 					} else app.ui.notify(1, dat.reason);
 				});
 			}
+			const roundStatus = mailed => parseInt(mailed) >> (5 * (cv.round - 1));
 			function ro(col) {
 				w3.sortHTML("div.table table tbody", "tr", "td:nth-child("+col.toString()+")");
 			}
@@ -101,6 +104,7 @@
 							selection.invert();
 							document.querySelector('.form-esc button[onClick="email()"]').disabled = false;
 						} $(".form-esc .form").removeAttr("disabled");
+						app.ui.notify(1, [0, "Message has been sent to all recipients within selection."]);
 					}
 				});
 			};

@@ -94,6 +94,7 @@
 			}
 			const statusTxt = state => (state ? '<font style="color: var(--clr-bs-green)"><?=$_COOKIE['set_lang']=="th"?"ส่งแล้ว":"Sent"?></font>' : '<font style="color: var(--clr-bs-red)"><?=$_COOKIE['set_lang']=="th"?"ไม่มีไฟล์":"Empty"?></font>');
 			const statusTxt2 = state => (state ? '<font style="color: var(--clr-bs-green)"><?=$_COOKIE['set_lang']=="th"?"มีผลคะแนน":"Graded"?></font>' : '<font style="color: var(--clr-bs-red)"><?=$_COOKIE['set_lang']=="th"?"ไม่มีผลคะแนน":"Not graded"?></font>');
+			const statusTxt3 = state => (state ? '<font style="color: var(--clr-bs-green)"><?=$_COOKIE['set_lang']=="th"?"ได้รับ":"Issued"?></font>' : '<font style="color: var(--clr-bs-red)"><?=$_COOKIE['set_lang']=="th"?"ไม่ได้รับ":"No certificate"?></font>');
 			function get_submission_status() {
 				ttl = 30;
 				if (is_active) {
@@ -104,6 +105,7 @@
 						if (dat.success) {
 							["v", "s"].forEach((file) => { document.querySelector('main .table td[name="'+file+'"]').innerHTML = statusTxt(dat.info[file]); });
 							document.querySelector('main .table td[name="g"]').innerHTML = statusTxt2(dat.info["g"]);
+							document.querySelector('main .table td[name="c"]').innerHTML = statusTxt3(dat.info["c"]);
 						} else app.ui.notify(1, dat.reason);
 					});
 				}
@@ -132,6 +134,10 @@
 					<tr>
 						<td><a href="view-score" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ผลการพิจรณาคะแนน":"My Score"?>">My Score</a></td>
 						<td name="g"></td>
+					</tr>
+					<tr>
+						<td><a href="my-certificate" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ประกาศณียบัตรของฉัน":"My Certificate"?>">My Certificate</a></td>
+						<td name="c"></td>
 					</tr>
 				</tbody></table></div>
 				<div class="sl-frame"><p class="txtoe"></p><div onClick="cfv()" class="ripple-click"><i class="material-icons">close</i></div><iframe></iframe></div>

@@ -7,6 +7,7 @@
 	else $has_data = false; if ($has_data) {
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
 		require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
+		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = intval($_SESSION['event']['round']);
         $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
 		if ($app == "mail") {
             if ($cmd == "send") {
@@ -14,27 +15,34 @@
 				$mail = array("recipients" => array(), "settings" => array()); $mail['setting'] = array(
 					array("var" => "account.name", "value" => "Pathway Speech Contest"),
 					array("var" => "support_mail", "value" => "devtech@PathwaySpeechContest.cf")
-				); $mail['recipient'] = explode(",", $attr['rcp']); switch ($attr['mode']) {
+				); $mail['recipient'] = explode(",", $attr['rcp']); switch ($round) {
+					case 1: $remindTemplateID = "ynrw7gy50k42k8e3"; $submitLastTime = "2021-12-31 23:59:59"; break;
+					case 2: $remindTemplateID = "neqvygmqyw40p7w2"; $submitLastTime = "2022-03-31 23:59:59"; break;
+					default: $remindTemplateID = ""; break;
+				} $submitLastTime = strval(floor((strtotime($submitLastTime) - time()) / 86400)); switch ($attr['mode']) {
 					case "remind-12":
-						$mail['templateID'] = "ynrw7gy50k42k8e3"; $mail['pos'] = 0;
+						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 0;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = strval(floor((strtotime("2021-12-31 23:59:59") - time()) / 86400));
+						$mail['day'] = $submitLastTime;
 						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
 					break; case "remind-8":
-						$mail['templateID'] = "ynrw7gy50k42k8e3"; $mail['pos'] = 1;
+						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 1;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = strval(floor((strtotime("2021-12-31 23:59:59") - time()) / 86400));
+						$mail['day'] = $submitLastTime;
 						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
 					break; case "remind-5":
-						$mail['templateID'] = "ynrw7gy50k42k8e3"; $mail['pos'] = 2;
+						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 2;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = strval(floor((strtotime("2021-12-31 23:59:59") - time()) / 86400));
+						$mail['day'] = $submitLastTime;
 						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
 					break; case "remind-0":
-						$mail['templateID'] = "ynrw7gy50k42k8e3"; $mail['pos'] = 3;
+						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 3;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = strval(floor((strtotime("2021-12-31 23:59:59") - time()) / 86400));
+						$mail['day'] = $submitLastTime;
 						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
+					break; case "announce":
+						$mail['templateID'] = "o65qngke1wgwr12z"; $mail['pos'] = (5 * ($round-1)) + 4;
+						$mail['topic'] = "Announcement";
 					break; default: die('{"success": false, "reason", [2, "Invalid message selected"]}'); break;
 				} $mail['pos'] = pow(2, $mail['pos']);
 				$list = $db -> query("SELECT ptpid,email,namef,namel,mail FROM PathwaySCon_attendees WHERE ptpid IN('".implode("','", $mail['recipient'])."') AND NOT mail&".$mail['pos']);

@@ -105,7 +105,7 @@
 							<output name="vdo-mark">-</output>
 						</div>
 						<div class="card">
-							<h4><?=$_COOKIE['set_lang']=="th"?"คลิปที่ยังไม่ตรวจ":"Unmarked submissions"?></h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"คลิปที่ยังไม่ตรวจ":"Unmarked submissions"?> <a href="mark-grade"><i class="material-icons">arrow_forward</i></a></h4>
 							<output name="vdo-clip">-</output>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 					</div>
 					<div class="grpdiv">
 						<div class="card">
-							<h4><?=$_COOKIE['set_lang']=="th"?"จำนวนรายการบริจาค":"Donation"?> <a disabled href="donation"><i class="material-icons">arrow_forward</i></a></h4>
+							<h4><?=$_COOKIE['set_lang']=="th"?"จำนวนรายการบริจาค":"Donation"?> <a href="donation"><i class="material-icons">arrow_forward</i></a></h4>
 							<output name="transac">-</output>
 						</div>
 					</div>

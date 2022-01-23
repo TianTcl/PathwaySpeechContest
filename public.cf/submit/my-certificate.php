@@ -33,7 +33,13 @@
 				margin: 10px 0px 0px;
 				justify-content: flex-end;
 			}
-			main div.box .card .form > div.group button { height: 35px; line-height: 35px; }
+			main div.box .card .form > div.group button {
+				padding: 2.5px 5px;
+				height: 35px; line-height: 35px;
+			}
+			@media only screen and (max-width: 768px) {
+				main div.box .card label { font-size: 2.5em; }
+			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -46,13 +52,16 @@
 						var display = document.querySelector("main div.box");
 						if (!dat.info) display.innerHTML = '<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้กรรมการยังพิจรณาคะแนนไม่เสร็จ จึงยังไม่มีการออกประกาศนียบัตร<br>กรุณาเข้ามาใหม่ภายหลัง":"The judgement isn\\'t finish. Please come back later."?></div>';
 						else {
-							display.innerHTML = '<div class="card"><label><?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตรการเข้าร่วม":"Certificate of Participation"?></label><div class="form"><div class="group" data-type="p"><button class="blue" data-title="View" onClick="view(this)"><i class="material-icons">visibility</i></button><button class="green" data-title="Download" onClick="download(this)"><i class="material-icons">download</i></button></div></div></div>';
-							if (dat.info >= 2) display.innerHTML += '<div class="card"><label><?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตระดับรางวัล":"Certificate of Completion"?></label><div class="form"><div class="group" data-type="a"><button class="blue" data-title="View" onClick="view(this)"><i class="material-icons">visibility</i></button><button class="green" data-title="Download" onClick="download(this)"><i class="material-icons">download</i></button></div></div></div>';
+							display.innerHTML = certCard("<?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตรการเข้าร่วม":"Certificate of Participation"?>", {type: "p"});
+							if (dat.info >= 2) display.innerHTML += certCard("<?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตระดับรางวัล":"Certificate of Completion"?>", {type: "a"});
 						}
 					} else {
 						app.ui.notify(1, dat.reason);
 						app.ui.notify(1, [1, "Retrying in 20 seconds..."]);
 						setTimeout(loadCertList, 20000);
+					}
+					function certCard(name, data) {
+						return '<div class="card"><label>'+name+'</label><div class="form"><div class="group" data-type="'+data.type+'"><button class="blue" data-title="View" onClick="view(this)"><i class="material-icons">visibility</i></button><button class="gray" data-title="Print" onClick="certPrint(this)"><i class="material-icons">print</i></button><button class="green" data-title="Download" onClick="download(this)"><i class="material-icons">download</i></button></div></div></div>';
 					}
 				});
 			}
@@ -60,11 +69,16 @@
 				var type = me.parentNode.getAttribute('data-type');
 				const tab = window.open("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/file/certificate?remote=<?=$_SESSION['evt']['encid']?>&type="+type+"&export=view", "_blank", "width=840,height=680");
 			}
+			function certPrint(me) {
+				var type = me.parentNode.getAttribute('data-type');
+				printJS("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/file/certificate?type="+type+"&export=print");
+			}
 			function download(me) {
 				var type = me.parentNode.getAttribute('data-type');
 				const tab = window.open("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/file/certificate?remote=<?=$_SESSION['evt']['encid']?>&type="+type+"&export=download");
 			}
 		</script>
+		<script type="text/javascript" src="/resource/js/lib/print.min.js"></script>
 	</head>
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>

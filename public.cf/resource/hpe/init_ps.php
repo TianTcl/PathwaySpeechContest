@@ -16,5 +16,5 @@
         return ($perm == null || in_array($perm, $_SESSION['evt2']["role"]) || ($mod && in_array("*", $_SESSION['evt2']["role"])));
     }
 
-    $forceExternalBrowser = preg_match('/^\/(criteria|donate|login|register|workshop\/|submit\/(view-score)?|organize\/(attendees|donation|giveaway|grant-permission|mark-grade|new-password|rate-rank|send-email)?)$/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $forceExternalBrowser = preg_match('/^\/(criteria|donate(\/\d{8,10}\/edit)?|login|register|workshop\/|submit\/(view-score)?|organize\/(attendees|donation|giveaway|grant-permission|mark-grade|new-password|rate-rank|send-email)?)$/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 ?>

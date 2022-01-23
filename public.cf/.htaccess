@@ -13,14 +13,8 @@ LimitRequestBody 1024000
 
 ## Block bots
 RewriteBase /
-RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
-RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
-RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
-RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
-RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
-RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
-RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
-RewriteCond %{HTTP_USER_AGENT} ^Zeus
+RewriteCond %{HTTP_USER_AGENT} ^(Anarchie|ASPSeek|attach|autoemailspider|Xaldon\ WebSpider|Xenu) [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus(.*Webster)?
 RewriteRule ^.* - [F,L]
 
 ## Handling
@@ -33,6 +27,7 @@ RewriteRule ^.* - [F,L]
 #RewriteRule ^(contact|criteria|login|logout|register|submit\/)$ /?url=$1 [L,QSA]
 #RewriteRule ^(organize\/(|home|statics))$ /?url=$1 [L,QSA]
 RewriteRule ^recording/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$ /workshop/video_playback?signature=$1 [L,QSA]
+RewriteRule ^donate/(\d{8,10})/edit$ /form/donate-complete?refNo=$1 [L,QSA]
 
 
 ## Redirect some link

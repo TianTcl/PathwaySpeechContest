@@ -75,7 +75,7 @@
                     if (!isset($error)) {
                         $certifile -> Output("$exportname.pdf", ($download ? "D": "I"));
                         /* --- PDF generation --- (END) */
-                        slog($user, "PathwaySCon", "certificate", ($download ? "save": "view"), $certType, "pass", $remote);
+                        slog($user, "PathwaySCon", "certificate", ($download ? "save": ($export == "print" ? "print" : "view")), $certType, "pass", $remote);
                     }
                 }
             } else $error = "900";

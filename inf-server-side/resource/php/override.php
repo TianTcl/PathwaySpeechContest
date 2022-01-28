@@ -89,7 +89,7 @@
 				} echo '{"success": true, "info": '.json_encode($sbmts).'}';
 			} else if ($cmd == "load") {
 				$smid = strval(intval(base_convert(trim($attr), 36, 10)) / 138);
-				$getsbmt = $db -> query("SELECT scid,p11,p12,p13,p21,p22,p23,p24,p31,p32,p40,mark,comment FROM PathwaySCon_score WHERE smid=$smid AND judge=$user");
+				$getsbmt = $db -> query("SELECT scid,p11,p12,p13,p21,p22,p23,p24,p31,p32,p41,mark,comment FROM PathwaySCon_score WHERE smid=$smid AND judge=$user");
 				if ($getsbmt) {
 					if ($getsbmt -> num_rows == 1) {
 						$mark = $getsbmt -> fetch_array(MYSQLI_ASSOC); $export = array();

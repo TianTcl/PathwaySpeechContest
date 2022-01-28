@@ -6,6 +6,7 @@
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = (has_perm("grader") || has_perm("judge", false)); if ($permitted) {
+		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/core/config.php");
 		
 	}
 ?>
@@ -178,13 +179,13 @@
 					} else app.ui.notify(1, [3, "Re-initializing not allowed"]);
 				};
 				var previewMark = function() {
-					var mark = [0, 0, 0, 0];
+					var mark = [0, 0, 0, 0, 0];
 					document.querySelectorAll('main .app .slot.grade input[name^="p:"]').forEach(em => {
 						let score = em.value, sg = em.name.charAt(2);
 						if (score != "") {
 							score = parseInt(score);
 							mark[0] += score;
-							if (sg != "4") mark[sg] += score;
+							mark[sg] += score;
 						}
 					}); document.querySelectorAll('main .app .slot.grade output[name^="s:"]').forEach(em =>
 						em.value = mark[parseInt(em.name.charAt(2))]
@@ -254,7 +255,7 @@
 					} return { pass: pass, info: info };
 				};
 				var viewScore = function() {
-					app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"คะแนนจากกรรมการทั้งหมด":"Score from all judges"?>", allowclose: true, html: '<div class="scoreboard"><center class="load"><img src="/resource/images/widget-load_spinner.gif" draggable="false" height="50"><br></center></div>'});
+					app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"คะแนนจากกรรมการทั้งหมด":"Score from all judges"?>", allowclose: true, html: '<div class="scoreboard"><center class="load"><img src="/resource/images/widget-load_spinner.gif" draggable="false" height="50"></center></div>'});
 					$(".lightbox .head label").on("click", function() {
 						history.replaceState(null, null, location.pathname+location.hash.replace(/&view=score$/, ""));
 					});
@@ -319,68 +320,75 @@
 								<thead><tr>
 									<th>Content</th>
 									<th><output type="number" name="s:1"></output></th>
-									<th>35 pts</th>
+									<th><?=$_SESSION['event']['criteria'][10]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Accuracy and Consistency</td>
-										<td><input type="number" name="p:11" required min="0" max="15" step="1"></td>
-										<td>15 pts</td>
+										<td><input type="number" name="p:11" required min="0" max="<?=$_SESSION['event']['criteria'][11]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][11]?> pts</td>
 									</tr><tr>
 										<td>Form & Organization Of Speech</td>
-										<td><input type="number" name="p:12" required min="0" max="10" step="1"></td>
-										<td>10 pts</td>
+										<td><input type="number" name="p:12" required min="0" max="<?=$_SESSION['event']['criteria'][12]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][12]?> pts</td>
 									</tr><tr>
 										<td>Creativity</td>
-										<td><input type="number" name="p:13" required min="0" max="10" step="1"></td>
-										<td>10 pts</td>
+										<td><input type="number" name="p:13" required min="0" max="<?=$_SESSION['event']['criteria'][13]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][13]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
 									<th>Language Competence & Fluency</th>
 									<th><output type="number" name="s:2"></output></th>
-									<th>45 pts</th>
+									<th><?=$_SESSION['event']['criteria'][20]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Vocabulary</td>
-										<td><input type="number" name="p:21" required min="0" max="5" step="1"></td>
-										<td>5 pts</td>
+										<td><input type="number" name="p:21" required min="0" max="<?=$_SESSION['event']['criteria'][21]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][21]?> pts</td>
 									</tr><tr>
 										<td>Structure & Connectors</td>
-										<td><input type="number" name="p:22" required min="0" max="10" step="1"></td>
-										<td>10 pts</td>
+										<td><input type="number" name="p:22" required min="0" max="<?=$_SESSION['event']['criteria'][22]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][22]?> pts</td>
 									</tr><tr>
 										<td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
-										<td><input type="number" name="p:23" required min="0" max="20" step="1"></td>
-										<td>20 pts</td>
+										<td><input type="number" name="p:23" required min="0" max="<?=$_SESSION['event']['criteria'][23]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][23]?> pts</td>
 									</tr><tr>
 										<td>Tone</td>
-										<td><input type="number" name="p:24" required min="0" max="10" step="1"></td>
-										<td>10 pts</td>
+										<td><input type="number" name="p:24" required min="0" max="<?=$_SESSION['event']['criteria'][24]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][24]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
 									<th>Presentation</th>
 									<th><output type="number" name="s:3"></output></th>
-									<th>15 pts</th>
+									<th><?=$_SESSION['event']['criteria'][30]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Communicaton</td>
-										<td><input type="number" name="p:31" required min="0" max="10" step="1"></td>
-										<td>10 pts</td>
+										<td><input type="number" name="p:31" required min="0" max="<?=$_SESSION['event']['criteria'][31]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][31]?> pts</td>
 									</tr><tr>
 										<td>Personality</td>
-										<td><input type="number" name="p:32" required min="0" max="5" step="1"></td>
-										<td>5 pts</td>
+										<td><input type="number" name="p:32" required min="0" max="<?=$_SESSION['event']['criteria'][32]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][32]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
-									<th>Time <a onClick="grader.criteria()" href="javascript:void(0)" class="action-list" data-title="Rubric criteria"><i class="material-icons">window</i></a></th>
-									<th style="padding: 2.5px 5px; text-align: center;"><input type="number" name="p:40" required min="0" max="5" step="1"></th>
-									<th>5 pts</th>
+									<th>Time</th>
+									<th><output type="number" name="s:4"></output></th>
+									<th><?=$_SESSION['event']['criteria'][40]?> pts</th>
 								</tr></thead>
+								<tbody>
+									<tr>
+										<td>Speech duration <a onClick="grader.criteria()" href="javascript:void(0)" class="action-list" data-title="Rubric criteria"><i class="material-icons">window</i></a></td>
+										<td><input type="number" name="p:41" required min="0" max="<?=$_SESSION['event']['criteria'][41]?>" step="1"></td>
+										<td><?=$_SESSION['event']['criteria'][41]?> pts</td>
+									</tr>
+								</tbody>
 								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
 									<th>Total <a onClick="grader.view()" href="javascript:void(0)" class="action-list" data-title="Score list"><i class="material-icons">list</i></a></th>
 									<th><output type="number" name="s:0"></output></th>

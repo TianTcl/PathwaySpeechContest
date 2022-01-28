@@ -142,11 +142,11 @@
 						focusfield("addr:road");
 						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"รูปแบบชื่อถนนไม่ถูกต้อง<br>อักขระที่รองรับ อักษรไทยอังกฤษตัวเลขไทยอาราบิก / . - ( )":"Invalid road name format.<br>Field only accepts TH EN alphabet, TH arabic number / . - ( ) characters."?>"]);
 						return false;
-					} if (!(address.alley + address.road).length) {
+					} /* if (!(address.alley + address.road).length) {
 						focusfield("addr:road");
-						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่ซอยหรือถนน":"Please fill in road name."?>"]);
+						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่ซอยหรือถนน":"Please fill in an alley or road name."?>"]);
 						return false;
-					} if (address.subdistrict.id.toString() == "NaN" || !address.subdistrict.name.length) {
+					} */ if (address.subdistrict.id.toString() == "NaN" || !address.subdistrict.name.length) {
 						focusfield("addr:subdistrict", true);
 						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่อำเภอ/แขวง":"Please fill in subdistrict name."?>"]);
 						return false;
@@ -171,13 +171,13 @@
 				var submit = function() {
 					go_on(); return false;
 					function go_on() {
-						var pass = true;
-						var slipFile = validate_file(true); if (!slipFile) {
-							if (pass) { focusfield("tax:slip"); pass = false; }
-							app.ui.notify(1, [2, "กรุณาเลือกไฟล์ภาพสลิปการโอนเงิน"]);
-						} if (pass) {
-							var address = verify_addr();
-							if (address) {
+						var pass = true, address = verify_addr();
+						if (address) {
+							document.querySelector('.form [name="address"]').value = JSON.stringify(address);
+							if (!validate_file(true)) {
+								if (pass) { focusfield("tax:slip"); pass = false; }
+								app.ui.notify(1, [2, "กรุณาเลือกไฟล์ภาพสลิปการโอนเงิน"]);
+							} if (pass) {
 								document.querySelector('.form [name="address"]').value = JSON.stringify(address);
 								$('.form [name^="addr:"]').removeAttr("name");
 								// Validated

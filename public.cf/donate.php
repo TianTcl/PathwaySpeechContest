@@ -200,11 +200,11 @@
 						focusfield("addr:road");
 						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"รูปแบบชื่อถนนไม่ถูกต้อง<br>อักขระที่รองรับ อักษรไทยอังกฤษตัวเลขไทยอาราบิก / . - ( )":"Invalid road name format.<br>Field only accepts TH EN alphabet, TH arabic number / . - ( ) characters."?>"]);
 						return false;
-					} if (!(address.alley + address.road).length) {
+					} /* if (!(address.alley + address.road).length) {
 						focusfield("addr:road");
-						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่ซอยหรือถนน":"Please fill in road name."?>"]);
+						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่ซอยหรือถนน":"Please fill in an alley or road name."?>"]);
 						return false;
-					} if (address.subdistrict.id.toString() == "NaN" || !address.subdistrict.name.length) {
+					} */ if (address.subdistrict.id.toString() == "NaN" || !address.subdistrict.name.length) {
 						focusfield("addr:subdistrict", true);
 						app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"กรุณาใส่อำเภอ/แขวง":"Please fill in subdistrict name."?>"]);
 						return false;

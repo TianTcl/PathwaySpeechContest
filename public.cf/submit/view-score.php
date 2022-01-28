@@ -5,6 +5,8 @@
 	$header_desc = "ดูผลคะแนน";
 
 	if (!isset($_SESSION['evt'])) header("Location: ../login");
+	
+	require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/core/config.php");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,68 +91,75 @@
 						<thead><tr>
 							<th>Content</th>
 							<th><output type="number" name="s:1"></output></th>
-							<th>35 pts</th>
+							<th><?=$_SESSION['event']['criteria'][10]?> pts</th>
 						</tr></thead>
 						<tbody>
 							<tr>
 								<td>Accuracy and Consistency</td>
 								<td><output type="number" name="p11"></output></td>
-								<td>15 pts</td>
+								<td><?=$_SESSION['event']['criteria'][11]?> pts</td>
 							</tr><tr>
 								<td>Form & Organization Of Speech</td>
 								<td><output type="number" name="p12"></output></td>
-								<td>10 pts</td>
+								<td><?=$_SESSION['event']['criteria'][12]?> pts</td>
 							</tr><tr>
 								<td>Creativity</td>
 								<td><output type="number" name="p13"></output></td>
-								<td>10 pts</td>
+								<td><?=$_SESSION['event']['criteria'][13]?> pts</td>
 							</tr>
 						</tbody>
 						<thead><tr>
 							<th>Language Competence & Fluency</th>
 							<th><output type="number" name="s:2"></output></th>
-							<th>45 pts</th>
+							<th><?=$_SESSION['event']['criteria'][20]?> pts</th>
 						</tr></thead>
 						<tbody>
 							<tr>
 								<td>Vocabulary</td>
 								<td><output type="number" name="p21"></output></td>
-								<td>5 pts</td>
+								<td><?=$_SESSION['event']['criteria'][21]?> pts</td>
 							</tr><tr>
 								<td>Structure & Connectors</td>
 								<td><output type="number" name="p22"></output></td>
-								<td>10 pts</td>
+								<td><?=$_SESSION['event']['criteria'][22]?> pts</td>
 							</tr><tr>
 								<td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
 								<td><output type="number" name="p23"></output></td>
-								<td>20 pts</td>
+								<td><?=$_SESSION['event']['criteria'][23]?> pts</td>
 							</tr><tr>
 								<td>Tone</td>
 								<td><output type="number" name="p24"></output></td>
-								<td>10 pts</td>
+								<td><?=$_SESSION['event']['criteria'][24]?> pts</td>
 							</tr>
 						</tbody>
 						<thead><tr>
 							<th>Presentation</th>
 							<th><output type="number" name="s:3"></output></th>
-							<th>15 pts</th>
+							<th><?=$_SESSION['event']['criteria'][30]?> pts</th>
 						</tr></thead>
 						<tbody>
 							<tr>
 								<td>Communicaton</td>
 								<td><output type="number" name="p31"></output></td>
-								<td>10 pts</td>
+								<td><?=$_SESSION['event']['criteria'][31]?> pts</td>
 							</tr><tr>
 								<td>Personality</td>
 								<td><output type="number" name="p32"></output></td>
-								<td>5 pts</td>
+								<td><?=$_SESSION['event']['criteria'][32]?> pts</td>
 							</tr>
 						</tbody>
 						<thead><tr>
 							<th>Time</th>
-							<th style="font-weight: normal;"><output type="number" name="p40"></output></th>
-							<th>5 pts</th>
+							<th><output type="number" name="s:4"></output></th>
+							<th><?=$_SESSION['event']['criteria'][40]?> pts</th>
 						</tr></thead>
+						<tbody>
+							<tr>
+								<td>Speech duration</td>
+								<td><output type="number" name="p41"></output></td>
+								<td><?=$_SESSION['event']['criteria'][41]?> pts</td>
+							</tr>
+						</tbody>
 						<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">
 							<th>Total</th>
 							<th><output type="number" name="mark"></output></th>

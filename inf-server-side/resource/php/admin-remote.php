@@ -56,6 +56,16 @@
             } else if ($action == "getAdminProfile") {
                 $myinfo = $db -> query("SELECT avatar,display FROM PathwaySCon_organizer WHERE user_id=$user");
                 echo json_encode($myinfo -> fetch_array(MYSQLI_ASSOC));
+            } else if ($action == "getDonateDoc") {
+                $startDnid = strval(31);
+                $result = $db -> query("SELECT contact,donor,amt,refer FROM PathwaySCon_donation WHERE dnid > $startDnid"); $result4 = array();
+                if ($result && $result -> num_rows) { while ($res = $result -> fetch_assoc()) array_push($result4, $res); }
+                $result2 = $db -> query("SELECT donor as name,amt as amount,address FROM PathwaySCon_donation WHERE address IS NOT NULL AND dnid > $startDnid"); $result3 = array();
+                if ($result2 && $result2 -> num_rows) { while ($res = $result2 -> fetch_assoc()) array_push($result3, $res); }
+                echo json_encode(array(
+                    "mail" => $result4,
+                    "addr" => $result3
+                ));
             }
             $db -> close();
         }

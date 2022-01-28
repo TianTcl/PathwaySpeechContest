@@ -52,7 +52,7 @@
 								target.innerHTML = "";
 								et.forEach(er => {
 									let name = '<font>'+er.name.replace(" (", "</font> (");
-									target.innerHTML += '<tr><td>'+String(rank++).padStart(3, "0")+'</td><td>'+name+'</td><td>'+scoreRender(er.p11)+'</td><td>'+scoreRender(er.p12)+'</td><td>'+scoreRender(er.p13)+'</td><td>'+scoreRender(er.p21)+'</td><td>'+scoreRender(er.p22)+'</td><td>'+scoreRender(er.p23)+'</td><td>'+scoreRender(er.p24)+'</td><td>'+scoreRender(er.p31)+'</td><td>'+scoreRender(er.p32)+'</td><td>'+scoreRender(er.p40)+'</td><td>'+scoreRender(er.mark)+'</td></tr>';
+									target.innerHTML += '<tr><td>'+String(rank++).padStart(3, "0")+'</td><td>'+name+'</td><td>'+scoreRender(er.p11)+'</td><td>'+scoreRender(er.p12)+'</td><td>'+scoreRender(er.p13)+'</td><td>'+scoreRender(er.p21)+'</td><td>'+scoreRender(er.p22)+'</td><td>'+scoreRender(er.p23)+'</td><td>'+scoreRender(er.p24)+'</td><td>'+scoreRender(er.p31)+'</td><td>'+scoreRender(er.p32)+'</td><td>'+scoreRender(er.p41)+'</td><td>'+scoreRender(er.mark)+'</td></tr>';
 								});
 							} else target.innerHTML = '<tr><td><center class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ไม่มีรายการคะแนนในหมวดหมู่นี้":"No score list in this category"?></center></td></tr>';
 						});
@@ -90,7 +90,7 @@
 					<th onClick="ro(9)"><span>2.4) Tone</span></th>
 					<th onClick="ro(10)"><span>3.1) Communication</span></th>
 					<th onClick="ro(11)"><span>3.2) Personality</span></th>
-					<th onClick="ro(12)"><span>4) Time</span></th>
+					<th onClick="ro(12)"><span>4) Duration</span></th>
 					<th onClick="ro(13)"><?=$_COOKIE['set_lang']=="th"?"คะแนนรวม":"Total"?></th>
 				</thead><thead><tr><td colspan="13"><?=$_COOKIE['set_lang']=="th"?"ประถม 3-6":"Elementary 3-6"?></td></tr></thead><tbody class="g1">
 

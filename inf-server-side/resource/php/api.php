@@ -100,7 +100,7 @@
                     } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch amount."]}';
             } else if ($cmd == "sboard") {
-                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p40) AS VARCHAR(5)) AS p40,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid>1 AND";
+                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid>1 AND";
                 $sqlpost = "GROUP BY a.smid ORDER BY mark DESC,b.lasttime,c.time";
                 $sqlpre2 = "SELECT b.smid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid>1 AND";
                 $sqlpost2 = "AND a.judge=10011 ORDER BY a.mark DESC,b.lasttime,c.time LIMIT 3";
@@ -211,7 +211,7 @@
             $round = $_SESSION['event']['round'];
             if ($cmd == "get") {
                 if ($attr == "score") {
-                    $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p40) AS VARCHAR(5)) AS p40,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
+                    $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
                     if ($getscore) {
                         if ($getscore -> num_rows == 1) {
                             $readscore = $getscore -> fetch_array(MYSQLI_ASSOC);

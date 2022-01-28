@@ -62,6 +62,7 @@
                 <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"การบริจาค":"Donate"?></li>
                 <li><a href="/organize/giveaway"><?=$_COOKIE['set_lang']=="th"?"บริหาร Giveaway":"Giveaway management"?></a></li>
                 <li><a href="/organize/donation"><?=$_COOKIE['set_lang']=="th"?"รายการที่รับบริจาค":"Donation list"?></a></li>
+                <li><a href="/donation-doc"><?=$_COOKIE['set_lang']=="th"?"เอกสารการบริจาค":"Donation documents"?></a></li>
                 <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"สถิติต่างๆ":"Statics"?></li>
                 <li><a href="/organize/statics"><?=$_COOKIE['set_lang']=="th"?"สถิติของโครงการ":"Event statics"?></a></li>
                 <li class="seperator">&nbsp;</li>

@@ -192,7 +192,7 @@
 				</div>
 				<div class="message blue schd-2" style="display: none;">
 					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 2)":"Schedule (Season 2)"?></h3>
-					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style=\"color: var(--clr-bs-red);\">•</font><br>ปิดรับสมัครวันที่ 31 มีนาคม 2565<br>ประกาศผลวันที่ 20 เมษายน 2565":"Open for registration & submit: 12<sup>th</sup> March 2022<br>Close for registration & submit: 31<sup>st</sup> March 2022<br>Rank & Score announcement: 20<sup>th</sup> April 2022"?></p>
+					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style=\"color: var(--clr-bs-red);\">•</font><br>ปิดรับสมัครวันที่ 31 มีนาคม 2565<br>ประกาศผลวันที่ 20 เมษายน 2565":"Open for registration & submit: 12<sup>th</sup> March 2022 <font style=\"color: var(--clr-bs-red);\">•</font><br>Close for registration & submit: 31<sup>st</sup> March 2022<br>Rank & Score announcement: 20<sup>th</sup> April 2022"?></p>
 				</div>
 				<div class="option">
 					<p><?=$_COOKIE['set_lang']=="th"?'หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย':'If you are already registered. Then you can <a href="login">sign in</a> to submut your speech.<br>If you are not registered. Then you can start filling the <a href="javascript:reg.start()">registration form</a>.'?></p>

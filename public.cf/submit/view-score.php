@@ -6,7 +6,7 @@
 
 	if (!isset($_SESSION['evt'])) header("Location: ../login");
 	
-	require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/core/config.php");
+	require_once($dirPWroot."resource/php/core/config.php");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

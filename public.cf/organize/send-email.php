@@ -7,7 +7,7 @@
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("lead"); if ($permitted) {
-		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = intval($_SESSION['event']['round']);
+		require_once($dirPWroot."resource/php/core/config.php"); $round = intval($_SESSION['event']['round']);
 		
 	}
 ?>

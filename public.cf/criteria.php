@@ -4,7 +4,7 @@
 	$header_title = "Scoring Criteria";
 	$header_desc = "เกณฑ์การพิจรณาคะแนน";
 
-	require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/core/config.php");
+	require_once($dirPWroot."resource/php/core/config.php");
 
 	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31<sup>st</sup> December 2021";
 	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 12 - 31 มีนาคม 2565":"Open for registration at 12<sup>th</sup> - 31<sup>st</sup> March 2022";

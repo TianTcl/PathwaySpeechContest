@@ -6,7 +6,7 @@
 	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = (has_perm("grader") || has_perm("judge", false)); if ($permitted) {
-		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/core/config.php");
+		require_once($dirPWroot."resource/php/core/config.php");
 		
 	}
 ?>

@@ -41,12 +41,26 @@
 					$("html, body").animate({ scrollTop: $("html, body").scrollTop() + 75 }, 25);
 				}
 				$("main .wrapper details > summary").on("click", function() { addHash(this.parentNode); });
+				Facebook_chat();
 			});
 			function addHash(me) {
 				setTimeout(function() {
 					if (me.open) history.replaceState(null, null, location.pathname+"#"+me.id);
 					else if (document.querySelector("main .wrapper details[open]") == null) history.replaceState(null, null, location.pathname);
 				}, 25);
+			}
+			function Facebook_chat() {
+				var chatbox = document.getElementById('fb-customer-chat');
+				chatbox.setAttribute("page_id", "111070124738792");
+				chatbox.setAttribute("attribution", "biz_inbox");
+				window.fbAsyncInit = function() { FB.init({ xfbml : true, version : 'v12.0' }); };
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
 			}
 		</script>
 	</head>
@@ -68,13 +82,13 @@
 						<p>กรณี<b>ไม่มีกล่องค้นหา</b>ขึ้นให้ลองแตะบริเวณอื่นก่อนแล้วแตะช่องโรงเรียนอีกรอบ</p>
 						<p>หากยังไม่ได้ให้ลองทำตามขั้นตอนใน<a href="#cant-send-form">คำแนะนำเรื่องการส่งฟอร์ม</a>ก่อน และถ้าหากไม่สามารถกรอกได้จริงๆ ให้จับภาพหน้าจอ (screenshot | capture) และพิมพ์ชื่อสถานศึกษามาให้ทางเราลงข้อมูลให้</p>
 					</details>
-					<details id="special-workshop" hidden>
+					<!--details id="special-workshop">
 						<summary>Special Event - Workshop</summary>
 						<p>📍พบกับ workshop จากแขกรับเชิญสุดพิเศษโดย T. Timothy Hutto อาจารย์จาก English Program ของโรงเรียนสามเสนวิทยาลัย และรุ่นพี่ในวันเสาร์ที่ 11 ธันวาคมนี้ เวลา 17.00 - 18.30 น.🍃</p>
 						<p>หากสนใจเข้าร่วม workshop สามารถเข้าร่วมผ่านทาง <a href="https://bod.in.th/!PSC-line" target="_blank">openchat</a> ที่นี่</p>
 						<p>เข้าร่วมการประชุมได้ที่ <a href="https://inf.bodin.ac.th/go?url=htts%3A%2F%2Fmeet.google.com%2Fgrt-zzzr-fkk" target="_blank">meet.google.com/grt-zzzr-fkk</a> หรือบันทึกใส่ <a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fcalendar.google.com%2Fevent%3Faction%3DTEMPLATE%26amp%3Btmeid%3DMG42cWF1bzBrMzBycnF2Z2NvNjA5bjVoa2MgdGlhbnRjbEBib2Rpbi5hYy50aA%26amp%3Btmsrc%3Dtiantcl%2540bodin.ac.th" target="_blank">Google calender</a> ไว้</p>
 						<p>ท่านสามารถ<a href="#joining-workshop-meet">ศึกษาวิธีการเข้าการประชุม</a>ได้ที่นี่</p>
-					</details>
+					</details-->
 					<details id="joining-workshop-meet">
 						<summary>วิธีการเข้า Video Conference ของกิจกรรม Workshop</summary>
 						<p>หากใช้คอมหรือโน้ตบุ๊คสามารถแตะลิงก์เข้าได้เลย</p>
@@ -89,13 +103,39 @@
 						<summary>วิธีการสมัครสำหรับนักเรียน Homeschool</summary>
 						<p>ในช่องโรงเรียน ให้กรอกว่า "จัดการศึกษาขั้นพื้นฐานโดยครอบครัว"</p>
 					</details>
+					<details id="not-top-get-cert">
+						<summary>หากไม่ติด 3 อันดับแรกของกลุ่ม จะได้รับประกาศนียบัตรไหม</summary>
+						<p>ทุกคนที่ส่งวีดีโอสุนทรพจน์จะได้รับประกาศนียบัตรเข้าร่วม<br>และสำหรับผู้ที่ติด 3 อันดับแรกของกลุ่มการจัดลำดับจะได้ประกาศนียบัตรบอกลำดับที่อีกฉบับ</p>
+					</details>
+					<details id="when-to-claim-cert">
+						<summary>จะได้รับประกาศนียบัตรเมื่อไหร่</summary>
+						<p>ประกาศนียบัตรของช่วงที่สองจะสามารถดาวน์โหลดผ่าน<a href="submit/#/my-certificate">ระบบ(เว็บแอปพลิเคชัน)</a>ได้</p>
+						<p>ตั้งแต่วันพุธที่ 20 เมษายน พ.ศ. 2565<br>จนถึงวันอาทิตย์ที่ 30 เมษายน พ.ศ. 2565</p>
+					</details>
+					<details id="cert-timeout">
+						<summary>ดาวน์โหลดประกาศนียบัตรไม่ทัน</summary>
+						<p>สามารถติดต่อมาขอประกาศนียบัตรย้อนหลังทางอีเมลได้ โดยแจ้ง ID และอีเมลที่ใช้สมัคร</p>
+					</details>
+					<details id="result-announce">
+						<summary>มีการประกาศผลอย่างไรบ้าง</summary>
+						<p>จะมีการประกาศผลเป็นสองส่วน<p>
+						<ul>
+							<li>ส่วนแรก จะประกาศ <a href="announcement">3 ลำดับที่แรก</a>ของทุกกลุ่มการจัดลำดับ</li>
+							<li>ส่วนที่สอง จะประกาศผลคะแนนแยกตามเกณฑ์ใน<a href="submit/#/view-score">ระบบ(เว็บแอปพลิเคชัน)</a> (ส่วนตัว)</li>
+						</ul>
+					</details>
+					<!--details id="">
+						<summary></summary>
+						<p></p>
+					</details-->
+				</div><br>
+				<div class="contact form inline">
+					<span>กรณีระบบมีปัญหา ต้องการแจ้งปัญหาหรือสอบถาม กรุณา</span>
+					<a role="button" class="black" href="https://inf.bodin.ac.th/go?url=mailto%3ATianTcl@PathwaySpeechContest.cf%3Fbcc%3DPathway.SpeechContest@gmail.com%3Fsubject%3DPSC%20Webapplication" target="_blank">ติดต่อผู้ดูแลระบบ</a>
 				</div>
-				<div class="contact form"><div class="group">
-					<span>ติดต่อผู้ดูแลระบบ</span>
-					<a role="button" class="blue" href="https://inf.bodin.ac.th/go?url=mailto%3ATianTcl@PathwaySpeechContest.cf%3Fbcc%3DPathway.SpeechContest@gmail.com%3Fsubject%3DPSC%20Webapplication" target="_blank">คลิ๊ก</a>
-				</div></div>
 			</div>
 		</main>
+		<div id="fb-root"></div><div id="fb-customer-chat" class="fb-customerchat"></div>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>
 		<footer>
 			<?php require($dirPWroot."resource/hpe/footer.php"); ?>

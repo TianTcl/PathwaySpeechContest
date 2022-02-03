@@ -161,7 +161,9 @@
 				setTimeout(function() {
 					Grade(document.querySelectorAll("/* div.app-logo div.card a div.img-container */ div.imgfill"));
 				}, (navigator.userAgent.indexOf("Mac OS")>-1?500:50));
-				// Facebook chat
+				Facebook_chat()
+			});
+			function Facebook_chat() {
 				var chatbox = document.getElementById('fb-customer-chat');
 				chatbox.setAttribute("page_id", "111070124738792");
 				chatbox.setAttribute("attribution", "biz_inbox");
@@ -173,7 +175,7 @@
 					js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
-			});
+			}
 		</script>
 		<script type="text/javascript" src="/resource/js/lib/grade.min.js"></script>
 	</head>

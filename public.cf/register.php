@@ -13,7 +13,7 @@
 		<style type="text/css">
 			main .message { font-family: "Sarabun", sans-serif; }
 			main .message > * { margin: 0px 0px 10px; }
-			main .form, main .form form { margin-bottom: 10px; }
+			main .form > *:not(:last-child) { margin-bottom: 10px; }
 			main .group-inline { display: flex; justify-content: space-between; }
 			main .group-inline .group { width: 48.75%; }
 			main .form { --mvlbt: -5px; }
@@ -53,6 +53,7 @@
 				display: block;
 			}
 			main .form p { margin: 5px 0px 0px; }
+			main .form .message code { margin-bottom: 0px; }
 			@media only screen and (max-width: 768px) {
 				main .form input + label { transform: translate(calc(var(--mvlbt) + 7.5px), 12.5px); }
     			main .form input:focus + label, main .form input[filled="true"] + label { transform: translate(calc(var(--mvlbt) - 7.5px), -4px) scale(0.75); }
@@ -250,6 +251,9 @@
 					<div class="group-inline">
 						<div class="group"><button type="reset" class="red hollow full-x dont-ripple" onClick="reg.reset()"><?php echo $_COOKIE['set_lang']=="th" ? "เริ่มใหม่" : "Reset form"; ?></button></div>
 						<div class="group"><button type="submit" class="blue full-x dont-ripple" onClick="reg.submit()"><?php echo $_COOKIE['set_lang']=="th" ? "ลงทะเบียน" : "Register"; ?></button></div>
+					</div>
+					<div class="message yellow">
+						<?=$_COOKIE['set_lang']=="th"?"พิมพ์คำนำหน้าชื่อในช่องชื่อจริง และช่องชื่อทั้งหมดไม่รองรับเครื่องหมายและการเว้นวรรค":"Please type in all the name fields with proper case (<code>Aaa</code>). None of the name fields accept punctuations or space."?>
 					</div>
 				</div>
 			</div>

@@ -45,6 +45,11 @@
 				transform: rotate(180deg);
 				color: var(--clr-bs-blue);
 			}
+			main .otherway img {
+				margin: 0px 5px 0px 2.5px;
+				width: 24px; height: auto;
+				object-fit: contain;
+			}
 			@keyframes uploading {
 				from { height: 0px; }
 				to { height: 24px; }
@@ -58,7 +63,7 @@
 				$.get("https://inf.bodin.ac.th/e/Pathway-Speech-Contest/submit/file?status&remote=<?php echo $_SESSION['evt']['encid']; ?>", function(res, hsc) {
 					var dat = JSON.parse(res);
 					if (dat.success) {
-						$(dat.info.v?'<div class="message green"><?=$_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have submitted your video."?></div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม และทางผู้ดำเนินกิจกรรมจะประเมินจากไฟล์ล่าสุดเท่านั้น":"Re-submitting a new one will replace the previous. Judges will grade from your lastest video."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven\'t send any video yet."?></div>').insertBefore("main form");
+						$(dat.info.v?'<div class="message green"><?=$_COOKIE['set_lang']=="th"?"คุณได้ส่งไฟล์แล้ว":"You have submitted your video."?></div><div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"การส่งไฟล์ใหม่จะเป็นการส่งทับไฟล์เดิม และทางผู้ดำเนินกิจกรรมจะประเมินจากไฟล์ล่าสุดเท่านั้น":"Re-submitting a new one will replace the previous. Judges will grade from your lastest video."?></div>':'<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"คุณยังไม่เคยส่งไฟล์":"You haven\\'t send any video yet."?></div>').insertBefore("main form");
 					} else app.ui.notify(1, dat.reason);
 				});
 
@@ -110,6 +115,12 @@
 					</div>
 				</form>
 				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?> <a href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank">devtech@PathwaySpeechContest.cf</a><?=$_COOKIE['set_lang']=="th"?" ได้":"."?></p>
+				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?></p>
+				<div class="form inline otherway">
+					<a role="button" class="cyan" href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank"><img src="/resource/images/nav-share-gmail.png" alt="Email" data-dark="false">devtech@PathwaySpeechContest.cf</a>
+					<a role="button" class="cyan" href="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/form/internal/submit-video?remote=<?php echo $_SESSION['evt']['encid']; ?>" target="_blank"><img src="https://www.gstatic.com/images/branding/product/1x/forms_2020q4_48dp.png" alt="ggForm" data-dark="false">Google Form</a>
+				</div>
+			</div><!--<?=$_COOKIE['set_lang']=="th"?" ได้":"."?>-->
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

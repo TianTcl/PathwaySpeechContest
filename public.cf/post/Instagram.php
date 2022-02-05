@@ -38,6 +38,7 @@
 				border-radius: 12.5px !important;
 			}
 		</style>
+		<link rel="stylesheet" href="/resource/css/extend/post.css">
 		<script type="text/javascript">
 			
 		</script>
@@ -96,6 +97,14 @@
 						</div>
 					</blockquote></li>
 				<?php } ?></ul></div>
+				<nav class="post">
+					<hr>
+					<div class="hold">
+						<a href="./">← Posts</a>
+						<span class="mnfst">By: Admin | Sync</span>
+						<a></a>
+					</div>
+				</nav>
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

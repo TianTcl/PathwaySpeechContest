@@ -13,7 +13,8 @@
 		<div class="head-item text">
 			<a href="/"><span>Pathway Speech Contest</span></a>
 			<!--a href="/criteria"><span>Scoring Criteria</span></a-->
-			<a href="/workshop/feed"><span>Workshop</span></a>
+			<!--a href="/workshop/"><span>Workshop</span></a-->
+			<a href="/post/"><span>Posts</span></a>
 			<a href="/donate"><span>Donate</span></a>
 			<a href="/FaQ"><span>FaQ</span></a>
 			<a href="/contact"><span>Contact us</span></a>

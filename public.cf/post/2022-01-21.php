@@ -1,7 +1,8 @@
 <?php
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."resource/hpe/init_ps.php");
-	$header_title = "ประกาศ";
+	$header_title = "ประกาศผล";
+	$header_desc = "Ranking result announcement";
 
 	$permitted = true; # has_perm("dev", false);
 ?>
@@ -10,10 +11,11 @@
 	<head>
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
+			main .rankrs { color: #0f5132; }
 			main .rankrs > h3 {
 				margin: 5px 0px 10px;
 				transform: scale(1.125);
-				font-size: 1.5em;
+				font-size: 1.5em; text-align: center;
 			}
 			main .rankrs p {
 				margin: 0px 0px 10px;
@@ -122,7 +124,7 @@
 				object-fit: contain;
 			}
 			@media only screen and (max-width: 768px) {
-				main .rankrs h3 { margin: 12.5px 0px 10px; }
+				main .rankrs > h3 { margin: 12.5px 0px 10px; }
 				main .rankrs .card { margin: 0px 2.5px 12.5px; padding: 7.5px; }
 				main .rankrs .card:last-child { margin: 0px 2.5px 5px; }
 				main .rankrs .card .avatar {
@@ -142,6 +144,7 @@
 				main .rankrs .card .info.longsch .school > span { font-size: 0.875em; }
 			}
 		</style>
+		<link rel="stylesheet" href="/resource/css/extend/post.css">
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("main .rankrs .card .avatar .wrapper .play[data-href]").on("click", function() { listen_to_speech(this.getAttribute("data-href")); })
@@ -157,9 +160,11 @@
 			<?php if (!$permitted) echo '<iframe src="/error/903">903: Page under construction</iframe>'; else { ?>
 			<div class="container">
 				<h2><?=$_COOKIE['set_lang']=="th"?"ประกาศ":"Announcements"?></h2>
-				<details class="message green rankrs" open>
-					<summary><?=$_COOKIE['set_lang']=="th"?"ประกาศผลรอบ New Year's Day":"Results for New Year's Day topic"?></summary>
-					<center><h3>Congratulations!</h3></center>
+				<!--details class="message green rankrs" open>
+					<summary><?=$_COOKIE['set_lang']=="th"?"ประกาศผลรอบ New Year's Day":"Results for New Year's Day topic"?></summary-->
+				<p><?=$_COOKIE['set_lang']=="th"?"ประกาศผลรอบ New Year's Day":"Results for New Year's Day topic"?></p>
+				<div class="rankrs">
+					<h3>Congratulations!</h3>
 					<center><p><?=$_COOKIE['set_lang']=="th"?"ระดับประถมศึกษา":"Elementary Level"?></p></center>
 					<div class="card right">
 						<div class="info">
@@ -306,7 +311,7 @@
 								</div>
 							</div>
 						</div>
-						</div><hr>
+					</div><hr>
 					<div class="form">
 						<h3>View playlists <span>- listen to their speeches</span></h3>
 						<div class="group split">
@@ -330,7 +335,15 @@
 							</a>
 						</div>
 					</div>
-				</details>
+				<!/details></div>
+				<nav class="post">
+					<hr>
+					<div class="hold">
+						<a href="2021-12-11">← Previous (11/12/2021)</a>
+						<span class="mnfst">By: Admin | 21/01/2022</span>
+						<a href="2022-01-26">(26/01/2022) Next →</a>
+					</div>
+				</nav>
 			</div><?php } ?>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

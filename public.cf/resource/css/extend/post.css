@@ -1,0 +1,5 @@
+main nav.post > div.hold {
+    display: flex; justify-content: space-between;
+    font-size: 0.8em;
+}
+main nav.post > div.hold span.mnfst { color: var(--clr-bs-gray); }

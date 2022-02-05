@@ -25,13 +25,13 @@
             <label>Sitemap</label>
             <ul>
                 <li><a href="/"><?=$_COOKIE['set_lang']=="th"?"หน้าหลัก":"Homepage"?></a></li>
-                <li><a href="/workshop/feed"><?=$_COOKIE['set_lang']=="th"?"การประชุมเชิงปฏิบัติการ":"Workshop"?></a></li>
+                <li><a href="/workshop/"><?=$_COOKIE['set_lang']=="th"?"การประชุมเชิงปฏิบัติการ":"Workshop"?></a></li>
                 <li><a href="/donate"><?=$_COOKIE['set_lang']=="th"?"บริจาค":"Donate"?></a></li>
-                <li><a href="/posts"><?=$_COOKIE['set_lang']=="th"?"คลังภาพ":"Gallery"?></a></li>
+                <li><a href="/post/"><?=$_COOKIE['set_lang']=="th"?"คลังภาพ":"Gallery"?></a></li>
                 <li><a href="/FaQ"><?=$_COOKIE['set_lang']=="th"?"คำถามที่พบบ่อย":"FaQ"?></a></li>
                 <li><a href="/contact"><?=$_COOKIE['set_lang']=="th"?"ติดต่อเรา":"Contact us"?></a></li>
                 <li><a href="/team"><?=$_COOKIE['set_lang']=="th"?"คณะผู้ดำเนินงาน":"Teams"?></a></li>
-                <li><a href="/announcement"><?=$_COOKIE['set_lang']=="th"?"ประกาศ":"Announcements"?></a></li>
+                <!--li><a href="/announcement"><?=$_COOKIE['set_lang']=="th"?"ประกาศ":"Announcements"?></a></li-->
                 <?php if (!isset($_SESSION['evt'])) { ?>
                 <li><a href="/criteria"><?=$_COOKIE['set_lang']=="th"?"เกณฑ์การพิจรณาคะแนน":"Scoring Criteria"?></a></li>
                 <li><a href="/register"><?=$_COOKIE['set_lang']=="th"?"ลงทะเบียน":"Register"?></a></li>

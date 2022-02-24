@@ -11,7 +11,7 @@
 
     $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
     $user = $rmte ? decode_key($_REQUEST['remote']) : ($_SESSION['evt']['user'] ?? ""); if ($user == "" && check_req("view-id")) $user = decode_key($_REQUEST['view-id']);
-    $round = $_SESSION['event']['round'];
+    $round = $config['round'];
 
     if ($user == "") $error = "901";
     else if (check_req("type") && check_req("export")) {

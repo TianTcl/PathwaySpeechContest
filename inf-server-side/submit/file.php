@@ -7,8 +7,7 @@
     $rmte = (isset($_GET['remote']) && !empty($_GET['remote'])); $remote = $rmte ? "remote" : "";
     $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
     if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
-    # if (!isset($_SESSION['event']['round'])) die('{"success": false, "reason": [2, "Server error. Please contact system administrator to fix this problem."]}');
-    require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = $_SESSION['event']['round'];
+    require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = $config['round'];
     require($dirPWroot."e/resource/db_connect.php");
     if (isset($_GET['status'])) {
 		echo json_encode(array(
@@ -16,7 +15,8 @@
             "info" => array(
                 "v" => file_exists("../resource/upload/sv-$round/$user.mp4"),
                 "s" => file_exists("../resource/upload/ps-$round/$user.png"),
-                "g" => boolval($db -> query("SELECT a.scid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round") -> num_rows)
+                "g" => boolval($db -> query("SELECT a.scid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round") -> num_rows),
+                "c" => !empty(($db -> query("SELECT rank FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round") -> fetch_array())['rank'])
             )
         ));
     } else if (isset($_GET['upload']) && isset($_FILES)) {

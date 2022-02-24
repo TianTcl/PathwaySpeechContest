@@ -7,7 +7,7 @@
 	else $has_data = false; if ($has_data) {
 		require($dirPWroot."e/resource/db_connect.php"); require_once($dirPWroot."resource/php/core/config.php");
 		require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
-		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = intval($_SESSION['event']['round']);
+		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = intval($config['round']);
         $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
 		if ($app == "mail") {
             if ($cmd == "send") {

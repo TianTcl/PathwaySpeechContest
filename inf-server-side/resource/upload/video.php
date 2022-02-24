@@ -20,8 +20,8 @@
 					$readptp = $getptp -> fetch_array(MYSQLI_ASSOC);
 					$ptpid = intval($readptp['ptpid']);
 					require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
-					$player_name = $_SESSION['event']['nameSub']." - ".$readptp['name']; $player_thumbnail = ""; $player_secured = false;
-					$videoPath = $dirPWroot."e/Pathway-Speech-Contest/resource/upload/sv-".$_SESSION['event']['round']."/$ptpid.mp4";
+					$player_name = $config['nameSub']." - ".$readptp['name']; $player_thumbnail = ""; $player_secured = false;
+					$videoPath = $dirPWroot."e/Pathway-Speech-Contest/resource/upload/sv-".$config['round']."/$ptpid.mp4";
 					if (file_exists($videoPath)) {
 						require_once($dirPWroot."resource/php/core/config.php");
 						$video_size = size2text(filesize($videoPath));
@@ -68,7 +68,7 @@
 					loaddot = (loaddot == "...") ? "" : loaddot+".";
 				}, 250); loaderi.show(); tprevent.attr("style", "cursor: wait !important;"); control.css("pointer-events", "none");
 				var vdo = document.querySelector(".player div.full.video div.view video"),
-					realSource = "/e/Pathway-Speech-Contest/resource/upload/sv-<?=$_SESSION['event']['round']?>/"+ID+".mp4";
+					realSource = "/e/Pathway-Speech-Contest/resource/upload/sv-<?=$config['round']?>/"+ID+".mp4";
 				if (!isSafari) fetchVideo(realSource).then(function(blobObj) {
 					var viewLink = URL.createObjectURL(blobObj);
 					vdo.src = viewLink; // gen_blob();

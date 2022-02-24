@@ -61,16 +61,16 @@
     <th></th>
 </tr><tr>
     <th>Max pts</th>
-    <td><?=$_SESSION['event']['criteria'][11]?></td>
-    <td><?=$_SESSION['event']['criteria'][12]?></td>
-    <td><?=$_SESSION['event']['criteria'][13]?></td>
-    <td><?=$_SESSION['event']['criteria'][21]?></td>
-    <td><?=$_SESSION['event']['criteria'][22]?></td>
-    <td><?=$_SESSION['event']['criteria'][23]?></td>
-    <td><?=$_SESSION['event']['criteria'][24]?></td>
-    <td><?=$_SESSION['event']['criteria'][31]?></td>
-    <td><?=$_SESSION['event']['criteria'][32]?></td>
-    <td><?=$_SESSION['event']['criteria'][41]?></td>
+    <td><?=$config['criteria'][11]?></td>
+    <td><?=$config['criteria'][12]?></td>
+    <td><?=$config['criteria'][13]?></td>
+    <td><?=$config['criteria'][21]?></td>
+    <td><?=$config['criteria'][22]?></td>
+    <td><?=$config['criteria'][23]?></td>
+    <td><?=$config['criteria'][24]?></td>
+    <td><?=$config['criteria'][31]?></td>
+    <td><?=$config['criteria'][32]?></td>
+    <td><?=$config['criteria'][41]?></td>
     <td>100</td>
     <td></td>
 </tr><?php } } ?></thead></table></div>

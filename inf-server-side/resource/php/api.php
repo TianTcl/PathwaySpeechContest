@@ -18,7 +18,7 @@
             } else if ($cmd == "addNew") {
                 foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
                 $getid = $db -> query("SELECT COUNT(ptpid) AS newid FROM PathwaySCon_attendees"); $newID = ($getid -> fetch_array(MYSQLI_ASSOC))['newid'];
-                $pubID = date("y", time()).$_SESSION['event']['round'].str_repeat("0", 3-strlen($newID)).$newID;
+                $pubID = date("y", time()).$config['round'].str_repeat("0", 3-strlen($newID)).$newID;
                 $success = $db -> query("INSERT INTO PathwaySCon_attendees (email,namef,namel,namen,phone,school,grade,publicID,line,ip) VALUES ('".strtolower($attr['email'])."','".$attr['namef']."','".$attr['namel']."','".$attr['namen']."','".$attr['phone']."','".$attr['school']."',".$attr['grade'].",".$pubID.",'".$attr['line']."','$ip')");
                 if ($success) {
                     $newid = $db -> insert_id;
@@ -60,7 +60,7 @@
         } else if ($app == "stat") {
             if ($cmd == "fetch") {
                 $getappall = $db -> query("SELECT COUNT(ptpid) AS amt FROM PathwaySCon_attendees WHERE ptpid > 1");
-                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=".$_SESSION['event']['round']);
+                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=".$config['round']);
                 $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 GROUP BY a.smid");
                 $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
@@ -188,19 +188,20 @@
                 $clip = $db -> real_escape_string(trim($attr['clip']));
                 $geturl = $db -> query("SELECT wvid,link FROM PathwaySCon_workshop WHERE namen='$name' AND video=$clip");
                 if ($geturl) {
+                    if (!isset($_SESSION['var'])) $_SESSION['var'] = array();
                     if ($geturl -> num_rows == 1) {
                         $readurl = $geturl -> fetch_array(MYSQLI_ASSOC);
                         $db -> query("UPDATE PathwaySCon_workshop SET view=view+1 WHERE wvid=".$readurl['wvid']);
                         echo '{"success": true, "info": "'.$readurl['link'].'"'.($rmte ? ', "clip": "'.($tcl -> encode($clip, 3)).'"' : "").'}';
                         slog($readurl['wvid'], "PathwaySCon", "video", "view", "", "pass", $remote);
-                        $_SESSION['event']['workshop-URL'] = $readurl['link'];
+                        $_SESSION['var']['workshop-URL'] = $readurl['link'];
                     } else {
                         $link = $tcl -> uuid("$name-$clip");
                         $success = $db -> query("INSERT INTO PathwaySCon_workshop (namen,video,link,ip) VALUES ('$name',$clip,'$link','$ip')");
                         if ($success) {
                             echo '{"success": true, "info": "'.$link.'"'.($rmte ? ', "clip": "'.($tcl -> encode($clip, 3)).'"' : "").'}';
                             slog($db -> insert_id, "PathwaySCon", "video", "view", "", "pass", $remote);
-                            $_SESSION['event']['workshop-URL'] = $link;
+                            $_SESSION['var']['workshop-URL'] = $link;
                         } else { echo '{"success": false'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "NotEligible"); }
                     }
                 } else { echo '{"success": false, "reason": [3, "Unable to load your video. Please try again."]}'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "InvalidQuery"); }
@@ -208,7 +209,7 @@
         } else if ($app == "main") {
             $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
             if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
-            $round = $_SESSION['event']['round'];
+            $round = $config['round'];
             if ($cmd == "get") {
                 if ($attr == "score") {
                     $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");

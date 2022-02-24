@@ -1,13 +1,13 @@
 <?php
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
-	require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ps.php");
+	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "Donation";
 	$header_desc = "การบริจาคเงินแก่มูลนิธิดวงประทีป";
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/heading.php"); require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ss.php"); ?>
+		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
 			main div.container .blur {
 				filter: blur(0.3rem);
@@ -34,7 +34,7 @@
 		</script>
 	</head>
 	<body>
-		<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/header.php"); ?>
+		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>Duang Prateep Foundation Fund Donation</h2>
@@ -59,7 +59,7 @@
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>
 		<footer>
-			<?php require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/footer.php"); ?>
+			<?php require($dirPWroot."resource/hpe/footer.php"); ?>
 		</footer>
 	</body>
 </html>

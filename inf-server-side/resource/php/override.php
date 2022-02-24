@@ -13,8 +13,9 @@
             if ($cmd == "send") {
 				// Config
 				$mail = array("recipients" => array(), "settings" => array()); $mail['setting'] = array(
-					array("var" => "account.name", "value" => "Pathway Speech Contest"),
-					array("var" => "support_mail", "value" => "devtech@PathwaySpeechContest.cf")
+					array("var" => "name.org", "value" => "Pathway Speech Contest"),
+					array("var" => "contact.pr", "value" => "Pathway.SpeechContest@gmail.com"),
+					array("var" => "contact.dev", "value" => "devtech@PathwaySpeechContest.cf")
 				); $mail['recipient'] = explode(",", $attr['rcp']); switch ($round) {
 					case 1: $remindTemplateID = "ynrw7gy50k42k8e3"; $submitLastTime = "2021-12-31 23:59:59"; break;
 					case 2: $remindTemplateID = "neqvygmqyw40p7w2"; $submitLastTime = "2022-03-31 23:59:59"; break;
@@ -23,23 +24,23 @@
 					case "remind-12":
 						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 0;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = $submitLastTime;
-						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
+						$mail['info.day'] = $submitLastTime;
+						array_push($mail['setting'], array("var" => "info.day", "value" => $mail['info.day']));
 					break; case "remind-8":
 						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 1;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = $submitLastTime;
-						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
+						$mail['info.day'] = $submitLastTime;
+						array_push($mail['setting'], array("var" => "info.day", "value" => $mail['info.day']));
 					break; case "remind-5":
 						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 2;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = $submitLastTime;
-						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
+						$mail['info.day'] = $submitLastTime;
+						array_push($mail['setting'], array("var" => "info.day", "value" => $mail['info.day']));
 					break; case "remind-0":
 						$mail['templateID'] = $remindTemplateID; $mail['pos'] = (5 * ($round-1)) + 3;
 						$mail['topic'] = "Reminder";
-						$mail['day'] = $submitLastTime;
-						array_push($mail['setting'], array("var" => "day", "value" => $mail['day']));
+						$mail['info.day'] = $submitLastTime;
+						array_push($mail['setting'], array("var" => "info.day", "value" => $mail['info.day']));
 					break; case "announce":
 						$mail['templateID'] = "o65qngke1wgwr12z"; $mail['pos'] = (5 * ($round-1)) + 4;
 						$mail['topic'] = "Announcement";
@@ -50,7 +51,9 @@
 					$return = array(); while ($ptp = $list -> fetch_assoc()) {
 						array_push($return, intval($ptp['ptpid']));
 						array_push($mail['recipients'], array("email" => $ptp['email']));
-						$each_setting = $mail['setting']; array_push($each_setting, array("var" => "recp.name", "value" => $ptp['namef']." ".$ptp['namel']));
+						array_push($mail['setting'], array("var" => "info.user", "value" => $ptp['email']));
+						array_push($mail['setting'], array("var" => "name.recp", "value" => $ptp['namef']." ".$ptp['namel']));
+						$each_setting = $mail['setting'];
 						array_push($mail['settings'], array("substitutions" => $each_setting, "email" => $ptp['email']));
 					}
 					// Setting

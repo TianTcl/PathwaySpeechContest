@@ -53,6 +53,7 @@
 		</style>
 		<script type="text/javascript">
 			const APIurl = "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api";
+			var sv = { next: "" };
 			$(document).ready(function() {
 				$(' main form input[type="tel"], main form input[type="email"]').on("input change", validate_field);
 				seek_param(); validate_field();
@@ -73,6 +74,7 @@
 					// Let's see
 					if (typeof hash.user !== "undefined") document.querySelector('main form input[type="email"]').value = hash.user;
 					history.replaceState(null, null, location.pathname);
+					if (typeof hash.next !== "undefined") sv.next = hash.next;
 			} }
 			function signin() {
 				go_on(); return false;
@@ -86,7 +88,7 @@
 						var dat = JSON.parse(res);
 						if (dat.success) $.post("/resource/php/core/api", {app: "account", cmd: "login", attr: dat.info}, function(res, hsc) {
 							var dat2 = JSON.parse(res);
-							if (dat2.success) location = "submit/";
+							if (dat2.success) top.location = "/submit/"+(sv.next.length ? "#/"+sv.next : "");
 							else app.ui.notify(1, dat2.reason);
 						});
 						else app.ui.notify(1, dat.reason);

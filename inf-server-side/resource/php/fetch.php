@@ -4,9 +4,9 @@
     header("Access-Control-Allow-Origin: https://pathwayspeechcontest.cf");
 	// Configuration
 	$colcode = array( // (colName, sortable, Display, Link)
-		"A" => array("namen", 1, "Nick name", false),
-		"B" => array("namef", 1, "First name", false),
-		"C" => array("namel", 1, "Last name", false),
+		"A" => array("namen", 1, "Nickname", false),
+		"B" => array("namef", 1, "Firstname", false),
+		"C" => array("namel", 1, "Lastname", false),
 		"D" => array("email", 1, "E-mail address", false),
 		"E" => array("grade", 1, "Grade", false),
 		"F" => array("school", 1, "School", false),
@@ -49,10 +49,10 @@
                     "b" => "$queryBegin AND grade BETWEEN 4 AND 6",
                     "c" => "$queryBegin AND grade BETWEEN 7 AND 9",
                 ); if (isset($_REQUEST['q']) && !empty(trim($_REQUEST['q']))) {
-                    $searchQeury = "AND ("; $q = $db -> real_escape_string(trim($_REQUEST['q']));
-                    foreach (array("A", "B", "C", "D", "F") as $cols) $searchQeury .= $colcode[$cols][0]." LIKE '$q%' OR ";
-                    $searchQeury = rtrim($searchQeury, " OR ").")";
-                } else $searchQeury = "";
+                    $searchQuery = "AND ("; $q = $db -> real_escape_string(trim($_REQUEST['q']));
+                    foreach (array("A", "B", "C", "D", "F") as $cols) $searchQuery .= $colcode[$cols][0]." LIKE '$q%' OR ";
+                    $searchQuery = rtrim($searchQuery, " OR ").")";
+                } else $searchQuery = "";
                 // Translate
                 $pt = explode("\\", $pathTree);
                 if ($pt[0] == "cf") {
@@ -72,7 +72,7 @@
                 } if (!empty($sql)) {
                     // Process
                     # require($dirPWroot."e/resource/db_connect.php");
-                    $result = $db -> query("$sql $searchQeury $queryEnd");
+                    $result = $db -> query("$sql $searchQuery $queryEnd");
                     $all = $db -> query($sql); 
                     # $db -> close();
                     // Export

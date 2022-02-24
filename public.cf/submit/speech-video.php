@@ -4,7 +4,7 @@
 	$header_title = "การส่งไฟล์";
 	$header_desc = "ไฟล์วีดีโอสุนทรพจน์";
 
-	if (!isset($_SESSION['evt'])) header("Location: ../login");
+	if (!isset($_SESSION['evt'])) header("Location: ../login#next=".end(explode("/", $_SERVER['REQUEST_URI'])));
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

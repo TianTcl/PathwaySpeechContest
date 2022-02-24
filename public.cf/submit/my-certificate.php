@@ -4,8 +4,7 @@
 	$header_title = "การส่งผลงาน";
 	$header_desc = "รับประกาศนียบัตร";
 
-	if (!isset($_SESSION['evt'])) header("Location: ../login");
-	$permitted = true; # has_perm("dev", false);
+	if (!isset($_SESSION['evt'])) header("Location: ../login#next=".end(explode("/", $_SERVER['REQUEST_URI'])));
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -83,12 +82,11 @@
 	<body>
 		<?php require($dirPWroot."resource/hpe/header.php"); ?>
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
-			<?php if (!$permitted) echo '<iframe src="/error/903">903: Page Under Construction</iframe>'; else { ?>
 			<div class="container">
 				<!--h2><?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตรของฉัน":"My Certificate"?></h2-->
 				<p class="message yellow"><?=$_COOKIE['set_lang']=="th"?"กรุณาเปิดใน browser ที่รองกับการเปิดหรือดาวน์โหลดไฟล์ PDF":"Please open this page in a browser that supports openning/downlading a PDF file."?></p>
 				<div class="box"></div>
-			</div><?php } ?>
+			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>
 		<footer>

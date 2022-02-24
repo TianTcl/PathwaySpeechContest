@@ -4,7 +4,7 @@
 	$header_title = "การส่งผลงาน";
 	$header_desc = "ดูผลคะแนน";
 
-	if (!isset($_SESSION['evt'])) header("Location: ../login");
+	if (!isset($_SESSION['evt'])) header("Location: ../login#next=".end(explode("/", $_SERVER['REQUEST_URI'])));
 	
 	require_once($dirPWroot."resource/php/core/config.php");
 ?>

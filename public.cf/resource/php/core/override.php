@@ -16,8 +16,9 @@
             }
         } else if ($app == "workshop") {
             if ($cmd == "view") {
-                $_SESSION['event']['workshop-URL'] = $attr['info'];
-				$_SESSION['event']['workshop-VDO'] = intval($tcl -> decode($attr['clip'], 3));
+				if (!isset($_SESSION['var'])) $_SESSION['var'] = array();
+                $_SESSION['var']['workshop-URL'] = $attr['info'];
+				$_SESSION['var']['workshop-VDO'] = intval($tcl -> decode($attr['clip'], 3));
 				echo '{"success": true}';
             }
         }

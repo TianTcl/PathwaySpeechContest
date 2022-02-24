@@ -320,73 +320,73 @@
 								<thead><tr>
 									<th>Content</th>
 									<th><output type="number" name="s:1"></output></th>
-									<th><?=$_SESSION['event']['criteria'][10]?> pts</th>
+									<th><?=$config['criteria'][10]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Accuracy and Consistency</td>
-										<td><input type="number" name="p:11" required min="0" max="<?=$_SESSION['event']['criteria'][11]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][11]?> pts</td>
+										<td><input type="number" name="p:11" required min="0" max="<?=$config['criteria'][11]?>" step="1"></td>
+										<td><?=$config['criteria'][11]?> pts</td>
 									</tr><tr>
 										<td>Form & Organization Of Speech</td>
-										<td><input type="number" name="p:12" required min="0" max="<?=$_SESSION['event']['criteria'][12]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][12]?> pts</td>
+										<td><input type="number" name="p:12" required min="0" max="<?=$config['criteria'][12]?>" step="1"></td>
+										<td><?=$config['criteria'][12]?> pts</td>
 									</tr><tr>
 										<td>Creativity</td>
-										<td><input type="number" name="p:13" required min="0" max="<?=$_SESSION['event']['criteria'][13]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][13]?> pts</td>
+										<td><input type="number" name="p:13" required min="0" max="<?=$config['criteria'][13]?>" step="1"></td>
+										<td><?=$config['criteria'][13]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
 									<th>Language Competence & Fluency</th>
 									<th><output type="number" name="s:2"></output></th>
-									<th><?=$_SESSION['event']['criteria'][20]?> pts</th>
+									<th><?=$config['criteria'][20]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Vocabulary</td>
-										<td><input type="number" name="p:21" required min="0" max="<?=$_SESSION['event']['criteria'][21]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][21]?> pts</td>
+										<td><input type="number" name="p:21" required min="0" max="<?=$config['criteria'][21]?>" step="1"></td>
+										<td><?=$config['criteria'][21]?> pts</td>
 									</tr><tr>
 										<td>Structure & Connectors</td>
-										<td><input type="number" name="p:22" required min="0" max="<?=$_SESSION['event']['criteria'][22]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][22]?> pts</td>
+										<td><input type="number" name="p:22" required min="0" max="<?=$config['criteria'][22]?>" step="1"></td>
+										<td><?=$config['criteria'][22]?> pts</td>
 									</tr><tr>
 										<td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
-										<td><input type="number" name="p:23" required min="0" max="<?=$_SESSION['event']['criteria'][23]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][23]?> pts</td>
+										<td><input type="number" name="p:23" required min="0" max="<?=$config['criteria'][23]?>" step="1"></td>
+										<td><?=$config['criteria'][23]?> pts</td>
 									</tr><tr>
 										<td>Tone</td>
-										<td><input type="number" name="p:24" required min="0" max="<?=$_SESSION['event']['criteria'][24]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][24]?> pts</td>
+										<td><input type="number" name="p:24" required min="0" max="<?=$config['criteria'][24]?>" step="1"></td>
+										<td><?=$config['criteria'][24]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
 									<th>Presentation</th>
 									<th><output type="number" name="s:3"></output></th>
-									<th><?=$_SESSION['event']['criteria'][30]?> pts</th>
+									<th><?=$config['criteria'][30]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Communicaton</td>
-										<td><input type="number" name="p:31" required min="0" max="<?=$_SESSION['event']['criteria'][31]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][31]?> pts</td>
+										<td><input type="number" name="p:31" required min="0" max="<?=$config['criteria'][31]?>" step="1"></td>
+										<td><?=$config['criteria'][31]?> pts</td>
 									</tr><tr>
 										<td>Personality</td>
-										<td><input type="number" name="p:32" required min="0" max="<?=$_SESSION['event']['criteria'][32]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][32]?> pts</td>
+										<td><input type="number" name="p:32" required min="0" max="<?=$config['criteria'][32]?>" step="1"></td>
+										<td><?=$config['criteria'][32]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
 									<th>Time</th>
 									<th><output type="number" name="s:4"></output></th>
-									<th><?=$_SESSION['event']['criteria'][40]?> pts</th>
+									<th><?=$config['criteria'][40]?> pts</th>
 								</tr></thead>
 								<tbody>
 									<tr>
 										<td>Speech duration <a onClick="grader.criteria()" href="javascript:void(0)" class="action-list" data-title="Rubric criteria"><i class="material-icons">window</i></a></td>
-										<td><input type="number" name="p:41" required min="0" max="<?=$_SESSION['event']['criteria'][41]?>" step="1"></td>
-										<td><?=$_SESSION['event']['criteria'][41]?> pts</td>
+										<td><input type="number" name="p:41" required min="0" max="<?=$config['criteria'][41]?>" step="1"></td>
+										<td><?=$config['criteria'][41]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);">

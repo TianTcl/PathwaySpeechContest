@@ -94,27 +94,27 @@
 				<div class="message blue date"><?=$schedule?></div>
 				<h2>Scoring Criteria</h2>
 				<div class="crit table"><table>
-					<thead><tr><th>Content</th><th><?=$_SESSION['event']['criteria'][10]?> pts</th></tr></thead>
+					<thead><tr><th>Content</th><th><?=$config['criteria'][10]?> pts</th></tr></thead>
 					<tbody>
-						<tr><td>Accuracy and Consistency</td><td><?=$_SESSION['event']['criteria'][11]?> pts</td></tr>
-						<tr><td>Form & Organization Of Speech</td><td><?=$_SESSION['event']['criteria'][12]?> pts</td></tr>
-						<tr><td>Creativity</td><td><?=$_SESSION['event']['criteria'][13]?> pts</td></tr>
+						<tr><td>Accuracy and Consistency</td><td><?=$config['criteria'][11]?> pts</td></tr>
+						<tr><td>Form & Organization Of Speech</td><td><?=$config['criteria'][12]?> pts</td></tr>
+						<tr><td>Creativity</td><td><?=$config['criteria'][13]?> pts</td></tr>
 					</tbody>
-					<thead><tr><th>Language Competence & Fluency</th><th><?=$_SESSION['event']['criteria'][20]?> pts</th></tr></thead>
+					<thead><tr><th>Language Competence & Fluency</th><th><?=$config['criteria'][20]?> pts</th></tr></thead>
 					<tbody>
-						<tr><td>Vocabulary</td><td><?=$_SESSION['event']['criteria'][21]?> pts</td></tr>
-						<tr><td>Structure & Connectors</td><td><?=$_SESSION['event']['criteria'][22]?> pts</td></tr>
-						<tr><td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td><td><?=$_SESSION['event']['criteria'][23]?> pts</td></tr>
-						<tr><td>Tone</td><td><?=$_SESSION['event']['criteria'][24]?> pts</td></tr>
+						<tr><td>Vocabulary</td><td><?=$config['criteria'][21]?> pts</td></tr>
+						<tr><td>Structure & Connectors</td><td><?=$config['criteria'][22]?> pts</td></tr>
+						<tr><td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td><td><?=$config['criteria'][23]?> pts</td></tr>
+						<tr><td>Tone</td><td><?=$config['criteria'][24]?> pts</td></tr>
 					</tbody>
-					<thead><tr><th>Presentation</th><th><?=$_SESSION['event']['criteria'][30]?> pts</th></tr></thead>
+					<thead><tr><th>Presentation</th><th><?=$config['criteria'][30]?> pts</th></tr></thead>
 					<tbody>
-						<tr><td>Communicaton</td><td><?=$_SESSION['event']['criteria'][31]?> pts</td></tr>
-						<tr><td>Personality</td><td><?=$_SESSION['event']['criteria'][32]?> pts</td></tr>
+						<tr><td>Communicaton</td><td><?=$config['criteria'][31]?> pts</td></tr>
+						<tr><td>Personality</td><td><?=$config['criteria'][32]?> pts</td></tr>
 					</tbody>
-					<thead><tr><th>Time</th><th><?=$_SESSION['event']['criteria'][40]?> pts</th></tr></thead>
+					<thead><tr><th>Time</th><th><?=$config['criteria'][40]?> pts</th></tr></thead>
 					<tbody>
-						<tr><td>Speech duration</td><td><?=$_SESSION['event']['criteria'][41]?> pts</td></tr>
+						<tr><td>Speech duration</td><td><?=$config['criteria'][41]?> pts</td></tr>
 					</tbody>
 					<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);"><th>Total</th><th>100 pts</th></tr></thead>
 				</table></div>

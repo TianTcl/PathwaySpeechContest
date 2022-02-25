@@ -74,8 +74,11 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
 		gtag("js", new Date());	gtag("config", "UA-204561763-3");
-		// Temporary Safair Ripple Fix
-		if (isSafari) $("main span.ripple-effect").remove();
+		// URL
+		if (/(^\?|&)(openExternalBrowser=1|fbclid=([^&])+)/.test(location.search)) {
+			let ns = location.search.substr(1).split("&").filter(ep => !(ep.startsWith("fbclid=") || ep=="openExternalBrowser=1")).join("&");
+			history.replaceState(null, null, location.pathname+(ns.length ? "?"+ns : "")+location.hash);
+		}
     });
 	// Scrolling
 	$(document).scroll(function() {

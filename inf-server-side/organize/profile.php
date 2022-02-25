@@ -5,8 +5,8 @@
     $rmte = (isset($_GET['remote']) && !empty($_GET['remote'])); $remote = $rmte ? "remote" : "";
 	$header_title = "My Profile";
 
-	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("location: new-password$my_url");
+	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2)) header("Location: ./$my_url");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 
 	require($dirPWroot."e/resource/db_connect.php");
 	$user = $rmte ? trim($_GET['remote']) : $_SESSION['evt2']['user'];

@@ -28,12 +28,13 @@
                 if (isset($_REQUEST['change'])) {
                     $change = trim($_REQUEST['change']); switch ($change) {
                         case "pathTree": $page = "1"; $sortBy = "G"; $sortOrder = "DESC"; break;
-                        case "show": $page = strval(floor($_SESSION['var-mUser_set']['page']*$_SESSION['var-mUser_set']['show']/intval($show))+1); break;
+                        case "show": $page = strval(floor($_SESSION['var']['mUser_set']['page']*$_SESSION['var']['mUser_set']['show']/intval($show))+1); break;
                         case "sortBy": $page = "1"; $sortOrder = "ASC"; break;
                         case "sortOrder": $page = "1"; break;
                         case "search": $page = "1"; break;
                     }
-                } $_SESSION['var-mUser_set'] = array( // Save for compare
+                } if (!isset($_SESSION['var'])) $_SESSION['var'] = array();
+                $_SESSION['var']['mUser_set'] = array( // Save for compare
                     "pathTree" => $pathTree,
                     "page" => intval($page)-1,
                     "show" => intval($show),

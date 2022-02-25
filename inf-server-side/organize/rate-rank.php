@@ -4,7 +4,7 @@
 	$header_title = "จัดลำดับ";
 	$header_desc = "เรียงลำดับผลงานผู้เข้าประกวดตามสาย";
 	
-	if (!isset($_SESSION['evt2'])) header("Location: ./$my_url");
+	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2)) header("Location: ./$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: new-password$my_url");
 	$permitted = has_perm("judge"); if ($permitted) {
 		

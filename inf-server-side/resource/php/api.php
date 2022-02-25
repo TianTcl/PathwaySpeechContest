@@ -39,6 +39,7 @@
                     if ($success -> num_rows == 1) {
                         $result = $success -> fetch_array(MYSQLI_ASSOC);
                         $_SESSION['evt'] = array(
+                            "EventID" => 2,
                             "user" => $result['ptpid'],
                             "namea" => $result['namef']." ".$result['namel'],
                             "namen" => $result['namen'],

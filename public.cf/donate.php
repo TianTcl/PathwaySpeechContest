@@ -297,7 +297,7 @@
 					// if (!recheck && typeof sv.img_link === "string") URL.revokeObjectURL(sv.img_link);
 					if (typeof f !== "undefined") {
 						let filename = f.name.toLowerCase().split(".");
-						if ((["png", "jpg", "jpeg", "heic", "gif"].includes(filename.at(-1))) && (f.size > 0 && f.size < 3072000)) { // 3 MB
+						if ((["png", "jpg", "jpeg", "heic", "gif"].includes(filename[filename.length-1])) && (f.size > 0 && f.size < 3072000)) { // 3 MB
 							if (!recheck) {
 								fname.value = f.name; try { if (!isSafari) { sv.img_link = URL.createObjectURL(f);
 								preview.css("background-image", 'url("'+sv.img_link+'")'); } } catch(ex) {}

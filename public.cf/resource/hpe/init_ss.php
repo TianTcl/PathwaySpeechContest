@@ -68,7 +68,7 @@
 		document.querySelectorAll("html body header section div.ocs div.head-item:not(.logo) a").forEach((menu) => {
 			if ($(menu).attr("href").split("?")[0].split("#")[0]==top.location.pathname) menu.classList.add("ftcpm");
 		}); $("a:not([draggable]), img:not([draggable])").attr("draggable", "false");
-		$('button:not(.ripple-click):not([onClick^="return "]):not([data-title]):not(.dont-ripple), a[role="button"]:not(.ripple-click):not([onClick^="return "]):not([data-title]):not(.dont-ripple)').addClass("ripple-click"); ppa.ripple_click_program();
+		// $('button:not(.ripple-click):not([onClick^="return "]):not([data-title]):not(.dont-ripple), a[role="button"]:not(.ripple-click):not([onClick^="return "]):not([data-title]):not(.dont-ripple)').addClass("ripple-click"); ppa.ripple_click_program();
 		/*if (!/^\/((s|t)\/)?$/.test(location.pathname))*/ $('aside.navigator_tab section.nav ul > li > a[href="'+location.pathname+'"]').parent().addClass("this-page");
 		// Google Analytics
 		window.dataLayer = window.dataLayer || [];

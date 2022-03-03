@@ -43,7 +43,7 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				setTimeout(changeTopic, 1250);
+				// setTimeout(changeTopic, 1250);
 			});
 			function viewFile(me) {
 				go_on(); return false;
@@ -65,7 +65,7 @@
 				});
 			}
 			function changeTopic() {
-				var pos = 14, topic = "World Health Day", speed = 50,
+				var pos = 16, topic = "World Environment Day", speed = 50,
 					target = $("main span.evn");
 				function remove() {
 					if (pos > 0) {
@@ -88,7 +88,7 @@
 			<div class="container">
 				<h2>เกณฑ์ในการประกวด</h2>
 				<ul>
-					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">New Year\'s Day</span>':'<span class="evn">New Year\'s Day</span> Topic.'?></li>
+					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">World Health Day</span>':'<span class="evn">World Health Day</span> Topic.'?></li>
 					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
 				<div class="message blue date"><?=$schedule?></div>

@@ -23,11 +23,11 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				setTimeout(changeTopic, 1250);
-				setTimeout(changeTopic2, 1250);
+				// setTimeout(changeTopic, 1250);
+				// setTimeout(changeTopic2, 1250);
 			});
 			function changeTopic() {
-				var pos = 14, topic = "WORLD HEALTH DAY", speed = 50,
+				var pos = 16, topic = "WORLD ENVIRONMENT DAY", speed = 50,
 					target = document.querySelector("main .topic");
 				function remove() {
 					if (pos > 0) {
@@ -45,7 +45,7 @@
 				} remove();
 			}
 			function changeTopic2() {
-				var pos = 14, topic = "World Health Day", speed = 50,
+				var pos = 16, topic = "World Environment Day", speed = 50,
 					target = $("main span.evn");
 				function remove() {
 					if (pos > 0) {
@@ -74,7 +74,7 @@
 					<p><font style="color: var(--clr-bs-red);">ฟรี! ค่าสมัคร</font></p>
 				</center>
 				<hr>
-				<p>กิจกรรมประกวดสุนทรพจน์ในหัวข้อ “<span class="evn">New Year's Day</span>”</p>
+				<p>กิจกรรมประกวดสุนทรพจน์ในหัวข้อ “<span class="evn">World Health Day</span>”</p>
 				<p>เวลาในการแข่งขัน นักเรียนควรใ้ช้เวลาในการพูดสุนทรพจน์ 2-3 นาที</p>
 				<hr>
 				<span>คุณสมบัติผู้เข้าแข่งขัน</span><ul>
@@ -91,7 +91,7 @@
 				</ul>
 				<hr>
 				<p>รูปแบบกิจกรรม</p>
-				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “<span class="evn">New Year's Day</span>” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
+				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “<span class="evn">World Health Day</span>” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
 				<span>วิธีการส่งคลิปวิดีโอเพื่อแข่งขัน</span><ul>
 					<li>อัดคลิปวิดีโอครึ่งตัวโดยให้เห็นใบหน้าที่ชัดเจน</li>
 					<li>แนะนำตัวให้น่าจดจำไม่เกิน 30 วินาที</li>

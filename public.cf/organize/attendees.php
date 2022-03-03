@@ -11,6 +11,8 @@
 	<head>
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
+			div.group.s div.list div.table tr td:nth-of-type(4) { text-align: center; }
+		</style>
 		<link rel="stylesheet" href="https://inf.bodin.ac.th/resource/css/extend/mod-directory.css">
 		<script type="text/javascript">
 			$(document).ready(function() {

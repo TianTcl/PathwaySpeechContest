@@ -4,13 +4,13 @@
     header("Access-Control-Allow-Origin: https://pathwayspeechcontest.cf");
 	// Configuration
 	$colcode = array( // (colName, sortable, Display, Link)
-		"A" => array("namen", 1, "Nickname", false),
-		"B" => array("namef", 1, "Firstname", false),
-		"C" => array("namel", 1, "Lastname", false),
-		"D" => array("email", 1, "E-mail address", false),
-		"E" => array("grade", 1, "Grade", false),
-		"F" => array("school", 1, "School", false),
-		"G" => array("time", 1, "Register time", false)
+		"A" => array("namen", true, "Nickname", false, "namen"),
+		"B" => array("namef", true, "Firstname", false, "namef"),
+		"C" => array("namel", true, "Lastname", false, "namel"),
+		"D" => array("email", true, "E-mail address", false, "email"),
+		"E" => array("grade", true, "Grade", false, "grade"),
+		"F" => array("school", true, "School", false, "school"),
+		"G" => array("time", true, "Register time", false, "time")
 	);
 	// Inputs
     if (isset($_REQUEST['list'])) {
@@ -51,7 +51,7 @@
                     "c" => "$queryBegin AND grade BETWEEN 7 AND 9",
                 ); if (isset($_REQUEST['q']) && !empty(trim($_REQUEST['q']))) {
                     $searchQuery = "AND ("; $q = $db -> real_escape_string(trim($_REQUEST['q']));
-                    foreach (array("A", "B", "C", "D", "F") as $cols) $searchQuery .= $colcode[$cols][0]." LIKE '$q%' OR ";
+                    foreach (array("A", "B", "C", "D", "F") as $cols) $searchQuery .= $colcode[$cols][4]." LIKE '$q%' OR ";
                     $searchQuery = rtrim($searchQuery, " OR ").")";
                 } else $searchQuery = "";
                 // Translate
@@ -86,7 +86,7 @@
                         $send = '{ "success": true, "info": { ';
                         // send thead
                         $send .= '"column": [';
-                        foreach ($col as $ec) $send .= '{ "name": "'.$colcode[$ec][2].'", "ref": "'.$ec.'", "sortable": '.($colcode[$ec][1]==0 ? "false" : "true" ).' },';
+                        foreach ($col as $ec) $send .= '{ "name": "'.$colcode[$ec][2].'", "ref": "'.$ec.'", "sortable": '.($colcode[$ec][1] ? "true" : "false" ).' },';
                         $send = rtrim($send, ","); $send .= '],';
                         // send tbody
                         $send .= '"users": [';

@@ -48,7 +48,7 @@
 								Object.keys(dat.info.data).forEach(mark => {
 									document.querySelector('main .mark .table output[name="'+mark+'"]').value = parseFloat(dat.info.data[mark]);
 								}); $("main .mark .table").toggle("fold", "linear", "slow");
-							} else $('<center class="message '+dat.info.data[0]+'">'+dat.info.data[1]+'</center>').insertAfter("main .mark .load");
+							} else $('<center class="message '+dat.info.data[0]+'">'+dat.info.data[1]+'</center>').insertAfter("main .mark .table");
 						} else app.ui.notify(1, dat.reason);
 					});
 				}, 750);

@@ -8,6 +8,7 @@
         require_once($dirPWroot."resource/php/lib/TianTcl.php"); require($dirPWroot."resource/php/core/getip.php");
         require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
         $rmte = ((isset($attr['remote']) && $attr['remote']) || (isset($_REQUEST['remote']) && $_REQUEST['remote'])); $remote = $rmte ? "remote" : "";
+        $round = $config['round'];
         $num2grade = array("ป.3", "ป.4", "ป.5", "ป.6", "ม.1", "ม.2", "ม.3", "ม.4", "ม.5", "ม.6");
 		if ($app == "register") {
             if ($cmd == "chkEml") {
@@ -52,7 +53,7 @@
                 } else { echo '{"success": false, "reason": [3, "Unable to sign you in. Please try again."]}'; slog("webForm", "PathwaySCon", "account", "login", $attr['user'].",".$attr['pass'], "fail", $remote, "InvalidQuery"); }
             } else if ($cmd == "logout") {
                 $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $attr['user'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
-                if (isset($_SESSION['evt'])) {
+                if (isset($_SESSION['evt']) && $_SESSION['evt']['EventID']==2) {
                     slog($user, "PathwaySCon", "account", "logout", "", "pass", $remote);
                     unset($_SESSION['evt']);
                 } else slog($user, "PathwaySCon", "account", "logout", "", "fail", $remote, "NotExisted");
@@ -61,9 +62,9 @@
         } else if ($app == "stat") {
             if ($cmd == "fetch") {
                 $getappall = $db -> query("SELECT COUNT(ptpid) AS amt FROM PathwaySCon_attendees WHERE ptpid > 1");
-                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=".$config['round']);
-                $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 GROUP BY a.smid");
-                $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1");
+                $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=$round");
+                $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 AND b.round=$round GROUP BY a.smid");
+                $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=$round");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
                 $getschamt = $db -> query("(SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school HAVING amount > 1) UNION SELECT 'โรงเรียนอื่นๆ' AS school,COUNT(a.ptpid) AS amount,GROUP_CONCAT(a.namen) AS peoples FROM PathwaySCon_attendees a WHERE a.ptpid > 1 AND NOT EXISTS (SELECT b.school FROM PathwaySCon_attendees b WHERE a.school=b.school HAVING COUNT(ptpid) > 1) ORDER BY amount DESC,school");
                 $getgrdamt = $db -> query("SELECT grade,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY grade ORDER BY amount DESC,grade");
@@ -93,7 +94,7 @@
                     )); } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch statics."]}';
             } else if ($cmd == "race") {
-                $getgroup = $db -> query("SELECT (CASE WHEN a.grade BETWEEN 0 AND 3 THEN 'ประถม' WHEN a.grade BETWEEN 4 AND 6 THEN 'มัธยมต้น' WHEN a.grade BETWEEN 7 AND 9 THEN 'มัธยมปลาย' END) AS Category, COUNT(a.ptpid) AS Amount, COUNT(b.smid) AS Submit FROM PathwaySCon_attendees a LEFT JOIN PathwaySCon_submission b ON a.ptpid=b.ptpid AND b.round=1 WHERE a.ptpid>1 GROUP BY Category");
+                $getgroup = $db -> query("SELECT (CASE WHEN a.grade BETWEEN 0 AND 3 THEN 'ประถม' WHEN a.grade BETWEEN 4 AND 6 THEN 'มัธยมต้น' WHEN a.grade BETWEEN 7 AND 9 THEN 'มัธยมปลาย' END) AS Category, COUNT(a.ptpid) AS Amount, COUNT(b.smid) AS Submit FROM PathwaySCon_attendees a LEFT JOIN PathwaySCon_submission b ON a.ptpid=b.ptpid AND b.round=$round WHERE a.ptpid > 1 GROUP BY Category");
                 if ($getgroup) {
                     $result = array();
                     if ($getgroup -> num_rows > 0) { while ($grpamt = $getgroup -> fetch_assoc())
@@ -101,9 +102,9 @@
                     } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch amount."]}';
             } else if ($cmd == "sboard") {
-                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid>1 AND";
+                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost = "GROUP BY a.smid ORDER BY mark DESC,b.lasttime,c.time";
-                $sqlpre2 = "SELECT b.smid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid>1 AND";
+                $sqlpre2 = "SELECT b.smid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost2 = "AND a.judge=10011 ORDER BY a.mark DESC,b.lasttime,c.time LIMIT 3";
                 $gettop = $db -> query("($sqlpre2 c.grade BETWEEN 0 AND 3 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 4 AND 6 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 7 AND 9 $sqlpost2)");
                 $prim = array(); $midl = array(); $high = array(); $tops = array();
@@ -210,7 +211,6 @@
         } else if ($app == "main") {
             $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
             if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
-            $round = $config['round'];
             if ($cmd == "get") {
                 if ($attr == "score") {
                     $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
@@ -237,7 +237,7 @@
                                 } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"ไม่มีข้อความจากผู้พิจรณาคะแนน":"No comment.").'</center>"}}';
                             } else echo '{"success": false, "reason": [3, "Unable to load comments."]}';
                         } else echo '{"success": false, "reason": [2, "Invalid permission responded."]}';
-                    } else echo '{"success": false, "reason": [3, "Unable to get permission."]}';
+                    } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"กรุณาส่งวีดีโอสุนทรพจน์เพื่อรอรับคะแนน":"Please submit your speech to wait for scores.").'</center>"}}'; # '{"success": false, "reason": [3, "Unable to get permission."]}';
                 }
             } else if ($cmd == "comment") {
                 if ($attr == "request") {

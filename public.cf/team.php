@@ -91,10 +91,8 @@
 			main .subrole div.role h3 {
 				margin: 0px;
 				transform: none;
-				text-align: left;
 			}
 			main div.role .member { display: flex; justify-content: center; flex-wrap: wrap; }
-			main .subrole div.role .member { justify-content: flex-start; }
 			main :not(.subrole) > div.role > div.member, main .subrole div.role {
 				padding: 5px;
 				border-radius: 7.5px;
@@ -118,7 +116,12 @@
 			}
 			main div.role .people .bio { padding: 5px 0px; }
 			main div.role .people .bio .name { font-family: "Krub", "IBM Plex Sans Thai"; }
+			@media only screen and (min-width: 768.003px) {
+				main .subrole div.role h3 { text-align: left; }
+				main .subrole div.role .member { justify-content: flex-start; }
+			}
 			@media only screen and (max-width: 768px) {
+				main div.role h3 { transform: scale(1.25); }
 				main div.role .people { width: 150px; height: 200px; }
 				main div.role .people .avatar { height: 150px; }
 			}
@@ -134,10 +137,23 @@
 					// Get configuration
 					$.getJSON("/resource/json/config-team.json", function(res) {
 						save_config(res);
-						load(cv.season);
+						seek_param(); // load(cv.season);
 					}); const save_config = data => tdi = data;
 					sv.lang = ppa.getCookie("set_lang");
 				};
+				function seek_param() { // Modified
+					var hash = {};
+					if (location.hash.length > 1) {
+						// Extract hashes
+						location.hash.substring(1, location.hash.length).split("&").forEach((ehs) => {
+							let ths = ehs.split("=");
+							hash[ths[0]] = ths[1];
+						});
+						// history.replaceState(null, null, location.pathname);
+					} // Let's see
+					if (typeof hash.season !== "undefined") load(parseInt(hash.season));
+					else load(cv.season);
+				}
 				var load = function(season) {
 					if (!sv.rendered.includes(season)) read_and_render(season);
 					change_to_tab(season);
@@ -149,14 +165,35 @@
 					$("main .wrapper div.tab + span.bar-responsive").css("--show", tab);
 					$("main .wrapper div.tbs > div").hide();
 					$('main .wrapper div.tbs > div[order="'+tab+'"]').show();
+					history.replaceState(null, null, location.pathname+"#season="+what.toString());
 				};
 				var read_and_render = function(season) {
 					if (sv.rendered.includes(season)) return;
 					sv.rendered.push(season);
 					// setTimeout(()=>{console.log(tdi)},125);
 					sv.info = tdi.ss[season - 1]; sv.display = "";
-					sv.info["order"].forEach(readRole);
-					var tab = (parseInt(season) - 1).toString();
+					sv.info["order"].forEach(eachRole => {
+						var has_member = (sv.info[eachRole] != null && sv.info[eachRole].length);
+						sv.display += '<div class="role">';
+						sv.display += '<div class="title"><h3>'+tdi.mnf[eachRole][sv.lang]+'</h3></div>';
+						if (has_member) {
+							sv.display += '<div class="member">';
+							sv.info[eachRole].forEach(eachMbr => {
+								var mbr = tdi.ppl[eachMbr];
+								sv.display += '<div class="people">';
+								sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
+								if (mbr.avatar == null) mbr.avatar = "default.jpg";
+								sv.display += '<img src="/e/Pathway-Speech-Contest/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+								sv.display += '</div><div class="bio">';
+								sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
+								sv.display += '</div></div>';
+							}); sv.display += '</div>';
+						} if (typeof tdi.tree[eachRole] !== "undefined" && tdi.tree[eachRole].length) {
+								sv.display += '<div class="subrole">';
+								tdi.tree[eachRole].forEach(readRole);
+								sv.display += '</div>';
+						} sv.display += '</div>';
+					}); var tab = (parseInt(season) - 1).toString();
 					$('main .wrapper div.tbs > div[order="'+tab+'"]').html(sv.display);
 					delete sv.info, sv.display;
 					setTimeout(function() { Grade(document.querySelectorAll('main div[order="'+tab+'"] div.people > .avatar:not(.real)')); }, 250);
@@ -165,26 +202,22 @@
 					<?php if (has_perm("dev")) echo '$(\'main div[order="\'+tab+\'"] div.member\').sortable();'; ?>
 				};
 				var readRole = eachRole => {
-					var has_member = (sv.info[eachRole] != null && sv.info[eachRole].length);
-					sv.display += '<div class="role">';
-					sv.display += '<div class="title"><h3>'+tdi.mnf[eachRole][sv.lang]+'</h3></div>';
-					if (has_member) {
+					if (sv.info[eachRole] != null && sv.info[eachRole].length) {
+						sv.display += '<div class="role">';
+						sv.display += '<div class="title"><h3>'+tdi.mnf[eachRole][sv.lang]+'</h3></div>';
 						sv.display += '<div class="member">';
 						sv.info[eachRole].forEach(eachMbr => {
 							var mbr = tdi.ppl[eachMbr];
 							sv.display += '<div class="people">';
 							sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
 							if (mbr.avatar == null) mbr.avatar = "default.jpg";
-							sv.display += '<img src="/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+							sv.display += '<img src="/e/Pathway-Speech-Contest/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
 							sv.display += '</div><div class="bio">';
 							sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
 							sv.display += '</div></div>';
 						}); sv.display += '</div>';
-					} if (typeof tdi.tree[eachRole] !== "undefined" && tdi.tree[eachRole].length) {
-							sv.display += '<div class="subrole">';
-							tdi.tree[eachRole].forEach(readRole);
-							sv.display += '</div>';
-					} sv.display += '</div>';
+						sv.display += '</div>';
+					}
 				};
 				return {
 					start: init,

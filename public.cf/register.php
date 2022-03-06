@@ -11,8 +11,47 @@
 	<head>
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
+			main div.container { overflow-y: hidden; }
 			main .message { font-family: "Sarabun", sans-serif; }
 			main .message > * { margin: 0px 0px 10px; }
+			main .wrapper {
+				--tabAmt: 3;
+				margin-bottom: 0px;
+				/* border-radius: 10px; box-shadow: 0px 0px var(--shd-big) var(--fade-black-7); */
+			}
+			main .wrapper div.tab {
+				margin: 0px;
+				/* border-radius: 10px 10px 0px 0px; */
+				display: flex; overflow: hidden;
+			}
+			main .wrapper div.tab div {
+				padding: 7.5px 10px;
+				width: 100%; height: 30px;
+				line-height: 30px; text-align: center;
+				cursor: pointer; transition: var(--time-tst-xfast) ease;
+			}
+			main .wrapper div.tab div:hover { background-color: var(--fade-white-7); }
+			main .wrapper div.tab div.active {
+				background-color: var(--fade-black-8);
+				/* border-radius: 10px 10px 0px 0px; */
+				pointer-events: none;
+			}
+			main .wrapper div.tab + span.bar-responsive {
+				margin-bottom: 0px;
+				transform: translate(calc(100% * var(--show)), -100%);
+				width: calc(100% / var(--tabAmt)); height: 2.5px;
+				background-color: var(--clr-psc-green-dark-high);
+				display: block; transition: var(--time-tst-xfast);
+				pointer-events: none;
+			}
+			/* main .wrapper div.tab:active + span.bar-responsive { animation: bar_moving var(--time-tst-fast) ease 1; } */
+			@keyframes bar_moving {
+				0%, 100% { width: calc(100% / var(--tabAmt)); }
+				5%, 95% { width: calc(100% / var(--tabAmt) * 1.25); }
+				50% { width: calc(100% / var(--tabAmt) * 0.75); }
+			}
+			main .wrapper div.tbs { transform: translateY(-2.5px); }
+			main .wrapper div.tbs div > p { margin: 7.5px 0px 0px; }
 			main .form > *:not(:last-child) { margin-bottom: 10px; }
 			main .group-inline { display: flex; justify-content: space-between; }
 			main .group-inline .group { width: 48.75%; }
@@ -66,12 +105,8 @@
 				$('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').on("input change", validate_field);
 				validate_field(); // app.io.confirm("leave");
 				if (location.hash == "#start") setTimeout(reg.start, 1250);
-				// setTimeout(changeSchd, 1250);
+				reg.show(2);
 			});
-			function changeSchd() {
-				$("main .schd-2").toggle("slide", "linear", "slow");
-				$("main .schd-3").toggle("blind", "linear", "slow");
-			}
 			function validate_field() {
 				document.querySelectorAll('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').forEach((eio) => {
 					var ei = $(eio);
@@ -172,11 +207,20 @@
 						ppa.ripple_click_program();
 					}, 500);
 				};
+				var viewSchd = function(what) {
+					var tab = (parseInt(what) - 1).toString();
+					$("main .wrapper div.tab div.active").removeClass("active");
+					$('main .wrapper div.tab div[onClick$="show('+what.toString()+')"]').addClass("active");
+					$("main .wrapper div.tab + span.bar-responsive").css("--show", tab);
+					$("main .wrapper div.tbs > div").hide();
+					$('main .wrapper div.tbs > div[order="'+tab+'"]').show();
+				};
 				return {
 					start: openForm,
 					reset: clearForm,
 					submit: validate,
-					confirm: registrationConfirm
+					confirm: registrationConfirm,
+					show: viewSchd
 				}
 			} const reg = regisfx(); delete regisfx;
 		</script>
@@ -187,16 +231,50 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเข้าร่วมประกวด":"Register to Event"?></h2>
-				<div class="message blue schd-1" style="display: none;">
-					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 1)":"Schedule (Season 1)"?></h3>
-					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 1 ธันวาคม 2564<br>ปิดรับสมัครวันที่ 31 ธันวาคม 2564<br>ประกาศผลวันที่ 15 มกราคม 2565":"Open for registration & submit: 1<sup>st</sup> December 2021<br>Close for registration & submit: 31<sup>st</sup> December 2021<br>Rank & Score announcement: 15<sup>th</sup> January 2022"?> <font style="color: var(--clr-bs-red);">•</font></p>
-				</div>
-				<div class="message blue schd-2">
-					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ (รอบที่ 2)":"Schedule (Season 2)"?></h3>
-					<p><?=$_COOKIE['set_lang']=="th"?"เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style=\"color: var(--clr-bs-red);\">•</font><br>ปิดรับสมัครวันที่ 31 มีนาคม 2565<br>ประกาศผลวันที่ 17 เมษายน 2565":"Open for registration & submit: 12<sup>th</sup> March 2022 <font style=\"color: var(--clr-bs-red);\">•</font><br>Close for registration & submit: 31<sup>st</sup> March 2022<br>Rank & Score announcement: 17<sup>th</sup> April 2022"?></p>
-				</div>
-				<div class="option">
-					<p><?=$_COOKIE['set_lang']=="th"?'หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย':'If you are already registered. Then you can <a href="login">sign in</a> to submut your speech.<br>If you are not registered. Then you can start filling the <a href="javascript:reg.start()">registration form</a>.'?></p>
+				<div class="message blue">
+					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ":"Schedule"?></h3>
+					<div class="wrapper">
+						<div class="tab">
+							<div onClick="reg.show(1)"><?=$_COOKIE['set_lang']=="th"?"รอบที่":"Season"?> 1</div>
+							<div onClick="reg.show(2)"><?=$_COOKIE['set_lang']=="th"?"รอบที่":"Season"?> 2</div>
+							<div onClick="reg.show(3)"><?=$_COOKIE['set_lang']=="th"?"รอบที่":"Season"?> 3</div>
+						</div><span class="bar-responsive"></span>
+						<div class="tbs">
+						<?php if ($_COOKIE['set_lang']=="th") { ?>
+							<div order="0">
+								<p>เปิดรับสมัครวันที่ 1 ธันวาคม 2564</p>
+								<p>ปิดรับสมัครวันที่ 31 ธันวาคม 2564</p>
+								<p>ประกาศผลวันที่ 15 มกราคม 2565</p>
+							</div>
+							<div order="1">
+								<p>เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>ปิดรับสมัครวันที่ 31 มีนาคม 2565</p>
+								<p>ประกาศผลวันที่ 17 เมษายน 2565</p>
+							</div>
+							<div order="2">
+								<p>เปิดรับสมัครวันที่ 4 มิถุนายน 2565</p>
+								<p>ปิดรับสมัครวันที่ 30 มิถุนายน 2565</p>
+								<p>ประกาศผลวันที่ 17 กรกฎาคม 2565</p>
+							</div>
+						<?php } else { ?>
+							<div order="0">
+								<p>Open for registration & submit: 1<sup>st</sup> December 2021</p>
+								<p>Close for registration & submit: 31<sup>st</sup> December 2021</p>
+								<p>Rank & Score announcement: 15<sup>th</sup> January 2022</p>
+							</div>
+							<div order="1">
+								<p>Open for registration & submit: 12<sup>th</sup> March 2022 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>Close for registration & submit: 31<sup>st</sup> March 2022</p>
+								<p>Rank & Score announcement: 17<sup>th</sup> April 2022</p>
+							</div>
+							<div order="2">
+								<p>Open for registration & submit: 4<sup>th</sup> June 2022</p>
+								<p>Close for registration & submit: 30<sup>th</sup> June 2022</p>
+								<p>Rank & Score announcement: 17<sup>th</sup> July 2022</p>
+							</div>
+						<?php } ?>
+						</div>
+					</div>
 				</div>
 				<div class="option">
 					<p><?=$_COOKIE['set_lang']=="th"?'หากท่านได้ทำการลงทะเบียนไว้เรียบร้อยแล้ว และต้องการส่งผลงาน โปรด<a href="login">เข้าสู่ระบบ</a><br>หากท่านยังไม่ลงทะเบียน ท่านสามารถ<a href="javascript:reg.start()">เริ่มกรอกฟอร์ม</a>ได้เลย':'If you are already registered. Then you can <a href="login">sign in</a> to submut your speech.<br>If you are not registered. Then you can start filling the <a href="javascript:reg.start()">registration form</a>.'?></p>

@@ -176,9 +176,9 @@
             "fullname": "นางสาวชนารดี  แสวงศรี",
             "avatar": null
         },
-        "P_0": {
+        "PJJ": {
             "nickname": "พี่พราว",
-            "fullname": "นางสาว___  ___",
+            "fullname": "นางสาวจารุจินตน์  จารุเศรนี",
             "avatar": null
         }
     },
@@ -212,7 +212,7 @@
             "D": ["TTH"],
             "E": ["KCP", "GYP", "MNA", "XRW", "PPS", "TCL"],
             "F": ["PNV", "PRW", "GYP"],
-            "G": ["PNV", "PRW", "P_0"],
+            "G": ["PNV", "PRW", "PJJ"],
             "H": null,
             "I": null,
             "J": null,

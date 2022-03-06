@@ -70,7 +70,7 @@
 					<p>การแข่งขัน</p>
 					<h1>Pathway Speech Contest</h1>
 					<p>ในหัวข้อ</p>
-					<h2 class="topic">NEW YEAR'S DAY</h2>
+					<h2 class="topic">WORLD HEALTH DAY</h2>
 					<p><font style="color: var(--clr-bs-red);">ฟรี! ค่าสมัคร</font></p>
 				</center>
 				<hr>

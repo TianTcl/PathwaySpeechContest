@@ -101,7 +101,8 @@
 					</details>
 					<details id="register-homeschool">
 						<summary>วิธีการสมัครสำหรับนักเรียน Homeschool</summary>
-						<p>ในช่องโรงเรียน ให้กรอกว่า "จัดการศึกษาขั้นพื้นฐานโดยครอบครัว"</p>
+						<p>ในช่องโรงเรียน ให้กรอกว่า "จัดการศึกษาขั้นพื้นฐานโดยครอบครัว (โอมสคูล)"</p>
+						<p>หากค้นหาไม่เจอ สามารถ<a href="#school-names">ดูชื่อโรงเรียนที่พบบ่อย</a>ได้</p>
 					</details>
 					<details id="not-top-get-cert">
 						<summary>หากไม่ติด 3 อันดับแรกของกลุ่ม จะได้รับประกาศนียบัตรไหม</summary>
@@ -125,6 +126,41 @@
 							<li>ส่วนที่สอง จะประกาศผลคะแนนแยกตามเกณฑ์ใน<a href="submit/#/view-score">ระบบ(เว็บแอปพลิเคชัน)</a> (ส่วนตัว)</li>
 						</ul>
 						<p>โดยผู้สมัคร จะได้รับอีเมลแจ้งเมื่อมีการประกาศผลแล้ว<p>
+					</details>
+					<details id="school-names">
+						<summary>หาชื่อโรงเรียนไม่เจอ</summary>
+						<p>รายชื่อโรงเรียนที่พบบ่อย</p>
+						<div class="table"><table><thead><tr>
+							<th>ชื่อทางการภาษาไทย (ในระบบ)</th>
+							<th>ชื่อทางการภาษาอังกฤษ</th>
+							<th>ชื่อที่รู้จัก/ชื่ออื่นๆ</th>
+						</tr></thead><tbody>
+							<tr>
+								<td>จัดการศึกษาขั้นพื้นฐานโดยครอบครัว</td>
+								<td>Homeschool</td>
+								<td>โอมสคูล</td>
+							</tr>
+							<tr>
+								<td>บีคอนเฮาส์แย้มสอาดรังสิต</td>
+								<td>Beaconhouse Yamsaard Rangsit</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>The Newton Sixth Form School</td>
+								<td>The Newton Sixth Form School</td>
+								<td>Newton Sixth Form</td>
+							</tr>
+							<tr>
+								<td>สาธิตนานาชาติ มหาวิทยาลัยมหิดล</td>
+								<td>Mahidol Univesity International Demonstration School</td>
+								<td>MUIDS</td>
+							</tr>
+							<tr>
+								<td>นานาชาติเอกมัย</td>
+								<td>Ekamai International School</td>
+								<td>EIS</td>
+							</tr>
+						</tbody></table></div>
 					</details>
 					<!--details id="">
 						<summary></summary>

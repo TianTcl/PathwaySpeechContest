@@ -24,7 +24,7 @@
 				background-color: var(--clr-gg-grey-300); background-size: contain; background-repeat: no-repeat; background-position: center;
 				background-image: url("<?=(!empty($get -> avatar)?"https://inf.bodin.ac.th/e/Pathway-Speech-Contest":"")?>/resource/images/people-<?=(!empty($get -> avatar)?($get -> avatar):"default.jpg")?>");
 				/* display: flex; justify-content: center; */
-				overflow: hidden;
+				overflow: hidden; transition: var(--time-tst-fast);
 			}
 			main form div.box:after {
 				margin: auto;
@@ -37,6 +37,10 @@
 				margin: auto;
 				width: 100%; height: 100%; transform: translateY(-2.5px);
 				opacity: 0%; filter: opacity(0%);
+			}
+			main form div.box:focus-within {
+				border-color: var(--clr-bs-blue);
+				box-shadow: 0px 0px 0px 0.25rem rgb(13 110 253 / 25%);
 			}
 			main form button { white-space: nowrap; }
 		</style>

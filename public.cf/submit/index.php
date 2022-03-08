@@ -3,7 +3,8 @@
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "การส่งไฟล์";
 
-	if (!isset($_SESSION['evt'])) header("Location: ../login");
+	$requireAuth = !isset($_SESSION['evt']);
+	if ($requireAuth) header("Location: ../login");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -63,11 +64,14 @@
 				$(window).on("blur", function() { is_active = false; });
 				$(window).on("focus", function() { is_active = true; });
 			});
-			function seek_param() { if (location.hash.length > 1) {
-				var page = location.hash.substr(2).trim();
-				if (document.querySelector('main .fileSelect a[href="'+page+'"]') != null)
-					$('main .fileSelect a[href="'+page+'"]').click();
-			} }
+			function seek_param() {
+				if (location.hash.length > 1) {
+					var page = location.hash.substr(2).trim();
+					<?php if ($requireAuth) echo 'top.location.assign("/login#next="+page);'; ?>
+					if (document.querySelector('main .fileSelect a[href="'+page+'"]') != null)
+						$('main .fileSelect a[href="'+page+'"]').click();
+				} <?php if ($requireAuth) echo 'else top.location.assign("/login");'; ?>
+			}
 			var sl_viewed = false;
 			function viewSubmission(me) {
 				loadFrame(me); return false;
@@ -132,11 +136,11 @@
 						<td name="s"></td>
 					</tr>
 					<tr>
-						<td><a href="view-score" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ผลการพิจรณาคะแนน":"My Score"?>">My Score</a></td>
+						<td><a href="view-score" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ผลการพิจรณาผลงาน":"Results"?>">My Score</a></td>
 						<td name="g"></td>
 					</tr>
 					<tr>
-						<td><a href="my-certificate" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ประกาศณียบัตรของฉัน":"My Certificate"?>">My Certificate</a></td>
+						<td><a href="my-certificate" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตรของฉัน":"My Certificate"?>">My Certificate</a></td>
 						<td name="c"></td>
 					</tr>
 				</tbody></table></div>

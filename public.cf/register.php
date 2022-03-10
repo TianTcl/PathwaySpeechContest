@@ -142,7 +142,7 @@
 						} if (!/^0[1-9]\d{8}$/.test(info.phone)) {
 							if (pass) { focusfield("phone"); pass = false; }
 							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid phone number format.":"รูปแบบหมายดลขโทรศัพท์ไม่ถูกต้อง"?>"]);
-						} if (!/^[0-9A-Za-z\._]{3,50}$/.test(info.line)) {
+						} if (!/^[0-9A-Za-z\._\-]{3,50}$/.test(info.line)) {
 							if (pass) { focusfield("line"); pass = false; }
 							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid line ID format.":"รูปแบบไอดีไลน์ไม่ถูกต้อง"?>"]);
 						} if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@([a-zA-Z0-9\-_]+\.)+[a-zA-Z]{2,13}$/.test(info.email) || info.email.length > 255) {

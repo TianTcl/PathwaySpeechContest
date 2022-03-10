@@ -54,6 +54,7 @@
 		<!-- Resources loading -->
 		<link rel="stylesheet" href="/resource/css/core/appstyle.css">
 		<link rel="stylesheet" href="/resource/css/core/stylevar.css">
+		<link rel="stylesheet" href="/resource/css/core/colortheme.css">
 		<link rel="stylesheet" href="/resource/css/core/customize.css">
 		<link rel="stylesheet" href="/resource/css/core/appobj.css">
 		<link rel="stylesheet" href="/resource/css/core/forms.css">

@@ -130,7 +130,7 @@
 						} if (!/^([ก-๛]{1,50}|[A-Z][a-z]{0,49})$/.test(info.namel)) {
 							if (pass) { focusfield("namel"); pass = false; }
 							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid Last name format.":"รูปแบบนามสกุลไม่ถูกต้อง"?>"]);
-						} if (!/^([ก-๛]{1,30}|[A-Z][a-z]{0,29})$/.test(info.namen)) {
+						} if (!/^([ก-๛]{1,30}|[A-Z][a-z]{0,29}|[A-Z]{2})$/.test(info.namen)) {
 							if (pass) { focusfield("namen"); pass = false; }
 							app.ui.notify(1, [2, "<?=$_COOKIE['set_lang']=="th"?"Invalid Nick name format.":"รูปแบบชื่อเล่นไม่ถูกต้อง"?>"]);
 						} if (!/^\d$/.test(info.grade)) {

@@ -3,7 +3,7 @@
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "เข้าสู่ระบบผู้สมัคร";
 
-	if (isset($_SESSION['evt'])) header("Location: submit/");
+	# if (isset($_SESSION['evt'])) header("Location: submit/");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,6 +58,7 @@
 				$(' main form input[type="tel"], main form input[type="email"]').on("input change", validate_field);
 				seek_param(); validate_field();
 				<?php # if (isset($_SESSION['evt'])) echo '$.ajax(APIurl+"?app=account&cmd=logout");'; ?>
+				<?php if (isset($_SESSION['evt'])) echo 'top.location = "/submit/"+(sv.next.length ? "#/"+sv.next : "")'; ?>
 			});
 			function validate_field() {
 				document.querySelectorAll('main form input[type="tel"], main form input[type="email"]').forEach((eio) => {
@@ -73,8 +74,8 @@
 					});
 					// Let's see
 					if (typeof hash.user !== "undefined") document.querySelector('main form input[type="email"]').value = hash.user;
-					history.replaceState(null, null, location.pathname);
 					if (typeof hash.next !== "undefined") sv.next = hash.next;
+					history.replaceState(null, null, location.pathname+(sv.next.length ? "#next="+sv.next : ""));
 			} }
 			function signin() {
 				go_on(); return false;

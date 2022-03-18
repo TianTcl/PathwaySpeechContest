@@ -118,13 +118,11 @@
 						<button class="blue ripple-click" onClick="return upload()" disabled>Upload</button>
 					</div>
 				</form>
-				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?> <a href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank">devtech@PathwaySpeechContest.cf</a><?=$_COOKIE['set_lang']=="th"?" ได้":"."?></p>
 				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?></p>
 				<div class="form inline otherway">
 					<a role="button" class="cyan" href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>" target="_blank"><img src="/resource/images/nav-share-gmail.png" alt="Email" data-dark="false">devtech@PathwaySpeechContest.cf</a>
 					<a role="button" class="cyan" href="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/form/internal/submit-video?remote=<?php echo $_SESSION['evt']['encid']; ?>" target="_blank"><img src="https://www.gstatic.com/images/branding/product/1x/forms_2020q4_48dp.png" alt="ggForm" data-dark="false">Google Form</a>
 				</div>
-			</div><!--<?=$_COOKIE['set_lang']=="th"?" ได้":"."?>-->
 			</div>
 		</main>
 		<?php require($dirPWroot."resource/hpe/material.php"); ?>

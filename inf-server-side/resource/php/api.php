@@ -19,7 +19,7 @@
             } else if ($cmd == "addNew") {
                 foreach ($attr as $ef => $ev) $attr[$ef] = $db -> real_escape_string(trim($ev));
                 $getid = $db -> query("SELECT COUNT(ptpid) AS newid FROM PathwaySCon_attendees"); $newID = ($getid -> fetch_array(MYSQLI_ASSOC))['newid'];
-                $pubID = date("y", time()).$config['round'].str_repeat("0", 3-strlen($newID)).$newID;
+                $pubID = $config['round'].date("m", time()).str_repeat("0", 3-strlen($newID)).$newID; # date("y", time()).$config['round'].str_repeat("0", 3-strlen($newID)).$newID;
                 $success = $db -> query("INSERT INTO PathwaySCon_attendees (email,namef,namel,namen,phone,school,grade,publicID,line,ip) VALUES ('".strtolower($attr['email'])."','".$attr['namef']."','".$attr['namel']."','".$attr['namen']."','".$attr['phone']."','".$attr['school']."',".$attr['grade'].",".$pubID.",'".$attr['line']."','$ip')");
                 if ($success) {
                     $newid = $db -> insert_id;

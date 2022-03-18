@@ -14,8 +14,8 @@
 				// Config
 				$mail = array("recipients" => array(), "settings" => array()); $mail['setting'] = array(
 					array("var" => "name.org", "value" => "Pathway Speech Contest"),
-					array("var" => "contact.pr", "value" => "Pathway.SpeechContest@gmail.com"),
-					array("var" => "contact.dev", "value" => "devtech@PathwaySpeechContest.cf")
+					array("var" => "mail.pr", "value" => "Pathway.SpeechContest@gmail.com"),
+					array("var" => "mail.dev", "value" => "devtech@PathwaySpeechContest.cf")
 				); $mail['recipient'] = explode(",", $attr['rcp']); switch ($round) {
 					case 1: $remindTemplateID = "ynrw7gy50k42k8e3"; $submitLastTime = "2021-12-31 23:59:59"; break;
 					case 2: $remindTemplateID = "neqvygmqyw40p7w2"; $submitLastTime = "2022-03-31 23:59:59"; break;

@@ -53,7 +53,7 @@
 					<div class="message blue"><?=$_COOKIE['set_lang']=="th"?"สำหรับผู้ที่เข้าใช้งานครั้งแรก รหัสคืออีเมลที่กรอก":"First time here? Your password is the your email address."?></div>
 					<label>Username</label><input name="user" type="text" <?php echo(isset($user)?"value=\"$user\"":"autofocus");?>><br>
 					<label>Password</label><input name="pass" type="password" <?php echo(isset($pass)?"value=\"$pass\"":(isset($user)?"autofocus":""));?>><br>
-					<button class="blue full-x ripple-click" onClick="return SignIn()" disabled><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
+					<button class="blue full-x dont-ripple" onClick="return SignIn()" disabled><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
 				</form>
 			</div>
 		</main>

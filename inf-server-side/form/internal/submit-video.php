@@ -1,9 +1,10 @@
 <?php
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ps.php");
+	require($dirPWroot."/resource/php/lib/TianTcl.php");
 
     $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
-    $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+    $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])))/138-138) : ($_SESSION['evt']['user'] ?? "");
     $returnPath = $rmte ? "https://PathwaySpeechContest.cf" : "/e/Pathway-Speech-Contest";
     if ($user == "") header("Location: $returnPath/login#next=speech-video");
 

@@ -135,7 +135,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				grader.init();
-				seek_param();
+				// seek_param();
 			});
 			const cv = { APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/override", myID: "<?=$_SESSION['evt2']['user']?>" };
 			function seek_param() { if (location.hash!="") {
@@ -165,9 +165,10 @@
 									$("main .app .slot.lists div.vg ul").html("");
 									dat.info.forEach(ei => {
 										let name = '<font>'+ei.name.replace(" (", '</font> (');
-										$("main .app .slot.lists div.vg-"+ei.group+" ul").append('<li class="txtoe ripple-click" onClick="grader.load(\''+ei.ID+'\')">'+name+'</li>');
-									}); ppa.ripple_click_program();
+										$("main .app .slot.lists div.vg-"+ei.group+" ul").append('<li class="txtoe dont-ripple" onClick="grader.load(\''+ei.ID+'\')">'+name+'</li>');
+									}); // ppa.ripple_click_program();
 									if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") < 0) $("main span.ripple-effect").remove();
+									seek_param();
 								}
 							} else app.ui.notify(1, dat.reason);
 						}); // Calculation

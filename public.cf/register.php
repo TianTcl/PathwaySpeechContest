@@ -174,7 +174,7 @@
 						app.ui.lightbox.open("top", {title: "<?=$_COOKIE['set_lang']=="th"?"โปรดตรวจสอบข้อมูล":"Please recheck the given information"?>", allowclose: true, autoclose: 90000, html: '<style type="text/css">.cnf-wrapper { font-size: 1.25rem; } .cnf-wrapper > * { margin: 0px 0px 10px; } .cnf-wrapper output { text-decoration: underline; } .cnf-wrapper div.action { display: flex; justify-content: space-evenly; }</style><div class="cnf-wrapper"><center class="message red"><?=$_COOKIE['set_lang']=="th"?"คุณไม่สามารถกลับมาแก้ไขข้อมูลได้ในภายหลัง":"Your information can\'t be edited later."?></center>'+
 							'<div class="info"><?=$_COOKIE['set_lang']=="th"?"ฉัน <output>'+sv.namef+'  '+sv.namel+' ('+sv.namen+')</output> ศึกษาอยู่ชั้น<output>'+grade[0]+'ศึกษาปีที่ '+grade[1]+'</output> โรงเรียน<output>'+sv.school+'</output> ใช้ไอดีไลน์ <output>'+sv.line+'</output> และเบอร์โทรศัพท์มือถือ <output>'+sv.phone+'</output><br>ที่อยู่อีเมลสำหรับติดต่อของฉันคือ <output>'+sv.email+'</output>":"I\'m <output>'+sv.namen+' ('+sv.namef+'  '+sv.namel+')</output>. I\'m studying in <output>'+grade+'</output> at <output>'+sv.school+'</output> School. Using LINE ID <output>'+sv.line+'</output> and telephone number <output>'+sv.phone+'</output><br>My contact e-mail address is <output>'+sv.email+'</output>"?></div>'+
 							'<div class="action"><button onClick="reg.confirm(false)" class="gray hollow ripple-click"><?=$_COOKIE['set_lang']=="th"?"กลับไปแก้ไขข้อมูล":"Edit information"?></button><button onClick="reg.confirm(true)" class="green ripple-click"><?=$_COOKIE['set_lang']=="th"?"ยืนยันข้อมูลการลงทะเบียน":"Confirm & Register"?></button></div></div>'});
-						setTimeout(function() { ppa.ripple_click_program(); }, 750);
+						// setTimeout(function() { ppa.ripple_click_program(); }, 750);
 					} else {
 						app.ui.lightbox.close();
 						if (cnf) sendForm();
@@ -187,7 +187,7 @@
 						if (dat.success) {
 							$(".form").addClass("message");
 							$('<div class="message cyan" style="display: none;"><div><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเสร็จสิ้น<br>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน":"Registration complete.<br>Please sign in to submit your speech video."?></div><div style="display: flex;"><a href="login#user='+encodeURIComponent(sv.email)+'" role="button" class="blue hollow full-x ripple-click" draggable="false" style="justify-content: center;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></a></div></div>').insertAfter(".form").toggle("fold");
-							setTimeout(function() { ppa.ripple_click_program(); }, 500);
+							// setTimeout(function() { ppa.ripple_click_program(); }, 500);
 							sv = null;
 						} else {
 							app.ui.notify(1, dat.reason);
@@ -202,10 +202,10 @@
 				var openForm = function() {
 					$(".option").toggle("slide");
 					$(".form").toggle("clip");
-					setTimeout(function() {
+					/* setTimeout(function() {
 						$(".form .dont-ripple").removeClass("dont-ripple").addClass("ripple-click");
 						ppa.ripple_click_program();
-					}, 500);
+					}, 500); */
 				};
 				var viewSchd = function(what) {
 					var tab = (parseInt(what) - 1).toString();
@@ -327,7 +327,7 @@
 						<div class="group">
 							<input type="email" name="email" maxlength="255"><label><?php echo $_COOKIE['set_lang']=="th" ? "ที่อยู่อีเมล" : "E-mail address"; ?></label>
 						</div>
-						<span><i class="material-icons">information</i> <?php echo $_COOKIE['set_lang']=="th" ? "สำหรับส่งเกียรติบัตร" : "For sending certificate only"; ?></span>
+						<span><i class="material-icons">information</i> <?php echo $_COOKIE['set_lang']=="th" ? "สำหรับการติดต่อและประกาศ" : "For contact & announcements"; ?></span>
 					</form>
 					<div class="group-inline">
 						<div class="group"><button type="reset" class="red hollow full-x dont-ripple" onClick="reg.reset()"><?php echo $_COOKIE['set_lang']=="th" ? "เริ่มใหม่" : "Reset form"; ?></button></div>

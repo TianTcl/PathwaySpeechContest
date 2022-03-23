@@ -98,7 +98,7 @@
 						$mark = $getsbmt -> fetch_array(MYSQLI_ASSOC); $export = array();
 						foreach ($mark as $key => $val) {
 							if (preg_match('/^(p\d{2}|mark)$/', $key)) $export[$key] = intval($val);
-							else if ($key == "scid") $export['returnTo'] = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($val)+138)*138, 1), 0, 13))); // 5d3
+							else if ($key == "scid") $export['returnTo'] = vsprintf("%s-%s-%s-%s", str_split($tcl -> encode((intval($val)+138)*138, 1), 4));
 							else $export[$key] = $val;
 						} echo '{"success": true, "info": '.json_encode($export).'}';
 					} else echo '{"success": true, "info": null}';
@@ -114,7 +114,7 @@
 				}
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "new", $toEdit, "fail", $remote, "InvalidQuery"); }
 			} else if ($cmd == "edit") {
-				$toEdit = strval(intval($tcl -> decode(str_replace("-", "", $attr['returnTo'])."5d3", 1))/138-138); unset($attr['returnTo']);
+				$toEdit = strval(intval($tcl -> decode(str_replace("-", "", $attr['returnTo']), 1))/138-138); unset($attr['returnTo']);
 				$marks = ""; foreach ($attr as $key => $val) {
 					if ($key <> "comment") $marks .= "$key='".($db -> real_escape_string(trim($val)))."',";
 					else $marks .= "$key='".($db -> real_escape_string(htmlspecialchars(trim($val))))."',";

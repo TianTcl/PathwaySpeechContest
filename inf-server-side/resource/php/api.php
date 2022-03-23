@@ -46,13 +46,13 @@
                             "namen" => $result['namen'],
                             "myID" => $result['publicID']
                         ); if ($rmte) {
-                            $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 0, 13)));
+                            $keyid = vsprintf("%s-%s-%s-%s", str_split($tcl -> encode((intval($result['ptpid'])+138)*138, 1), 4));
                         } echo '{"success": true, "info": ["'.($keyid??"").'", "'.$result['namef']." ".$result['namel'].'", "'.$result['namen'].'", '.$result['publicID'].']}';
                         slog($_SESSION['evt']['user'], "PathwaySCon", "account", "login", "", "pass", $remote);
                     } else { echo '{"success": false, "reason": [3, "Incorrect E-mail address or phone number"]}'; slog("webForm", "PathwaySCon", "account", "login", $attr['user'].",".$attr['pass'], "fail", $remote, "Incorrect"); }
                 } else { echo '{"success": false, "reason": [3, "Unable to sign you in. Please try again."]}'; slog("webForm", "PathwaySCon", "account", "login", $attr['user'].",".$attr['pass'], "fail", $remote, "InvalidQuery"); }
             } else if ($cmd == "logout") {
-                $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $attr['user'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+                $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $attr['user'])))/138-138) : ($_SESSION['evt']['user'] ?? "");
                 if (isset($_SESSION['evt']) && $_SESSION['evt']['EventID']==2) {
                     slog($user, "PathwaySCon", "account", "logout", "", "pass", $remote);
                     unset($_SESSION['evt']);
@@ -209,7 +209,7 @@
                 } else { echo '{"success": false, "reason": [3, "Unable to load your video. Please try again."]}'; slog("webForm", "PathwaySCon", "video", "view", "$name,$clip", "fail", $remote, "InvalidQuery"); }
             }
         } else if ($app == "main") {
-            $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+            $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_REQUEST['remote'])))/138-138) : ($_SESSION['evt']['user'] ?? "");
             if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
             if ($cmd == "get") {
                 if ($attr == "score") {

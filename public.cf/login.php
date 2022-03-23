@@ -107,7 +107,7 @@
 				<form>
 					<input type="email" maxlength="255" required><label>E-mail address</label>
 					<input type="tel" maxlength="10" required><label>Phone number</label>
-					<button type="submit" class="blue full-x ripple-click" onClick="return signin()" style="margin-top: 7.5px;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
+					<button type="submit" class="blue full-x dont-ripple" onClick="return signin()" style="margin-top: 7.5px;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></button>
 				</form>
 			</div>
 		</main>

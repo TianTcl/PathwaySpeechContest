@@ -6,7 +6,7 @@
 
 	$remoting = (isset($_REQUEST['remote']) && preg_match('/^100\d{2}$/', $_REQUEST['remote']));
 	$my_url = "?return_url=e%2FPathway-Speech-Contest2Fresource%2Fupload%2Fvideo%3Fview%3D".urlencode($_REQUEST['view']);
-	if (!isset($_SESSION['evt2']) && !$remoting) header("Location: ../../organize/$my_url");
+	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2) && !$remoting) header("Location: ../../organize/$my_url");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: ../../organize/new-password$my_url");
 	$permitted = has_perm("grader") || has_perm("judge") || $remoting; if ($permitted) {
 		$playable = false;
@@ -72,15 +72,18 @@
 				if (!isSafari) fetchVideo(realSource).then(function(blobObj) {
 					var viewLink = URL.createObjectURL(blobObj);
 					vdo.src = viewLink; // gen_blob();
-				}); else vdo.src = realSource;
-				function videoManifest() {
+					setTimeout(videoManifest, 250);
+				}); else {
+					vdo.src = realSource;
+					setTimeout(videoManifest, 250);
+				} function videoManifest() {
 					var durationI = parseInt(vdo.duration), durationT;
-					if (durationI < 3600) { durationT = Math.floor(durationI/60).toString()+":"+(((durationI%60).toString().length==1)?"0":"")+(durationI%60).toString(); }
-					else { durationT = Math.floor(durationI/3600).toString()+":"+(((Math.floor(durationI%3600/60)).toString().length==1)?"0":"")+Math.floor(durationI%3600/60).toString()+":"+(((durationI%3600%60).toString().length==1)?"0":"")+(durationI%3600%60).toString(); }
+					if (durationI < 3600) durationT = Math.floor(durationI/60).toString()+":"+(((durationI%60).toString().length==1)?"0":"")+(durationI%60).toString();
+					else durationT = Math.floor(durationI/3600).toString()+":"+(((Math.floor(durationI%3600/60)).toString().length==1)?"0":"")+Math.floor(durationI%3600/60).toString()+":"+(((durationI%3600%60).toString().length==1)?"0":"")+(durationI%3600%60).toString();
 					document.querySelector('.player span[name="duration"]').innerText = durationT;
 					jsinit(where=".player", (isSafari ? viewLink : realSource), durationT);
 					clearInterval(loading); loadert.text(""); loaderi.hide(); tprevent.removeAttr("style"); control.css("pointer-events", "auto");
-				} setTimeout(videoManifest, 250);
+				} // setTimeout(videoManifest, 250);
 			}
 			var fetchVideo = function(url) { return fetch(url, { mode: "no-cors" }).then(function(response) { return response.blob(); }); }
 			const record = false;

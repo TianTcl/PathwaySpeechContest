@@ -6,7 +6,7 @@
     
     require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); require_once($dirPWroot."resource/php/lib/TianTcl.php");
 
-    function decode_key($key) { global $tcl; return strval(intval($tcl -> decode(str_replace("-", "", $key)."5d3"))/138-138); }
+    function decode_key($key) { global $tcl; return strval(intval($tcl -> decode(str_replace("-", "", $key)))/138-138); }
     function check_req($param) { return (isset($_REQUEST[$param]) && trim($_REQUEST[$param])<>""); }
 
     $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
@@ -82,7 +82,7 @@
             $db -> close();
         } else {
             $viewer = true;
-            $keyid = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($user)+138)*138, 1), 0, 13)));
+            $keyid = vsprintf("%s-%s-%s-%s", str_split($tcl -> encode((intval($user)+138)*138, 1), 4));
         }
     } else $error = "902";
     if (isset($error)) $header_desc = "Error ($error)";

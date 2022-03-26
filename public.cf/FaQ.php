@@ -110,7 +110,7 @@
 					</details>
 					<details id="when-to-claim-cert">
 						<summary>จะได้รับประกาศนียบัตรเมื่อไหร่</summary>
-						<p>ประกาศนียบัตรของช่วงที่สองจะสามารถดาวน์โหลดผ่าน<a href="submit/#/my-certificate">ระบบ(เว็บแอปพลิเคชัน)</a>ได้</p>
+						<p>ประกาศนียบัตรของช่วงที่สองจะสามารถดาวน์โหลดผ่าน<a href="login#next=my-certificate">ระบบ(เว็บแอปพลิเคชัน)</a>ได้</p>
 						<p>ตั้งแต่วันอาทิตย์ที่ 17 เมษายน พ.ศ. 2565<br>จนถึงวันอาทิตย์ที่ 30 เมษายน พ.ศ. 2565</p>
 						<p>โดยผู้สมัคร จะได้รับอีเมลแจ้งเมื่อมีการประกาศผลแล้ว<p>
 					</details>
@@ -123,7 +123,7 @@
 						<p>จะมีการประกาศผลเป็นสองส่วน<p>
 						<ul>
 							<li>ส่วนแรก จะประกาศ <a href="post/">3 ลำดับที่แรก</a>ของทุกกลุ่มการจัดลำดับ</li>
-							<li>ส่วนที่สอง จะประกาศผลคะแนนแยกตามเกณฑ์ใน<a href="submit/#/view-score">ระบบ(เว็บแอปพลิเคชัน)</a> (ส่วนตัว)</li>
+							<li>ส่วนที่สอง จะประกาศผลคะแนนแยกตามเกณฑ์ใน<a href="login#next=view-score">ระบบ(เว็บแอปพลิเคชัน)</a> (ส่วนตัว)</li>
 						</ul>
 						<p>โดยผู้สมัคร จะได้รับอีเมลแจ้งเมื่อมีการประกาศผลแล้ว<p>
 					</details>
@@ -145,11 +145,11 @@
 								<td>Beaconhouse Yamsaard Rangsit</td>
 								<td></td>
 							</tr>
-							<tr>
+							<!--tr>
 								<td>The Newton Sixth Form School</td>
 								<td>The Newton Sixth Form School</td>
 								<td>Newton Sixth Form</td>
-							</tr>
+							</tr-->
 							<tr>
 								<td>สาธิตนานาชาติ มหาวิทยาลัยมหิดล</td>
 								<td>Mahidol Univesity International Demonstration School</td>
@@ -160,7 +160,34 @@
 								<td>Ekamai International School</td>
 								<td>EIS</td>
 							</tr>
+							<tr>
+								<td>กรุงเทพคริสเตียนวิทยาลัย</td>
+								<td>Bangkok Christian College</td>
+								<td>กรุงเทพคริสเตียน</td>
+							</tr>
+							<tr>
+								<td>สาธิตสถาบันการจัดการปัญญาภิวัฒน์</td>
+								<td>Panyapiwat Institute of Management Demonstration School</td>
+								<td>สาธิต PIM</td>
+							</tr>
 						</tbody></table></div>
+					</details>
+					<details id="how-to-submit">
+						<summary>ข้อกำหนดการส่งไฟล์คลิปวีดีโอสุนทรพจน์</summary>
+						<p>หากไฟล์มีขนาดไม่เกิน 25MB ให้ทำการส่งผ่าน<a href="login#next=speech-video">ระบบเว็บแอปพลิเคชัน</a><br>หากไฟล์มีขนาดไม่เกิน 1GB ให้ทำการส่งผ่าน Google Forms (โดยเข้าผ่านหน้าส่งผลงาน)<br>หากมีปัญหาเกิดขึ้นจึงสามารถส่งทางอีเมลได้(และต้องส่งเป็นไฟล์หรือผ่าน Google Drive (ที่แชร์ให้ผู้รับเปิดได้แล้ว) เท่านั้น ห้ามส่งเป็นลิงก์ Youtube หรือลิงก์อื่นเด็ดขาด) แต่ต้องระบุสาเหตุ</p>
+						<p>หมายเหตุ: หากไม่ส่งผานช่องทางตามเงื่อนไขที่กำหนดมาข้างต้นอาจต้องส่งใหม่ให้ถูกต้อง หรือต้องตอบข้อซักถาม ที่ได้รับจากการตอบกลับของเจ้าหน้าที่</p>
+						<p>หากผู้ได้ประสงค์จะลดขนาดไฟล์วีดีโอของตนเองสามารถศึกษา<a href="#reduce-video-filesize">วิธีการทำโดยไม่เสียคุณภาพ</a>ได้</p>
+					</details>
+					<details id="reduce-video-filesize">
+						<summary>วิธีการลดขนาดไฟล์วีดีโอโดยไม่เสียคุณภาพ</summary>
+						<ol>
+							<li>ติดตั้งแอปพลิเคชัน <a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fhandbrake.fr%2Fdownloads.php" target="_blank">Handbrake</a> (สำหรับคนที่ไม่มี)</li>
+							<li>เปิดโปรแกรม</li>
+							<li>เลือกไฟล์วีดีโอที่ต้องการลดขนาด</li>
+							<li>ศึกษาวิธีการตั้งค่าจาก<a href="/go?url=https%3A%2F%2Fyoutu.be%2FWgZq6Sakcog%3Ft%3D190" target="_blank">คลิปวีดีโอ</a> หรือนำเข้า<a href="/resource/file/handbrake-config.json" download="reduce-filesize-sameRes.json">การตั้งค่าจากไฟล์</a></li>
+							<li>กดปุ่ม "Start Encode" ด้านบนแล้วรอจนไฟล์แปลงเสร็จ</li>
+							<li>นำไฟล์ที่ได้ส่งมาในระบบ</li>
+						</ol>
 					</details>
 					<!--details id="">
 						<summary></summary>

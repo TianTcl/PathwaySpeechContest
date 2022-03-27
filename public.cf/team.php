@@ -183,7 +183,7 @@
 								sv.display += '<div class="people">';
 								sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
 								if (mbr.avatar == null) mbr.avatar = "default.jpg";
-								sv.display += '<img src="/e/Pathway-Speech-Contest/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+								sv.display += '<img src="/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
 								sv.display += '</div><div class="bio">';
 								sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
 								sv.display += '</div></div>';
@@ -211,7 +211,7 @@
 							sv.display += '<div class="people">';
 							sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
 							if (mbr.avatar == null) mbr.avatar = "default.jpg";
-							sv.display += '<img src="/e/Pathway-Speech-Contest/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+							sv.display += '<img src="/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
 							sv.display += '</div><div class="bio">';
 							sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
 							sv.display += '</div></div>';

@@ -26,6 +26,7 @@
 			main .form * { user-select: all; }
 		</style>
 		<script type="text/javascript">
+			const n = ["วันอังคารที่ 25 มกราคม 2565 เวลา 08.00น.", "มูลนิธิกระจกเงา"];
 			$(document).ready(function() {
 				h();
 			});
@@ -33,7 +34,8 @@
 				return "เรียนคุณ "+b+"\n"+
 					"\n"+
 					"คุณได้บริจาคเงินจำนวน "+c+" บาทเข้ามาที่โครงการ Pathway Speech Contest ทางเจ้าหน้าที่ได้ตรวจสอบและยืนยันการได้รับเงินบริจาคแล้ว\n"+
-					"ทั้งนี้ ทางเราจะนำเงินบริจาคทั้งหมดไปบริจาคแก่มูลนิธิกระจกเงา หากท่านต้องการใบเสร็จการบริจาค ท่านสามารถคลิ๊กเข้าไปกรอกข้อมูลที่อยู่พร้อมส่งภาพหลักฐานการโอนเงินได้ที่ https://PathwaySpeechContest.cf/donate/"+d+"/edit ภายในวันอังคารที่ 25 มกราคม 2565 เวลา 08.00น. ครับ (หมายเลขอ้างอิงรายการ \""+d+"\")\n"+
+					// "ทั้งนี้ ทางเราจะนำเงินบริจาคทั้งหมดไปบริจาคแก่"+n[1]+" หากท่านต้องการใบเสร็จการบริจาค ท่านสามารถคลิ๊กเข้าไปกรอกข้อมูลที่อยู่พร้อมส่งภาพหลักฐานการโอนเงินได้ที่ https://PathwaySpeechContest.cf/donate/"+d+"/edit ภายใน"+n[0]+" ครับ (หมายเลขอ้างอิงรายการ \""+d+"\")\n"+
+					"ทั้งนี้ หากท่านต้องการใบเสร็จการบริจาค ท่านสามารถคลิ๊กเข้าไปกรอกข้อมูลที่อยู่พร้อมส่งภาพหลักฐานการโอนเงินได้ที่ https://PathwaySpeechContest.cf/donate/"+d+"/edit ครับ (หมายเลขอ้างอิงรายการ \""+d+"\")\n"+
 					"\n"+
 					"จึงเรียนมาเพื่อทราบ\n"+
 					"\n"+
@@ -78,7 +80,7 @@
 					<p><?=$_COOKIE['set_lang']=="th"?"ข้อขวามส่งเมลขอที่อยู่ออกใบเสร็จบริจาค":"Message for emailling for donation address"?></p>
 					<ol class="wrapper slider"><?php foreach ($apiData -> mail as $each) { ?>
 						<li onClick="e(['<?=$each -> donor?>', <?=$each -> amt?>, <?=$each -> refer?>], this)"><?=$each -> contact?></li>
-					<?php } ?></ol>
+					<?php } ?></ol><hr>
 					<div class="form">
 						<div class="group"><input type="text" value="Pathway Speech Contest - Donation" readonly></div>
 						<textarea id="ref_mail" rows="13"></textarea>

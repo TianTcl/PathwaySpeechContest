@@ -13,7 +13,7 @@
 		if (isset($_REQUEST['view']) && !empty(trim($_REQUEST['view']))) {
 			require($dirPWroot."e/resource/db_connect.php");
 			$smID = $db -> real_escape_string(strval(intval(base_convert(base64_decode(ltrim(trim($_REQUEST['view']), "ID")), 36, 10)) / 138));
-			$getptp = $db -> query("SELECT a.ptpid,CONCAT(b.namef,' ',b.namel,' (',b.namen,')') AS name FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE a.smid=$smID");
+			$getptp = $db -> query("SELECT a.ptpid,CONCAT(b.namef,' ',b.namel,' (',b.namen,')') AS name,a.round FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE a.smid=$smID");
 			if ($getptp) {
 				if ($getptp -> num_rows == 1) {
 					$playable = true;
@@ -21,7 +21,7 @@
 					$ptpid = intval($readptp['ptpid']);
 					require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
 					$player_name = $config['nameSub']." - ".$readptp['name']; $player_thumbnail = ""; $player_secured = false;
-					$videoPath = $dirPWroot."e/Pathway-Speech-Contest/resource/upload/sv-".$config['round']."/$ptpid.mp4";
+					$videoPath = $dirPWroot."e/Pathway-Speech-Contest/resource/upload/sv-".$readptp['round']."/$ptpid.mp4";
 					if (file_exists($videoPath)) {
 						require_once($dirPWroot."resource/php/core/config.php");
 						$video_size = size2text(filesize($videoPath));
@@ -68,7 +68,7 @@
 					loaddot = (loaddot == "...") ? "" : loaddot+".";
 				}, 250); loaderi.show(); tprevent.attr("style", "cursor: wait !important;"); control.css("pointer-events", "none");
 				var vdo = document.querySelector(".player div.full.video div.view video"),
-					realSource = "/e/Pathway-Speech-Contest/resource/upload/sv-<?=$config['round']?>/"+ID+".mp4";
+					realSource = "/e/Pathway-Speech-Contest/resource/upload/sv-<?=$readptp['round']??$config['round']?>/"+ID+".mp4";
 				if (!isSafari) fetchVideo(realSource).then(function(blobObj) {
 					var viewLink = URL.createObjectURL(blobObj);
 					vdo.src = viewLink; // gen_blob();

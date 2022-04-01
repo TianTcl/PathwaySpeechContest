@@ -82,6 +82,8 @@
         } else if ($app == "grade") {
 			$user = ($rmte) ? ($db -> real_escape_string(trim($_REQUEST['remote']))) : $_SESSION['evt2']['user'];
 			if ($cmd == "list") {
+				if ($attr == "special-S1") $round = 1;
+				else if ($attr == "special-S2") $round = 2;
 				$getsbmt = $db -> query("SELECT a.smid,CONCAT(b.namen,' (',b.namef,' ',b.namel,')') AS name,(CASE WHEN b.grade BETWEEN 0 AND 3 THEN 1 WHEN b.grade BETWEEN 4 AND 6 THEN 2 WHEN b.grade BETWEEN 7 AND 9 THEN 3 END) AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE b.ptpid > 1 AND a.round=$round ORDER BY division,name");
 				$sbmts = array(); if ($getsbmt && $getsbmt -> num_rows > 0) {
 					while ($readsbmt = $getsbmt -> fetch_assoc()) array_push($sbmts, array(

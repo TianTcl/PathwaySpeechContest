@@ -13,7 +13,8 @@
         $getcmt = $db -> query("SELECT scid,comment FROM PathwaySCon_score WHERE smid=$smID AND NOT comment=''");
         $db -> close();
         if ($getgrade && ($getgrade -> num_rows)) $readgrade = $getgrade -> fetch_array(MYSQLI_ASSOC);
-        else $exit_msg = array("gray", "This submission cannot be graded.<br>No judge marks this speech video yet.");
+        # else $exit_msg = array("gray", "This submission cannot be graded.<br>No judge marks this speech video yet.");
+		else $readgrade = array("p11" => 0, "p12" => 0, "p13" => 0, "p21" => 0, "p22" => 0, "p23" => 0, "p24" => 0, "p31" => 0, "p32" => 0, "p41" => 0, "mark" => 0);
     } else $exit_msg = array("yellow", "No participant selected.");
 
     if (isset($exit_msg)) die('<center class="message '.$exit_msg[0].'">'.$exit_msg[1].'</center>');
@@ -80,7 +81,7 @@
     </tr></thead>
     <tbody>
         <tr>
-            <td>Communicaton</td>
+            <td>Communication</td>
             <td><output type="number" name="p31"><?=strval($readgrade["p31"] + 0)?></output></td>
             <td><?=$config['criteria'][31]?> pts</td>
         </tr><tr>

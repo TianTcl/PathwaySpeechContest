@@ -139,7 +139,7 @@
 						</tr></thead>
 						<tbody>
 							<tr>
-								<td>Communicaton</td>
+								<td>Communication</td>
 								<td><output type="number" name="p31"></output></td>
 								<td><?=$config['criteria'][31]?> pts</td>
 							</tr><tr>

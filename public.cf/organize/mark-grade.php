@@ -369,7 +369,7 @@
 								</tr></thead>
 								<tbody>
 									<tr>
-										<td>Communicaton</td>
+										<td>Communication</td>
 										<td><input type="number" name="p:31" required min="0" max="<?=$config['criteria'][31]?>" step="1"></td>
 										<td><?=$config['criteria'][31]?> pts</td>
 									</tr><tr>

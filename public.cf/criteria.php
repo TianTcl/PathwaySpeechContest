@@ -109,7 +109,7 @@
 					</tbody>
 					<thead><tr><th>Presentation</th><th><?=$config['criteria'][30]?> pts</th></tr></thead>
 					<tbody>
-						<tr><td>Communicaton</td><td><?=$config['criteria'][31]?> pts</td></tr>
+						<tr><td>Communication</td><td><?=$config['criteria'][31]?> pts</td></tr>
 						<tr><td>Personality</td><td><?=$config['criteria'][32]?> pts</td></tr>
 					</tbody>
 					<thead><tr><th>Time</th><th><?=$config['criteria'][40]?> pts</th></tr></thead>

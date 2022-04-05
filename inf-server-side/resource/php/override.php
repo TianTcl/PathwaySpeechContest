@@ -111,7 +111,7 @@
 				foreach ($attr as $part => $mark) $attr[$part] = $db -> real_escape_string(trim($mark));
 				$success = $db -> query("INSERT INTO PathwaySCon_score (smid,judge,".implode(",", array_keys($attr)).",ip) VALUES ($toEdit,$user,'".implode("','", array_values($attr))."','$ip')");
 				if ($success) {
-					$newid = $db -> insert_id; $encID = vsprintf("%s%s%s%s-%s%s%s%s%s-%s%s%s%s", str_split(substr($tcl -> encode((intval($newid)+138)*138, 1), 0, 13))); // 5d3
+					$newid = $db -> insert_id; $encID = vsprintf("%s-%s-%s-%s", str_split($tcl -> encode((intval($newid)+138)*138, 1), 4));
 					echo '{"success": true, "info": "'.$encID.'"}'; slog($user, "PathwaySCon", "grade", "new", $newid, "pass", $remote);
 				}
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "new", $toEdit, "fail", $remote, "InvalidQuery"); }

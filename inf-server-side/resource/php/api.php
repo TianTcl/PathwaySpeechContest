@@ -104,24 +104,24 @@
             } else if ($cmd == "sboard") {
                 $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost = "GROUP BY a.smid ORDER BY mark DESC,b.lasttime,c.time";
-                $sqlpre2 = "SELECT b.smid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
+                $sqlpre2 = "SELECT b.smid,c.grade FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost2 = "AND a.judge=10011 ORDER BY a.mark DESC,b.lasttime,c.time LIMIT 3";
                 $gettop = $db -> query("($sqlpre2 c.grade BETWEEN 0 AND 3 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 4 AND 6 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 7 AND 9 $sqlpost2)");
                 $prim = array(); $midl = array(); $high = array(); $tops = array();
                 if ($gettop && $gettop -> num_rows) { while ($readtop = $gettop -> fetch_assoc()) array_push($tops, $readtop['smid']); }
                 # $gettop = $db -> query("($sqlpre b.smid=".implode(" $sqlpost) UNION ALL ($sqlpre b.smid=", $tops)." $sqlpost)");
-                $order = ""; for ($i = 1; $i <= 9; $i++) $order .= " WHEN ".$tops[$i-1]." THEN ".strval($i);
+                $order = ""; for ($i = 1; $i <= 9 && $i <= count($tops); $i++) $order .= " WHEN ".$tops[$i-1]." THEN ".strval($i);
                 $gettop = $db -> query("($sqlpre b.smid IN(".implode(",", $tops).") GROUP BY a.smid ORDER BY (CASE b.smid$order ELSE 10 END))");
                 if ($gettop && $gettop -> num_rows) { while ($readtop = $gettop -> fetch_assoc()) {
                     if (count($prim) < 3) array_push($prim, $readtop);
                     else if (count($midl) < 3) array_push($midl, $readtop);
                     else if (count($high) < 3) array_push($high, $readtop);
-                    if (!empty($readtop['smid'])) array_push($tops, $readtop['smid']);
+                    # if (!empty($readtop['smid'])) array_push($tops, $readtop['smid']);
                 } } $sqlpost = (count($tops) ? "AND NOT b.smid IN(".implode(",", $tops).") " : "").$sqlpost;
                 $getprim = $db -> query("$sqlpre c.grade BETWEEN 0 AND 3 $sqlpost"); if ($getprim && $getprim -> num_rows) { while ($readprim = $getprim -> fetch_assoc()) array_push($prim, $readprim); }
                 $getmidl = $db -> query("$sqlpre c.grade BETWEEN 4 AND 6 $sqlpost"); if ($getmidl && $getmidl -> num_rows) { while ($readmidl = $getmidl -> fetch_assoc()) array_push($midl, $readmidl); }
                 $gethigh = $db -> query("$sqlpre c.grade BETWEEN 7 AND 9 $sqlpost"); if ($gethigh && $gethigh -> num_rows) { while ($readhigh = $gethigh -> fetch_assoc()) array_push($high, $readhigh); }
-                echo '{"success": true, "info": ['.json_encode($prim).', '.json_encode($midl).', '.json_encode($high).']}';
+                echo '{"success": true, "info": '.json_encode(array($prim, $midl, $high)).' }';
             }
         } else if ($app == "giveaway") {
             if ($cmd == "get") {

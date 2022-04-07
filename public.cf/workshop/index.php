@@ -22,7 +22,7 @@
 					}; if (data.name.length <= 0 || data.name.length > 30) {
 						app.ui.notify(1, [3, "Your nickname is empty or too long"]);
 						$('form [name="name"]').focus(); return false;
-					} if (!/^([ก-๛]{1,30}|[A-Z][a-z]{0,29})$/.test(data.name)) {
+					} if (!/^([ก-๛]{1,30}|[A-Z][a-z]{0,29}|[A-Z]{2})$/.test(data.name)) {
 						app.ui.notify(1, [2, "Invalid nickname format"]);
 						$('form [name="name"]').focus(); return false;
 					} if (data.clip.length == 0) {

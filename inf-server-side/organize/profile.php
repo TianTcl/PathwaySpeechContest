@@ -15,9 +15,9 @@
 		$name = $db -> real_escape_string(trim($_POST['name']));
 		require($dirPWroot."resource/php/core/getip.php");
 		if (isset($_FILES['usf'])) {
-			$target_dir = "../resource/images/"; $imageFileType = strtolower(pathinfo(basename($_FILES['usf']["name"]), PATHINFO_EXTENSION));
+			$target_dir = "../resource/images/people/"; $imageFileType = strtolower(pathinfo(basename($_FILES['usf']["name"]), PATHINFO_EXTENSION));
 			$newFileName = crc32($user).".$imageFileType";
-            $etfn = "people-$newFileName"; $target_file = $target_dir.$etfn;
+            $target_file = $target_dir.$newFileName;
             $uploadOk = ($_FILES['usf']["size"] > 0 && $_FILES['usf']["size"] <= 5120000); // 5 MB
             if (!in_array($imageFileType, array("png", "jpg", "jpeg", "gif", "heic"))) $uploadOk = false;
             if ($uploadOk) {
@@ -44,7 +44,7 @@
 				width: calc(100% - 5px); height: 125px;
 				border-radius: 5px; border: 2.5px dashed var(--clr-bs-gray);
 				background-color: var(--clr-gg-grey-300); background-size: contain; background-repeat: no-repeat; background-position: center;
-				background-image: url("/e/Pathway-Speech-Contest/resource/images/people-<?=(!empty($mydata['avatar'])?$mydata['avatar']:"default.jpg")?>");
+				background-image: url("/e/Pathway-Speech-Contest/resource/images/people/<?=(!empty($mydata['avatar'])?$mydata['avatar']:"default.jpg")?>");
 				/* display: flex; justify-content: center; */
 				overflow: hidden; transition: var(--time-tst-fast);
 			}

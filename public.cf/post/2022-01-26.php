@@ -40,9 +40,9 @@
 				<h2>Duang Prateep Foundation Fund Donation</h2>
 				<p>เมื่อวันที่ 26 กุมภาพันธ์ 2565 ทาง Pathway Hub ได้ทำการบริจาคเงินให้กับมูลนิธิดวงประทีปเป็นที่เรียบร้อยแล้ว พวกเราขอขอบพระคุณทุกๆท่านที่ร่วมสมทบทุนให้น้องๆในโครงการอนุบาลชุมชนเป็นอย่างสูงค่ะ🙏🏻❤️</p>
 				<div class="images">
-					<img src="/resource/images/news-dn1-01.jpg">
-					<img src="/resource/images/news-dn1-02.jpg">
-					<img src="/resource/images/news-dn1-03.jpg">
+					<img src="/resource/images/news/dn1-01.jpg">
+					<img src="/resource/images/news/dn1-02.jpg">
+					<img src="/resource/images/news/dn1-03.jpg">
 				</div>
 				<div class="take-act">
 					<a role="button" class="green hollow" href="/donate">&emsp;<?=$_COOKIE['set_lang']=="th"?"ร่วมบริจาค":"Donate"?> &nbsp;<i class="material-icons">arrow_forward</i> &nbsp; </a>
@@ -52,7 +52,7 @@
 					<div class="hold">
 						<a href="2022-01-21">← Previous (21/01/2022)</a>
 						<span class="mnfst">By: Founder | 26/01/2022</span>
-						<a></a>
+						<a href="2022-04-17">(17/04/2022) Next →</a>
 					</div>
 				</nav>
 			</div>

@@ -11,7 +11,7 @@
 	<head>
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
-			main div.message.green a { float: right; transform: scale(0.8) translate(17.5px, -5px); }
+			main div.message.green a { float: right; transform: scale(0.8) translate(17.5px, -11.5px); }
 			main form div.box {
 				margin-bottom: 10px;
 				width: calc(100% - 5px); height: 125px;
@@ -58,6 +58,9 @@
 				from { height: 0px; }
 				to { height: 24px; }
 			}
+			@media only screen and (max-width: 768px) {
+				main div.message.green a { transform: translate(3.5px, -4.5px); }
+			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -80,8 +83,10 @@
 				});
 				// Let's see
 				if (typeof hash.status !== "undefined") switch (hash.status) {
-					case "success": app.ui.notify(1, [0, "Your file has been uploaded successfully!"]); break;
-					case "error": app.ui.notify(1, [3, "Unable to upload your file...<br>Please try again."]); break;
+					case "success": {
+						if (typeof top.get_submission_status !== "undefined") top.get_submission_status();
+						app.ui.notify(1, [0, "Your file has been uploaded successfully!"]); break;
+					} case "error": app.ui.notify(1, [3, "Unable to upload your file...<br>Please try again."]); break;
 					case "failed": app.ui.notify(1, [2, "Sorry, your file does not match the file reciever criteria.<br>Please try again."]); break;
 					case "unknown": app.ui.notify(1, [3, "There's an error. The server could not process your file."]); break;
 				} history.replaceState(null, null, location.pathname);

@@ -180,6 +180,11 @@
             "nickname": "พี่พราว",
             "fullname": "นางสาวจารุจินตน์  จารุเศรนี",
             "avatar": null
+        },
+        "JTS": {
+            "nickname": "พี่เจแปน",
+            "fullname": "นายธัญญ์  สิทธิวรรณรักษ์",
+            "avatar": "516798603.jpg"
         }
     },
     "ss": [
@@ -190,7 +195,7 @@
             "C": ["TCL", "KCP", "PRW", "NCB"],
             "D": ["TTH"],
             "E": ["KCP", "GYP", "MNA", "PPS", "PCS"],
-            "F": ["JSR"],
+            "F": ["JSR", "PRW"],
             "G": ["PRW", "JPM", "NPP"],
             "H": null,
             "I": ["PPS", "TCL"],
@@ -198,7 +203,7 @@
             "K": ["TCL"],
             "L": null,
             "M": null,
-            "N": ["TCL", "NCB"],
+            "N": null,
             "O": ["TCL", "NCB", "KCP", "GYP"],
             "P": ["TCL"],
             "Q": ["NCB", "TCL"],
@@ -210,7 +215,7 @@
             "B": ["TCL", "PNV"],
             "C": null,
             "D": ["TTH"],
-            "E": ["KCP", "GYP", "MNA", "XRW", "PPS", "TCL"],
+            "E": ["KCP", "GYP", "MNA", "XRW", "PPS", "JTS", "TCL"],
             "F": ["PNV", "PRW", "GYP"],
             "G": ["PNV", "PRW", "PJJ"],
             "H": null,
@@ -219,7 +224,7 @@
             "K": ["TCL"],
             "L": null,
             "M": null,
-            "N": ["TCL", "PPS", "NCB"],
+            "N": ["TCL", "PPS"],
             "O": null,
             "P": ["TCL"],
             "Q": ["NCB", "TCL"],

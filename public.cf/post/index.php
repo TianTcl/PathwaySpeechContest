@@ -93,6 +93,15 @@
 							<p class="breif"></p>
 						</div>
 					</a></li-->
+					<li><a class="wrapper" href="2022-04-17">
+						<div class="banner">
+							<img src="/resource/images/PathwaySpeechContest.png" alt="Season 2 Results" data-dark="false">
+						</div>
+						<div class="content">
+							<h3 class="title">Season 2 Results</h3>
+							<p class="breif">Ranks announcement for "World Health Day" topic</p>
+						</div>
+					</a></li>
 					<li><a class="wrapper" href="2022-01-26">
 						<div class="banner">
 							<img src="/resource/images/PathwaySpeechContest.png" alt="DPF.org Donation" data-dark="false">
@@ -113,7 +122,7 @@
 					</a></li>
 					<li><a class="wrapper" href="2021-12-11">
 						<div class="banner" eimg>
-							<img src="/resource/images/workshop-1.png" alt="1st Workshop" data-dark="false">
+							<img src="/resource/images/news/workshop-1.png" alt="1st Workshop" data-dark="false">
 						</div>
 						<div class="content">
 							<h3 class="title">1<sup>st</sup> Workshop</h3>

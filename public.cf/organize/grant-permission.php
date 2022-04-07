@@ -57,7 +57,7 @@
 								target.innerHTML = "";
 								dat.info.forEach(er => {
 									target.innerHTML += '<li><div class="req"><div class="name"><span>'+er.nickname+'</span><span>'+er.longname+'</span></div><div class="action"><button class="blue ripple-click" onClick="perm.load(\''+er.ID+'\')"><?=$_COOKIE['set_lang']=="th"?"พิจรณา":"Review"?></button></div></div></li>';
-								}); ppa.ripple_click_program();
+								}); // ppa.ripple_click_program();
 							} else target.innerHTML = '<center class="message gray"><?=$_COOKIE['set_lang']=="th"?"ไม่มีคำขอสิทธิ์":"No requests."?></center>';
 						} else app.ui.notify(1, dat.reason);
 					});

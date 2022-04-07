@@ -28,7 +28,7 @@
 		$eventRole = role2text(explode(",", $user -> role));
 		?><div class="people">
 			<div class="image <?=(empty($user -> avatar)?"":"real")?>">
-				<img src="/resource/images/people-<?=$avatar?>" data-dark="false">
+				<img src="/resource/images/people/<?=$avatar?>" data-dark="false">
 			</div>
 			<div class="name"><span data-title="<?=$realName?>"><?=$displayName?></span></div>
 			<div class="role"><?=$eventRole?></div>

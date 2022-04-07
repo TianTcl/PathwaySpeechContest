@@ -116,6 +116,25 @@
 			}
 			main div.role .people .bio { padding: 5px 0px; }
 			main div.role .people .bio .name { font-family: "Krub", "IBM Plex Sans Thai"; }
+			main div.sponsor .card {
+				margin: 10px 0px 10px 25px; padding: 7.5px;
+				width: calc(100% - 40px); height: 135px;
+				border-radius: 5px;
+				display: flex; transition: var(--time-tst-fast);
+			}
+			main div.sponsor .card:hover { background-color: var(--fade-white-5); }
+			main div.sponsor .card .logo { min-width: 150px; max-width: 30%; height: 100%; }
+			main div.sponsor .card .logo img {
+				width: auto; max-width: 100%; height: 100%;
+				object-fit: contain;
+			}
+			main div.sponsor .card .info {
+				padding-left: 7.5px;
+				min-width: 70%; height: 100%;
+			}
+			main div.sponsor .card .info > * { margin: 5px 0px 7.5px; }
+			main div.sponsor .card .info > *:last-child { margin: 2.5px 0px 0px; }
+			main div.sponsor .card .info > h3[onClick] { cursor: help; }
 			@media only screen and (min-width: 768.003px) {
 				main .subrole div.role h3 { text-align: left; }
 				main .subrole div.role .member { justify-content: flex-start; }
@@ -124,6 +143,16 @@
 				main div.role h3 { transform: scale(1.25); }
 				main div.role .people { width: 150px; height: 200px; }
 				main div.role .people .avatar { height: 150px; }
+				main div.sponsor .card {
+					margin: 7.5px 0px 7.5px 17.5px; padding: 5px;
+					width: calc(100% - 35px); height: 140px;
+					border-radius: 5px;
+				}
+				main div.sponsor .card .logo { min-width: 100px; max-width: 25%; height: 100%; }
+				main div.sponsor .card .info {
+					padding-left: 5px;
+					min-width: 75%; height: 100%;
+				}
 			}
 		</style>
 		<script type="text/javascript">
@@ -183,7 +212,7 @@
 								sv.display += '<div class="people">';
 								sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
 								if (mbr.avatar == null) mbr.avatar = "default.jpg";
-								sv.display += '<img src="/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+								sv.display += '<img src="/resource/images/people/'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
 								sv.display += '</div><div class="bio">';
 								sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
 								sv.display += '</div></div>';
@@ -211,7 +240,7 @@
 							sv.display += '<div class="people">';
 							sv.display += '<div class="avatar'+(mbr.avatar == null ? "" : " real")+'">';
 							if (mbr.avatar == null) mbr.avatar = "default.jpg";
-							sv.display += '<img src="/resource/images/people-'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
+							sv.display += '<img src="/resource/images/people/'+mbr.avatar+'" data-dark="false" draggable="false" alt="Avatar">';
 							sv.display += '</div><div class="bio">';
 							sv.display += '<div class="name"><center><span data-title="'+mbr.fullname+'">'+mbr.nickname+'</span></center></div>';
 							sv.display += '</div></div>';
@@ -248,6 +277,17 @@
 						</div>
 						<div order="2">
 
+						</div>
+					</div>
+				</div>
+			</div><br>
+				<h2><?=$_COOKIE['set_lang']=="th"?"สนับสนุนโดย":"Supported by"?></h2>
+				<div class="sponsor">
+					<div class="card">
+						<div class="logo"><img src="https://inf.bodin.ac.th/resource/images/logo-2.png" data-dark="false"></div>
+						<div class="info">
+							<h3 onClick="app.io.warpto('/inf.bodin.ac.th/go?url=https%3A%2F%2Fbodin.ac.th', true)">Bodindecha (Sing Singhaseni) School</h3>
+							<p>Thanks for hosting our web application.</p>
 						</div>
 					</div>
 				</div>

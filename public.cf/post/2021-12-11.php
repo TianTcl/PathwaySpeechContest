@@ -42,10 +42,10 @@
 				<p>เข้าร่วมการประชุมได้ที่ <a disabled href="https://inf.bodin.ac.th/go?url=htts%3A%2F%2Fmeet.google.com%2Fgrt-zzzr-fkk" target="_blank">meet.google.com/<span class="blur">grt-zzzr-fkk</span></a> หรือบันทึกใส่ <a disabled href="/go?url=https%3A%2F%2Fcalendar.google.com%2Fevent%3Faction%3DTEMPLATE%26amp%3Btmeid%3DMG42cWF1bzBrMzBycnF2Z2NvNjA5bjVoa2MgdGlhbnRjbEBib2Rpbi5hYy50aA%26amp%3Btmsrc%3Dtiantcl%2540bodin.ac.th" target="_blank"><strike>Google calender</strike></a> ไว้</p>
 				<p>ท่านสามารถ<a href="/FaQ#joining-workshop-meet">ศึกษาวิธีการเข้าการประชุม</a>ได้ที่นี่</p>
 				<div class="images">
-					<img src="/resource/images/news-ws1-01.jpg">
-					<img src="/resource/images/news-ws1-02.png">
-					<img src="/resource/images/news-ws1-03.png">
-					<img src="/resource/images/news-ws1-04.jpg">
+					<img src="/resource/images/news/ws1-01.jpg">
+					<img src="/resource/images/news/ws1-02.png">
+					<img src="/resource/images/news/ws1-03.png">
+					<img src="/resource/images/news/ws1-04.jpg">
 				</div>
 				<div class="take-act">
 					<a role="button" class="green hollow" href="/workshop/">&emsp;<?=$_COOKIE['set_lang']=="th"?"ดูคลิปย้อนหลัง":"View Playback"?> &nbsp;<i class="material-icons">arrow_forward</i> &nbsp; </a>

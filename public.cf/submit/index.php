@@ -113,7 +113,7 @@
 						} else app.ui.notify(1, dat.reason);
 					});
 				}
-			}
+			} top.get_submission_status = get_submission_status;
 		</script>
 	</head>
 	<body>

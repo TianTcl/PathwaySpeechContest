@@ -16,5 +16,5 @@
     if (!$getinfo) header("Location: $returnPath/login#next=speech-video");
     $readinfo = $getinfo -> fetch_array(MYSQLI_ASSOC);
     require($dirPWroot."resource/php/core/getip.php");
-    header("Location: https://docs.google.com/forms/d/e/1FAIpQLSfWbw41IZ2eTdECwjJeOTJH0oE-KcS3kNyTLxyIgYizyt9lJQ/viewform?entry.2027917912=".$readinfo['publicID']."&entry.1659649865=".$readinfo['email']."&entry.1234696549=$ip");
+    header("Location: https://docs.google.com/forms/d/e/1FAIpQLSfWbw41IZ2eTdECwjJeOTJH0oE-KcS3kNyTLxyIgYizyt9lJQ/viewform?entry.2027917912=".$readinfo['publicID']."&entry.1659649865=".$readinfo['email']."&entry.1234696549=$ip&authuser=".$readinfo['email']);
 ?>

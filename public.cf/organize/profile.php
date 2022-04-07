@@ -22,7 +22,7 @@
 				width: calc(100% - 5px); height: 125px;
 				border-radius: 5px; border: 2.5px dashed var(--clr-bs-gray);
 				background-color: var(--clr-gg-grey-300); background-size: contain; background-repeat: no-repeat; background-position: center;
-				background-image: url("<?=(!empty($get -> avatar)?"https://inf.bodin.ac.th/e/Pathway-Speech-Contest":"")?>/resource/images/people-<?=(!empty($get -> avatar)?($get -> avatar):"default.jpg")?>");
+				background-image: url("<?=(!empty($get -> avatar)?"https://inf.bodin.ac.th/e/Pathway-Speech-Contest":"")?>/resource/images/people/<?=(!empty($get -> avatar)?($get -> avatar):"default.jpg")?>");
 				/* display: flex; justify-content: center; */
 				overflow: hidden; transition: var(--time-tst-fast);
 			}

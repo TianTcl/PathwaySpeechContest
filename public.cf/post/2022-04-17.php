@@ -4,7 +4,8 @@
 	$header_title = "ประกาศผล";
 	$header_desc = "Ranking result announcement";
 
-	$permitted = (has_perm("art", false) || has_perm("dev"));
+	$permitted = isset($_SESSION['evt2']); # (has_perm("art", false) || has_perm("dev"));
+	if ($permitted && $_SESSION['evt2']["force_pwd_change"]) header("Location: ../organize/new-password?return_url=..%2Fpost%2F2022-04-17");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -59,7 +60,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="info">
+						<div class="info longsch">
 							<div class="prize"><span>1<sup>st</sup> Runner Up</span></div>
 							<div class="name"><span>Sisiratha Kaewkraisorn</span></div>
 							<div class="school"><span>Thetsaban 1 Chomchon Ban Udomtong</span></div>
@@ -160,7 +161,7 @@
 						<div class="info longnme">
 							<div class="prize"><span>1<sup>st</sup> Runner Up</span></div>
 							<div class="name"><span>Sirisopha Ekarattanawong</span></div>
-							<div class="school"><span>Suakularbwittayalai Ragsit</span></div>
+							<div class="school"><span>Suankularbwittayalai Rangsit</span></div>
 						</div>
 					</div>
 					<div class="card right">

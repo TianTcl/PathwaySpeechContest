@@ -186,7 +186,7 @@
 						var dat = JSON.parse(res);
 						if (dat.success) {
 							$(".form").addClass("message");
-							$('<div class="message cyan" style="display: none;"><div><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเสร็จสิ้น<br>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน":"Registration complete.<br>Please sign in to submit your speech video."?></div><div style="display: flex;"><a href="login#user='+encodeURIComponent(sv.email)+'" role="button" class="blue hollow full-x ripple-click" draggable="false" style="justify-content: center;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></a></div></div>').insertAfter(".form").toggle("fold");
+							$('<div class="message cyan" style="display: none;"><div><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเสร็จสิ้น<br>กรุณาเข้าสู่ระบบเพื่อส่งผลงาน":"Registration complete.<br>Please sign in to submit your speech video."?></div><div style="display: flex;"><a href="login#user='+sv.email+'" role="button" class="blue hollow full-x ripple-click" draggable="false" style="justify-content: center;"><?=$_COOKIE['set_lang']=="th"?"เข้าสู่ระบบ":"Sign in"?></a></div></div>').insertAfter(".form").toggle("fold");
 							// setTimeout(function() { ppa.ripple_click_program(); }, 500);
 							sv = null;
 						} else {
@@ -247,9 +247,9 @@
 								<p>ประกาศผลวันที่ 15 มกราคม 2565</p>
 							</div>
 							<div order="1">
-								<p>เปิดรับสมัครวันที่ 12 มีนาคม 2565 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>เปิดรับสมัครวันที่ 12 มีนาคม 2565</p>
 								<p>ปิดรับสมัครวันที่ 31 มีนาคม 2565</p>
-								<p>ประกาศผลวันที่ 17 เมษายน 2565</p>
+								<p>ประกาศผลวันที่ 17 เมษายน 2565 <font style="color: var(--clr-bs-red);">•</font></p>
 							</div>
 							<div order="2">
 								<p>เปิดรับสมัครวันที่ 4 มิถุนายน 2565</p>
@@ -263,9 +263,9 @@
 								<p>Rank & Score announcement: 15<sup>th</sup> January 2022</p>
 							</div>
 							<div order="1">
-								<p>Open for registration & submit: 12<sup>th</sup> March 2022 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>Open for registration & submit: 12<sup>th</sup> March 2022</p>
 								<p>Close for registration & submit: 31<sup>st</sup> March 2022</p>
-								<p>Rank & Score announcement: 17<sup>th</sup> April 2022</p>
+								<p>Rank & Score announcement: 17<sup>th</sup> April 2022 <font style="color: var(--clr-bs-red);">•</font></p>
 							</div>
 							<div order="2">
 								<p>Open for registration & submit: 4<sup>th</sup> June 2022</p>

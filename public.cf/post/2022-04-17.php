@@ -43,7 +43,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Idea">
 								<img data-dark="false" src="/resource/images/participant/3718819804.jpg" alt="Idea">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="501895711405360">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -54,7 +54,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Dew">
 								<img data-dark="false" src="/resource/images/participant/1580828531.jpg" alt="Dew">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="1082223582636180">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -75,7 +75,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Manie">
 								<img data-dark="false" src="/resource/images/participant/779442320.jpg" alt="Manie">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="788683605849992">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -87,7 +87,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Indy">
 								<img data-dark="false" src="/resource/images/participant/835501526.jpg" alt="Indy">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="1641960109506392">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -96,7 +96,7 @@
 						<div class="info longsch">
 							<div class="prize"><span>Winner</span></div>
 							<div class="name"><span>Than Thanawutikul</span></div>
-							<div class="school"><span>Patumwan Deminstraion School Srinakharinwirot University</span></div>
+							<div class="school"><span>Patumwan Demonstration School Srinakharinwirot University</span></div>
 						</div>
 					</div>
 					<div class="card right">
@@ -108,7 +108,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="CC">
 								<img data-dark="false" src="/resource/images/participant/1968709139.jpg" alt="CC">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="668695067730409">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -119,7 +119,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Bonus">
 								<img data-dark="false" src="/resource/images/participant/1582911614.jpg" alt="Bonus">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="702631710771661">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -141,7 +141,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Pancake">
 								<img data-dark="false" src="/resource/images/participant/2152004955.jpg" alt="Pancake">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="294366869528747">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -152,7 +152,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Ping">
 								<img data-dark="false" src="/resource/images/participant/2246546115.jpg" alt="Ping">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="690480452098227">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -173,7 +173,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Prim">
 								<img data-dark="false" src="/resource/images/participant/973119883.jpg" alt="Prim">
-								<div class="play" --data-href="___">
+								<div class="play" data-href="3224520557865403">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>

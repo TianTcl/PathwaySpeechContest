@@ -3,6 +3,7 @@
 	require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ps.php");
 	$header_title = "Custom";
 	$header_desc = "All submission video list";
+	$forceExternalBrowser = true;
 
 	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2)) header("Location: ../organize/?return_url=..%2Fresource%2Fab1ec7e3-cda1-4872-9323-f5325a53f17f");
 	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: ../organize/new-password?return_url=..%2Fresource%2Fab1ec7e3-cda1-4872-9323-f5325a53f17f");

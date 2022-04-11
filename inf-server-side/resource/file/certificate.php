@@ -26,13 +26,22 @@
                 if (empty($readinfo['rank'])) $error = "900";
                 else if ($readinfo['rank'] == "5N" && $certType == "a") $error = "902";
                 else {
+                    $isAward = ($certType == "a");
                     switch ($certType) {
                         case "p": $certName = "Participation"; $certPath = "pa"; $certNumber = "A"; break;
                         case "a": $certName = "Completion"; $certPath = "g".$readinfo['group']; $certNumber = "B"; break;
                     } switch (intval($round)) {
-                        case 1: $pageSize = array(357.5, 275); $sourceSize = array(1456, 1126); $sourceType = "jpg"; $sourceDPI = 96; break;
-                    } $isAward = ($certType == "a");
-                    $exportname = "Certificate - Pathway Speech Contest ($certName)";
+                        case 1: $cfgCert = array(
+                            "pageSize" => array(357.5, 275), "sourceSize" => array(1456, 1126), "sourceType" => "jpg", "sourceDPI" => 96,
+                            "fontFamily" => "Pattaya", "fontSize" => 41, "fontColor" => array(9, 95, 34),
+                            "pos" => array("xID" => 15, "yName" => ($isAward ? 112.5 : 120), "yPlace" => 145)
+                        ); break;
+                        case 2: $cfgCert = array(
+                            "pageSize" => array(357.5, 275), "sourceSize" => array(1650, 1275), "sourceType" => "jpg", "sourceDPI" => 150,
+                            "fontFamily" => "Pattaya", "fontSize" => 42, "fontColor" => array(33, 102, 153),
+                            "pos" => array("xID" => 13, "yName" => ($isAward ? 106.5 : 118.25), "yPlace" => 143)
+                        ); break;
+                    } $exportname = "Certificate - Pathway Speech Contest ($certName)";
                     /* --- PDF generation --- (BEGIN) */
                     require_once($dirPWroot."resource/php/lib/tcpdf/tcpdf.php"); # require_once($dirPWroot."resource/php/lib/fpdi/fpdi.php");
                     $certifile = new TCPDF("L", PDF_UNIT, "A4", true, 'UTF-8', false);
@@ -47,30 +56,30 @@
                     $certifile -> SetKeywords("Pathway Speech Contest");
                     $certifile -> SetAutoPageBreak(false, 0);
                     // Edit
-                    $certifile -> AddPage("L", array($pageSize[0], $pageSize[1]));
-                    $sourcePath = $dirPWroot."e/Pathway-Speech-Contest/resource/file/cert/s".(strlen($round)<2?"0":"")."$round-$certPath.$sourceType";
-                    $certifile -> Image($sourcePath, 0, 0, $pageSize[0], $pageSize[1], strtoupper($sourceType), "", "", false, $sourceDPI, "", false, false, 0);
+                    $certifile -> AddPage("L", array($cfgCert["pageSize"][0], $cfgCert["pageSize"][1]));
+                    $sourcePath = $dirPWroot."e/Pathway-Speech-Contest/resource/file/cert/s".(strlen($round)<2?"0":"")."$round-$certPath.".$cfgCert["sourceType"];
+                    $certifile -> Image($sourcePath, 0, 0, $cfgCert["pageSize"][0], $cfgCert["pageSize"][1], strtoupper($cfgCert["sourceType"]), "", "", false, $cfgCert["sourceDPI"], "", false, false, 0);
                     $certifile -> setPageMark();
-                    $certifile -> setTextColor(9, 95, 34);
+                    $certifile -> setTextColor($cfgCert["fontColor"][0], $cfgCert["fontColor"][1], $cfgCert["fontColor"][2]);
                     // Add cert-id
                     $certID = strrev(strtoupper(base_convert(strtotime($readinfo['rank_time']), 10, 36)))."-".
                         str_rot13($readinfo['rank'].$readinfo['edit'].$certNumber.strtoupper($tcl -> encode($readinfo['smid'], 1)));
                     $certifile -> setFont("thsarabun", "I", 15);
-                    $certifile -> SetXY(15, 10);
+                    $certifile -> SetXY($cfgCert["pos"]["xID"], 10);
                     $certifile -> Cell(75, 0, "Cert-ID: $certID", 0, 1, 'L', 0, '', 0);
                     // Add name
-                    $certifile -> setFont("Pattaya", "B", 41);
-                    $certifile -> SetXY($pageSize[0]/2-150, ($isAward ? 112.5 : 120));
-                    $certifile -> Cell(300, 0, $readinfo['name'], 0, 1, 'C', 0, '', 0);
+                    $certifile -> setFont($cfgCert["fontFamily"], "B", $cfgCert["fontSize"]);
+                    $certifile -> SetXY($cfgCert["pageSize"][0]/2-175, $cfgCert["pos"]["yName"]);
+                    $certifile -> Cell(350, 0, $readinfo['name'], 0, 1, 'C', 0, '', 0);
                     if ($isAward) { // Add Place
-                        $certifile -> setFont("Pattaya", "", 39);
-                        $certifile -> SetXY($pageSize[0]/2-150, 145);
+                        $certifile -> setFont($cfgCert["fontFamily"], "", $cfgCert["fontSize"] - 2);
+                        $certifile -> SetXY($cfgCert["pageSize"][0]/2-175, $cfgCert["pos"]["yPlace"]);
                         switch ($readinfo['rank']) {
                             case "1G": $rankText = "1st"; break;
                             case "2S": $rankText = "2nd"; break;
                             case "3B": $rankText = "3rd"; break;
                             default: $error = "905"; break;
-                        } $certifile -> Cell(300, 0, ($rankText??"")." Place", 0, 1, 'C', 0, '', 0);
+                        } $certifile -> Cell(350, 0, ($rankText??"")." Place", 0, 1, 'C', 0, '', 0);
                     } // Send out file
                     if (!isset($error)) {
                         $certifile -> Output("$exportname.pdf", ($download ? "D": "I"));

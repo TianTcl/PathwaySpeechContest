@@ -4,7 +4,7 @@
 	$header_title = "ประกาศผล";
 	$header_desc = "Ranking result announcement";
 
-	$permitted = isset($_SESSION['evt2']); # (has_perm("art", false) || has_perm("dev"));
+	$permitted = true; # isset($_SESSION['evt2']); # (has_perm("art", false) || has_perm("dev"));
 	if ($permitted && $_SESSION['evt2']["force_pwd_change"]) header("Location: ../organize/new-password?return_url=..%2Fpost%2F2022-04-17");
 ?>
 <!doctype html>
@@ -38,7 +38,7 @@
 						<div class="info">
 							<div class="prize"><span>Winner</span></div>
 							<div class="name"><span>Thee Thanawutikul</span></div>
-							<div class="school"><span>Anuban Nakhonpathom</span></div>
+							<div class="school"><span>Anuban Nakhon Pathom School</span></div>
 						</div>
 						<div class="avatar">
 							<div class="wrapper" data-title="Idea">
@@ -158,10 +158,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="info longnme">
+						<div class="info longnme longsch">
 							<div class="prize"><span>1<sup>st</sup> Runner Up</span></div>
 							<div class="name"><span>Sirisopha Ekarattanawong</span></div>
-							<div class="school"><span>Suankularbwittayalai Rangsit</span></div>
+							<div class="school"><span>Suankularbwittayalai Rangsit School</span></div>
 						</div>
 					</div>
 					<div class="card right">
@@ -197,7 +197,7 @@
 									<a href="https://bod.in.th/!PSC-V_s02c" role="button" class="cyan dont-ripple" target="_blank">High School</a>
 								</div>
 							</div>
-							<a href="/go?url=https%3A%2F%2Ffacebook.com%2FPathway.speechcontest%2Fposts%2F___" role="button" class="blue dont-ripple" target="_blank">
+							<a href="/go?url=https%3A%2F%2Ffacebook.com%2FPathway.speechcontest%2Fposts%2F523438846110407" role="button" class="blue dont-ripple" target="_blank">
 								<img src="/resource/images/nav-share-facebook.png">
 								<span>Share to Facebook</span>
 							</a>

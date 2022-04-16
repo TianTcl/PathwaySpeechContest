@@ -197,7 +197,7 @@
 									<a href="https://bod.in.th/!PSC-V_s02c" role="button" class="cyan dont-ripple" target="_blank">High School</a>
 								</div>
 							</div>
-							<a href="/go?url=https%3A%2F%2Ffacebook.com%2FPathway.speechcontest%2Fposts%2F523438846110407" role="button" class="blue dont-ripple" target="_blank">
+							<a href="/go?url=https%3A%2F%2Ffacebook.com%2FPathway.speechcontest%2Fposts%2F147186821127122" role="button" class="blue dont-ripple" target="_blank">
 								<img src="/resource/images/nav-share-facebook.png">
 								<span>Share to Facebook</span>
 							</a>

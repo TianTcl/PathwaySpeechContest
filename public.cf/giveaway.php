@@ -19,7 +19,6 @@
         <style type="text/css">
             main div.container h3 { display: flex; justify-content: space-between; align-items: center; }
             main div.container h3 a[role="button"] { font-size: 17.5px; }
-            main div.container h3 a[role="button"] i.material-icons { transform: translateY(5px); }
             main div.container iframe {
 				width: 100%; height: 540px;
 				border: 1px solid var(--clr-bs-dark); border-radius: 5px;

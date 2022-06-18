@@ -28,7 +28,8 @@
 			const cv = {
 				APIurl: "https://inf.bodin.ac.th/e/Pathway-Speech-Contest/resource/php/api",
 				msg: [
-					"ขอบคุณมากๆที่มาร่วมสนุกกับทาง Pathway Speech Contest นะคะ🙏🏻🥰 หวังว่า 50 Essential IELTS Vocabulary จะช่วยเพิ่มศัพท์ในคลังได้ค่าา 💕🧚🏻‍♀️"
+					"ขอบคุณมากๆที่มาร่วมสนุกกับทาง Pathway Speech Contest นะคะ🙏🏻🥰 หวังว่า 50 Essential IELTS Vocabulary จะช่วยเพิ่มศัพท์ในคลังได้ค่าา 💕🧚🏻‍♀️",
+					"ขอบคุณมากๆที่มาร่วมสนุกกับทาง Pathway Speech Contest นะคะ🙏🏻🥰 หวังว่า 12 Tenses Summary จะช่วยเพิ่มความแม่นยำในเรื่อง tense ของน้องๆได้ค่าา 💕🧚🏻‍♀️"
 				]
 			}; var sv = { first: true };
 			function generate() {
@@ -95,15 +96,16 @@
 						<select name="book">
 							<option selected value disabled>---Sheet---</option>
 							<option value="1">1) 50 Essential IELTS Vocabulary</option>
+							<option value="2">2) 12 Tenses Summary</option>
 						</select>
-						<button class="blue full-x ripple-click" onClick="return generate()" disabled>Get Link</button>
+						<button class="blue full-x --ripple-click" onClick="return generate()" disabled>Get Link</button>
 					</div>
 				</form>
 				<div class="link form message cyan">
 					<div class="group" style="margin: 0px;">
 						<input type="text" readonly>
-						<button class="blue ripple-click" onClick="linked.copy()"><i class="material-icons">content_copy</i></button>
-						<button class="green ripple-click" onClick="linked.share()"><i class="material-icons">share</i></button>
+						<button class="blue --ripple-click" onClick="linked.copy()"><i class="material-icons">content_copy</i></button>
+						<button class="green --ripple-click" onClick="linked.share()"><i class="material-icons">share</i></button>
 					</div>
 				</div>
 			</div>

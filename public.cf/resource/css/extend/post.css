@@ -1,7 +1,7 @@
 main nav.post > div.hold {
     font-size: 0.8em;
     /* display: flex; justify-content: space-between; */
-    display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr;
+    display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; grid-column-gap: 5px;
 }
 main nav.post > div.hold :first-child {
     grid-area: 1 / 1 / 2 / 2;

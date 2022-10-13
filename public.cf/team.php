@@ -160,11 +160,11 @@
 				teams.start();
 			});
 			const teams = (function() {
-				const cv = { season: 2 };
+				const cv = { season: 3 };
 				var tdi, sv = { rendered: [] };
 				var init = function() {
 					// Get configuration
-					$.getJSON("/resource/json/config-team.json", function(res) {
+					$.getJSON("/resource/json/config-team.min.json", function(res) {
 						save_config(res);
 						seek_param(); // load(cv.season);
 					}); const save_config = data => tdi = data;
@@ -266,7 +266,7 @@
 					<div class="tab">
 						<div onClick="teams.show(1)">Season 1</div>
 						<div onClick="teams.show(2)">Season 2</div>
-						<div onClick="teams.show(3)" disabled>Season 3</div>
+						<div onClick="teams.show(3)">Season 3</div>
 					</div><span class="bar-responsive"></span>
 					<div class="tbs">
 						<div order="0">
@@ -276,7 +276,7 @@
 
 						</div>
 						<div order="2">
-
+						
 						</div>
 					</div>
 				</div>

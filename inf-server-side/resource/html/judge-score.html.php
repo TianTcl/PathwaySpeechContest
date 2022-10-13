@@ -16,7 +16,7 @@
     if (isset($exit_msg)) die('<center class="message '.$exit_msg[0].'">'.$exit_msg[1].'</center>');
 ?>
 <div class="table"><table><thead><tr>
-    <th onClick="ro(1)"><?=$_COOKIE['set_lang']=="th"?"ผู้พิจรณา":"Judge"?></th>
+    <th onClick="ro(1)"><?=$_COOKIE['set_lang']=="th"?"ผู้พิจารณา":"Judge"?></th>
     <th onClick="ro(2)"><span>1.1) Accuracy</span></th>
     <th onClick="ro(3)"><span>1.2) Organization</span></th>
     <th onClick="ro(4)"><span>1.3) Creativity</span></th>

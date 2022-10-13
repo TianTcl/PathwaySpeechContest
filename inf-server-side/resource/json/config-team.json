@@ -230,6 +230,27 @@
             "Q": ["NCB", "TCL"],
             "R": null,
             "S": ["TCL", "NCB", "PNV", "PRW"]
+        }, {
+            "order": ["A", "D", "R"],
+            "A": ["NCB"],
+            "B": ["TCL"],
+            "C": null,
+            "D": ["TTH"],
+            "E": ["PPS", "TCL"],
+            "F": null,
+            "G": null,
+            "H": null,
+            "I": null,
+            "J": null,
+            "K": null, // ["TCL"],
+            "L": null,
+            "M": null,
+            "N": null, // ["TCL", "PPS"],
+            "O": null,
+            "P": null, // ["TCL"],
+            "Q": null, // ["NCB", "TCL"],
+            "R": null,
+            "S": ["TCL", "NCB"]
         }
     ]
 }

@@ -8,6 +8,7 @@
 		<?php require($dirPWroot."resource/hpe/heading.php"); require($dirPWroot."resource/hpe/init_ss.php"); ?>
 		<style type="text/css">
 			main center > * { margin: 0px 0px 10px; }
+			main h2.topic { text-transform: uppercase; }
 			div.register div.btn-warp { display: flex; justify-content: center; }
 			div.register div.btn-warp a[role="button"] {
 				padding: 7.5px 32.5px;
@@ -70,11 +71,11 @@
 					<p>การแข่งขัน</p>
 					<h1>Pathway Speech Contest</h1>
 					<p>ในหัวข้อ</p>
-					<h2 class="topic">WORLD HEALTH DAY</h2>
+					<h2 class="topic">World Wildlife Conservation Day</h2>
 					<p><font style="color: var(--clr-bs-red);">ฟรี! ค่าสมัคร</font></p>
 				</center>
 				<hr>
-				<p>กิจกรรมประกวดสุนทรพจน์ในหัวข้อ “<span class="evn">World Health Day</span>”</p>
+				<p>กิจกรรมประกวดสุนทรพจน์ในหัวข้อ “<span class="evn">World Wildlife Conservation Day</span>”</p>
 				<p>เวลาในการแข่งขัน นักเรียนควรใ้ช้เวลาในการพูดสุนทรพจน์ 2-3 นาที</p>
 				<hr>
 				<span>คุณสมบัติผู้เข้าแข่งขัน</span><ul>
@@ -91,7 +92,7 @@
 				</ul>
 				<hr>
 				<p>รูปแบบกิจกรรม</p>
-				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “<span class="evn">World Health Day</span>” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
+				<p>การพูดสุนทรพจน์เป็นภาษาอังกฤษในหัวข้อ “<span class="evn">World Wildlife Conservation Day</span>” โดยการอัดคลิปวิดีโอแล้วอัปโหลดคลิปส่งผ่านเวปไซต์ <a href="https://PathwaySpeechContest.cf">PathwaySpeechContest.cf</a></p>
 				<span>วิธีการส่งคลิปวิดีโอเพื่อแข่งขัน</span><ul>
 					<li>อัดคลิปวิดีโอครึ่งตัวโดยให้เห็นใบหน้าที่ชัดเจน</li>
 					<li>แนะนำตัวให้น่าจดจำไม่เกิน 30 วินาที</li>

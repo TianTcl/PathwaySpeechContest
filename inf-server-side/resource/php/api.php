@@ -224,8 +224,8 @@
                     $getperm = $db -> query("SELECT viewCmt FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
                     if ($getperm && $getperm -> num_rows == 1) {
                         $permission = ($getperm -> fetch_array(MYSQLI_ASSOC))['viewCmt'];
-                        if ($permission == "N") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คุณไม่มีสิทธิ์ในการดูข้อความจากผู้พิจรณา":"You don't have permission to view comments.").' <a role=\\"button\\" onClick=\\"reqComment(\''.base_convert(time(), 10, 36).'\')\\" href=\\"javascript:void(0)\\" class=\\"yellow\\" draggable=\\"false\\">'.($_COOKIE['set_lang']=="th"?"ขอสิทธิ์":"Request permission").'</a>"}}';
-                        else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจรณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
+                        if ($permission == "N") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คุณไม่มีสิทธิ์ในการดูข้อความจากผู้พิจารณา":"You don't have permission to view comments.").' <a role=\\"button\\" onClick=\\"reqComment(\''.base_convert(time(), 10, 36).'\')\\" href=\\"javascript:void(0)\\" class=\\"yellow\\" draggable=\\"false\\">'.($_COOKIE['set_lang']=="th"?"ขอสิทธิ์":"Request permission").'</a>"}}';
+                        else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจารณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
                         else if ($permission == "Y") {
                             $getcmt = $db -> query("SELECT a.scid,a.comment FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE NOT a.comment='' AND b.ptpid=$user AND b.round=$round");
                             if ($getcmt) {
@@ -234,7 +234,7 @@
                                         $keyid = base_convert(intval($readcmt['scid']) * 138, 10, 36);
                                         $info .= '<li name=\\"'.$keyid.'\\">'.$readcmt['comment'].'</li><hr>';
                                     } echo '{"success": true, "info": {"html": "<ul class=\\"list\\">'.$info.'</ul>"}}';
-                                } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"ไม่มีข้อความจากผู้พิจรณาคะแนน":"No comment.").'</center>"}}';
+                                } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"ไม่มีข้อความจากผู้พิจารณาคะแนน":"No comment.").'</center>"}}';
                             } else echo '{"success": false, "reason": [3, "Unable to load comments."]}';
                         } else echo '{"success": false, "reason": [2, "Invalid permission responded."]}';
                     } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"กรุณาส่งวีดีโอสุนทรพจน์เพื่อรอรับคะแนน":"Please submit your speech to wait for scores.").'</center>"}}'; # '{"success": false, "reason": [3, "Unable to get permission."]}';
@@ -247,13 +247,13 @@
                         if ($permission == "N") {
                             $success = $db -> query("UPDATE PathwaySCon_submission SET viewCmt='R',viewCmt_req=current_timestamp() WHERE ptpid=$user AND round=$round");
                             if ($success) {
-                                echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"ส่งคำขอสิทธิ์การดูข้อความจากผู้พิจรณาคะแนนแล้ว.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Permission request sent.<br>Please come back later.").'"}}';
+                                echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"ส่งคำขอสิทธิ์การดูข้อความจากผู้พิจารณาคะแนนแล้ว.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Permission request sent.<br>Please come back later.").'"}}';
                                 slog($user, "PathwaySCon", "comment", "request", "view", "pass", $remote);
                             } else {
                                 echo '{"success": false, "reason": [3, "'.($_COOKIE['set_lang']=="th"?"เกิดข้อผิดพลาด.<br>กรุณาลองอีกครั้ง.":"There's an error.<br>Please try again.").'"]}';
                                 slog($user, "PathwaySCon", "comment", "request", "view", "fail", $remote, "InvalidQuery");
                             }
-                        } else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจรณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
+                        } else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจารณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
                         else if ($permission == "Y") echo '{"success": false, "reason": [2, "'.($_COOKIE['set_lang']=="th"?"เกิดขอผิดผลาด.<br>คุณมีสิทธิ์ดูความคิดเห็นแล้ว ไม่สามารถยื่นคำขอซ้ำได้.":"There's an error.<br>You already have a permission to view comments. You cannot request view permission again.").'"]}';
                     } else echo '{"success": false, "reason": [3, "Unable to get permission."]}';
                 }

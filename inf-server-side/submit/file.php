@@ -5,7 +5,7 @@
 
     require_once($dirPWroot."resource/php/lib/TianTcl.php");
     $rmte = (isset($_GET['remote']) && !empty($_GET['remote'])); $remote = $rmte ? "remote" : "";
-    $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])."5d3"))/138-138) : ($_SESSION['evt']['user'] ?? "");
+    $user = $rmte ? strval(intval($tcl -> decode(str_replace("-", "", $_GET['remote'])))/138-138) : ($_SESSION['evt']['user'] ?? "");
     if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
     require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php"); $round = $config['round'];
     require($dirPWroot."e/resource/db_connect.php");

@@ -56,7 +56,7 @@
 							if (dat.info.length) {
 								target.innerHTML = "";
 								dat.info.forEach(er => {
-									target.innerHTML += '<li><div class="req"><div class="name"><span>'+er.nickname+'</span><span>'+er.longname+'</span></div><div class="action"><button class="blue ripple-click" onClick="perm.load(\''+er.ID+'\')"><?=$_COOKIE['set_lang']=="th"?"พิจรณา":"Review"?></button></div></div></li>';
+									target.innerHTML += '<li><div class="req"><div class="name"><span>'+er.nickname+'</span><span>'+er.longname+'</span></div><div class="action"><button class="blue ripple-click" onClick="perm.load(\''+er.ID+'\')"><?=$_COOKIE['set_lang']=="th"?"พิจารณา":"Review"?></button></div></div></li>';
 								}); // ppa.ripple_click_program();
 							} else target.innerHTML = '<center class="message gray"><?=$_COOKIE['set_lang']=="th"?"ไม่มีคำขอสิทธิ์":"No requests."?></center>';
 						} else app.ui.notify(1, dat.reason);
@@ -105,7 +105,7 @@
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
 				<h2><?=$_COOKIE['set_lang']=="th"?"อนุมัติคำขอสิทธิ์":"Grant Permission"?></h2>
-				<p><?=$_COOKIE['set_lang']=="th"?"อนุญาตให้ผุ้เข้าร่วมดูข้อความจากผู้พิจรณา":"Allow participants to view comments"?></p>
+				<p><?=$_COOKIE['set_lang']=="th"?"อนุญาตให้ผุ้เข้าร่วมดูข้อความจากผู้พิจารณา":"Allow participants to view comments"?></p>
 				<ul class="list">
 
 				</ul>

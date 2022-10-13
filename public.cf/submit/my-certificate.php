@@ -49,7 +49,7 @@
 					var dat = JSON.parse(res);
 					if (dat.success) {
 						var display = document.querySelector("main div.box");
-						if (!dat.info) display.innerHTML = '<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้กรรมการยังพิจรณาคะแนนไม่เสร็จ จึงยังไม่มีการออกประกาศนียบัตร<br>กรุณาเข้ามาใหม่ภายหลัง":"The judgement isn\\'t finish. Please come back later."?></div>';
+						if (!dat.info) display.innerHTML = '<div class="message gray"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้กรรมการยังพิจารณาคะแนนไม่เสร็จ จึงยังไม่มีการออกประกาศนียบัตร<br>กรุณาเข้ามาใหม่ภายหลัง":"The judgement isn\\'t finish. Please come back later."?></div>';
 						else {
 							display.innerHTML = certCard("<?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตรการเข้าร่วม":"Certificate of Participation"?>", {type: "p"});
 							if (dat.info >= 2) display.innerHTML += certCard("<?=$_COOKIE['set_lang']=="th"?"ประกาศนียบัตระดับรางวัล":"Certificate of Completion"?>", {type: "a"});

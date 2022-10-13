@@ -4,7 +4,7 @@
 	$header_title = "การส่งไฟล์";
 
 	$requireAuth = !isset($_SESSION['evt']);
-	if ($requireAuth) header("Location: ../login");
+	# if ($requireAuth) header("Location: ../login");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -136,7 +136,7 @@
 						<td name="s"></td>
 					</tr>
 					<tr>
-						<td><a href="view-score" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ผลการพิจรณาผลงาน":"Results"?>">My Score</a></td>
+						<td><a href="view-score" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"ผลการพิจารณาผลงาน":"Results"?>">My Score</a></td>
 						<td name="g"></td>
 					</tr>
 					<tr>

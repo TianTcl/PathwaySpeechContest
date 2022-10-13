@@ -105,7 +105,7 @@
 				$('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').on("input change", validate_field);
 				validate_field(); // app.io.confirm("leave");
 				if (location.hash == "#start") setTimeout(reg.start, 1250);
-				reg.show(2);
+				reg.show(3);
 			});
 			function validate_field() {
 				document.querySelectorAll('main .form input[type="text"], main .form input[type="tel"], main .form input[type="email"]').forEach((eio) => {
@@ -231,7 +231,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2><?=$_COOKIE['set_lang']=="th"?"การลงทะเบียนเข้าร่วมประกวด":"Register to Event"?></h2>
-				<div class="message blue">
+				<div class="message blue --aqua">
 					<h3><?=$_COOKIE['set_lang']=="th"?"กำหนดการ":"Schedule"?></h3>
 					<div class="wrapper">
 						<div class="tab">
@@ -249,12 +249,12 @@
 							<div order="1">
 								<p>เปิดรับสมัครวันที่ 12 มีนาคม 2565</p>
 								<p>ปิดรับสมัครวันที่ 31 มีนาคม 2565</p>
-								<p>ประกาศผลวันที่ 17 เมษายน 2565 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>ประกาศผลวันที่ 17 เมษายน 2565</p>
 							</div>
 							<div order="2">
-								<p>เปิดรับสมัครวันที่ 4 มิถุนายน 2565</p>
-								<p>ปิดรับสมัครวันที่ 30 มิถุนายน 2565</p>
-								<p>ประกาศผลวันที่ 17 กรกฎาคม 2565</p>
+								<p>เปิดรับสมัครวันที่ 15 ตุลาคม 2565 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>ปิดรับสมัครวันที่ 30 ตุลาคม 2565</p>
+								<p>ประกาศผลวันที่ 20 พฤศจิกายน 2565</p>
 							</div>
 						<?php } else { ?>
 							<div order="0">
@@ -265,12 +265,12 @@
 							<div order="1">
 								<p>Open for registration & submit: 12<sup>th</sup> March 2022</p>
 								<p>Close for registration & submit: 31<sup>st</sup> March 2022</p>
-								<p>Rank & Score announcement: 17<sup>th</sup> April 2022 <font style="color: var(--clr-bs-red);">•</font></p>
+								<p>Rank & Score announcement: 17<sup>th</sup> April 2022</p>
 							</div>
 							<div order="2">
-								<p>Open for registration & submit: 4<sup>th</sup> June 2022</p>
-								<p>Close for registration & submit: 30<sup>th</sup> June 2022</p>
-								<p>Rank & Score announcement: 17<sup>th</sup> July 2022</p>
+								<p>Open for registration & submit: 15<sup>th</sup> October 2022 <font style="color: var(--clr-bs-red);">•</font> </p>
+								<p>Close for registration & submit: 30<sup>th</sup> October 2022</p>
+								<p>Rank & Score announcement: 20<sup>th</sup> November 2022</p>
 							</div>
 						<?php } ?>
 						</div>

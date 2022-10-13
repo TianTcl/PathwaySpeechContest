@@ -2,12 +2,13 @@
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "Scoring Criteria";
-	$header_desc = "เกณฑ์การพิจรณาคะแนน";
+	$header_desc = "เกณฑ์การพิจารณาคะแนน";
 
 	require_once($dirPWroot."resource/php/core/config.php");
 
 	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31<sup>st</sup> December 2021";
-	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 12 - 31 มีนาคม 2565":"Open for registration at 12<sup>th</sup> - 31<sup>st</sup> March 2022";
+	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 12 - 31 มีนาคม 2565":"Open for registration at 12<sup>th</sup> - 31<sup>st</sup> March 2022";
+	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 15 - 30 ตุลาคม 2565":"Open for registration at 15<sup>th</sup> - 30<sup>th</sup> October 2022";
 
 	$filePath = "e%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria%20S02%20v2.pdf";
 ?>
@@ -88,7 +89,7 @@
 			<div class="container">
 				<h2>เกณฑ์ในการประกวด</h2>
 				<ul>
-					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">World Health Day</span>':'<span class="evn">World Health Day</span> Topic.'?></li>
+					<li><?=$_COOKIE['set_lang']=="th"?'หัวข้อ <span class="evn">World Wildlife Conservation Day</span>':'<span class="evn">World Wildlife Conservation Day</span> Topic.'?></li>
 					<li><?=$_COOKIE['set_lang']=="th"?"ความยาวในการพูด 2-3 นาที":"2-3 minutes speech."?></li>
 				</ul>
 				<div class="message blue date"><?=$schedule?></div>

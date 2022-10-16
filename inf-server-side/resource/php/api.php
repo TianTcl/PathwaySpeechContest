@@ -25,9 +25,10 @@
                     $newid = $db -> insert_id;
                     echo '{"success": true}'; slog("webForm", "PathwaySCon", "register", "new", $newid, "pass", $remote);
                     // Notify team via LINE application
-                    /* require($dirPWroot."resource/php/lib/LINE.php");
-                    $LINE -> setToken("970F4tFzYzTrBZ4ayvrhqKihmGFCrvPsM11sKrNhPPU");
-                    $LINE -> notify("มีผู้สมัครใหม่ → ".$attr['namen']."\r\n".$num2grade[intval($attr['grade'])]." โรงเรียน".$attr['school']."\r\nจำนวนผู้สมัครทั้งหมด ".strval(intval($newid)-1)." คน"); */
+                    require($dirPWroot."resource/php/lib/LINE.php");
+                    // $LINE -> setToken("970F4tFzYzTrBZ4ayvrhqKihmGFCrvPsM11sKrNhPPU");
+                    $LINE -> setToken("YsS15OnSstLdNWHGJav5vq2i9c0dwF79KUsovgJMjJq");
+                    $LINE -> notify("มีผู้สมัครใหม่ → ".$attr['namen']."\r\n".$num2grade[intval($attr['grade'])]." โรงเรียน".$attr['school']."\r\nจำนวนผู้สมัครทั้งหมด ".strval(intval($newid)-1)." คน");
                     // End LINE Notify API
                 } else { echo '{"success": false, "reason": [3, "Unable to register. Please try again."]}'; slog("webForm", "PathwaySCon", "register", "new", strtolower($attr['email']), "fail", $remote, "InvalidQuery"); }
             }
@@ -63,7 +64,7 @@
             if ($cmd == "fetch") {
                 $getappall = $db -> query("SELECT COUNT(ptpid) AS amt FROM PathwaySCon_attendees WHERE ptpid > 1");
                 $getappsnd = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=$round");
-                $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 AND b.round=$round GROUP BY a.smid");
+                $getvdogrd = $db -> query("SELECT COUNT(a.scid) AS amt FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid > 1 AND b.round=$round GROUP BY a.smid");
                 $getvdoall = $db -> query("SELECT COUNT(smid) AS amt FROM PathwaySCon_submission WHERE ptpid > 1 AND round=$round");
                 $getdonate = $db -> query("SELECT COUNT(dnid) AS amt FROM PathwaySCon_donation");
                 $getschamt = $db -> query("(SELECT school,COUNT(ptpid) AS amount,GROUP_CONCAT(namen) AS peoples FROM PathwaySCon_attendees WHERE ptpid > 1 GROUP BY school HAVING amount >= 3) UNION SELECT 'โรงเรียนอื่นๆ' AS school,COUNT(a.ptpid) AS amount,GROUP_CONCAT(a.namen) AS peoples FROM PathwaySCon_attendees a WHERE a.ptpid > 1 AND NOT EXISTS (SELECT b.school FROM PathwaySCon_attendees b WHERE a.school=b.school HAVING COUNT(ptpid) >= 3) ORDER BY amount DESC,school");
@@ -102,9 +103,9 @@
                     } echo '{"success": true, "info": '.json_encode($result).'}';
                 } else echo '{"success": false, "reason": [3, "Unable to fetch amount."]}';
             } else if ($cmd == "sboard") {
-                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
+                $sqlpre = "SELECT b.smid,CONCAT(c.namen, ' (', c.namef, ' ', c.namel, ')') AS name,CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p14) AS VARCHAR(5)) AS p14,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost = "GROUP BY a.smid ORDER BY mark DESC,b.lasttime,c.time";
-                $sqlpre2 = "SELECT b.smid,c.grade FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
+                $sqlpre2 = "SELECT b.smid,c.grade FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid INNER JOIN PathwaySCon_attendees c ON b.ptpid=c.ptpid WHERE c.ptpid > 1 AND b.round=$round AND";
                 $sqlpost2 = "AND a.judge=10011 ORDER BY a.mark DESC,b.lasttime,c.time LIMIT 3";
                 $gettop = $db -> query("($sqlpre2 c.grade BETWEEN 0 AND 3 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 4 AND 6 $sqlpost2) UNION ALL ($sqlpre2 c.grade BETWEEN 7 AND 9 $sqlpost2)");
                 $prim = array(); $midl = array(); $high = array(); $tops = array();
@@ -213,7 +214,7 @@
             if ($user == "") die('{"success": false, "reason": [3, "You are not signed in."]}');
             if ($cmd == "get") {
                 if ($attr == "score") {
-                    $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
+                    $getscore = $db -> query("SELECT CAST(AVG(a.p11) AS VARCHAR(5)) AS p11,CAST(AVG(a.p12) AS VARCHAR(5)) AS p12,CAST(AVG(a.p13) AS VARCHAR(5)) AS p13,CAST(AVG(a.p14) AS VARCHAR(5)) AS p14,CAST(AVG(a.p21) AS VARCHAR(5)) AS p21,CAST(AVG(a.p22) AS VARCHAR(5)) AS p22,CAST(AVG(a.p23) AS VARCHAR(5)) AS p23,CAST(AVG(a.p24) AS VARCHAR(5)) AS p24,CAST(AVG(a.p31) AS VARCHAR(5)) AS p31,CAST(AVG(a.p32) AS VARCHAR(5)) AS p32,CAST(AVG(a.p41) AS VARCHAR(5)) AS p41,CAST(AVG(a.mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round GROUP BY a.smid");
                     if ($getscore) {
                         if ($getscore -> num_rows == 1) {
                             $readscore = $getscore -> fetch_array(MYSQLI_ASSOC);
@@ -227,7 +228,7 @@
                         if ($permission == "N") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คุณไม่มีสิทธิ์ในการดูข้อความจากผู้พิจารณา":"You don't have permission to view comments.").' <a role=\\"button\\" onClick=\\"reqComment(\''.base_convert(time(), 10, 36).'\')\\" href=\\"javascript:void(0)\\" class=\\"yellow\\" draggable=\\"false\\">'.($_COOKIE['set_lang']=="th"?"ขอสิทธิ์":"Request permission").'</a>"}}';
                         else if ($permission == "R") echo '{"success": true, "info": {"html": "'.($_COOKIE['set_lang']=="th"?"คำขอสิทธิ์การดูข้อความอยู่ระหว่างการพิจารณา.<br>กรุณาเข้ามาใหม่ภายหลัง.":"Your request to view comments is under review.<br>Please come back later.").'"}}';
                         else if ($permission == "Y") {
-                            $getcmt = $db -> query("SELECT a.scid,a.comment FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE NOT a.comment='' AND b.ptpid=$user AND b.round=$round");
+                            $getcmt = $db -> query("SELECT a.scid,a.comment FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE NOT a.comment='' AND b.ptpid=$user AND b.round=$round");
                             if ($getcmt) {
                                 if ($getcmt -> num_rows > 0) {
                                     $info = ""; while ($readcmt = $getcmt -> fetch_assoc()) {
@@ -237,7 +238,7 @@
                                 } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"ไม่มีข้อความจากผู้พิจารณาคะแนน":"No comment.").'</center>"}}';
                             } else echo '{"success": false, "reason": [3, "Unable to load comments."]}';
                         } else echo '{"success": false, "reason": [2, "Invalid permission responded."]}';
-                    } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"กรุณาส่งวีดีโอสุนทรพจน์เพื่อรอรับคะแนน":"Please submit your speech to wait for scores.").'</center>"}}'; # '{"success": false, "reason": [3, "Unable to get permission."]}';
+                    } else echo '{"success": true, "info": {"html": "<center>'.($_COOKIE['set_lang']=="th"?"กรุณาส่งวิดีโอสุนทรพจน์เพื่อรอรับคะแนน":"Please submit your speech to wait for scores.").'</center>"}}'; # '{"success": false, "reason": [3, "Unable to get permission."]}';
                 }
             } else if ($cmd == "comment") {
                 if ($attr == "request") {

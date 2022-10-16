@@ -9,12 +9,12 @@
         require($dirPWroot."e/resource/db_connect.php");
         $spcID = ltrim(trim($_REQUEST['of']), "ID");
         $smID = $db -> real_escape_string(strval(intval(base_convert(base64_decode($spcID), 36, 10)) / 138));
-        $getgrade = $db -> query("SELECT CAST(AVG(p11) AS VARCHAR(5)) AS p11,CAST(AVG(p12) AS VARCHAR(5)) AS p12,CAST(AVG(p13) AS VARCHAR(5)) AS p13,CAST(AVG(p21) AS VARCHAR(5)) AS p21,CAST(AVG(p22) AS VARCHAR(5)) AS p22,CAST(AVG(p23) AS VARCHAR(5)) AS p23,CAST(AVG(p24) AS VARCHAR(5)) AS p24,CAST(AVG(p31) AS VARCHAR(5)) AS p31,CAST(AVG(p32) AS VARCHAR(5)) AS p32,CAST(AVG(p41) AS VARCHAR(5)) AS p41,CAST(AVG(mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score WHERE smid=$smID GROUP BY smid");
-        $getcmt = $db -> query("SELECT scid,comment FROM PathwaySCon_score WHERE smid=$smID AND NOT comment=''");
+        $getgrade = $db -> query("SELECT CAST(AVG(p11) AS VARCHAR(5)) AS p11,CAST(AVG(p12) AS VARCHAR(5)) AS p12,CAST(AVG(p13) AS VARCHAR(5)) AS p13,CAST(AVG(p14) AS VARCHAR(5)) AS p14,CAST(AVG(p21) AS VARCHAR(5)) AS p21,CAST(AVG(p22) AS VARCHAR(5)) AS p22,CAST(AVG(p23) AS VARCHAR(5)) AS p23,CAST(AVG(p24) AS VARCHAR(5)) AS p24,CAST(AVG(p31) AS VARCHAR(5)) AS p31,CAST(AVG(p32) AS VARCHAR(5)) AS p32,CAST(AVG(p41) AS VARCHAR(5)) AS p41,CAST(AVG(mark) AS VARCHAR(5)) AS mark FROM PathwaySCon_score2 WHERE smid=$smID GROUP BY smid");
+        $getcmt = $db -> query("SELECT scid,comment FROM PathwaySCon_score2 WHERE smid=$smID AND NOT comment=''");
         $db -> close();
         if ($getgrade && ($getgrade -> num_rows)) $readgrade = $getgrade -> fetch_array(MYSQLI_ASSOC);
         # else $exit_msg = array("gray", "This submission cannot be graded.<br>No judge marks this speech video yet.");
-		else $readgrade = array("p11" => 0, "p12" => 0, "p13" => 0, "p21" => 0, "p22" => 0, "p23" => 0, "p24" => 0, "p31" => 0, "p32" => 0, "p41" => 0, "mark" => 0);
+		else $readgrade = array("p11" => 0, "p12" => 0, "p13" => 0, "p14" => 0, "p21" => 0, "p22" => 0, "p23" => 0, "p24" => 0, "p31" => 0, "p32" => 0, "p41" => 0, "mark" => 0);
     } else $exit_msg = array("yellow", "No participant selected.");
 
     if (isset($exit_msg)) die('<center class="message '.$exit_msg[0].'">'.$exit_msg[1].'</center>');
@@ -37,17 +37,21 @@
     </tr></thead>
     <tbody>
         <tr>
-            <td>Accuracy and Consistency</td>
+            <td>Form & Organization of Speech</td>
             <td><output type="number" name="p11"><?=strval($readgrade["p11"] + 0)?></output></td>
             <td><?=$config['criteria'][11]?> pts</td>
         </tr><tr>
-            <td>Form & Organization Of Speech</td>
+            <td>Accuracy and Consistency</td>
             <td><output type="number" name="p12"><?=strval($readgrade["p12"] + 0)?></output></td>
             <td><?=$config['criteria'][12]?> pts</td>
         </tr><tr>
-            <td>Creativity</td>
+            <td>Vocabulary</td>
             <td><output type="number" name="p13"><?=strval($readgrade["p13"] + 0)?></output></td>
             <td><?=$config['criteria'][13]?> pts</td>
+        </tr><tr>
+            <td>Creativity</td>
+            <td><output type="number" name="p14"><?=strval($readgrade["p14"] + 0)?></output></td>
+            <td><?=$config['criteria'][14]?> pts</td>
         </tr>
     </tbody>
     <thead><tr>
@@ -57,15 +61,15 @@
     </tr></thead>
     <tbody>
         <tr>
-            <td>Vocabulary</td>
+            <td>Pronunciation</td>
             <td><output type="number" name="p21"><?=strval($readgrade["p21"] + 0)?></output></td>
             <td><?=$config['criteria'][21]?> pts</td>
         </tr><tr>
-            <td>Structure & Connectors</td>
+            <td>Stress, Intonation, Rhythm, Pausing and Pace</td>
             <td><output type="number" name="p22"><?=strval($readgrade["p22"] + 0)?></output></td>
             <td><?=$config['criteria'][22]?> pts</td>
         </tr><tr>
-            <td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
+            <td>Connecting & Linking</td>
             <td><output type="number" name="p23"><?=strval($readgrade["p23"] + 0)?></output></td>
             <td><?=$config['criteria'][23]?> pts</td>
         </tr><tr>

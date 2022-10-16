@@ -146,7 +146,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
-				<h2><?=$_COOKIE['set_lang']=="th"?"วีดีโอทั้งหมดจากช่วงที่ 2":"All Seaon 2 Submissions"?></h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"วิดีโอทั้งหมดจากช่วงที่ 2":"All Seaon 2 Submissions"?></h2>
 				<div class="app">
 					<div class="slot lists slider">
 						<div class="vg vg-1">

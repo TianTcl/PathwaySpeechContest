@@ -55,7 +55,7 @@
                 <li><a href="/organize/send-email"><?=$_COOKIE['set_lang']=="th"?"ส่งอีเมลแจ้งเตือน":"Notify with e-mail"?></a></li>
                 <li class="sub-detail"><?=$_COOKIE['set_lang']=="th"?"การแข่งขัน":"Competition"?></li>
                 <li><a href="/organize/attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
-                <li><a href="/organize/mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
+                <li><a href="/organize/mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวิดีโอคลิป":"Grade speech"?></a></li>
                 <li hidden><a href="/organize/rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
                 <li class="seperator">&nbsp;</li>
                 <li><a href="/organize/scoreboard"><?=$_COOKIE['set_lang']=="th"?"กระดานคะแนน":"Scoreboard"?></a></li>

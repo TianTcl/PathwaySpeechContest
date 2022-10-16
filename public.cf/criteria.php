@@ -8,9 +8,9 @@
 
 	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 1 - 31 ธันวาคม 2564":"Open for registration at 1<sup>st</sup> - 31<sup>st</sup> December 2021";
 	# $schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 12 - 31 มีนาคม 2565":"Open for registration at 12<sup>th</sup> - 31<sup>st</sup> March 2022";
-	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 15 - 30 ตุลาคม 2565":"Open for registration at 15<sup>th</sup> - 30<sup>th</sup> October 2022";
+	$schedule = $_COOKIE['set_lang']=="th"?"เปิดรับสมัครตั้งแต่วันที่ 15 - 31 ตุลาคม 2565":"Open for registration at 15<sup>th</sup> - 31<sup>st</sup> October 2022";
 
-	$filePath = "e%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria%20S02%20v2.pdf";
+	$filePath = "e%2FPathway-Speech-Contest%2Fresource%2Ffile%2FScoring%20Criteria%20S03%20v1%20rev8.pdf";
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,6 +95,7 @@
 				<div class="message blue date"><?=$schedule?></div>
 				<h2>Scoring Criteria</h2>
 				<div class="crit table"><table>
+					<?php if (false) { // v1 ?>
 					<thead><tr><th>Content</th><th><?=$config['criteria'][10]?> pts</th></tr></thead>
 					<tbody>
 						<tr><td>Accuracy and Consistency</td><td><?=$config['criteria'][11]?> pts</td></tr>
@@ -116,7 +117,31 @@
 					<thead><tr><th>Time</th><th><?=$config['criteria'][40]?> pts</th></tr></thead>
 					<tbody>
 						<tr><td>Speech duration</td><td><?=$config['criteria'][41]?> pts</td></tr>
-					</tbody>
+					</tbody><?php } ?>
+					<?php if (true) { // v2 ?>
+						<thead><tr><th>Content</th><th><?=$config['criteria'][10]?> pts</th></tr></thead>
+						<tbody>
+							<tr><td>Form & Organization of Speech</td><td><?=$config['criteria'][11]?> pts</td></tr>
+							<tr><td>Accuracy and Consistency</td><td><?=$config['criteria'][12]?> pts</td></tr>
+							<tr><td>Vocabulary</td><td><?=$config['criteria'][13]?> pts</td></tr>
+							<tr><td>Creativity</td><td><?=$config['criteria'][14]?> pts</td></tr>
+						</tbody>
+						<thead><tr><th>Language Competence & Fluency</th><th><?=$config['criteria'][20]?> pts</th></tr></thead>
+						<tbody>
+							<tr><td>Pronunciation</td><td><?=$config['criteria'][21]?> pts</td></tr>
+							<tr><td>Stress, Intonation, Rhythm, Pausing and Pace</td><td><?=$config['criteria'][22]?> pts</td></tr>
+							<tr><td>Connecting & Linking</td><td><?=$config['criteria'][23]?> pts</td></tr>
+							<tr><td>Tone</td><td><?=$config['criteria'][24]?> pts</td></tr>
+						</tbody>
+						<thead><tr><th>Presentation</th><th><?=$config['criteria'][30]?> pts</th></tr></thead>
+						<tbody>
+							<tr><td>Communication</td><td><?=$config['criteria'][31]?> pts</td></tr>
+							<tr><td>Personality</td><td><?=$config['criteria'][32]?> pts</td></tr>
+						</tbody>
+						<thead><tr><th>Time</th><th><?=$config['criteria'][40]?> pts</th></tr></thead>
+						<tbody>
+							<tr><td>Speech duration</td><td><?=$config['criteria'][41]?> pts</td></tr>
+					</tbody><?php } ?>
 					<thead><tr style="line-height: 1.5; background-color: var(--fade-black-8);"><th>Total</th><th>100 pts</th></tr></thead>
 				</table></div>
 				<div class="form"><div class="group split" style="margin-bottom: 0px;">

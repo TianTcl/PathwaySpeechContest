@@ -289,7 +289,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
-				<h2><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech video"?></h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวิดีโอคลิป":"Grade speech video"?></h2>
 				<div class="app">
 					<div class="slot lists slider">
 						<div class="vg vg-1">
@@ -325,17 +325,21 @@
 								</tr></thead>
 								<tbody>
 									<tr>
-										<td>Accuracy and Consistency</td>
+										<td>Form & Organization of Speech</td>
 										<td><input type="number" name="p:11" required min="0" max="<?=$config['criteria'][11]?>" step="1"></td>
 										<td><?=$config['criteria'][11]?> pts</td>
 									</tr><tr>
-										<td>Form & Organization Of Speech</td>
+										<td>Accuracy and Consistency</td>
 										<td><input type="number" name="p:12" required min="0" max="<?=$config['criteria'][12]?>" step="1"></td>
 										<td><?=$config['criteria'][12]?> pts</td>
 									</tr><tr>
-										<td>Creativity</td>
+										<td>Vocabulary</td>
 										<td><input type="number" name="p:13" required min="0" max="<?=$config['criteria'][13]?>" step="1"></td>
 										<td><?=$config['criteria'][13]?> pts</td>
+									</tr><tr>
+										<td>Creativity</td>
+										<td><input type="number" name="p:14" required min="0" max="<?=$config['criteria'][14]?>" step="1"></td>
+										<td><?=$config['criteria'][14]?> pts</td>
 									</tr>
 								</tbody>
 								<thead><tr>
@@ -345,15 +349,15 @@
 								</tr></thead>
 								<tbody>
 									<tr>
-										<td>Vocabulary</td>
+										<td>Pronunciation</td>
 										<td><input type="number" name="p:21" required min="0" max="<?=$config['criteria'][21]?>" step="1"></td>
 										<td><?=$config['criteria'][21]?> pts</td>
 									</tr><tr>
-										<td>Structure & Connectors</td>
+										<td>Stress, Intonation, Rhythm, Pausing and Pace</td>
 										<td><input type="number" name="p:22" required min="0" max="<?=$config['criteria'][22]?>" step="1"></td>
 										<td><?=$config['criteria'][22]?> pts</td>
 									</tr><tr>
-										<td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
+										<td>Connecting & Linking</td>
 										<td><input type="number" name="p:23" required min="0" max="<?=$config['criteria'][23]?>" step="1"></td>
 										<td><?=$config['criteria'][23]?> pts</td>
 									</tr><tr>

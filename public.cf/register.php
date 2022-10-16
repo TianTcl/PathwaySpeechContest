@@ -253,7 +253,7 @@
 							</div>
 							<div order="2">
 								<p>เปิดรับสมัครวันที่ 15 ตุลาคม 2565 <font style="color: var(--clr-bs-red);">•</font></p>
-								<p>ปิดรับสมัครวันที่ 30 ตุลาคม 2565</p>
+								<p>ปิดรับสมัครวันที่ 31 ตุลาคม 2565</p>
 								<p>ประกาศผลวันที่ 20 พฤศจิกายน 2565</p>
 							</div>
 						<?php } else { ?>
@@ -269,7 +269,7 @@
 							</div>
 							<div order="2">
 								<p>Open for registration & submit: 15<sup>th</sup> October 2022 <font style="color: var(--clr-bs-red);">•</font> </p>
-								<p>Close for registration & submit: 30<sup>th</sup> October 2022</p>
+								<p>Close for registration & submit: 31<sup>st</sup> October 2022</p>
 								<p>Rank & Score announcement: 20<sup>th</sup> November 2022</p>
 							</div>
 						<?php } ?>

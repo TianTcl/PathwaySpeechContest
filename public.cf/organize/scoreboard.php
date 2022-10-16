@@ -52,9 +52,9 @@
 								target.innerHTML = "";
 								et.forEach(er => {
 									let name = '<font>'+er.name.replace(" (", "</font> (");
-									target.innerHTML += '<tr><td>'+String(rank++).padStart(3, "0")+'</td><td>'+name+'</td><td>'+scoreRender(er.p11)+'</td><td>'+scoreRender(er.p12)+'</td><td>'+scoreRender(er.p13)+'</td><td>'+scoreRender(er.p21)+'</td><td>'+scoreRender(er.p22)+'</td><td>'+scoreRender(er.p23)+'</td><td>'+scoreRender(er.p24)+'</td><td>'+scoreRender(er.p31)+'</td><td>'+scoreRender(er.p32)+'</td><td>'+scoreRender(er.p41)+'</td><td>'+scoreRender(er.mark)+'</td></tr>';
+									target.innerHTML += '<tr><td>'+String(rank++).padStart(3, "0")+'</td><td>'+name+'</td><td>'+scoreRender(er.p11)+'</td><td>'+scoreRender(er.p12)+'</td><td>'+scoreRender(er.p13)+'</td><td>'+scoreRender(er.p14)+'</td><td>'+scoreRender(er.p21)+'</td><td>'+scoreRender(er.p22)+'</td><td>'+scoreRender(er.p23)+'</td><td>'+scoreRender(er.p24)+'</td><td>'+scoreRender(er.p31)+'</td><td>'+scoreRender(er.p32)+'</td><td>'+scoreRender(er.p41)+'</td><td>'+scoreRender(er.mark)+'</td></tr>';
 								});
-							} else target.innerHTML = '<tr><td colspan="13"><center class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ไม่มีรายการคะแนนในหมวดหมู่นี้":"No score list in this category"?></center></td></tr>';
+							} else target.innerHTML = '<tr><td colspan="14"><center class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ไม่มีรายการคะแนนในหมวดหมู่นี้":"No score list in this category"?></center></td></tr>';
 						});
 					} else app.ui.notify(1, dat.reason);
 				});
@@ -81,22 +81,23 @@
 				<div class="stat table scoreboard"><table><thead>
 					<th onClick="ro(1)"><?=$_COOKIE['set_lang']=="th"?"ลำดับ":"Rank"?></th>
 					<th onClick="ro(2)"><?=$_COOKIE['set_lang']=="th"?"ชื่อเต็ม":"Fullname"?></th>
-					<th onClick="ro(3)"><span>1.1) Accuracy</span></th>
-					<th onClick="ro(4)"><span>1.2) Organization</span></th>
-					<th onClick="ro(5)"><span>1.3) Creativity</span></th>
-					<th onClick="ro(6)"><span>2.1) Vocabulary</span></th>
-					<th onClick="ro(7)"><span>2.2) Structure, Connectors</span></th>
-					<th onClick="ro(8)"><span>2.3) Stress, Rhythm</th>
-					<th onClick="ro(9)"><span>2.4) Tone</span></th>
-					<th onClick="ro(10)"><span>3.1) Communication</span></th>
-					<th onClick="ro(11)"><span>3.2) Personality</span></th>
-					<th onClick="ro(12)"><span>4) Duration</span></th>
-					<th onClick="ro(13)"><?=$_COOKIE['set_lang']=="th"?"คะแนนรวม":"Total"?></th>
-				</thead><thead><tr><td colspan="13"><?=$_COOKIE['set_lang']=="th"?"ประถม 3-6":"Elementary 3-6"?></td></tr></thead><tbody class="g1">
+					<th onClick="ro(3)"><span>1.1) Organization</span></th>
+					<th onClick="ro(4)"><span>1.2) Accuracy</span></th>
+					<th onClick="ro(5)"><span>1.3) Vocabulary</span></th>
+					<th onClick="ro(6)"><span>1.4) Creativity</span></th>
+					<th onClick="ro(7)"><span>2.1) Pronunciation</span></th>
+					<th onClick="ro(8)"><span>2.2) Stress, Rhythm</span></th>
+					<th onClick="ro(9)"><span>2.3) Connecting</th>
+					<th onClick="ro(10)"><span>2.4) Tone</span></th>
+					<th onClick="ro(11)"><span>3.1) Communication</span></th>
+					<th onClick="ro(12)"><span>3.2) Personality</span></th>
+					<th onClick="ro(13)"><span>4.1) Duration</span></th>
+					<th onClick="ro(14)"><?=$_COOKIE['set_lang']=="th"?"คะแนนรวม":"Total"?></th>
+				</thead><thead><tr><td colspan="14"><?=$_COOKIE['set_lang']=="th"?"ประถม 3-6":"Elementary 3-6"?></td></tr></thead><tbody class="g1">
 
-				</tbody><thead><tr><td colspan="13"><?=$_COOKIE['set_lang']=="th"?"มัธยม 1-3":"Middle School"?></td></tr></thead><tbody class="g2">
+				</tbody><thead><tr><td colspan="14"><?=$_COOKIE['set_lang']=="th"?"มัธยม 1-3":"Middle School"?></td></tr></thead><tbody class="g2">
 					
-				</tbody><thead><tr><td colspan="13"><?=$_COOKIE['set_lang']=="th"?"มัธยม 4-6":"High School"?></td></tr></thead><tbody class="g3">
+				</tbody><thead><tr><td colspan="14"><?=$_COOKIE['set_lang']=="th"?"มัธยม 4-6":"High School"?></td></tr></thead><tbody class="g3">
 					
 				</tbody></table></div>
 			</div>

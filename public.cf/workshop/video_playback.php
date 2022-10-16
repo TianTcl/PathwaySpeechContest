@@ -2,7 +2,7 @@
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "Workshop";
-	$header_desc = "การย้อนดูคลิปวีดีโอ";
+	$header_desc = "การย้อนดูคลิปวิดีโอ";
 
 	if (!isset($_GET['signature']) || empty(trim($_GET['signature']))|| !isset($_SESSION['var']['workshop-URL'])
 		|| $_SESSION['var']['workshop-URL'] <> trim($_GET['signature'])) header("Location: /workshop/");

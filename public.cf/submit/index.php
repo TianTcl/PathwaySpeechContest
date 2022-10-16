@@ -128,7 +128,7 @@
 					</tr>
 				</thead><tbody>
 					<tr>
-						<td><a href="speech-video" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"วีดีโอสุนทรพจน์":"Speech Video"?>">Speech Video</a></td>
+						<td><a href="speech-video" onClick="return viewSubmission(this)" data-text="<?=$_COOKIE['set_lang']=="th"?"วิดีโอสุนทรพจน์":"Speech Video"?>">Speech Video</a></td>
 						<td name="v"></td>
 					</tr>
 					<tr>

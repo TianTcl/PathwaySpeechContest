@@ -95,17 +95,21 @@
 						</tr></thead>
 						<tbody>
 							<tr>
-								<td>Accuracy and Consistency</td>
+								<td>Form & Organization of Speech</td>
 								<td><output type="number" name="p11"></output></td>
 								<td><?=$config['criteria'][11]?> pts</td>
 							</tr><tr>
-								<td>Form & Organization Of Speech</td>
+								<td>Accuracy and Consistency</td>
 								<td><output type="number" name="p12"></output></td>
 								<td><?=$config['criteria'][12]?> pts</td>
 							</tr><tr>
-								<td>Creativity</td>
+								<td>Vocabulary</td>
 								<td><output type="number" name="p13"></output></td>
 								<td><?=$config['criteria'][13]?> pts</td>
+							</tr><tr>
+								<td>Creativity</td>
+								<td><output type="number" name="p14"></output></td>
+								<td><?=$config['criteria'][14]?> pts</td>
 							</tr>
 						</tbody>
 						<thead><tr>
@@ -115,15 +119,15 @@
 						</tr></thead>
 						<tbody>
 							<tr>
-								<td>Vocabulary</td>
+								<td>Pronunciation</td>
 								<td><output type="number" name="p21"></output></td>
 								<td><?=$config['criteria'][21]?> pts</td>
 							</tr><tr>
-								<td>Structure & Connectors</td>
+								<td>Stress, Intonation, Rhythm, Pausing and Pace</td>
 								<td><output type="number" name="p22"></output></td>
 								<td><?=$config['criteria'][22]?> pts</td>
 							</tr><tr>
-								<td>Pronunciation, Stress, Intonation, Rhythm, Pausing and Pace</td>
+								<td>Connecting & Linking</td>
 								<td><output type="number" name="p23"></output></td>
 								<td><?=$config['criteria'][23]?> pts</td>
 							</tr><tr>

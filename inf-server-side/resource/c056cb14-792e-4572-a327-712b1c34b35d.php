@@ -5,8 +5,8 @@
 	$header_desc = "All submission video list";
 	$forceExternalBrowser = true;
 
-	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2)) header("Location: ../organize/?return_url=..%2Fresource%2Fab1ec7e3-cda1-4872-9323-f5325a53f17f");
-	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: ../organize/new-password?return_url=..%2Fresource%2Fab1ec7e3-cda1-4872-9323-f5325a53f17f");
+	if (!(isset($_SESSION['evt2']) && $_SESSION['evt2']['EventID']==2)) header("Location: ../organize/?return_url=..%2Fresource%2Fc056cb14-792e-4572-a327-712b1c34b35d");
+	else if ($_SESSION['evt2']["force_pwd_change"]) header("Location: ../organize/new-password?return_url=..%2Fresource%2Fc056cb14-792e-4572-a327-712b1c34b35d");
 	$permitted = (has_perm("grader") || has_perm("judge", false)); if ($permitted) {
 		require_once($dirPWroot."e/Pathway-Speech-Contest/resource/php/config.php");
 		
@@ -105,7 +105,7 @@
 					if (!sv.inited) {
 						sv.inited = true;
 						// Fetch list
-						$.get(cv.APIurl+"?app=grade&cmd=list&attr=special-S1", function(res, hsc) {
+						$.get(cv.APIurl+"?app=grade&cmd=list&attr=special-S3", function(res, hsc) {
 							var dat = JSON.parse(res);
 							if (dat.success) {
 								if (dat.info.length) {
@@ -146,7 +146,7 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<?php if (!$permitted) echo '<iframe src="/error/901">901: No Permission</iframe>'; else { ?>
 			<div class="container">
-				<h2><?=$_COOKIE['set_lang']=="th"?"วิดีโอทั้งหมดจากช่วงที่ 1":"All Seaon 1 Submissions"?></h2>
+				<h2><?=$_COOKIE['set_lang']=="th"?"วิดีโอทั้งหมดจากช่วงที่ 2":"All Seaon 3 Submissions"?></h2>
 				<div class="app">
 					<div class="slot lists slider">
 						<div class="vg vg-1">

@@ -15,7 +15,7 @@
             "info" => array(
                 "v" => file_exists("../resource/upload/sv-$round/$user.mp4"),
                 "s" => file_exists("../resource/upload/ps-$round/$user.png"),
-                "g" => boolval($db -> query("SELECT a.scid FROM PathwaySCon_score a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round") -> num_rows),
+                "g" => boolval($db -> query("SELECT a.scid FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_submission b ON a.smid=b.smid WHERE b.ptpid=$user AND b.round=$round") -> num_rows),
                 "c" => !empty(($db -> query("SELECT rank FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round") -> fetch_array())['rank'])
             )
         ));

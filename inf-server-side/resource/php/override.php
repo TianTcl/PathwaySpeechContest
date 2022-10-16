@@ -15,10 +15,11 @@
 				$mail = array("recipients" => array(), "settings" => array()); $mail['setting'] = array(
 					array("var" => "name.org", "value" => "Pathway Speech Contest"),
 					array("var" => "mail.pr", "value" => "Pathway.SpeechContest@gmail.com"),
-					array("var" => "mail.dev", "value" => "devtech@PathwaySpeechContest.cf")
+					array("var" => "mail.dev", "value" => "PathwaySpeechContest@mail.TianTcl.net")
 				); $mail['recipient'] = explode(",", $attr['rcp']); switch ($round) {
 					case 1: $remindTemplateID = "ynrw7gy50k42k8e3"; $submitLastTime = "2021-12-31 23:59:59"; break;
 					case 2: $remindTemplateID = "neqvygmqyw40p7w2"; $submitLastTime = "2022-03-31 23:59:59"; break;
+					case 2: $remindTemplateID = "3vz9dlemox14kj50"; $submitLastTime = "2022-11-05 23:59:59"; break;
 					default: $remindTemplateID = ""; break;
 				} $submitLastTime = strval(floor((strtotime($submitLastTime) - time()) / 86400)); switch ($attr['mode']) {
 					case "remind-12":
@@ -60,7 +61,7 @@
 					$email = curl_init(); curl_setopt($email, CURLOPT_URL, "https://api.mailersend.com/v1/email");
 					curl_setopt($email, CURLOPT_RETURNTRANSFER, 1); curl_setopt($email, CURLOPT_POST, 1);
 					$header = json_encode(array(
-						"from" => array("email" => "TianTcl@pathwayspeechcontest.cf", "name" => "Tecillium (UFDT)"),
+						"from" => array("email" => "PathwaySpeechContest@mail.TianTcl.net", "name" => "Tecillium (UFDT)"),
 						"to" => $mail['recipients'], "subject" => "Pathway Speech Contest - ".$mail['topic'], // Can be ["to", "cc", "bcc"]
 						"variables" => $mail['settings'], "template_id" => $mail['templateID']
 					)); curl_setopt($email, CURLOPT_POSTFIELDS, $header); $headers = array(
@@ -84,6 +85,7 @@
 			if ($cmd == "list") {
 				if ($attr == "special-S1") $round = 1;
 				else if ($attr == "special-S2") $round = 2;
+				else if ($attr == "special-S3") $round = 3;
 				$getsbmt = $db -> query("SELECT a.smid,CONCAT(b.namen,' (',b.namef,' ',b.namel,')') AS name,(CASE WHEN b.grade BETWEEN 0 AND 3 THEN 1 WHEN b.grade BETWEEN 4 AND 6 THEN 2 WHEN b.grade BETWEEN 7 AND 9 THEN 3 END) AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE b.ptpid > 1 AND a.round=$round ORDER BY division,name");
 				$sbmts = array(); if ($getsbmt && $getsbmt -> num_rows > 0) {
 					while ($readsbmt = $getsbmt -> fetch_assoc()) array_push($sbmts, array(
@@ -94,7 +96,7 @@
 				} echo '{"success": true, "info": '.json_encode($sbmts).'}';
 			} else if ($cmd == "load") {
 				$smid = strval(intval(base_convert(trim($attr), 36, 10)) / 138);
-				$getsbmt = $db -> query("SELECT scid,p11,p12,p13,p21,p22,p23,p24,p31,p32,p41,mark,comment FROM PathwaySCon_score WHERE smid=$smid AND judge=$user");
+				$getsbmt = $db -> query("SELECT scid,p11,p12,p13,p14,p21,p22,p23,p24,p31,p32,p41,mark,comment FROM PathwaySCon_score2 WHERE smid=$smid AND judge=$user");
 				if ($getsbmt) {
 					if ($getsbmt -> num_rows == 1) {
 						$mark = $getsbmt -> fetch_array(MYSQLI_ASSOC); $export = array();
@@ -109,7 +111,7 @@
 				$toEdit = strval(intval(base_convert(trim($attr['returnTo']), 36, 10)) / 138); unset($attr['returnTo']);
 				$attr['comment'] = htmlspecialchars($attr['comment']);
 				foreach ($attr as $part => $mark) $attr[$part] = $db -> real_escape_string(trim($mark));
-				$success = $db -> query("INSERT INTO PathwaySCon_score (smid,judge,".implode(",", array_keys($attr)).",ip) VALUES ($toEdit,$user,'".implode("','", array_values($attr))."','$ip')");
+				$success = $db -> query("INSERT INTO PathwaySCon_score2 (smid,judge,".implode(",", array_keys($attr)).",ip) VALUES ($toEdit,$user,'".implode("','", array_values($attr))."','$ip')");
 				if ($success) {
 					$newid = $db -> insert_id; $encID = vsprintf("%s-%s-%s-%s", str_split($tcl -> encode((intval($newid)+138)*138, 1), 4));
 					echo '{"success": true, "info": "'.$encID.'"}'; slog($user, "PathwaySCon", "grade", "new", $newid, "pass", $remote);
@@ -120,7 +122,7 @@
 				$marks = ""; foreach ($attr as $key => $val) {
 					if ($key <> "comment") $marks .= "$key='".($db -> real_escape_string(trim($val)))."',";
 					else $marks .= "$key='".($db -> real_escape_string(htmlspecialchars(trim($val))))."',";
-				} $success = $db -> query("UPDATE PathwaySCon_score SET $marks edit=edit+1,lasttime=current_timestamp() WHERE scid=$toEdit");
+				} $success = $db -> query("UPDATE PathwaySCon_score2 SET $marks edit=edit+1,lasttime=current_timestamp() WHERE scid=$toEdit");
 				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "grade", "edit", "$toEdit", "pass", $remote); }
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "edit", $toEdit, "fail", $remote, "InvalidQuery"); }
 			}
@@ -132,7 +134,7 @@
 					case "B": $group = "AND b.grade BETWEEN 4 AND 6"; break;
 					case "C": $group = "AND b.grade BETWEEN 7 AND 9"; break;
 					default: die('{"success": false, "reason": [2, "Invalid group requested."]}'); break;
-				} $gethigh = $db -> query("SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,CAST(AVG(c.mark) AS VARCHAR(5)) AS mark,a.rank FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round $group GROUP BY a.smid ORDER BY mark DESC,a.lasttime,b.time LIMIT 5");
+				} $gethigh = $db -> query("SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,CAST(AVG(c.mark) AS VARCHAR(5)) AS mark,a.rank FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score2 c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round $group GROUP BY a.smid ORDER BY mark DESC,a.lasttime,b.time LIMIT 5");
 				if ($gethigh) {
 					if ($gethigh -> num_rows) {
 						$toplist = array(); while ($readhigh = $gethigh -> fetch_assoc()) array_push($toplist, array(
@@ -144,7 +146,7 @@
 					} else echo '{"success": false, "reason": [1, "No participant in this category."]}';
 				} else echo '{"success": false, "reason": [3, "Unable to fetch list."]}';
 			} */ if ($cmd == "list") {
-				$gettop = $db -> query("(SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,1 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 0 AND 3 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,2 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 4 AND 6 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,3 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 7 AND 9 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5)");
+				$gettop = $db -> query("(SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,1 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score2 c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 0 AND 3 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,2 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score2 c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 4 AND 6 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5) UNION ALL (SELECT a.smid,CONCAT(b.namen, ' (', b.namef, ' ', b.namel, ')') AS name,3 AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid INNER JOIN PathwaySCon_score2 c ON a.smid=c.smid WHERE b.ptpid > 1 AND a.round=$round AND b.grade BETWEEN 7 AND 9 GROUP BY a.smid ORDER BY AVG(c.mark) DESC,a.lasttime,b.time LIMIT 5)");
 				$sbmts = array(); if ($gettop && $gettop -> num_rows > 0) {
 					while ($readtop = $gettop -> fetch_assoc()) array_push($sbmts, array(
 						"ID" => base_convert(intval($readtop['smid'])*138, 10, 36),
@@ -172,7 +174,7 @@
 					$perm = ($getperm -> fetch_array(MYSQLI_ASSOC))['viewCmt'];
 					if ($perm <> "R") echo '{"success": true, "info": null}';
 					else {
-						$getcmt = $db -> query("SELECT substring(b.display, 4, LENGTH(b.display)) as judge,a.comment FROM PathwaySCon_score a INNER JOIN PathwaySCon_organizer b ON a.judge=b.user_id WHERE a.smid=$smID AND NOT a.comment=''");
+						$getcmt = $db -> query("SELECT substring(b.display, 4, LENGTH(b.display)) as judge,a.comment FROM PathwaySCon_score2 a INNER JOIN PathwaySCon_organizer b ON a.judge=b.user_id WHERE a.smid=$smID AND NOT a.comment=''");
 						if ($getcmt) {
 							if ($getcmt -> num_rows) {
 								$comments = array(); while ($readcmt = $getcmt -> fetch_assoc()) array_push($comments, array(

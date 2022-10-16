@@ -30,7 +30,7 @@
 				<input name="contest" type="checkbox" id="ref_menu-b"><label for="ref_menu-b"><?=$_COOKIE['set_lang']=="th"?"การแข่งขัน":"Competition"?></label><ul>
 					<li class="dt"><?=$_COOKIE['set_lang']=="th"?"การประกวด":"Contest"?></li>
 					<li><a href="attendees"><?=$_COOKIE['set_lang']=="th"?"รายชื่อผู้สมัคร":"Applicant list"?></a></li>
-					<li><a href="mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวีดีโอคลิป":"Grade speech"?></a></li>
+					<li><a href="mark-grade"><?=$_COOKIE['set_lang']=="th"?"ลงคะแนนวิดีโอคลิป":"Grade speech"?></a></li>
 					<li hidden><a href="rate-rank"><?=$_COOKIE['set_lang']=="th"?"จัดลำดับและตัดสิน":"Rank speech"?></a></li>
 					<li class="dt"><?=$_COOKIE['set_lang']=="th"?"ผลการแข่งขัน":"Results"?></li>
 					<li><a href="scoreboard"><?=$_COOKIE['set_lang']=="th"?"กระดานคะแนน":"Scoreboard"?></a></li>

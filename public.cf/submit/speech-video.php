@@ -2,7 +2,7 @@
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "การส่งไฟล์";
-	$header_desc = "ไฟล์วีดีโอสุนทรพจน์";
+	$header_desc = "ไฟล์วิดีโอสุนทรพจน์";
 
 	if (!isset($_SESSION['evt'])) header("Location: ../login#next=".end(explode("/", $_SERVER['REQUEST_URI'])));
 ?>
@@ -123,10 +123,10 @@
 						<button class="blue ripple-click" onClick="return upload()" disabled>Upload</button>
 					</div>
 				</form>
-				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวีดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?></p>
+				<p><?=$_COOKIE['set_lang']=="th"?"หากไฟล์มีขนาดใหญ่กว่า 25MB หรือไม่ใช่นามสกุล MP4 อนุญาตให้ผู้สมัครส่งวิดีโอมาที่":"If your file is larger than 25MB or is not in MP4 extension, we allow you to send your video to"?></p>
 				<div class="form inline otherway">
 					<a role="button" class="cyan" href="https://inf.bodin.ac.th/e/Pathway-Speech-Contest/form/internal/submit-video?remote=<?php echo $_SESSION['evt']['encid']; ?>" target="_blank"><img src="https://www.gstatic.com/images/branding/product/1x/forms_2020q4_48dp.png" alt="ggForm" data-dark="false">Google Form</a>
-					<a role="button" class="cyan" href="mailto:devtech@PathwaySpeechContest.cf?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>%0D%0Aระบุเหตุผลที่ไม่ส่งผ่าน%20ggForm%20%28อธิบาย%29%3A%20" target="_blank"><img src="/resource/images/nav-share-gmail.png" alt="Email" data-dark="false">E-mail</a>
+					<a role="button" class="cyan" href="mailto:PathwaySpeechContest@mail.TianTcl.net?subject=PSC%20Speech%20Video&body=เลขที่ผู้สมัคร%20<?=$_SESSION['evt']['myID']?>%0D%0Aระบุเหตุผลที่ไม่ส่งผ่าน%20ggForm%20%28อธิบาย%29%3A%20" target="_blank"><img src="/resource/images/nav-share-gmail.png" alt="Email" data-dark="false">E-mail</a>
 				</div>
 			</div>
 		</main>

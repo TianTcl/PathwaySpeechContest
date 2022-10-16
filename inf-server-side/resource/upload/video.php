@@ -26,7 +26,7 @@
 						require_once($dirPWroot."resource/php/core/config.php");
 						$video_size = size2text(filesize($videoPath));
 					}
-				} else $error = 'gray">ผู้สมัครไม่ได้ส่งคลิปวีดีโอ';
+				} else $error = 'gray">ผู้สมัครไม่ได้ส่งคลิปวิดีโอ';
 			} else $error = 'yellow">Unable to load video';
 			$db -> close();
 		} else $error = 'red">Invalid Request';

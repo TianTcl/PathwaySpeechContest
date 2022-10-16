@@ -2,7 +2,7 @@
     $dirPWroot = str_repeat("../", substr_count($_SERVER['PHP_SELF'], "/")-1);
 	require($dirPWroot."e/Pathway-Speech-Contest/resource/hpe/init_ps.php");
 	$header_title = "Custom";
-	$header_desc = "Speech วีดีโอของ Proud Klampaiboon";
+	$header_desc = "Speech วิดีโอของ Proud Klampaiboon";
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

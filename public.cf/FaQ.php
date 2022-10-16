@@ -106,12 +106,12 @@
 					</details>
 					<details id="not-top-get-cert">
 						<summary>หากไม่ติด 3 อันดับแรกของกลุ่ม จะได้รับประกาศนียบัตรไหม</summary>
-						<p>ทุกคนที่ส่งวีดีโอสุนทรพจน์จะได้รับประกาศนียบัตรเข้าร่วม<br>และสำหรับผู้ที่ติด 3 อันดับแรกของกลุ่มการจัดลำดับจะได้ประกาศนียบัตรบอกลำดับที่อีกฉบับ</p>
+						<p>ทุกคนที่ส่งวิดีโอสุนทรพจน์จะได้รับประกาศนียบัตรเข้าร่วม<br>และสำหรับผู้ที่ติด 3 อันดับแรกของกลุ่มการจัดลำดับจะได้ประกาศนียบัตรบอกลำดับที่อีกฉบับ</p>
 					</details>
 					<details id="when-to-claim-cert">
 						<summary>จะได้รับประกาศนียบัตรเมื่อไหร่</summary>
 						<p>ประกาศนียบัตรของช่วงที่สองจะสามารถดาวน์โหลดผ่าน<a href="login#next=my-certificate">ระบบ(เว็บแอปพลิเคชัน)</a>ได้</p>
-						<p>ตั้งแต่วันอาทิตย์ที่ 17 เมษายน พ.ศ. 2565<br>จนถึงวันอาทิตย์ที่ 30 เมษายน พ.ศ. 2565</p>
+						<p>ตั้งแต่วันอาทิตย์ที่ 20 พฤศจิกายน พ.ศ. 2565</p>
 						<p>โดยผู้สมัคร จะได้รับอีเมลแจ้งเมื่อมีการประกาศผลแล้ว<p>
 					</details>
 					<details id="cert-timeout">
@@ -173,18 +173,18 @@
 						</tbody></table></div>
 					</details>
 					<details id="how-to-submit">
-						<summary>ข้อกำหนดการส่งไฟล์คลิปวีดีโอสุนทรพจน์</summary>
+						<summary>ข้อกำหนดการส่งไฟล์คลิปวิดีโอสุนทรพจน์</summary>
 						<p>หากไฟล์มีขนาดไม่เกิน 25MB ให้ทำการส่งผ่าน<a href="login#next=speech-video">ระบบเว็บแอปพลิเคชัน</a><br>หากไฟล์มีขนาดไม่เกิน 1GB ให้ทำการส่งผ่าน Google Forms (โดยเข้าผ่านหน้าส่งผลงาน)<br>หากมีปัญหาเกิดขึ้นจึงสามารถส่งทางอีเมลได้(และต้องส่งเป็นไฟล์หรือผ่าน Google Drive (ที่แชร์ให้ผู้รับเปิดได้แล้ว) เท่านั้น ห้ามส่งเป็นลิงก์ Youtube หรือลิงก์อื่นเด็ดขาด) แต่ต้องระบุสาเหตุ</p>
 						<p>หมายเหตุ: หากไม่ส่งผานช่องทางตามเงื่อนไขที่กำหนดมาข้างต้นอาจต้องส่งใหม่ให้ถูกต้อง หรือต้องตอบข้อซักถาม ที่ได้รับจากการตอบกลับของเจ้าหน้าที่</p>
-						<p>หากผู้ได้ประสงค์จะลดขนาดไฟล์วีดีโอของตนเองสามารถศึกษา<a href="#reduce-video-filesize">วิธีการทำโดยไม่เสียคุณภาพ</a>ได้</p>
+						<p>หากผู้ได้ประสงค์จะลดขนาดไฟล์วิดีโอของตนเองสามารถศึกษา<a href="#reduce-video-filesize">วิธีการทำโดยไม่เสียคุณภาพ</a>ได้</p>
 					</details>
 					<details id="reduce-video-filesize">
-						<summary>วิธีการลดขนาดไฟล์วีดีโอโดยไม่เสียคุณภาพ</summary>
+						<summary>วิธีการลดขนาดไฟล์วิดีโอโดยไม่เสียคุณภาพ</summary>
 						<ol>
 							<li>ติดตั้งแอปพลิเคชัน <a href="https://inf.bodin.ac.th/go?url=https%3A%2F%2Fhandbrake.fr%2Fdownloads.php" target="_blank">Handbrake</a> (สำหรับคนที่ไม่มี)</li>
 							<li>เปิดโปรแกรม</li>
-							<li>เลือกไฟล์วีดีโอที่ต้องการลดขนาด</li>
-							<li>ศึกษาวิธีการตั้งค่าจาก<a href="/go?url=https%3A%2F%2Fyoutu.be%2FWgZq6Sakcog%3Ft%3D190" target="_blank">คลิปวีดีโอ</a> หรือนำเข้า<a href="/resource/file/handbrake-config.json" download="reduce-filesize-sameRes.json">การตั้งค่าจากไฟล์</a></li>
+							<li>เลือกไฟล์วิดีโอที่ต้องการลดขนาด</li>
+							<li>ศึกษาวิธีการตั้งค่าจาก<a href="/go?url=https%3A%2F%2Fyoutu.be%2FWgZq6Sakcog%3Ft%3D190" target="_blank">คลิปวิดีโอ</a> หรือนำเข้า<a href="/resource/file/handbrake-config.json" download="reduce-filesize-sameRes.json">การตั้งค่าจากไฟล์</a></li>
 							<li>กดปุ่ม "Start Encode" ด้านบนแล้วรอจนไฟล์แปลงเสร็จ</li>
 							<li>นำไฟล์ที่ได้ส่งมาในระบบ</li>
 						</ol>
@@ -196,7 +196,7 @@
 				</div><br>
 				<div class="contact form inline">
 					<span>กรณีระบบมีปัญหา ต้องการแจ้งปัญหาหรือสอบถาม กรุณา</span>
-					<a role="button" class="black" href="https://inf.bodin.ac.th/go?url=mailto%3ATianTcl@PathwaySpeechContest.cf%3Fbcc%3DPathway.SpeechContest@gmail.com%3Fsubject%3DPSC%20Webapplication" target="_blank">ติดต่อผู้ดูแลระบบ</a>
+					<a role="button" class="black" href="https://inf.bodin.ac.th/go?url=mailto%3APathwaySpeechContest@mail.TianTcl.net%3Fbcc%3DPathway.SpeechContest@gmail.com%3Fsubject%3DPSC%20Webapplication" target="_blank">ติดต่อผู้ดูแลระบบ</a>
 				</div>
 			</div>
 		</main>

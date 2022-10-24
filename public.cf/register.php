@@ -3,6 +3,7 @@
 	require($dirPWroot."resource/hpe/init_ps.php");
 	$header_title = "I'm attending!";
 	$header_desc = "ลงทะเบียนเข้าร่วมการแข่งขัน";
+	$forceExternalBrowser = true;
 
 	if (isset($_SESSION['evt'])) header("Location: submit/");
 ?>

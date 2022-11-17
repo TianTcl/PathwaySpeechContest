@@ -4,7 +4,8 @@
 	$header_title = "ประกาศผล";
 	$header_desc = "Ranking result announcement";
 
-	$permitted = true; # has_perm("dev", false);
+	$permitted = true; # isset($_SESSION['evt2']); # (has_perm("art", false) || has_perm("dev"));
+	if ($permitted && $_SESSION['evt2']["force_pwd_change"] ?? false) header("Location: ../organize/new-password?return_url=..%2Fpost%2F2022-01-21");
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">

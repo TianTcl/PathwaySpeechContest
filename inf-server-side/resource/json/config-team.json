@@ -192,7 +192,7 @@
             "order": ["A", "D", "F", "I", "K", "R"],
             "A": ["NCB"],
             "B": ["PNV", "TCL"],
-            "C": ["TCL", "KCP", "PRW", "NCB"],
+            "C": ["TCL", "KCP", "PRW"],
             "D": ["TTH"],
             "E": ["KCP", "GYP", "MNA", "PPS", "PCS"],
             "F": ["JSR", "PRW"],
@@ -231,14 +231,14 @@
             "R": null,
             "S": ["TCL", "NCB", "PNV", "PRW"]
         }, {
-            "order": ["A", "D", "R"],
+            "order": ["A", "D", "G", "R"],
             "A": ["NCB"],
-            "B": ["TCL"],
+            "B": ["TCL", "PNV"],
             "C": null,
             "D": ["TTH"],
-            "E": ["PPS", "TCL"],
+            "E": ["KCP", "PPS"],
             "F": null,
-            "G": null,
+            "G": ["PNV", "PRW", "PJJ"],
             "H": null,
             "I": null,
             "J": null,
@@ -250,7 +250,7 @@
             "P": null, // ["TCL"],
             "Q": null, // ["NCB", "TCL"],
             "R": null,
-            "S": ["TCL", "NCB"]
+            "S": ["TCL", "NCB", "PNV"]
         }
     ]
 }

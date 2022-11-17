@@ -41,6 +41,11 @@
                             "fontFamily" => "Pattaya", "fontSize" => 42, "fontColor" => array(33, 102, 153),
                             "pos" => array("xID" => 13, "yName" => ($isAward ? 106.5 : 118.25), "yPlace" => 143)
                         ); break;
+                        case 3: $cfgCert = array(
+                            "pageSize" => array(357.5, 275), "sourceSize" => array(1650, 1275), "sourceType" => "jpg", "sourceDPI" => 150,
+                            "fontFamily" => "Pattaya", "fontSize" => 42, "fontColor" => array(36, 92, 45),
+                            "pos" => array("xID" => 13, "yName" => ($isAward ? 106.5 : 118.25), "yPlace" => 143)
+                        ); break;
                     } $exportname = "Certificate - Pathway Speech Contest ($certName)";
                     /* --- PDF generation --- (BEGIN) */
                     require_once($dirPWroot."resource/php/lib/tcpdf/tcpdf.php"); # require_once($dirPWroot."resource/php/lib/fpdi/fpdi.php");

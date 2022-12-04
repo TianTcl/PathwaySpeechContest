@@ -340,12 +340,13 @@
 		<main shrink="<?php echo($_COOKIE['sui_open-nt'])??"false"; ?>">
 			<div class="container">
 				<h2>Donate</h2>
-				<!--div class="message yellow"><?=$_COOKIE['set_lang']=="th"?"ขณะนี้ผู้พัฒนาระบบกำลังปรับปรุงระบบ กรุณาเข้ามาใหม่ภายหลัง<br>การกรอกฟอร์มบริจาคใดๆในช่วงที่ยังมีข้อความนี้จะไม่มีผล":"System developer is upgrading this page. Please come back later.<br>Sending the form below now doesn't counts."?><a data-role="button" class="cyan ripple-click" target="_blank" href="https://bod.in.th/!PSC-donate2" style="float: right;">&nbsp;<?=$_COOKIE['set_lang']=="th"?"ฟอร์มบริจาคชั่วคราว":"Temporary Form"?>&nbsp;</a></div-->
+				<div class="message yellow" hidden><?=$_COOKIE['set_lang']=="th"?"ขณะนี้ผู้พัฒนาระบบกำลังปรับปรุงระบบ กรุณาเข้ามาใหม่ภายหลัง<br>การกรอกฟอร์มบริจาคใดๆในช่วงที่ยังมีข้อความนี้จะไม่มีผล":"System developer is upgrading this page. Please come back later.<br>Sending the form below now doesn't counts."?><a data-role="button" class="cyan ripple-click" target="_blank" href="https://bod.in.th/!PSC-donate2" style="float: right;">&nbsp;<?=$_COOKIE['set_lang']=="th"?"ฟอร์มบริจาคชั่วคราว":"Temporary Form"?>&nbsp;</a></div>
 				<!--details class="message gray">
 					<summary>ขั้นตอนวิธีการบริจาค</summary>
 					<p>___บราๆๆ___ ทำไม ยังไม่เขียน ช่วยแต่งหน่อยก็ดี</p>
 				</details-->
-				<p><?=$_COOKIE['set_lang']=="th"?"เงินบริจาคทั้งหมดจะถูกนำไปบริจาคแก่มูลนิธิดวงประทีปในโครงการอนุบาลชุมชน":"All donations will be donated to Duangprathip foundation in Society Nursery program."?></p>
+				<p hidden><?=$_COOKIE['set_lang']=="th"?"เงินบริจาคทั้งหมดจะถูกนำไปบริจาคแก่มูลนิธิดวงประทีปในโครงการอนุบาลชุมชน":"All donations will be donated to Duangprathip foundation in Society Nursery program."?></p>
+				<p><?=$_COOKIE['set_lang']=="th"?"เงินบริจาคทั้งหมดจะถูกนำไปบริจาคแก่องค์การกองทุนสัตว์ป่าโลกสากล":"All donations will be donated to World Wide Fund for Nature."?></p>
 				<center class="error message yellow" style="display: none;"><?=$_COOKIE['set_lang']=="th"?"กรุณาใช้ browser อื่นในการกรอกฟอร์ม<br>หรือกรอกใน":"Please use other internet browser to fill in this form.<br>Or fill in "?><a href="https://bod.in.th/!PSC-donate2" target="_blank"><?=$_COOKIE['set_lang']=="th"?"กูเกิ้ลฟอร์ม":"Google Form"?></a>. (<?=$_COOKIE['set_lang']=="th"?"ไม่สามารถขอใบเสร็จได้":"Cannot request receipt"?>)</center>
 				<div class="form">
 					<section class="fill message cyan" style="height: 0px;">

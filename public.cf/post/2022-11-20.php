@@ -43,7 +43,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Pann">
 								<img data-dark="false" src="/resource/images/participant/1288525775.jpg" alt="Pann">
-								<div class="play" data-href="521282613245823">
+								<div class="play" data-href="874520850213673">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -54,7 +54,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Tamtam">
 								<img data-dark="false" src="/resource/images/participant/1186829084.jpg" alt="Tamtam">
-								<div class="play" data-href="1608860712912646">
+								<div class="play" data-href="434549275515704">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -75,7 +75,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Nampunch">
 								<img data-dark="false" src="/resource/images/participant/3178736012.jpg" alt="Nampunch">
-								<div class="play" data-href="497726908976694">
+								<div class="play" data-href="576347590925880">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -87,7 +87,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Proud">
 								<img data-dark="false" src="/resource/images/participant/1679553582.jpg" alt="Proud">
-								<div class="play" data-href="1332751617494909">
+								<div class="play" data-href="547293624073659">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -108,7 +108,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Tangtang">
 								<img data-dark="false" src="/resource/images/participant/3638101695.jpg" alt="Tangtang">
-								<div class="play" data-href="523247166376110">
+								<div class="play" data-href="1041193843939687">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -119,7 +119,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Idea">
 								<img data-dark="false" src="/resource/images/participant/2864276859.jpg" alt="Idea">
-								<div class="play" data-href="910669183229581">
+								<div class="play" data-href="670447424791083">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -141,7 +141,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Emily">
 								<img data-dark="false" src="/resource/images/participant/4276704694.jpg" alt="Emily">
-								<div class="play" data-href="1219234355661479">
+								<div class="play" data-href="1591046464664186">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -152,7 +152,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Chin">
 								<img data-dark="false" src="/resource/images/participant/2314102048.jpg" alt="Chin">
-								<div class="play" data-href="532126858434887">
+								<div class="play" data-href="1073376940013123">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>
@@ -173,7 +173,7 @@
 						<div class="avatar">
 							<div class="wrapper" data-title="Paully">
 								<img data-dark="false" src="/resource/images/participant/1246022066.jpg" alt="Paully">
-								<div class="play" data-href="521874559818885">
+								<div class="play" data-href="819318915851740">
 									<div class="link"><i class="material-icons">play_circle_outline</i></div>
 									<label>Watch</label>
 								</div>

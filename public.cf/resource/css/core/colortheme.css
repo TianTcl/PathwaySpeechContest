@@ -190,7 +190,7 @@
 	--msg-bdc: #fed7b6; /* alert border */
 	--msg-ctc: #984A08; /* alert txt */
 }
-.aqua {
+.teal {
 	--btn-ntc: var(--clr-main-black-absolute); /* btn normal txt */
 	--btn-bgc: #0dfda3; /* btn normal bg */
 	--btn-hbc: #0dfda323; /* btn hover bg hollow */

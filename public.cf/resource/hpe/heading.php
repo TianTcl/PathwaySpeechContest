@@ -1,7 +1,7 @@
 		<?php
 			$heading_name = "Pathway Speech Contest"; $heading_domain = "PathwaySpeechContest.cf";
 			$heading_title = ((isset($header_title))?$header_title." | ":"").$heading_name;
-			$heading_desc = (isset($header_desc))?str_replace("\"","'",$header_desc):"การประกวดสุนทรพจน์ภาษาอังกฤษที่รวบรวมเงินทั้งหมดไปบริจาคแก่มูลนิธิดวงประทีป";
+			$heading_desc = (isset($header_desc))?str_replace("\"","'",$header_desc):"การประกวดสุนทรพจน์ภาษาอังกฤษที่รวบรวมเงินทั้งหมดไปบริจาคแก่องค์การกองทุนสัตว์ป่าโลกสากล (World Wide Fund for Nature)";
 			$heading_cover = ((isset($header_cover))?$header_cover:"images/PathwaySpeechContest.png");
 		?>
 		<!-- Settings -->

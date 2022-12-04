@@ -11,7 +11,7 @@
 
     $rmte = (isset($_REQUEST['remote']) && $_REQUEST['remote']); $remote = $rmte ? "remote" : "";
     $user = $rmte ? decode_key($_REQUEST['remote']) : ($_SESSION['evt']['user'] ?? ""); if ($user == "" && check_req("view-id")) $user = decode_key($_REQUEST['view-id']);
-    $round = $config['round'];
+    $round = $_REQUEST["round"] ?? $config['round'];
 
     if ($user == "") $error = "901";
     else if (check_req("type") && check_req("export")) {
@@ -89,7 +89,7 @@
                     if (!isset($error)) {
                         $certifile -> Output("$exportname.pdf", ($download ? "D": "I"));
                         /* --- PDF generation --- (END) */
-                        slog($user, "PathwaySCon", "certificate", ($download ? "save": ($export == "print" ? "print" : "view")), $certType, "pass", $remote);
+                        slog($user, "PathwaySCon", "certificate", ($download ? "save": ($export == "print" ? "print" : "view")), "$round:$certType", "pass", $remote);
                     }
                 }
             } else $error = "900";
@@ -120,7 +120,7 @@
                 <div class="container">
                     <div class="message yellow"><?=$_COOKIE['set_lang']=="th"?'หากประกาศนียบัตรไม่ปรากฏขึ้นใน 10 วินาที กรุณากด reload หน้านี้':'If the certificate doesn\'t show up within 10 seconds. Please reload the page.'?></div>
                 </div>
-                <iframe src="https://docs.google.com/viewerng/viewer?embedded=true&url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2Fcertificate%3Fview-id%3D<?="$keyid%26type%3D$certType"?>%26export%3Dshow">Loading...</iframe>
+                <iframe src="https://docs.google.com/gview?embedded=true&url=https%3A%2F%2Finf.bodin.ac.th%2Fe%2FPathway-Speech-Contest%2Fresource%2Ffile%2Fcertificate%3Fview-id%3D<?="$keyid%26type%3D$certType%26round%3D$round"?>%26export%3Dshow">Loading...</iframe>
             <?php } ?>
         </main>
         <?php require($dirPWroot."resource/hpe/material.php"); ?>

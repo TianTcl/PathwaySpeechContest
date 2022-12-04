@@ -260,15 +260,16 @@
                 }
             } else if ($cmd == "certify") {
                 if ($attr == "list") {
-                    $getrank = $db -> query("SELECT rank FROM PathwaySCon_submission WHERE ptpid=$user AND round=$round");
+                    $getrank = $db -> query("SELECT round,rank FROM PathwaySCon_submission WHERE ptpid=$user ORDER BY round");
                     if ($getrank) {
-                        if ($getrank -> num_rows == 1) {
-                            $readrank = ($getrank -> fetch_array(MYSQLI_ASSOC))['rank'];
-                            if (empty($readrank)) $certamt = 0;
-                            else if ($readrank == "5N") $certamt = 1;
-                            else $certamt = 2;
-                            echo '{"success": true, "info": '.$certamt.'}';
-                        } else echo '{"success": false, "reason": [2, "Your haven\'t submit any speech this round."]}';
+                        if ($getrank -> num_rows > 0) {
+                            $certs = array(); while ($readrank = $getrank -> fetch_assoc()) {
+                                if (empty($readrank["rank"])) $certamt = 0;
+                                else if ($readrank["rank"] == "5N") $certamt = 1;
+                                else $certamt = 2;
+                                array_push($certs, array("round" => intval($readrank["round"]), "cert" => $certamt));
+                            } echo '{"success": true, "info": '.json_encode($certs).'}';
+                        } else echo '{"success": false, "reason": [2, "Your haven\'t submit any speech yet."]}';
                     } else echo '{"success": false, "reason": [3, "Unable to get ranks."]}';
                 }
             }

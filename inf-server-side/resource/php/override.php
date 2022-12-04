@@ -77,16 +77,17 @@
 					} else echo '{"success": false, "reason": [3, "Unable to send Email'.(count($mail['recipient'])>1?"s":"").'."], "error": '.$result.'}';
 				} else echo '{"success": false, "reason": [2, "No recipient"]}';
             } else if ($cmd == "list") {
-				$get = $db -> query("SELECT ptpid,namef,namel,namen,grade,mail FROM PathwaySCon_attendees ORDER BY mail ASC,ptpid DESC");
+				$get = $db -> query("SELECT ptpid,namef,namel,namen,grade,mail FROM PathwaySCon_attendees ORDER BY (CASE WHEN grade BETWEEN 1 AND 3 THEN 1 WHEN grade BETWEEN 4 AND 6 THEN 2 WHEN grade BETWEEN 7 AND 9 THEN 3 ELSE 4 END),namen,namef,namel"); # mail ASC,ptpid DESC
 				$user = array(); while ($read = $get -> fetch_assoc()) array_push($user, $read);
 				echo '{"success": true, "info": '.json_encode($user).'}';
 			}
         } else if ($app == "grade") {
 			$user = ($rmte) ? ($db -> real_escape_string(trim($_REQUEST['remote']))) : $_SESSION['evt2']['user'];
 			if ($cmd == "list") {
-				if ($attr == "special-S1") $round = 1;
-				else if ($attr == "special-S2") $round = 2;
-				else if ($attr == "special-S3") $round = 3;
+				if (preg_match("/special\-S\d+/", $attr)) {
+					preg_match("/\d+/", $attr, $round);
+					$round = intval($round[0]);
+				}
 				$getsbmt = $db -> query("SELECT a.smid,CONCAT(b.namen,' (',b.namef,' ',b.namel,')') AS name,(CASE WHEN b.grade BETWEEN 0 AND 3 THEN 1 WHEN b.grade BETWEEN 4 AND 6 THEN 2 WHEN b.grade BETWEEN 7 AND 9 THEN 3 END) AS division FROM PathwaySCon_submission a INNER JOIN PathwaySCon_attendees b ON a.ptpid=b.ptpid WHERE b.ptpid > 1 AND a.round=$round ORDER BY division,name");
 				$sbmts = array(); if ($getsbmt && $getsbmt -> num_rows > 0) {
 					while ($readsbmt = $getsbmt -> fetch_assoc()) array_push($sbmts, array(
@@ -124,7 +125,7 @@
 					if ($key <> "comment") $marks .= "$key='".($db -> real_escape_string(trim($val)))."',";
 					else $marks .= "$key='".($db -> real_escape_string(htmlspecialchars(trim($val))))."',";
 				} $success = $db -> query("UPDATE PathwaySCon_score2 SET $marks edit=edit+1,lasttime=current_timestamp() WHERE scid=$toEdit");
-				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "grade", "edit", "$toEdit", "pass", $remote); }
+				if ($success) { echo '{"success": true}'; slog($user, "PathwaySCon", "grade", "edit", $toEdit, "pass", $remote); }
 				else { echo '{"success": false, "reason": [3, "Unable to set marks."]}'; slog($user, "PathwaySCon", "grade", "edit", $toEdit, "fail", $remote, "InvalidQuery"); }
 			}
 		} else if ($app == "rank") {

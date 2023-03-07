@@ -73,7 +73,8 @@
 		// Google Analytics
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
-		gtag("js", new Date());	gtag("config", "UA-204561763-3");
+		// gtag("js", new Date());	gtag("config", "UA-204561763-3");
+		gtag("js", new Date());	gtag("config", "G-GJQ0WP5EK2");
 		// URL
 		if (/(^\?|&)(openExternalBrowser=1|fbclid=([^&])+)/.test(location.search)) {
 			let ns = location.search.substr(1).split("&").filter(ep => !(ep.startsWith("fbclid=") || ep=="openExternalBrowser=1")).join("&");

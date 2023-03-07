@@ -38,7 +38,8 @@
 		<!-- Third parties app setup -->
 		<!meta property="fb:app_id" content="132941421905432" />
 		<!meta name="google-site-verification" content="gRW1HQaoV9CcViylNyqfgrm2nXztykHOtW4oakRFUXE" />
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-204561763-3"></script>
+		<!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-204561763-3"></script-->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-GJQ0WP5EK2"></script>
 		<!-- Android standalone A2HS webapp prepare -->
 		<link rel="manifest" href="/resource/appmanifest.webmanifest" crossorigin="use-credentials">
 		<link rel="manifest" href="/resource/extn-manifest.json">

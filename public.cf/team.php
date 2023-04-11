@@ -284,7 +284,7 @@
 				<h2><?=$_COOKIE['set_lang']=="th"?"สนับสนุนโดย":"Supported by"?></h2>
 				<div class="sponsor">
 					<div class="card">
-						<div class="logo"><img src="https://inf.bodin.ac.th/resource/images/logo-2.png" data-dark="false"></div>
+						<div class="logo"><img src="https://inf.bodin.ac.th/resource/images/logo/color.png" data-dark="false"></div>
 						<div class="info">
 							<h3 onClick="app.io.warpto('/inf.bodin.ac.th/go?url=https%3A%2F%2Fbodin.ac.th', true)">Bodindecha (Sing Singhaseni) School</h3>
 							<p>Thanks for hosting our web application.</p>
